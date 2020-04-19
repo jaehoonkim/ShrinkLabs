@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>vendor on ShrinkLabs</title>
+    <link>https://shrinklabs.com/tags/vendor/</link>
+    <description>Recent content in vendor on ShrinkLabs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-kr</language>
+    <lastBuildDate>Wed, 09 Mar 2016 14:12:58 +0900</lastBuildDate>
+    
+	<atom:link href="https://shrinklabs.com/tags/vendor/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>vendor 사용 팁(내부 패키지)</title>
+      <link>https://shrinklabs.com/posts/vendor/</link>
+      <pubDate>Wed, 09 Mar 2016 14:12:58 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/posts/vendor/</guid>
+      <description>프로젝트 내부에서 별도의 패키지를 만들어서 사용을 하려고 할때면,
+import 경로를 &amp;ldquo;github.com/blah/project/internalpkg&amp;rdquo; 처럼 다 써야 했었다.
+이제 vendor를 사용하면 pkg 이름만 import 해서 사용할 수 있게 되었다.
+샘플 프로젝트는 다음과 같다.
+https://github.com/sabzil/lotto
+샘플 프로젝트에 대해서 약간의 설명을 더하면,
+기존에는 command 패키지를 commands.go 에서 import 하기 위해서,
+import &amp;ldquo;github.com/sabzil/lotto/command&amp;rdquo; 와 같이 사용해야 했었다.
+이렇게 되면 lotto 프로젝트를 다른 사람이 fork 해서 사용하려고 하면 일일이 import 경로를 변경해줘야 하는 문제가 생기게 된다.
+그래서 go1.</description>
+    </item>
+    
+  </channel>
+</rss>

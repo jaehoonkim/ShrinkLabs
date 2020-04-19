@@ -39,62 +39,14 @@
 	<article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
-			<a href="/posts/private-container-registry/" rel="bookmark">
-			Kubernetes에서 Private Container Registry 사용
+			<a href="/posts/docker/" rel="bookmark">
+			docker 시작하기
 			</a>
 		</h3>
 		<div class="list__meta meta">
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text" datetime="2020-04-10T16:31:48&#43;09:00">April 10, 2020</time>
-</div>
-
-<div class="meta__item-categories meta__item">
-	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta__text">
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		Kubernetes에 배포하기 위해서 Container Registry(Private)을 사용하려면, 별도의 secret을 등록해야 한다.
-$ kubectl create secret docker-registry {secret} \ --docker-server={registryserver} \ --docker-username={name} \ --docker-password={password} \ --docker-email={email} \ --namespace={namespace}  namespace는 지정하지 않으면 default로 지정된다.
-그리고 Container Registry로 부터 image를 받아서 사용하기 위한 yaml 파일에 다음과 같이 추가한다.
-apiVersion: v1 kind: Pod metadata: name: private-reg spec: containers: - name: private-reg-container image: regcred/projectaa/private-reg:latest imagePullSecrets: - name: regcred  &ldquo;imagePullSecrets&rdquo; 항목을 추가하고 containers.image에서 iamgePullSecretes.name을 base로 사용한다.
-	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/posts/docker-error/" rel="bookmark">
-			docker 설치 후 에러
-			</a>
-		</h3>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text" datetime="2020-04-08T21:27:50&#43;09:00">April 08, 2020</time>
-</div>
-
-<div class="meta__item-categories meta__item">
-	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta__text">
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		docker 설치 후 &ldquo;Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?&rdquo; 가 발생
-$sudo systemctl status docker $sudo systemctl start docker $sudo systemctl enable docker  
-	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/posts/k8s-with-kops-on-gce/" rel="bookmark">
-			GCE에서 kops를 이용한 K8s 구성
-			</a>
-		</h3>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text" datetime="2020-03-05T21:36:13&#43;09:00">March 05, 2020</time>
+	<time class="meta__text" datetime="2017-07-27T00:25:51&#43;09:00">July 27, 2017</time>
 </div>
 
 <div class="meta__item-categories meta__item">
@@ -104,201 +56,261 @@ $sudo systemctl status docker $sudo systemctl start docker $sudo systemctl enabl
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		클러스터 배포용 VM 인스턴스 생성  Kubernetes를 구성하기 위한 VM 인스턴스를 생성한다.
- &ldquo;ID 및 API 액세스&rdquo; 항목에서 액세스 범위를 &ldquo;모든 Cloud API에 대한 전체 액세스 허용&rdquo; 으로 선택한다. 또는 아래와 같이 서비스 계정에 권한을 설정하고 서비스 계정을 선택해도 된다.
- GCP 관리 콘솔의 IAM&amp;Admin에서 서비스 계정을 하나 만든다. 서비스 계정이 갖고 있어야 하는 최소한의 권한은 다음과 같다.
-compute admin servce account admin service account key admin service account token creator service acount user storage admin DNS Administrator DNS Reader  SSH로 연결 &amp; 업데이트
+		docker ce 설치  오래된 버전 제거
+$ sudo apt-get remove docker docker-engine docker.io  패키지 인덱스 업데이트
+$ sudo apt-get update  apt가 https를 통해서 저장소를 사용할 수 있도록 패키지를 설치
+$ sudo apt-get install \ apt-transport-https \ ca-certificates \ curl \ software-properties-common  docker의 공식 GPG 키를 추가
+$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -  fingerprint를 확인
+$ sudo apt-key fingerprint 0EBFCD88  안정화 버전의 저장소를 추가
 	</div>
 </article><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
-			<a href="/posts/docker-image/" rel="bookmark">
-			docker image 저장소 위치 변경
+			<a href="/posts/delve/" rel="bookmark">
+			delve를 사용한 Go언어 디버깅
 			</a>
 		</h3>
 		<div class="list__meta meta">
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text" datetime="2020-03-05T12:05:00&#43;09:00">March 05, 2020</time>
+	<time class="meta__text" datetime="2017-06-18T23:13:14&#43;09:00">June 18, 2017</time>
 </div>
 
 <div class="meta__item-categories meta__item">
 	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta__text"><a class="meta__link" href="/categories/containers/" rel="category">containers</a>
+	<span class="meta__text"><a class="meta__link" href="/categories/code/" rel="category">code</a>
 	</span>
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		 새로운 디스크를 추가한다.
- 여기에서는 &ldquo;/docker&rdquo; 에 mount 되어 있는걸로 가정한다.
-  &ldquo;etc/docker/daemon.json&rdquo; 에 다음의 내용을 추가한다.
-{ &quot;data-root&quot;: &quot;/docker&quot; }  docker 서비스를 재시작한다.
-$ sudo systemctl daemon-reload $ sudo systemctl restart docker   
+		소개 delve는 Go언어를 위한 debugger 이다.
+delve설치 설치를 하기위해서는 Go 1.5 이상의 버전이 필요하다.
+지금 시점에 Go 1.5를 사용하지 않을테니&hellip;
+다음의 명령으로 설치한다.
+$ go get github.com/derekparker/delve/cmd/dlv  이제 설치 끝! (Windows랑 MAC은 모르겠다.)
+delve사용 프로세스 실행 제어, 변수, 스레드/goroutine 상태, CPU 레지스터 상태 등을 확인 할 수 있다.
+ Commands
+ attach: 실행중인 프로세스에 연결해서 디버깅을 한다.
+$ dlv attach pid [executable]  실행중인 프로세스에 디버그 세션을 연결해서 프로세스를 제어한다.
 	</div>
 </article><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
-			<a href="/posts/nginx-ingress-controller-on-google-kubernetes-engine/" rel="bookmark">
-			10.Nginx Ingress Controller on Google Kubernetes Engine
+			<a href="/posts/build/" rel="bookmark">
+			build
 			</a>
 		</h3>
 		<div class="list__meta meta">
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text" datetime="2019-01-21T17:05:30&#43;09:00">January 21, 2019</time>
+	<time class="meta__text" datetime="2017-05-25T15:43:40&#43;09:00">May 25, 2017</time>
 </div>
 
 <div class="meta__item-categories meta__item">
 	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta__text"><a class="meta__link" href="/categories/containers/" rel="category">containers</a>
+	<span class="meta__text"><a class="meta__link" href="/categories/code/" rel="category">code</a>
 	</span>
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		이번 과정에서는 &ldquo;Ingress&rdquo;에 대해서 알아 볼 수 있었다.
-&ldquo;Ingress&rdquo;는 resource와 controller로 구성되어 있다.
-resource는 &ldquo;Ingress&rdquo;의 동작에 대한 규칙을 정해 놓은 yaml이며,
-controller는 layer7에 해당하는 로드밸런서의 역할을 제공한다. 즉 http 요청에 대한 처리와 부하 분산을 제공한다.
-controller로는 gce, nginx, envoy, haproxy, istio, kong, traefik 을 이용할 수 있다.
-과정에서는 &ldquo;hello-app&rdquo; 이라는 &ldquo;Service&rdquo;를 노출한다. 그리고 helm을 이용해서 nginx-ingress를 kubernetes cluster에 설치한다.
-kind가 &ldquo;Ingress&rdquo;인 yaml 파일을 만든다. 이때 &ldquo;path: /hello&rdquo;로 지정하며, backend를 &ldquo;serviceName: hello-app&rdquo;과 &ldquo;servicePort: 8080&rdquo; 으로 지정을 한다.
+		소개 Go언어로 개발을 하다보면 debug모드 release모드 같이 별도의 빌드 환경을 구성하고 싶을때가 있다.
+그래서 build 옵션으로 특정한 환경별로 결과를 달리 할 수 있는 방법에 대해서 테스트한 내용을 정리해본다.
+빌드 go 파일들을 빌드하기 위해서는 일반적으로 다음과 같이 한다.
+$ go build  Go언어 문서중에 보면 https://golang.org/pkg/go/build/#hdr-Build_Constraints[Build Constraints] 에 관한 내용이 있다.
+이 내용은 build 할 때 조건을 줄 수 있다는 내용이고 방법은 다음과 같이 하면 된다고 한다.
+코드의 상단에 &ldquo;// +build linux&rdquo; 하고 한 칸을 띄우고 &ldquo;package blah&rdquo; 를 시작한다.
 	</div>
 </article><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
-			<a href="/posts/helm-package-management/" rel="bookmark">
-			9.Helm Package Management
+			<a href="/posts/rabbitmqwithgo/" rel="bookmark">
+			RabbitMQ 스터디(with go)
 			</a>
 		</h3>
 		<div class="list__meta meta">
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text" datetime="2019-01-17T15:04:00&#43;09:00">January 17, 2019</time>
+	<time class="meta__text" datetime="2017-04-19T23:43:52&#43;09:00">April 19, 2017</time>
 </div>
 
 <div class="meta__item-categories meta__item">
 	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta__text"><a class="meta__link" href="/categories/containers/" rel="category">containers</a>
+	<span class="meta__text"><a class="meta__link" href="/categories/tools/" rel="category">tools</a>
 	</span>
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		이번 과정은 kubernetes에서 사용할 수 있는 패키지 관리자에 대해서 알아 볼 수 있었다.
-Helm은 클라이언트 역할을 하는 helm, 서버 역할을 하는 tiller 그리고 설정 정보들의 관리를 위한 chart로 이루어져 있다.
-여기에서 클라이언트(helm)라고 하는건 클러스터의 외부에서 작업을 지시하기 위한 도구이고, 실제로 클러스터 안쪽에서 동작 하는건 서버(tiller)라고 보면 된다.
-helm의 설치는 간단합니다.
-$ curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get &gt; get_helm.sh $ chmod 700 get_helm.sh $ ./get_helm.sh  근데 이 과정 다음에 갑자기 tiller를 위한 계정을 만들고 해당 계정을 무언가에 바인딩을 한다.
+		Go언어로 RabbitMQ를 어떻게 이용할 수 있는지 스터디하는 내용들을 대충 대충 정리하는 중&hellip;
+RabbitMQ라는게 뭐지? AMQP를 구현한 메세지 브로커
+여기 저기에 있는 클라이언트들(Producer/Consumer)이 메세지를 서로 주고 받을 수 있도록 해주는 그런거?
+설치  RabbitMQ 설치
+sudo apt-get install rabbitmq-server  관리 플러그인 설치
+sudo rabbitmq-plugins enable rabbitmq_management sudo service rabbitmq-server restart  실행
+service rabbitmq-server start  계정 등록(id:sabzil, pw:1234)
+rabbimqctl add_user sabzil 1234  등록한 계정을 관리자 계정으로 변경
 	</div>
 </article><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
-			<a href="/posts/setting-up-private-kubernetes-cluster/" rel="bookmark">
-			8.Setting Up a Private Kubernetes Cluster
+			<a href="/posts/multipart-contenttype/" rel="bookmark">
+			CreateFormFile()을 사용하면 Content-Type이 고정되는 현상
 			</a>
 		</h3>
 		<div class="list__meta meta">
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text" datetime="2019-01-16T01:46:28&#43;09:00">January 16, 2019</time>
+	<time class="meta__text" datetime="2016-12-10T18:22:48&#43;09:00">December 10, 2016</time>
 </div>
 
 <div class="meta__item-categories meta__item">
 	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta__text"><a class="meta__link" href="/categories/containers/" rel="category">containers</a>
+	<span class="meta__text"><a class="meta__link" href="/categories/code/" rel="category">code</a>
 	</span>
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		이번 과정의 실습을 진행하면서 클러스터에 대한 접근을 제한 할 수 있도록 하기 위한 방법에 대해서 알 수 있었다. 하지만 전체 내용에 대해서 정확하게 이해를 하지 못했다.
-해당 내용은 이후에 비공개 클러스터 설정(https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters) 에 대한 내용이 실습 내용과 동일하므로 추후에 이해가 가능한 시점이 되면 다시 한번 시도해 보려고 한다.
-아래는 내용을 이해하기 위해서 학습했던 내용들의 링크이다.
- 네트워크 입문: http://kujung.tistory.com/category/%EB%98%A5%20%EC%8B%B8%EA%B8%B0/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC
- IPv4 네트워크 주소와 호스트 주소/서브넷팅/IP Class: http://itsaessak.tistory.com/174
- IP 주소체계와 클래스 구별법 (IPV4): http://korean-daeddo.
+		mime/multipart를 사용해서 파일을 업로드 하려 할때 파일을 업로드할 필드를 생성하기 위해서 CreateFormFile()을 사용한다.
+이를 이용해서 파일을 업로드하면 &ldquo;Content-Type&rdquo;이 &ldquo;application/octet-stream&rdquo; 으로 고정되어진다.
+src/mime/multipart/writer.go의 CreateFormFile을 확인해 보면 다음과 같이 고정되어 있는걸 확인 할 수 있다.
+h.Set(&quot;Content-Type&quot;, &quot;application/octet-stream&quot;)  관련한 이슈가 올라온게 혹시 있지 않을까 해서 찾아보니.
+이런 이슈가 있었다.
+https://github.com/golang/go/issues/16425
+bradfitz는 다음과 같이 답변을 하고 있다.
+ Use CreatePart. CreateFormFile is a very thin wrapper around CreatePart. Click https://golang.org/pkg/mime/multipart/#Writer.CreateFormField[] and then click the CreateFormFile heading to see its source code.
 	</div>
 </article><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
-			<a href="/posts/build-slack-bot-with-nodejs-on-kubernetes/" rel="bookmark">
-			7.Build Slack Bot With Node.js on Kubernetes
+			<a href="/posts/html-form/" rel="bookmark">
+			Go코드로 HTML Form 전송
 			</a>
 		</h3>
 		<div class="list__meta meta">
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text" datetime="2019-01-14T13:17:21&#43;09:00">January 14, 2019</time>
+	<time class="meta__text" datetime="2016-12-06T01:13:41&#43;09:00">December 06, 2016</time>
 </div>
 
 <div class="meta__item-categories meta__item">
 	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta__text"><a class="meta__link" href="/categories/containers/" rel="category">containers</a>
+	<span class="meta__text"><a class="meta__link" href="/categories/code/" rel="category">code</a>
 	</span>
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		이번 과정은 Secret 객체에 대해서 좀 더 자세하게 알아볼 수 있는 과정이었다.
-서비스를 제공하는 프로그램(node.js 코드)을 Docker image로 만든 다음 Registry Server에 Push를 한다.
-제공하는 서비스에서 외부의 서비스(slack)를 사용하기 위해서 민감한 정보인 token이 존재한다. 이 내용이 코드상 또는 image 상에 존재하지 않게 Image를 만들고자 한다.
-그래서 별도로 &ldquo;slack-token&rdquo; 파일을 만들어서 파일을 통해서 token 정보를 제공하도록 만들어 놓았다. 해당 파일을 경로와 파일명을 포함해서 환경변수 &ldquo;slack_token_path&rdquo;에 등록해 놓고, 코드상에서는 환경 변수인 &ldquo;slack_token_path&rdquo;에 지정되어 있는 경로의 파일로 부터 token 정보를 읽어서 사용한다.
+		HTML, Javascript를 사용해서 Post방식으로 Form을 전송하는 동작을 Go 코드를 작성해 보자.
+우선 POST로 전송된 Form을 받아서 처리를 하는 서버쪽을 다음과 같은 구성을 갖는 코드로 만든다.
+package main import { &quot;net/http&quot; &quot;github.com/gorilla/mux&quot; } func main() { r := mux.Newrouter().StrictSlash(false) r.HandleFunc(&quot;/upload&quot;, upload).Methods(&quot;POST&quot;) http.ListenAndServe(&quot;:8080&quot;, r) } func upload(w http.ResponseWriter, r *http.Request) { if r.Method == &quot;POST&quot; { } }  이렇게 &ldquo;http://localhost:8080/upload&quot; 를 통해서 POST 방식으로 전달되는 요청을 받아서 처리하기 위한 큰틀을 만들었다.
 	</div>
 </article><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
-			<a href="/posts/running-mongodb-database-in-kubernetes-with-statefulsets/" rel="bookmark">
-			6.Running Mongodb Database in Kubernetes With Statefulsets
+			<a href="/posts/encode-go/" rel="bookmark">
+			인코딩된 텍스트 디코딩하기
 			</a>
 		</h3>
 		<div class="list__meta meta">
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text" datetime="2019-01-11T17:52:48&#43;09:00">January 11, 2019</time>
+	<time class="meta__text" datetime="2016-11-25T00:52:47&#43;09:00">November 25, 2016</time>
 </div>
 
 <div class="meta__item-categories meta__item">
 	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta__text"><a class="meta__link" href="/categories/containers/" rel="category">containers</a>
+	<span class="meta__text"><a class="meta__link" href="/categories/code/" rel="category">code</a>
 	</span>
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		지금까지의 과정 중에서 가장 어려웠다.;;; 그리고 제대로 이해를 한건지도 잘 모르겠다.
-일단을 이해했다고 생각되는 정도만 정리를 해봤다.
-이번 과정은 StatefulSet에 대한 이해를 목표로 하고 있다.
-StatefulSet에 대한 이해를 위해서는 Headless Service에 대한 이해와 StorageClass에 대한 이해가 필요했다.
-StorageClass는 상태를 갖는걸 확인하기 위한 실습이 필요하다보니, Volume을 사용해야 하고 StatefulSet의 scale을 조정하게 되는 것에 따라서 Volume도 같이 조정이 되어야 해서 StorageClass 컨트롤러를 통해서 Volume을 동적으로 조정할 수 있도록 하려고 사용 된 것 같다.
+		Javascript에서 encodeURIComponent() 함수를 사용해서 전달받은 문자열을 디코딩해서 보기 위해서는 &ldquo;net/url&rdquo; 패키지의 QueryUnescape() 함수를 사용할 수 있다.
+email, err := url.QueryUnescape(user.Email)  
 	</div>
 </article><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
-			<a href="/posts/continuous-delivery-with-jenkins-in-kubernetes-engine/" rel="bookmark">
-			5.Continuous Delivery With Jenkins in Kubernetes Engine
+			<a href="/posts/govendor/" rel="bookmark">
+			vendor 관리
 			</a>
 		</h3>
 		<div class="list__meta meta">
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text" datetime="2019-01-10T11:40:50&#43;09:00">January 10, 2019</time>
+	<time class="meta__text" datetime="2016-10-14T18:16:35&#43;09:00">October 14, 2016</time>
 </div>
 
 <div class="meta__item-categories meta__item">
 	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta__text"><a class="meta__link" href="/categories/containers/" rel="category">containers</a>
+	<span class="meta__text"><a class="meta__link" href="/categories/code/" rel="category">code</a>
 	</span>
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		이번 과정은 Jenkins와 Kubernetes를 이용한 배포 자동화를 실습해 볼 수 있었다.
-분량은 많지만 이해가 어렵지는 않은 내용이었다.
-실습을 해보면서 Namespace라는 객체와 Helm이라는 패키지 관리 도구를 사용해 볼 수 있다. Namespace는 일반적으로 우리가 알고 있는 용도인데, 논리적으로 무언가를 구분지어서 사용하고 싶을때 사용하는게 목적이라고 보면 될 것 같다.
-이전 과정에서 배웠던 배포를 위한 전략에서는 label을 사용했었다면, 이번에는 Namespace를 사용해서 비슷한 문제 상황을 해결하는걸 경험해 볼 수 있다.
-그리고 helm은 Kubernetes의 클러스터에 올라갈 수 있도록 미리 정의해서 배포해 놓은걸 사용할 수 있게 해주는 도구였다.
+		vendoring되어 있는 패키지를 관리해야 할 이유가 무엇인지에 대해서 찾아보다가 좋은 글을 발견했다.
+https://gocodecloud.com/blog/2016/03/29/go-vendoring-beginner-tutorial/
+이 글을 읽고 이해한 정도만을 요약
+vendoring을 왜 하나? Project A에서 사용하는 Pkg X의 리비전 1을 사용하고 있다. 그런데 Project B에서는 Pkg X의 리비전 2를 사용하려 한다.
+그런데 $GOPATH 안에는 같은 패키지를 하나만 갖고 있을 수 있다.
+Pkg X의 리비전을 Project A에 맞추면 Project B가 빌드를 실패하고, Project B에 맞추면 Project A가 빌드에 실패하게 된다.
+그래서 패키지들을 vendor 아래에 위치 시킨다.
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/posts/hugo/" rel="bookmark">
+			GitHub 페이지에 Hugo 올리기
+			</a>
+		</h3>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2016-10-13T14:17:19&#43;09:00">October 13, 2016</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/tools/" rel="category">tools</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		Blogger에서 Hugo( http://gohugo.io )로 갈아타는 과정을 정리해 본다.
+Hugo 를 설치한다 https://github.com/spf13/hugo/releases 에서 본인의 환경에 맞는걸 찾아서 설치한다.
+Linux는 deb를 제공하고 있지만, Windows는 exe파일을 제공하고 있어서 환경변수(PATH)를 잡아주던가, 환경변수가 잡혀있는곳에 복사를 해준다.
+(이름도 hugo.exe로 바꿔주는게 사용하기에 더 편리한것 같다.)
+MAC은 안 써봐서 잘 모르겠다&hellip;;;;
+github에 저장소를 만든다 github에서 호스팅을 받아서 hugo를 사용하기 위해서는 2개의 저장소를 만들어야 한다.
+hugo의 컨텐츠를 관리하기 위한 저장소가 필요하다.(ex: https://github.com/sabzil/blog)
+그리고 컨텐츠를 보여주기 위한 github의 페이지 저장소(ex: https://github.
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/posts/tmux/" rel="bookmark">
+			tmux
+			</a>
+		</h3>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2016-10-12T01:28:09&#43;09:00">October 12, 2016</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/tools/" rel="category">tools</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		tmux 시작 $ tmux $ tmux new-session(or new) -s [세션 이름] -n [윈도우 이름]  tmux 종료 $ ctrl-d $ exit  tmux detach(현재 클라이언트) $ ctrl-b, d  tmux attach $ tmux attach -t [세션 이름]  window 생성 $ ctrl-b, c  window 리스트 $ ctrl-b, w  window 이동(현재의 이전(다음, 이전) $ ctrl-b, l(n, p)  window 종료 $ ctrl-b, &amp;  window 이름 변경 $ ctrl-b, ,  pane 가로 나누기 $ ctrl-b, %  pane 세로 나누기 $ ctrl-b, &quot;  pane 의 번호를 화면에 출력 $ ctrl-b, q  pane 크기 조절 $ ctrl-b, (ctrl + 방향키)  모든 pane의 크기 동일하게 만들기 $ ctrl-b alt-1 # 모든 vertical split 넓이를 동일하게 변경 $ ctrl-b alt-2 # 모든 horizontal split의 넓이를 동일하게 변경  pane 이동하기 $ ctrl-b, o  pane 이동하기 $ ctrl-b, 방향키 $ ctrl-b {(})  pane 삭제하기 $ ctrl-d  pane 화면 스크롤 모드 시작 $ ctrl-b, [  pane 화면 스크롤 모드 종료 $ q  입력되는 내용을 모든 pane에 동일하게 적용 $ ctrl-b : setw synchronize-panes  http://nodeqa.
 	</div>
 </article>
 </main>
 
 <div class="pagination">
-	<span class="pagination__item pagination__item--current">1/5</span>
-	<a class="pagination__item pagination__item--next btn" href="/page/2/">»</a>
+	<a class="pagination__item pagination__item--prev btn" href="/page/2/">«</a>
+	<span class="pagination__item pagination__item--current">3/5</span>
+	<a class="pagination__item pagination__item--next btn" href="/page/4/">»</a>
 </div>
 
 

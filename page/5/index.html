@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html class="no-js" lang="ko-kr">
+<head>
+	<meta name="generator" content="Hugo 0.59.1" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>ShrinkLabs</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="Keep calm and do sabzil.">
+	
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="alternate" type="application/rss+xml" href="/index.xml" title="ShrinkLabs">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container">
+		<div class="logo">
+			<a class="logo__link" href="/" title="ShrinkLabs" rel="home">
+				<div class="logo__title">ShrinkLabs</div>
+				<div class="logo__tagline">컨테이너관리 솔루션을 만들면서 경험하는 삽질에 대한 로그.</div>
+			</a>
+		</div>
+		<div class="divider"></div>
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main list" role="main">
+	<article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/posts/setting/" rel="bookmark">
+			개발환경 설정
+			</a>
+		</h3>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2015-05-23T01:28:09&#43;09:00">May 23, 2015</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/tools/" rel="category">tools</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		업데이트 $ sudo apt-get update $ sudo apt-get install build-essential  vim 설치 $ sudo apt-get install vim  vim 8.0 $ sudo add-apt-repository ppa:jonathonf/vim $ sudo apt-get update  xclip 설치 $ sudo apt-get install xclip  wget 설치(사용이 필요한 경우에만 설치) $ sudo apt-get install wget  git 설치  git 설치와 설정
+$ sudo apt-get install git $ git config –-global user.name “blah” $ git config –-global user.
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/posts/pkg-config/" rel="bookmark">
+			pkg-config 사용
+			</a>
+		</h3>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2015-03-06T01:28:09&#43;09:00">March 06, 2015</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/code/" rel="category">code</a>, <a class="meta__link" href="/categories/tools/" rel="category">tools</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		Go언어를 사용하다보면 C로 만들어진 라이브러리를 사용하기 위해서 cgo가 필요할 때 가 있다. 라이브러리를 링크하고 하는 몇 가지 절차를 거치게 되는데, 이때 pkg-config라는걸 사용하면 편리하다.
+pkg-config를 사용하면 컴파일하는데 필요한 라이브러리와 헤더정보를 Go코드상에서 동일한 경로로 제공해줄 수 있게 된다.
+pkg-config가 설치되어 있지 않을 경우에는 다음과 같이 설치를 해준다.
+$ sudo apt-get install pkg-config  이제 설치되어 있는 라이브러리 목록을 한번 보자.
+$ pkg-config --list-all  현재 설치된 라이브러리들의 정보가 나오게 된다.
+그런데 내가 원하는 라이브러리의 정보가 나타나지 않는다.
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/posts/golang-channels-tutorial/" rel="bookmark">
+			Golang channels tutorial
+			</a>
+		</h3>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2014-12-10T13:12:58&#43;09:00">December 10, 2014</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/code/" rel="category">code</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		최근에 goroutine과 channel에 대해서 학습하다가 설명이 잘 되어 있는 글을 찾아서 번역(이라고 하기에는 뭐하고 정리?) 를 해봤다. 제대로 이해를 못하고 잘 못 번역을 한 부분이 있을 수 도 있으니&hellip;꼭 원본을 보길 권장한다.;;;
+원본 : http://guzalexander.com/2013/12/06/golang-channels-tutorial.html
+Go언어는 병렬 프로그램 작성을 위해서 내장 도구를 갖고 있다. go를 함수 호출 앞에 놓으면 동일한 주소에 위치하는 코드를 독립적인 병렬 스레드로 실행을 시작한다. 이런 쓰레드를 Go언어에서는 goroutine이라고 부른다. 여기에서 말하는 concurrently는 parallel을 의미하지는 않는다. (역주: 그렇지만 번역은 “병렬” 이라고 칭하겠다.
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/posts/md5/" rel="bookmark">
+			md5 패키지 사용예
+			</a>
+		</h3>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2013-10-08T17:10:53&#43;09:00">October 08, 2013</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/code/" rel="category">code</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		Qt로 만드는 클라이언트에서 이미지 파일에 대해서 만들어진 md5 hash를 검증 해보기 위해서, 같은 이미지 파일에 대해서 Go언어로 md5 hash를 만들었을때 동일한 값이 생성되면 제대로 만들어진거 아닐까 해서, 만들어 봄.
+(사실은 일하기 싫어서 괜히 한번 해 본&hellip;)
+package main import ( &quot;io/ioutil&quot; &quot;crypto/md5&quot; &quot;fmt&quot; ) func main() { data, err := ioutil.ReadFile(&quot;1.jpg&quot;) if err != nil { return; } hash := md5.New() hash.Write(data) hashData := hash.Sum(nil) fmt.Printf(&quot;%x&quot;, hashData) }  
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/posts/c-go-slices/" rel="bookmark">
+			C언어의 배열을 Go언어의 slices로 변환
+			</a>
+		</h3>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2013-09-17T17:10:53&#43;09:00">September 17, 2013</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/code/" rel="category">code</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		cgo를 이용하다보면, C언어로 작성된 라이브러리의 리턴값으로 포인터에 구조체가 할당되어서 넘어올때가 있다.
+C언어에서 넘어오는 구조체 배열이 포인터 형태로 넘어오니, Go의 포인터에 할당을 해서 사용 해봤다.
+당연히 제대로 동작하지 않는다. C언어로 작성된 라이브러리에서 넘어오는 값은 배열이니, Go언어에서는 slices에 할당을 하는게 맞는것 같다.
+다음의 내용을 보면, array를 어떻게 slices에 할당을 해야 할지에 대해서 잘 설명이 되어 있다.
+&ldquo;Turning C arrays into Go slcies&rdquo; ( https://code.google.com/p/go-wiki/wiki/cgo )
+아래는 cubrid driver를 만들면서 사용한 코드이다.
+slcieHeader := (*reflect.
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/posts/cgo-type/" rel="bookmark">
+			type으로 이름 붙여진 구조체의 필드를 사용하기위한 방법
+			</a>
+		</h3>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2013-09-03T17:10:53&#43;09:00">September 03, 2013</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/code/" rel="category">code</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		c로 만들어져 있던 라이브러리를 cgo를 이용해서 포팅(?)을 하는 작업을 하다보면 난감한 부분들이 종종 나타난다.
+그중에 한가지가 c에서 사용하던 구조체의 파라미터명이 go 에서 미리정의된 명칭일 경우가 있다.
+대표적인 예로 &ldquo;type&rdquo;이라는 파라미터명이다.
+c에서는 T_CCI_COL_INFO(cubrid의 cci에서 사용되는 구조체중에 하나) 의 필드중에 하나가 type이라는 필드가 하나 있다.
+이걸 go에서 사용을 하려고 하니,,,
+&rdquo;&hellip;expected selector or type assertion, found &lsquo;type&rsquo; &ldquo; 이라는 결과를 만나게 된다.
+이걸 도대체 어떻게 사용해야 하나 고민을 하던중, golang.org 에 있는 문서 http://golang.
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/posts/testing/" rel="bookmark">
+			패키지 만들때 testing 패키지 사용하기
+			</a>
+		</h3>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2013-08-23T14:12:58&#43;09:00">August 23, 2013</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/code/" rel="category">code</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		개요 Go 언어용 패키지를 만들려면, 테스트코드를 해야 개발이 진행이 좀 더 원활하게 되는 것 같다.
+그래서 간단하게 테스트 코드 작성하는 방법을 정리해봤다.
+abc 패키지를 만들어서 테스트하기 src\abc\abc.go
+src\abc\abc_test.go 와 같이 파일을 만들어 놓는다.
+abc.go를 다음과 같이 작성한다.
+// abc.go package abc import ( &quot;fmt&quot; ) func A_Method() { fmt.Println(&quot;test A Method&quot;) }  그리고 abc_test.go를 다음과 같이 작성한다.
+// abc_test.go package abc import ( &quot;testing&quot; ) func TestA_Method(t *testing.T) { A_Method() }  그리고 $GOPATH/src/abc/ 에서
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/posts/test/" rel="bookmark">
+			
+			</a>
+		</h3>
+		
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/posts/test2/" rel="bookmark">
+			
+			</a>
+		</h3>
+		
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		
+	</div>
+</article>
+</main>
+
+<div class="pagination">
+	<a class="pagination__item pagination__item--prev btn" href="/page/4/">«</a>
+	<span class="pagination__item pagination__item--current">5/5</span>
+</div>
+
+
+			</div>
+			<aside class="sidebar">
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/posts/private-container-registry/">Kubernetes에서 Private Container Registry 사용</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/docker-error/">docker 설치 후 에러</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/k8s-with-kops-on-gce/">GCE에서 kops를 이용한 K8s 구성</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/docker-image/">docker image 저장소 위치 변경</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/nginx-ingress-controller-on-google-kubernetes-engine/">10.Nginx Ingress Controller on Google Kubernetes Engine</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/cscope/" title="cscope">cscope</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/debug/" title="debug">debug</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/docker/" title="docker">docker</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/first/" title="first">first</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/git/" title="git">git</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/go/" title="go">go</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/hugo/" title="hugo">hugo</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/kubernetes/" title="kubernetes">kubernetes</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/kvm/" title="kvm">kvm</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/linux/" title="linux">linux</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mq/" title="mq">mq</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/pkgconfig/" title="pkgconfig">pkgconfig</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/studyjam/" title="studyjam">studyjam</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/terminator/" title="terminator">terminator</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/test/" title="test">test</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tmux/" title="tmux">tmux</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/vendor/" title="vendor">vendor</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/vi/" title="vi">vi</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/zsh/" title="zsh">zsh</a>
+	</div>
+</div>
+</aside>
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 ShrinkLabs.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+</body>
+</html>

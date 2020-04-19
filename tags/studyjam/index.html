@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html class="no-js" lang="ko-kr">
 <head>
-	<meta name="generator" content="Hugo 0.59.1" />
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ShrinkLabs</title>
+	<title>studyjam - ShrinkLabs</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
-	<meta name="description" content="Keep calm and do sabzil.">
+	<meta name="description" content="">
 	
 	
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
-	<link rel="alternate" type="application/rss+xml" href="/index.xml" title="ShrinkLabs">
+	<link rel="alternate" type="application/rss+xml" href="/tags/studyjam/index.xml" title="ShrinkLabs">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
 	<link rel="stylesheet" href="/css/style.css">
 	
@@ -36,106 +35,9 @@
 			<div class="primary">
 			
 <main class="main list" role="main">
-	<article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/posts/private-container-registry/" rel="bookmark">
-			Kubernetes에서 Private Container Registry 사용
-			</a>
-		</h3>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text" datetime="2020-04-10T16:31:48&#43;09:00">April 10, 2020</time>
-</div>
-
-<div class="meta__item-categories meta__item">
-	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta__text">
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		Kubernetes에 배포하기 위해서 Container Registry(Private)을 사용하려면, 별도의 secret을 등록해야 한다.
-$ kubectl create secret docker-registry {secret} \ --docker-server={registryserver} \ --docker-username={name} \ --docker-password={password} \ --docker-email={email} \ --namespace={namespace}  namespace는 지정하지 않으면 default로 지정된다.
-그리고 Container Registry로 부터 image를 받아서 사용하기 위한 yaml 파일에 다음과 같이 추가한다.
-apiVersion: v1 kind: Pod metadata: name: private-reg spec: containers: - name: private-reg-container image: regcred/projectaa/private-reg:latest imagePullSecrets: - name: regcred  &ldquo;imagePullSecrets&rdquo; 항목을 추가하고 containers.image에서 iamgePullSecretes.name을 base로 사용한다.
-	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/posts/docker-error/" rel="bookmark">
-			docker 설치 후 에러
-			</a>
-		</h3>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text" datetime="2020-04-08T21:27:50&#43;09:00">April 08, 2020</time>
-</div>
-
-<div class="meta__item-categories meta__item">
-	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta__text">
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		docker 설치 후 &ldquo;Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?&rdquo; 가 발생
-$sudo systemctl status docker $sudo systemctl start docker $sudo systemctl enable docker  
-	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/posts/k8s-with-kops-on-gce/" rel="bookmark">
-			GCE에서 kops를 이용한 K8s 구성
-			</a>
-		</h3>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text" datetime="2020-03-05T21:36:13&#43;09:00">March 05, 2020</time>
-</div>
-
-<div class="meta__item-categories meta__item">
-	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta__text"><a class="meta__link" href="/categories/containers/" rel="category">containers</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		클러스터 배포용 VM 인스턴스 생성  Kubernetes를 구성하기 위한 VM 인스턴스를 생성한다.
- &ldquo;ID 및 API 액세스&rdquo; 항목에서 액세스 범위를 &ldquo;모든 Cloud API에 대한 전체 액세스 허용&rdquo; 으로 선택한다. 또는 아래와 같이 서비스 계정에 권한을 설정하고 서비스 계정을 선택해도 된다.
- GCP 관리 콘솔의 IAM&amp;Admin에서 서비스 계정을 하나 만든다. 서비스 계정이 갖고 있어야 하는 최소한의 권한은 다음과 같다.
-compute admin servce account admin service account key admin service account token creator service acount user storage admin DNS Administrator DNS Reader  SSH로 연결 &amp; 업데이트
-	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/posts/docker-image/" rel="bookmark">
-			docker image 저장소 위치 변경
-			</a>
-		</h3>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text" datetime="2020-03-05T12:05:00&#43;09:00">March 05, 2020</time>
-</div>
-
-<div class="meta__item-categories meta__item">
-	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta__text"><a class="meta__link" href="/categories/containers/" rel="category">containers</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		 새로운 디스크를 추가한다.
- 여기에서는 &ldquo;/docker&rdquo; 에 mount 되어 있는걸로 가정한다.
-  &ldquo;etc/docker/daemon.json&rdquo; 에 다음의 내용을 추가한다.
-{ &quot;data-root&quot;: &quot;/docker&quot; }  docker 서비스를 재시작한다.
-$ sudo systemctl daemon-reload $ sudo systemctl restart docker   
-	</div>
-</article><article class="list__item post">
+	<header class="main__header">
+		<h1 class="main__title">studyjam</h1>
+	</header><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
 			<a href="/posts/nginx-ingress-controller-on-google-kubernetes-engine/" rel="bookmark">
@@ -293,17 +195,114 @@ StorageClass는 상태를 갖는걸 확인하기 위한 실습이 필요하다�
 이전 과정에서 배웠던 배포를 위한 전략에서는 label을 사용했었다면, 이번에는 Namespace를 사용해서 비슷한 문제 상황을 해결하는걸 경험해 볼 수 있다.
 그리고 helm은 Kubernetes의 클러스터에 올라갈 수 있도록 미리 정의해서 배포해 놓은걸 사용할 수 있게 해주는 도구였다.
 	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/posts/managing-deployments-using-kubernetes/" rel="bookmark">
+			4.Managing Deployments Using Kubernetes
+			</a>
+		</h3>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2019-01-09T11:15:55&#43;09:00">January 09, 2019</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/containers/" rel="category">containers</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		이번 장에서는 &ldquo;Deployment&rdquo;가 어떤 역할을 할 수 있으며, 이를 이용해서 취할 수 있는 배포 전략에 대해서 알아볼 수 있었다.
+(이번 장에서 실습을 위해서는 필수적으로 compute/zone 설정을 us-central1-a로 지정해 놓아야 cluster 생성을 정상적으로 할 수 있다.)
+Deployment 뿐만이 아니라 다른 객체들을 사용하기 위해서도 yaml을 작성할때 각 필드에 대한 정보를 어디에서 확인해야 하는지가 궁금했다.
+$ kubectl explain deployment $ kubectl explain --recursive $ kubectl explain deployment.metadata.name  등과 같이 확인을 할 수 있다.
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/posts/orchestrating-cloud-with-kubernetes/" rel="bookmark">
+			3.Orchestrating the Cloud With Kubernetes
+			</a>
+		</h3>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2019-01-09T01:26:47&#43;09:00">January 09, 2019</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/containers/" rel="category">containers</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		이번 장은 우선 &ldquo;nginx&rdquo;와 &ldquo;monolith&rdquo;라는 단어에 현혹되지 않도록 주의를 해야 할 것 같다.
+최초에 nginx가 실행되는 Pod는 그거대로 Kubnernetes 작동에 대한 내용이고, Pod에 대한 내용에서 언급되는 nginx와 monolith는 또 그것대로의 내용을 설명한다.
+그리고 다음에 나오는 port-forward에 대한 내용은 또 완전히 별개의 내용이다.
+port-forward는 &ldquo;Service&rdquo;로 노출하지 않는 Pod에 대해서 테스트등을 해보기 위해서 아주 유용한 도구인 것 같다.
+port-forward로 &ldquo;monolith&rdquo; Pod의 80 포트를 10080을 지정하면 local의 10080 포트를 사용하고 있는것 처럼 이용이 가능하다.
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/posts/hello-node-kubernetes/" rel="bookmark">
+			2.Hello Node Kubernetes
+			</a>
+		</h3>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2019-01-08T13:13:09&#43;09:00">January 08, 2019</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/containers/" rel="category">containers</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		2번째 과정에서는 Kubernetes의 기본적인 동작 방식에 대해서 알아 볼 수 있었다.
+Kubernetes의 클러스터를 생성하는 과정은 Google Cloud Platform에서 기능을 제공하고 있어서 아주 간편했다.
+책을 보면서 Kubernetes 공부를 처음 시작하는 과정에서 가장 시간을 많이 소비하게 되는 부분이었는데, 플랫폼에서 제공되는 기능을 glcoud를 이용해서 node와 각 node의 기본적인 설정을 지정후 cluster를 생성하는 명령 하나로 모든 과정이 생략될 수 있게 되었다.
+그리고 Registry Server에 등록해 놓았던 Image를 이용해서 직접 &ldquo;Pod&rdquo;를 만들어보고, &ldquo;Pod&rdquo;의 개념과 &ldquo;Deployment&rdquo;의 개념이 무엇인지에 대해서 대략적으로 알아 볼 수 있었다.
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/posts/introduction-to-docker/" rel="bookmark">
+			1.Introduction to Docker
+			</a>
+		</h3>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2019-01-08T10:48:08&#43;09:00">January 08, 2019</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/containers/" rel="category">containers</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		구글에서 지원해주는 “2019 클라우드 스터디잼 입문반” 스터디에 참여하기 시작했다. 이 스터디는 어떠한 형태로든 모인 멤버들이 일정 기간(1&frasl;7~1&frasl;27) 동안에 실습이 겸해진 과정(QWIKLABS - Kubernetes in the Google Cloud)을 완수하는 방식이다.
+첫번째 과정으로 “Introduction to Docker” 을 진행 했다. 다음은 과정을 진행하면서 학습할 수 있었던 내용의 요약이다.
+처음 해보는 과정이라서 그런지 익숙해지기 위한 시간이 약간 필요했지만 그다지 어렵지는 않았다.
+Docker의 Image와 Container 그리고 Dockerfile의 이해를 위한 몇 가지의 실습이 진행되었다. 실습들을 통해서 Image와 Container를 어떻게 구분지어서 생각해야 하는지를 학습할 수 있었다.
+	</div>
 </article>
 </main>
 
-<div class="pagination">
-	<span class="pagination__item pagination__item--current">1/5</span>
-	<a class="pagination__item pagination__item--next btn" href="/page/2/">»</a>
-</div>
-
 
 			</div>
-			<aside class="sidebar">
+			
+<aside class="sidebar">
 <div class="widget-recent widget">
 	<h4 class="widget__title">Recent Posts</h4>
 	<div class="widget__content">

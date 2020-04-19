@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html class="no-js" lang="ko-kr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>3.Orchestrating the Cloud With Kubernetes - ShrinkLabs</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container">
+		<div class="logo">
+			<a class="logo__link" href="/" title="ShrinkLabs" rel="home">
+				<div class="logo__title">ShrinkLabs</div>
+				<div class="logo__tagline">컨테이너관리 솔루션을 만들면서 경험하는 삽질에 대한 로그.</div>
+			</a>
+		</div>
+		<div class="divider"></div>
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">3.Orchestrating the Cloud With Kubernetes</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2019-01-09T01:26:47&#43;09:00">January 09, 2019</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/containers/" rel="category">containers</a>
+	</span>
+</div></div>
+		</header><div class="content post__content clearfix">
+			<p>이번 장은 우선 &ldquo;nginx&rdquo;와 &ldquo;monolith&rdquo;라는 단어에 현혹되지 않도록 주의를 해야 할 것 같다.</p>
+
+<p>최초에 nginx가 실행되는 Pod는 그거대로 Kubnernetes 작동에 대한 내용이고, Pod에 대한 내용에서 언급되는 nginx와 monolith는 또 그것대로의 내용을 설명한다.</p>
+
+<p>그리고 다음에 나오는 port-forward에 대한 내용은 또 완전히 별개의 내용이다.</p>
+
+<p>port-forward는 &ldquo;Service&rdquo;로 노출하지 않는 Pod에 대해서 테스트등을 해보기 위해서 아주 유용한 도구인 것 같다.</p>
+
+<p>port-forward로 &ldquo;monolith&rdquo; Pod의 80 포트를 10080을 지정하면 local의 10080 포트를 사용하고 있는것 처럼 이용이 가능하다.</p>
+
+<p>&ldquo;Service&rdquo;는 Pod가 수시로 죽고 살아나는 과정 중에서 외부에 노출될 수 있는 일정한 IP를 제공하기 위한 목적이다.</p>
+
+<p>&ldquo;Service&rdquo;는 &ldquo;selector&rdquo;를 이용해서 Pod에 지정된 &ldquo;label&rdquo; 별로 Pod들을 선택할 수 있다. 그리고 &ldquo;Service&rdquo;의 형태로는 &ldquo;ClusterIP&rdquo;, &ldquo;NodePort&rdquo;, &ldquo;LoadBalancer&rdquo;가 있다.</p>
+
+<p>&ldquo;secure-monolith&rdquo; Pod를 생성하는 과정중에 &ldquo;secret&rdquo;와 &ldquo;configmap&rdquo;을 생성하는게 나오는데 아직은 크게 신경쓰지 않아도 될 것 같다.</p>
+
+<p>둘 다 비슷한 성격을 갖는데, &ldquo;secret&rdquo;는 패스워드 처럼 민감 데이터를 다루는 성격이고, &ldquo;configmap&rdquo;은 환경 설정과 같은 성격의 정보를 다룬다. 특성 또는 상태를 갖는 정보를 포함하지 않고 Pod가 관리될 수 있도록 해준다.</p>
+
+<p>&ldquo;Deployment&rdquo;는 &ldquo;replicas&rdquo; 항목에 지정된 만큼의 Pod를 관리하기 위한 용도이다.</p>
+
+<p>앞부분에서 약간의 착각을 할 수 있는 부분이 있기는 했었지만 전체적으로 간단하게라도 kubernetes를 이용한 관리방법에 대해서 이해를 할 수 있는 장 이었던것 같다.</p>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/tags/studyjam/" rel="tag">studyjam</a></li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="jaehoon avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">About jaehoon</span>
+	</div>
+	<div class="authorbox__description">
+		go, kubernetes에 관심 많은 프로그래머
+	</div>
+</div>
+
+<nav class="post-nav flex">
+	<div class="post-nav__item post-nav__item--prev">
+		<a class="post-nav__link" href="/posts/hello-node-kubernetes/" rel="prev"><span class="post-nav__caption">«&thinsp;Previous</span><p class="post-nav__post-title">2.Hello Node Kubernetes</p></a>
+	</div>
+	<div class="post-nav__item post-nav__item--next">
+		<a class="post-nav__link" href="/posts/managing-deployments-using-kubernetes/" rel="next"><span class="post-nav__caption">Next&thinsp;»</span><p class="post-nav__post-title">4.Managing Deployments Using Kubernetes</p></a>
+	</div>
+</nav>
+
+<section class="comments">
+	<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "jaehoon" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+			</div>
+			<aside class="sidebar">
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/posts/private-container-registry/">Kubernetes에서 Private Container Registry 사용</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/docker-error/">docker 설치 후 에러</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/k8s-with-kops-on-gce/">GCE에서 kops를 이용한 K8s 구성</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/docker-image/">docker image 저장소 위치 변경</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/nginx-ingress-controller-on-google-kubernetes-engine/">10.Nginx Ingress Controller on Google Kubernetes Engine</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/cscope/" title="cscope">cscope</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/debug/" title="debug">debug</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/docker/" title="docker">docker</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/first/" title="first">first</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/git/" title="git">git</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/go/" title="go">go</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/hugo/" title="hugo">hugo</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/kubernetes/" title="kubernetes">kubernetes</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/kvm/" title="kvm">kvm</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/linux/" title="linux">linux</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mq/" title="mq">mq</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/pkgconfig/" title="pkgconfig">pkgconfig</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/studyjam/" title="studyjam">studyjam</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/terminator/" title="terminator">terminator</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/test/" title="test">test</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tmux/" title="tmux">tmux</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/vendor/" title="vendor">vendor</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/vi/" title="vi">vi</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/zsh/" title="zsh">zsh</a>
+	</div>
+</div>
+</aside>
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 ShrinkLabs.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+</body>
+</html>
