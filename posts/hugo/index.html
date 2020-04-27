@@ -63,8 +63,8 @@ MAC은 안 써봐서 잘 모르겠다&hellip;;;;</p>
 <h2 id="github에-저장소를-만든다">github에 저장소를 만든다</h2>
 
 <p>github에서 호스팅을 받아서 hugo를 사용하기 위해서는 2개의 저장소를 만들어야 한다.<br />
-hugo의 컨텐츠를 관리하기 위한 저장소가 필요하다.(ex: <a href="https://github.com/sabzil/blog">https://github.com/sabzil/blog</a>)<br />
-그리고 컨텐츠를 보여주기 위한 github의 페이지 저장소(ex: <a href="https://github.com/sabzil/sabzil.github.io">https://github.com/sabzil/sabzil.github.io</a>)</p>
+hugo의 컨텐츠를 관리하기 위한 저장소가 필요하다.(ex: <a href="https://github.com/shrinklabs/blog">https://github.com/shrinklabs/blog</a>)<br />
+그리고 컨텐츠를 보여주기 위한 github의 페이지 저장소(ex: <a href="https://github.com/shrinklabs/shrinklabs.github.io">https://github.com/shrinklabs/shrinklabs.github.io</a>)</p>
 
 <h2 id="로컬에서-기초-작업을-한다">로컬에서 기초 작업을 한다</h2>
 
@@ -100,15 +100,15 @@ $ git remote rm origin
 <p>config.toml을 수정해서 사이트의 기본 설정을 한다.<br />
 이 부분은 개인 취향과 테마에서 필요한 설정들을 하도록 한다.</p>
 
-<p>이제 로컬의 blog 디렉토리에 처음에 만들었던 github의 blog( github.com/sabzil/blog ) 을 리모트로 등록한다.</p>
+<p>이제 로컬의 blog 디렉토리에 처음에 만들었던 github의 blog( github.com/shrinklabs/blog ) 을 리모트로 등록한다.</p>
 
 <pre><code>$ git init  
-$ git remote add origin git@github.com:sabzil/blog.git
+$ git remote add origin git@github.com:shrinklabs/blog.git
 </code></pre>
 
-<p>그리고 github.com/sabzil/sabzi.github.io를 blog의 서브모듈로 등록한다.</p>
+<p>그리고 github.com/shrinklabs/shrinklabs.github.io를 blog의 서브모듈로 등록한다.</p>
 
-<pre><code>$ git submodule add -b master git@github.com:sabzil/sabzil.github.io.git public
+<pre><code>$ git submodule add -b master git@github.com:shrinklabs/shrinklabs.github.io.git public
 </code></pre>
 
 <h2 id="컨텐츠를-만든다">컨텐츠를 만든다</h2>
@@ -154,14 +154,14 @@ Windows는 배치파일을 만들어서 사용해도 되겠지만, 귀찮으면 
 <pre><code>$ git push origin master
 </code></pre>
 
-<p>지금 까지 작업한 내용을 github.com/sabzil/sabzil.github.io에 반영한다.</p>
+<p>지금 까지 작업한 내용을 github.com/shrinklabs/shrinklabs.github.io에 반영한다.</p>
 
 <pre><code>$ cd ..
 </code></pre>
 
 <p>blog 디렉토리로 돌아온다.</p>
 
-<p>이제 blog의 변경된 내용을 github.com/sabzil/blog 에 반영을 한다.</p>
+<p>이제 blog의 변경된 내용을 github.com/shrinklabs/blog 에 반영을 한다.</p>
 
 <pre><code>$ git add -A  
 $ git commit -m &quot;blahblah&quot;  
@@ -172,12 +172,12 @@ $ git push origin master
 
 <p>항상 동일한 장소에서 컨텐츠를 만들고 있다면 모르겠지만,<br />
 회사, 집 그리고 노트북에서 사용을 하고 있다거나 OS를 새로설치하고 다시 사용하기 위해서는,<br />
-&ldquo;github.com/sabzil/blog&rdquo;을 새로 clone 받아서 사용해야 한다.<br />
+&ldquo;github.com/shrinklabs/blog&rdquo;을 새로 clone 받아서 사용해야 한다.<br />
 이때 필요한 절차는 다음과 같다.</p>
 
 <p>blog을 clone 받는다.</p>
 
-<pre><code>$ git clone git@github.com:sabzil/blog.git
+<pre><code>$ git clone git@github.com:shrinklabs/blog.git
 </code></pre>
 
 <p>submodule로 등록해 놓은 public의 내용을 업데이트 한다.</p>

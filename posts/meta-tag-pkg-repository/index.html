@@ -80,19 +80,19 @@ This is a git repository holding a redirect for the Go repositories referenced b
 <p>에 보면 meta tag를 사용해서 원격저장소의 경로를 커스텀 도메인으로 사용할 수 있는 방법이 있었다.<br />
 그래서 도메인을 하나 구입했다.<br />
 io도메인(rsc.io, robpike.io 가 왠지 멋있어 보여서..;)을 따라하고 싶어&hellip;<br />
-나도 jaehoon.io 구매했었지만&hellip;너무 비싸서 연장을 못했다&hellip;;(지금은 sabzil.org 로&hellip;)</p>
+나도 .io 구매했었지만&hellip;너무 비싸서 연장을 못했다&hellip;;(지금은 shrinklabs.com 으로&hellip;)</p>
 
-<p>그리고 github page(sabzil.github.io)를 만들어 놓고, 거기에 내가 만든 pkg중에 하나를 골라서 한번 만들어봤다.</p>
+<p>그리고 github page(shrinklabs.github.io)를 만들어 놓고, 거기에 내가 만든 pkg중에 하나를 골라서 한번 만들어봤다.</p>
 
-<pre><code>sabzil.github.io/cubrid
+<pre><code>shrinklabs.github.io/cubrid
 </code></pre>
 
 <p>에 index.html 을 다음과 같이 만들었다.</p>
 
-<pre><code>&lt;meta name=&quot;go-import&quot; content=&quot;sabzil.org/cubrid git https://github.com/sabzil/cubrid&quot;&gt;
+<pre><code>&lt;meta name=&quot;go-import&quot; content=&quot;shrinklabs.org/cubrid git https://github.com/shrinklabs/cubrid&quot;&gt;
 </code></pre>
 
-<p>이제 내 도메인(sabzil.org)과 연결을 했다.(github page를 커스컴 도메인에 연결하는 방법은 검색해보니 많이 나와서 쉽게했다.)</p>
+<p>이제 내 도메인(shrinklabs.org)과 연결을 했다.(github page를 커스컴 도메인에 연결하는 방법은 검색해보니 많이 나와서 쉽게했다.)</p>
 
 <p>그리고 커맨드 창에서&hellip;</p>
 
@@ -102,12 +102,12 @@ io도메인(rsc.io, robpike.io 가 왠지 멋있어 보여서..;)을 따라하�
 <p>명령을 내리고 잠시 기다리니 받아진다!!! (오류가 나온다면 cgo관련한 설정 때문인것 같다.) +
  +
 그리고 godoc.org에도 등록도 잘된다. +
-cubrid로 검색을 해보면, sabzil.org/cubrid 와 github.com/sabzil/cubrid 두개가 나온다.</p>
+cubrid로 검색을 해보면, shrinklabs.org/cubrid 와 github.com/shrinklabs/cubrid 두개가 나온다.</p>
 
 <p>russ cox는 웹브라우저에서 rsc.io/pdf 를 입력하면 godoc/rsc.io/pdf 로 redirect 가 되도록 해놓은것 같다.<br />
 그래서 나도 meta tag를 하나 더 추가했다.</p>
 
-<pre><code>&lt;meta http-equiv=&quot;refresh&quot; content=&quot;3;url=http://www.godoc.org/sabzil.org/cubrid&quot;&gt;
+<pre><code>&lt;meta http-equiv=&quot;refresh&quot; content=&quot;3;url=http://www.godoc.org/shrinklabs.org/cubrid&quot;&gt;
 </code></pre>
 
 <p>이렇게 하니 godoc.org로 이동을 한다.<br />
@@ -115,7 +115,7 @@ cubrid로 검색을 해보면, sabzil.org/cubrid 와 github.com/sabzil/cubrid �
 
 <p>이제 열심히 코딩해서 pkg 많이 만들면 되는건가?;</p>
 
-<p>html 코드는 <a href="https://github.com/sabzil/sabzil.github.io/blob/master/ringbuffer/index.html">https://github.com/sabzil/sabzil.github.io/blob/master/ringbuffer/index.html</a> 을 참고하면 된다.</p>
+<p>html 코드는 <a href="https://github.com/shrinklabs/shrinklabs.github.io/blob/master/ringbuffer/index.html">https://github.com/shrinklabs/shrinklabs.github.io/blob/master/ringbuffer/index.html</a> 을 참고하면 된다.</p>
 
 <p>github page에 커스텀 도메인을 연결하면, https에 문제가 좀 있다.;</p>
 

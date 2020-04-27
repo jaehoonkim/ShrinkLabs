@@ -73,24 +73,24 @@ DNS Reader
 
 <li><p>SSH로 연결 &amp; 업데이트</p>
 
-<pre><code class="language-shell">sabzil@sabzil:~$sudo apt-get update
-sabzil@sabzil:~$sudo apt-get dist-upgrade
+<pre><code class="language-shell">shrinklabs@shrinklabs:~$sudo apt-get update
+shrinklabs@shrinklabs:~$sudo apt-get dist-upgrade
 </code></pre></li>
 </ul></li>
 </ul>
 
 <h1 id="kubectl-설치">kubectl 설치</h1>
 
-<pre><code class="language-shell">sabzil@sabzil:~$curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-sabzil@sabzil:~$chmod +x ./kubectl
-sabzil@sabzil:~$sudo mv ./kubectl /usr/local/bin/kubectl
+<pre><code class="language-shell">shrinklabs@shrinklabs:~$curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+shrinklabs@shrinklabs:~$chmod +x ./kubectl
+shrinklabs@shrinklabs:~$sudo mv ./kubectl /usr/local/bin/kubectl
 </code></pre>
 
 <h1 id="kops-설치">kops 설치</h1>
 
-<pre><code class="language-shell">sabzil@sabzil:~$wget -O kops https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '&quot;' -f 4)/kops-linux-amd64
-sabzil@sabzil:~$chmod +x ./kops
-sabzil@sabzil:~$sudo mv ./kops /usr/local/bin/
+<pre><code class="language-shell">shrinklabs@shrinklabs:~$wget -O kops https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '&quot;' -f 4)/kops-linux-amd64
+shrinklabs@shrinklabs:~$chmod +x ./kops
+shrinklabs@shrinklabs:~$sudo mv ./kops /usr/local/bin/
 </code></pre>
 
 <h1 id="gcp-tool-설치">GCP Tool 설치</h1>
@@ -98,11 +98,11 @@ sabzil@sabzil:~$sudo mv ./kops /usr/local/bin/
 <ul>
 <li><p><a href="https://cloud.google.com/sdk/install">https://cloud.google.com/sdk/install</a></p>
 
-<pre><code class="language-shell">sabzil@sabzil:~$export CLOUD_SDK_REPO=&quot;cloud-sdk-$(lsb_release -c -s)&quot;
-sabzil@sabzil:~$echo &quot;deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main&quot; | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
-sabzil@sabzil:~$sudo apt-get install apt-transport-https ca-certificates
-sabzil@sabzil:~$curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-sabzil@sabzil:~$sudo apt-get update &amp;&amp; sudo apt-get install google-cloud-sdk
+<pre><code class="language-shell">shrinklabs@shrinklabs:~$export CLOUD_SDK_REPO=&quot;cloud-sdk-$(lsb_release -c -s)&quot;
+shrinklabs@shrinklabs:~$echo &quot;deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main&quot; | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+shrinklabs@shrinklabs:~$sudo apt-get install apt-transport-https ca-certificates
+shrinklabs@shrinklabs:~$curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+shrinklabs@shrinklabs:~$sudo apt-get update &amp;&amp; sudo apt-get install google-cloud-sdk
 </code></pre></li>
 
 <li><p>추가 구성요소는 선택적으로 설치 한다. ( sudo apt-get install )</p>
@@ -122,7 +122,7 @@ kubectl
 
 <li><p>GCP를 시작하기 위한 초기화</p>
 
-<pre><code class="language-shell">sabzil@sabzil:~$gcloud init
+<pre><code class="language-shell">shrinklabs@shrinklabs:~$gcloud init
 Welcome! This command will take you through the configuration of gcloud.
 Your current configuration has been set to: [default]
 You can skip diagnostics next time by using the following flag:
@@ -139,12 +139,12 @@ Please enter your numeric choice: 1
 
 You are logged in as: [xxxxxxxxxxxx-compute@developer.gserviceaccount.com].
 Pick cloud project to use: 
-[1] sabzil-000000
+[1] shrinklabs-000000
 [2] Create a new project
 Please enter numeric choice or text value (must exactly match list 
 item): 1
 
-Your current project has been set to: [sabzil-000000].
+Your current project has been set to: [shrinklabs-000000].
 
 Do you want to configure a default Compute Region and Zone? (Y/n)? y
 
@@ -211,12 +211,12 @@ Your project default Compute Engine zone has been set to [us-central1-a].
 You can change it by running [gcloud config set compute/zone NAME].
 Your project default Compute Engine region has been set to [us-central1].
 You can change it by running [gcloud config set compute/region NAME].
-Created a default .boto configuration file at [/home/sabzil/.boto]. See this file and
+Created a default .boto configuration file at [/home/shrinklabs/.boto]. See this file and
 [https://cloud.google.com/storage/docs/gsutil/commands/config] for more
 information about configuring Google Cloud Storage.
 Your Google Cloud SDK is configured and ready to use!
 * Commands that require authentication will use xxxxxxxxxxxx-compute@developer.gserviceaccount.com by default
-* Commands will reference project `sabzil-000000` by default
+* Commands will reference project `shrinklabs-000000` by default
 * Compute Engine commands will use region `us-central1` by default
 * Compute Engine commands will use zone `us-central1-a` by default
 Run `gcloud help config` to learn how to change individual settings
@@ -225,7 +225,7 @@ Run `gcloud topic configurations` to learn more.
 Some things to try next:
 * Run `gcloud --help` to see the Cloud Platform services you can interact with. And run `gcloud help COMMAND` to get help on any gcloud command.
 * Run `gcloud topic --help` to learn about advanced features of the SDK like arg files and output formatting
-sabzil@sabzil:~$
+shrinklabs@shrinklabs:~$
 </code></pre></li>
 
 <li><p>선택 사항</p>
@@ -235,7 +235,7 @@ sabzil@sabzil:~$
 <li>연결되어 있는 서비스 계정인 &ldquo;[1] xxxxxxxxxxxx-compute@developer.gserviceaccount.com&rdquo; 를 선택</li>
 <li>&ldquo;Please enter numeric choice or text value (must exactly match list
 item): 1&rdquo;</li>
-<li>연결하고자 하는 프로젝트인 &ldquo;[1] sabzil-000000&rdquo; 를 선택</li>
+<li>연결하고자 하는 프로젝트인 &ldquo;[1] shrinklabs-000000&rdquo; 를 선택</li>
 <li>&ldquo;Do you want to configure a default Compute Region and Zone? (Y/n)? y&rdquo;</li>
 <li>기본으로 제공되고 있는 region과 zone을 사용</li>
 <li>&ldquo;Please enter numeric choice or text value (must exactly match list
@@ -245,9 +245,9 @@ item): 8&rdquo;</li>
 
 <h1 id="스토리지-버킷-생성">스토리지(버킷) 생성</h1>
 
-<pre><code class="language-shell">sabzil@sabzil:~$ gsutil mb gs://sabzil-cluster-state-store
-Creating gs://sabzil-cluster-state-store/...
-sabzil@sabzil:~$ export KOPS_STATE_STORE=gs://sabzil-cluster-state-store/
+<pre><code class="language-shell">shrinklabs@shrinklabs:~$ gsutil mb gs://shrinklabs-cluster-state-store
+Creating gs://shrinklabs-cluster-state-store/...
+shrinklabs@shrinklabs:~$ export KOPS_STATE_STORE=gs://shrinklabs-cluster-state-store/
 </code></pre>
 
 <ul>
@@ -256,7 +256,7 @@ sabzil@sabzil:~$ export KOPS_STATE_STORE=gs://sabzil-cluster-state-store/
 <ul>
 <li>mb: Make buckets</li>
 </ul></li>
-<li>Bucket의 이름은 필요한 형태로 만들면 된다. (ex, sabzil-cluster-state-store)</li>
+<li>Bucket의 이름은 필요한 형태로 만들면 된다. (ex, shrinklabs-cluster-state-store)</li>
 </ul>
 
 <h1 id="클러스터-생성">클러스터 생성</h1>
@@ -264,42 +264,42 @@ sabzil@sabzil:~$ export KOPS_STATE_STORE=gs://sabzil-cluster-state-store/
 <ul>
 <li><p>Google Cloud에서 사용할 정보</p>
 
-<pre><code class="language-shell">sabzil@sabzil:~$ PROJECT=`gcloud config get-value project`
-sabzil@sabzil:~$ export KOPS_FEATURE_FLAGS=AlphaAllowGCE # to unlock the GCE features
+<pre><code class="language-shell">shrinklabs@shrinklabs:~$ PROJECT=`gcloud config get-value project`
+shrinklabs@shrinklabs:~$ export KOPS_FEATURE_FLAGS=AlphaAllowGCE # to unlock the GCE features
 </code></pre></li>
 
 <li><p>Kubernetes 클러스터 생성(상태 저장소)</p>
 
-<pre><code class="language-shell">sabzil@sabzil:~$ kops create cluster --name=sabzil-cluster.k8s.local --zones=us-central1-a --state=${KOPS_STATE_STORE} --project=${PROJECT}
+<pre><code class="language-shell">shrinklabs@shrinklabs:~$ kops create cluster --name=shrinklabs-cluster.k8s.local --zones=us-central1-a --state=${KOPS_STATE_STORE} --project=${PROJECT}
 
-ManagedFile/sabzil-cluster.k8s.local-addons-dns-controller.addons.k8s.io-k8s-1.6
+ManagedFile/shrinklabs-cluster.k8s.local-addons-dns-controller.addons.k8s.io-k8s-1.6
     Location                addons/dns-controller.addons.k8s.io/k8s-1.6.yaml
 
-ManagedFile/sabzil-cluster.k8s.local-addons-dns-controller.addons.k8s.io-pre-k8s-1.6
+ManagedFile/shrinklabs-cluster.k8s.local-addons-dns-controller.addons.k8s.io-pre-k8s-1.6
     Location                addons/dns-controller.addons.k8s.io/pre-k8s-1.6.yaml
 
-ManagedFile/sabzil-cluster.k8s.local-addons-kube-dns.addons.k8s.io-k8s-1.12
+ManagedFile/shrinklabs-cluster.k8s.local-addons-kube-dns.addons.k8s.io-k8s-1.12
     Location                addons/kube-dns.addons.k8s.io/k8s-1.12.yaml
 
-ManagedFile/sabzil-cluster.k8s.local-addons-kube-dns.addons.k8s.io-k8s-1.6
+ManagedFile/shrinklabs-cluster.k8s.local-addons-kube-dns.addons.k8s.io-k8s-1.6
     Location                addons/kube-dns.addons.k8s.io/k8s-1.6.yaml
 
-ManagedFile/sabzil-cluster.k8s.local-addons-kube-dns.addons.k8s.io-pre-k8s-1.6
+ManagedFile/shrinklabs-cluster.k8s.local-addons-kube-dns.addons.k8s.io-pre-k8s-1.6
     Location                addons/kube-dns.addons.k8s.io/pre-k8s-1.6.yaml
 
-ManagedFile/sabzil-cluster.k8s.local-addons-kubelet-api.rbac.addons.k8s.io-k8s-1.9
+ManagedFile/shrinklabs-cluster.k8s.local-addons-kubelet-api.rbac.addons.k8s.io-k8s-1.9
     Location                addons/kubelet-api.rbac.addons.k8s.io/k8s-1.9.yaml
 
-ManagedFile/sabzil-cluster.k8s.local-addons-limit-range.addons.k8s.io
+ManagedFile/shrinklabs-cluster.k8s.local-addons-limit-range.addons.k8s.io
     Location                addons/limit-range.addons.k8s.io/v1.5.0.yaml
 
-ManagedFile/sabzil-cluster.k8s.local-addons-rbac.addons.k8s.io-k8s-1.8
+ManagedFile/shrinklabs-cluster.k8s.local-addons-rbac.addons.k8s.io-k8s-1.8
     Location                addons/rbac.addons.k8s.io/k8s-1.8.yaml
 
-ManagedFile/sabzil-cluster.k8s.local-addons-storage-gce.addons.k8s.io-v1.6.0
+ManagedFile/shrinklabs-cluster.k8s.local-addons-storage-gce.addons.k8s.io-v1.6.0
     Location                addons/storage-gce.addons.k8s.io/v1.6.0.yaml
 
-ManagedFile/sabzil-cluster.k8s.local-addons-storage-gce.addons.k8s.io-v1.7.0
+ManagedFile/shrinklabs-cluster.k8s.local-addons-storage-gce.addons.k8s.io-v1.7.0
     Location                addons/storage-gce.addons.k8s.io/v1.7.0.yaml
 
 ManagedFile/etcd-cluster-spec-events
@@ -332,12 +332,12 @@ Secret/system:monitoring
 
 Secret/system:scheduler
 
-StorageBucketAcl/serviceaccount-backup-readwrite-sabzil-cluster-state-store
-    Bucket                  sabzil-cluster-state-store
+StorageBucketAcl/serviceaccount-backup-readwrite-shrinklabs-cluster-state-store
+    Bucket                  shrinklabs-cluster-state-store
     Entity                  xxxx-000000000000-compute@developer.gserviceaccount.com
     Role                    WRITER
 
-TargetPool/api-sabzil-cluster-k8s-local
+TargetPool/api-shrinklabs-cluster-k8s-local
 
 Must specify --yes to apply changes
 
@@ -345,18 +345,18 @@ Cluster configuration has been created.
 
 Suggestions:
 * list clusters with: kops get cluster
-* edit this cluster with: kops edit cluster sabzil-cluster.k8s.local
-* edit your node instance group: kops edit ig --name=sabzil-cluster.k8s.local nodes
-* edit your master instance group: kops edit ig --name=sabzil-cluster.k8s.local master-us-central1-a
+* edit this cluster with: kops edit cluster shrinklabs-cluster.k8s.local
+* edit your node instance group: kops edit ig --name=shrinklabs-cluster.k8s.local nodes
+* edit your master instance group: kops edit ig --name=shrinklabs-cluster.k8s.local master-us-central1-a
 
-Finally configure your cluster with: kops update cluster --name sabzil-cluster.k8s.local --yes
+Finally configure your cluster with: kops update cluster --name shrinklabs-cluster.k8s.local --yes
 
-sabzil@sabzil:~$
+shrinklabs@shrinklabs:~$
 </code></pre></li>
 
 <li><p>Kubernetes 클러스터 생성(VM 인스턴스에 직접 생성)</p>
 
-<pre><code class="language-shell">sabzil@sabzil:~$ kops update cluster --name sabzil-cluster.k8s.local --yes
+<pre><code class="language-shell">shrinklabs@shrinklabs:~$ kops update cluster --name shrinklabs-cluster.k8s.local --yes
 I1106 05:42:52.576477   26628 apply_cluster.go:559] Gossip DNS: skipping DNS validation
 W1106 05:42:52.641383   26628 external_access.go:36] TODO: Harmonize gcemodel ExternalAccessModelBuilder with awsmodel
 W1106 05:42:52.641597   26628 firewall.go:35] TODO: Harmonize gcemodel with awsmodel for firewall - GCE model is way too open
@@ -364,10 +364,10 @@ W1106 05:42:52.641685   26628 firewall.go:63] Adding overlay network for X -&gt;
 W1106 05:42:52.641750   26628 firewall.go:64] We should probably use subnets?
 W1106 05:42:52.641824   26628 firewall.go:118] Adding overlay network for X -&gt; master rule - HACK
 W1106 05:42:52.770317   26628 storageacl.go:71] we need to split master / node roles
-W1106 05:42:52.770353   26628 storageacl.go:86] adding bucket level write ACL to gs://sabzil-cluster-state-store to support etcd backup
+W1106 05:42:52.770353   26628 storageacl.go:86] adding bucket level write ACL to gs://shrinklabs-cluster-state-store to support etcd backup
 W1106 05:42:52.770450   26628 autoscalinggroup.go:108] enabling storage-rw for etcd backups
 I1106 05:42:54.889249   26628 executor.go:103] Tasks: 0 done / 66 total; 39 can run
-I1106 05:42:55.253887   26628 address.go:123] GCE creating address: &quot;api-sabzil-cluster-k8s-local&quot;
+I1106 05:42:55.253887   26628 address.go:123] GCE creating address: &quot;api-shrinklabs-cluster-k8s-local&quot;
 I1106 05:42:55.387139   26628 vfs_castore.go:729] Issuing new certificate: &quot;etcd-peers-ca-events&quot;
 I1106 05:42:55.672462   26628 vfs_castore.go:729] Issuing new certificate: &quot;apiserver-aggregator-ca&quot;
 I1106 05:42:55.765508   26628 vfs_castore.go:729] Issuing new certificate: &quot;etcd-manager-ca-main&quot;
@@ -393,26 +393,26 @@ I1106 05:43:12.812512   26628 vfs_castore.go:729] Issuing new certificate: &quot
 I1106 05:43:21.263578   26628 executor.go:103] Tasks: 64 done / 66 total; 2 can run
 I1106 05:43:32.802331   26628 executor.go:103] Tasks: 66 done / 66 total; 0 can run
 I1106 05:43:33.070437   26628 update_cluster.go:294] Exporting kubecfg for cluster
-kops has set your kubectl context to sabzil-cluster.k8s.local
+kops has set your kubectl context to shrinklabs-cluster.k8s.local
 
 Cluster is starting.  It should be ready in a few minutes.
 
 Suggestions:
 * validate cluster: kops validate cluster
 * list nodes: kubectl get nodes --show-labels
-* ssh to the master: ssh -i ~/.ssh/id_rsa admin@api.sabzil-cluster.k8s.local
+* ssh to the master: ssh -i ~/.ssh/id_rsa admin@api.shrinklabs-cluster.k8s.local
 * the admin user is specific to Debian. If not using Debian please use the appropriate user based on your OS.
 * read about installing addons at: https://github.com/kubernetes/kops/blob/master/docs/addons.md.
 
-sabzil@sabzil:~$
+shrinklabs@shrinklabs:~$
 </code></pre></li>
 
 <li><p>클러스터 상태 확인(클러스터 생성 완료되고 5~10분뒤에 확인)</p>
 
-<pre><code class="language-shell">sabzil@sabzil:~$ kops validate cluster
-Using cluster from kubectl context: sabzil-cluster.k8s.local
+<pre><code class="language-shell">shrinklabs@shrinklabs:~$ kops validate cluster
+Using cluster from kubectl context: shrinklabs-cluster.k8s.local
 
-Validating cluster sabzil-cluster.k8s.local
+Validating cluster shrinklabs-cluster.k8s.local
 
 I1106 05:50:12.213436   26733 gce_cloud.go:273] Scanning zones: [us-central1-c us-central1-a us-central1-f us-central1-b]
 INSTANCE GROUPS
@@ -426,13 +426,13 @@ master-us-central1-a-dg9q       master  True
 nodes-2f58                      node    True
 nodes-9t48                      node    True
 
-Your cluster sabzil-cluster.k8s.local is ready
-sabzil@sabzil:~$
+Your cluster shrinklabs-cluster.k8s.local is ready
+shrinklabs@shrinklabs:~$
 </code></pre></li>
 
 <li><p>kubectl 동작 확인</p>
 
-<pre><code class="language-shell">sabzil@sabzil:~$ kubectl get pods --all-namespaces
+<pre><code class="language-shell">shrinklabs@shrinklabs:~$ kubectl get pods --all-namespaces
 NAMESPACE     NAME                                                READY   STATUS    RESTARTS   AGE
 kube-system   dns-controller-7f9457558d-fmnpk                     1/1     Running   0          4m53s
 kube-system   etcd-manager-events-master-us-central1-a-dg9q       1/1     Running   0          3m26s
@@ -446,7 +446,7 @@ kube-system   kube-proxy-master-us-central1-a-dg9q                1/1     Runnin
 kube-system   kube-proxy-nodes-2f58                               1/1     Running   0          3m41s
 kube-system   kube-proxy-nodes-9t48                               1/1     Running   0          3m25s
 kube-system   kube-scheduler-master-us-central1-a-dg9q            1/1     Running   0          4m33s
-sabzil@sabzil:~$
+shrinklabs@shrinklabs:~$
 </code></pre></li>
 </ul>
 

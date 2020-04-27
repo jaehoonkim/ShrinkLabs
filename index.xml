@@ -326,8 +326,8 @@ RabbitMQ라는게 뭐지? AMQP를 구현한 메세지 브로커
 설치  RabbitMQ 설치
 sudo apt-get install rabbitmq-server  관리 플러그인 설치
 sudo rabbitmq-plugins enable rabbitmq_management sudo service rabbitmq-server restart  실행
-service rabbitmq-server start  계정 등록(id:sabzil, pw:1234)
-rabbimqctl add_user sabzil 1234  등록한 계정을 관리자 계정으로 변경</description>
+service rabbitmq-server start  계정 등록(id:shrinklabs, pw:1234)
+rabbimqctl add_user shrinklabs 1234  등록한 계정을 관리자 계정으로 변경</description>
     </item>
     
     <item>
@@ -394,7 +394,7 @@ Linux는 deb를 제공하고 있지만, Windows는 exe파일을 제공하고 있
 (이름도 hugo.exe로 바꿔주는게 사용하기에 더 편리한것 같다.)
 MAC은 안 써봐서 잘 모르겠다&amp;hellip;;;;
 github에 저장소를 만든다 github에서 호스팅을 받아서 hugo를 사용하기 위해서는 2개의 저장소를 만들어야 한다.
-hugo의 컨텐츠를 관리하기 위한 저장소가 필요하다.(ex: https://github.com/sabzil/blog)
+hugo의 컨텐츠를 관리하기 위한 저장소가 필요하다.(ex: https://github.com/shrinklabs/blog)
 그리고 컨텐츠를 보여주기 위한 github의 페이지 저장소(ex: https://github.</description>
     </item>
     
@@ -520,10 +520,10 @@ package main import ( &amp;quot;net/http&amp;quot; ) type indexHandler struct { 
 import 경로를 &amp;ldquo;github.com/blah/project/internalpkg&amp;rdquo; 처럼 다 써야 했었다.
 이제 vendor를 사용하면 pkg 이름만 import 해서 사용할 수 있게 되었다.
 샘플 프로젝트는 다음과 같다.
-https://github.com/sabzil/lotto
+https://github.com/shrinklabs/lotto
 샘플 프로젝트에 대해서 약간의 설명을 더하면,
 기존에는 command 패키지를 commands.go 에서 import 하기 위해서,
-import &amp;ldquo;github.com/sabzil/lotto/command&amp;rdquo; 와 같이 사용해야 했었다.
+import &amp;ldquo;github.com/shrinklabs/lotto/command&amp;rdquo; 와 같이 사용해야 했었다.
 이렇게 되면 lotto 프로젝트를 다른 사람이 fork 해서 사용하려고 하면 일일이 import 경로를 변경해줘야 하는 문제가 생기게 된다.
 그래서 go1.</description>
     </item>

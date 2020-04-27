@@ -100,7 +100,7 @@ func upload(w http.ResponseWriter, r *http.Request) {
 
 <p>이 HTML을 Go 코드로 구현을 하기 위해서는 http 패키지의 PostForm() 함수를 사용할 수 있다.</p>
 
-<pre><code class="language-go">resp, err := http.PostForm(&quot;localhost:8080/upload&quot;, url.Values{&quot;user&quot;, {&quot;sabzil&quot;}})
+<pre><code class="language-go">resp, err := http.PostForm(&quot;localhost:8080/upload&quot;, url.Values{&quot;user&quot;, {&quot;shrinklabs&quot;}})
 </code></pre>
 
 <p>그럼 HTML의 Form을 통해서 파일을 업로드를 할 경우에는 어떻게 해야 할까?<br />
@@ -166,7 +166,7 @@ func upload(w http.ResponseWriter, r *http.Request) {
     if fw, err = w.CreateFormField(&quot;user&quot;); err != nil {
         return
     }
-    if _, err = fw.Write([]byte(&quot;sabzil&quot;)); err != nil {
+    if _, err = fw.Write([]byte(&quot;shrinklabs&quot;)); err != nil {
         return
     }
 
@@ -187,7 +187,7 @@ func upload(w http.ResponseWriter, r *http.Request) {
 }
 </code></pre>
 
-<p>위의 코드는 로컬의 현재 위치에 있는 &ldquo;sample.jpg&rdquo; 파일과 &ldquo;sabzil&rdquo;이라는 이름을 전송하려고 한다.</p>
+<p>위의 코드는 로컬의 현재 위치에 있는 &ldquo;sample.jpg&rdquo; 파일과 &ldquo;shrinklabs&rdquo;이라는 이름을 전송하려고 한다.</p>
 
 <p>mime/multipart의 Writer를 생성해서 File 필드를 하나 만들고(CreateFormFile), 일반 필드를 하나 만든다.(CreateFormField)<br />
 HTML의 Form에서 action에 해당하는 url과 파일 버퍼를 사용해서 request를 만든다(NewRequest)<br />

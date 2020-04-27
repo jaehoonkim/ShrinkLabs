@@ -77,14 +77,14 @@ sudo service rabbitmq-server restart
 <pre><code>service rabbitmq-server start
 </code></pre></li>
 
-<li><p>계정 등록(id:sabzil, pw:1234)</p>
+<li><p>계정 등록(id:shrinklabs, pw:1234)</p>
 
-<pre><code>rabbimqctl add_user sabzil 1234
+<pre><code>rabbimqctl add_user shrinklabs 1234
 </code></pre></li>
 
 <li><p>등록한 계정을 관리자 계정으로 변경</p>
 
-<pre><code>rabbitmqctl set_user_tags sabzil administrator
+<pre><code>rabbitmqctl set_user_tags shrinklabs administrator
 </code></pre></li>
 
 <li><p>웹브라우저로 관리 플러그인에 접속</p>
@@ -201,7 +201,7 @@ Tx(, Commit, Rollback)<br /></li>
 
 <li><p>mq 서버에 연결</p>
 
-<pre><code class="language-go">conn, err := amqp.Dial(&quot;amqp://sabzil:1234@localhost:5672&quot;)  
+<pre><code class="language-go">conn, err := amqp.Dial(&quot;amqp://shrinklabs:1234@localhost:5672&quot;)  
 </code></pre>
 
 <p>연결 포트는 5672번을 사용 (관리 플러그인은 15672번 포트를 사용)</p></li>
