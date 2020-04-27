@@ -129,7 +129,7 @@ textarea {
 	font-weight: 500;
 	color: #fff;
 	white-space: pre-line;
-	background: #777;
+	background: #666;
 }
 
 .btn:hover {
@@ -395,7 +395,7 @@ select {
 	font-size: 2rem;
 	font-weight: 700;
 	line-height: 1;
-	color: #000;
+	color: #777;
 }
 
 .logo__tagline {
