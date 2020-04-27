@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html class="no-js" lang="ko-kr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>pkg 원격저장소 연결하기 - ShrinkLabs</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container">
+		<div class="logo">
+			<a class="logo__link" href="/" title="ShrinkLabs" rel="home">
+				<div class="logo__title">ShrinkLabs</div>
+				<div class="logo__tagline">컨테이너관리 솔루션을 만들면서 경험하는 삽질에 대한 로그.</div>
+			</a>
+		</div>
+		<div class="divider"></div>
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">pkg 원격저장소 연결하기</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2015-06-11T13:43:41&#43;09:00">June 11, 2015</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/code/" rel="category">code</a>
+	</span>
+</div></div>
+		</header><div class="content post__content clearfix">
+			<p>최근에 go소스들을 분석하면서 특이한 pkg import 경로들을 보게되었다.</p>
+
+<pre><code class="language-go">import &quot;rsc.io/pdf&quot;
+</code></pre>
+
+<p>와 같은 &ldquo;github.com/rsc/pdf&rdquo; 와 동일한 내용인데 그리고 rsc는 russ cox가 사용하는 닉네임인데&hellip;그럼 같은 pkg인가?<br />
+그래서 웹브라우저에서 rsc.io/pdf 를 입력하면 godoc로 이동을 하네?<br />
+어떻게 한걸까!? 궁금했다. 그리고 왠지 멋있어 보였다&hellip;;</p>
+
+<p>그러다가 우연히 rob pike의 github page(<a href="https://github.com/robpike/robpike.github.io)를">https://github.com/robpike/robpike.github.io)를</a> 보게 되었다.<br />
+index.html 에 이렇게만 코드가 되어 있었다.</p>
+
+<pre><code>&lt;meta name=&quot;go-import&quot; content=&quot;robpike.io/cmd hg https://code.google.com/p/rspace.cmd&quot;&gt;
+This is a git repository holding a redirect for the Go repositories referenced by robpike.io.
+</code></pre>
+
+<p>이게 뭐지? 그리고 roppike.github.io/cmd 안에는 여러 폴더들이 존재하고 그 안에는 index.html 파일 하나씩만 덩그러니 있었다.<br />
+그 내용들은 다음과 같았다.</p>
+
+<pre><code>&lt;meta name=&quot;go-import&quot; content=&quot;robpike.io/cmd hg https://code.google.com/p/rspace.cmd&quot;&gt;
+</code></pre>
+
+<p>흠&hellip;meta tag를 사용하면 뭔가가 되나 보다 하면서 자료를 찾아봤다.<br />
+단서는 의외로 간단하게 나왔다.</p>
+
+<pre><code>https://golang.org/cmd/go/#hdr-Remote_import_paths  
+</code></pre>
+
+<p>에 보면 meta tag를 사용해서 원격저장소의 경로를 커스텀 도메인으로 사용할 수 있는 방법이 있었다.<br />
+그래서 도메인을 하나 구입했다.<br />
+io도메인(rsc.io, robpike.io 가 왠지 멋있어 보여서..;)을 따라하고 싶어&hellip;<br />
+나도 jaehoon.io 구매했었지만&hellip;너무 비싸서 연장을 못했다&hellip;;(지금은 sabzil.org 로&hellip;)</p>
+
+<p>그리고 github page(sabzil.github.io)를 만들어 놓고, 거기에 내가 만든 pkg중에 하나를 골라서 한번 만들어봤다.</p>
+
+<pre><code>sabzil.github.io/cubrid
+</code></pre>
+
+<p>에 index.html 을 다음과 같이 만들었다.</p>
+
+<pre><code>&lt;meta name=&quot;go-import&quot; content=&quot;sabzil.org/cubrid git https://github.com/sabzil/cubrid&quot;&gt;
+</code></pre>
+
+<p>이제 내 도메인(sabzil.org)과 연결을 했다.(github page를 커스컴 도메인에 연결하는 방법은 검색해보니 많이 나와서 쉽게했다.)</p>
+
+<p>그리고 커맨드 창에서&hellip;</p>
+
+<pre><code>$ go get gonuts.kr/cubrid  
+</code></pre>
+
+<p>명령을 내리고 잠시 기다리니 받아진다!!! (오류가 나온다면 cgo관련한 설정 때문인것 같다.) +
+ +
+그리고 godoc.org에도 등록도 잘된다. +
+cubrid로 검색을 해보면, sabzil.org/cubrid 와 github.com/sabzil/cubrid 두개가 나온다.</p>
+
+<p>russ cox는 웹브라우저에서 rsc.io/pdf 를 입력하면 godoc/rsc.io/pdf 로 redirect 가 되도록 해놓은것 같다.<br />
+그래서 나도 meta tag를 하나 더 추가했다.</p>
+
+<pre><code>&lt;meta http-equiv=&quot;refresh&quot; content=&quot;3;url=http://www.godoc.org/sabzil.org/cubrid&quot;&gt;
+</code></pre>
+
+<p>이렇게 하니 godoc.org로 이동을 한다.<br />
+음! 왠지 멋있어 보인다..;</p>
+
+<p>이제 열심히 코딩해서 pkg 많이 만들면 되는건가?;</p>
+
+<p>html 코드는 <a href="https://github.com/sabzil/sabzil.github.io/blob/master/ringbuffer/index.html">https://github.com/sabzil/sabzil.github.io/blob/master/ringbuffer/index.html</a> 을 참고하면 된다.</p>
+
+<p>github page에 커스텀 도메인을 연결하면, https에 문제가 좀 있다.;</p>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/tags/go/" rel="tag">go</a></li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="post-nav flex">
+	<div class="post-nav__item post-nav__item--prev">
+		<a class="post-nav__link" href="/posts/setting/" rel="prev"><span class="post-nav__caption">«&thinsp;Previous</span><p class="post-nav__post-title">개발환경 설정</p></a>
+	</div>
+	<div class="post-nav__item post-nav__item--next">
+		<a class="post-nav__link" href="/posts/vendor/" rel="next"><span class="post-nav__caption">Next&thinsp;»</span><p class="post-nav__post-title">vendor 사용 팁(내부 패키지)</p></a>
+	</div>
+</nav>
+
+
+			</div>
+			<aside class="sidebar">
+<div class="widget-social widget">
+	<h4 class="widget-social__title widget__title">Info</h4>
+	<div class="widget-social__content widget__content">
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="GitHub" rel="noopener noreferrer" href="https://github.com/jaehoonkim" target="_blank">
+				<svg class="widget-social__link-icon icon icon-github" width="24" height="24" viewBox="0 0 384 374"><path d="m192 0c-106.1 0-192 85.8-192 191.7 0 84.7 55 156.6 131.3 181.9 9.6 1.8 13.1-4.2 13.1-9.2 0-4.6-.2-16.6-.3-32.6-53.4 11.6-64.7-25.7-64.7-25.7-8.7-22.1-21.3-28-21.3-28-17.4-11.9 1.3-11.6 1.3-11.6 19.3 1.4 29.4 19.8 29.4 19.8 17.1 29.3 44.9 20.8 55.9 15.9 1.7-12.4 6.7-20.8 12.2-25.6-42.6-4.8-87.5-21.3-87.5-94.8 0-20.9 7.5-38 19.8-51.4-2-4.9-8.6-24.3 1.9-50.7 0 0 16.1-5.2 52.8 19.7 15.3-4.2 31.7-6.4 48.1-6.5 16.3.1 32.7 2.2 48.1 6.5 36.7-24.8 52.8-19.7 52.8-19.7 10.5 26.4 3.9 45.9 1.9 50.7 12.3 13.4 19.7 30.5 19.7 51.4 0 73.7-44.9 89.9-87.7 94.6 6.9 5.9 13 17.6 13 35.5 0 25.6-.2 46.3-.2 52.6 0 5.1 3.5 11.1 13.2 9.2 76.2-25.5 131.2-97.3 131.2-182 0-105.9-86-191.7-192-191.7z"/></svg>
+				<span>GitHub</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="Email" href="mailto:jaehoon@shrinklabs.com">
+				<svg class="widget-social__link-icon icon icon-mail" width="24" height="24" viewBox="0 0 416 288"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg>
+				<span>jaehoon@shrinklabs.com</span>
+			</a>
+		</div>
+
+		
+	</div>
+</div>
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/posts/private-container-registry/">Kubernetes에서 Private Container Registry 사용</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/docker-error/">docker 설치 후 에러</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/k8s-with-kops-on-gce/">GCE에서 kops를 이용한 K8s 구성</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/docker-image/">docker image 저장소 위치 변경</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/nginx-ingress-controller-on-google-kubernetes-engine/">10.Nginx Ingress Controller on Google Kubernetes Engine</a></li>
+		</ul>
+	</div>
+</div>
+</aside>
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 ShrinkLabs.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+</body>
+</html>

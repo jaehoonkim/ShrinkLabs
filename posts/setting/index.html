@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html class="no-js" lang="ko-kr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>개발환경 설정 - ShrinkLabs</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container">
+		<div class="logo">
+			<a class="logo__link" href="/" title="ShrinkLabs" rel="home">
+				<div class="logo__title">ShrinkLabs</div>
+				<div class="logo__tagline">컨테이너관리 솔루션을 만들면서 경험하는 삽질에 대한 로그.</div>
+			</a>
+		</div>
+		<div class="divider"></div>
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">개발환경 설정</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2015-05-23T01:28:09&#43;09:00">May 23, 2015</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/tools/" rel="category">tools</a>
+	</span>
+</div></div>
+		</header><div class="content post__content clearfix">
+			
+
+<h2 id="업데이트">업데이트</h2>
+
+<pre><code>$ sudo apt-get update  
+$ sudo apt-get install build-essential
+</code></pre>
+
+<h2 id="vim-설치">vim 설치</h2>
+
+<pre><code>$ sudo apt-get install vim
+</code></pre>
+
+<h2 id="vim-8-0">vim 8.0</h2>
+
+<pre><code>$ sudo add-apt-repository ppa:jonathonf/vim  
+$ sudo apt-get update
+</code></pre>
+
+<h2 id="xclip-설치">xclip 설치</h2>
+
+<pre><code>$ sudo apt-get install xclip
+</code></pre>
+
+<h2 id="wget-설치-사용이-필요한-경우에만-설치">wget 설치(사용이 필요한 경우에만 설치)</h2>
+
+<pre><code>$ sudo apt-get install wget
+</code></pre>
+
+<h2 id="git-설치">git 설치</h2>
+
+<ol>
+<li><p>git 설치와 설정</p>
+
+<pre><code>$ sudo apt-get install git  
+$ git config –-global user.name “blah”  
+$ git config –-global user.email “blah@blah.com”  
+$ git config --global core.editor vim  
+$ git config --global core.commentchar &quot;*&quot;  
+$ ssh-keygen -t rsa -C “blah@blah.com”  
+$ xclip -sel clip &lt; ~/.ssh/id_rsa.pub
+</code></pre></li>
+
+<li><p>github/bitbucket에 ssh key 값을 등록</p></li>
+</ol>
+
+<h2 id="gopath로-사용할-위치-생성">GOPATH로 사용할 위치 생성</h2>
+
+<pre><code>$HOME/work  
+bin  
+pkg  
+src
+</code></pre>
+
+<h2 id="go-설치">Go 설치</h2>
+
+<ol>
+<li><p>기존에 설치된 버전이 있다면 삭제한다.</p>
+
+<pre><code>$ rm -r /usr/local/go
+</code></pre></li>
+
+<li><p><a href="http://golang.org/doc/install">http://golang.org/doc/install</a> 에서 다운로드<br />
+(또는$ wget &ndash;no-check-certificate <a href="https://storage.googleapis.com/golang/go1.7.1.linux-amd64.tar.gz">https://storage.googleapis.com/golang/go1.7.1.linux-amd64.tar.gz</a> 와 같이 원하는 OS 및 버전에 맞는 Go 바이너리를 wget으로 받을 수도 있다.)</p></li>
+
+<li><p>/usr/loca/go에 압축을 푼다.</p>
+
+<pre><code>$ sudo tar -C /usr/local -xzf gox.x.x.linux-xxx.tar.gz
+</code></pre></li>
+
+<li><p>$HOME/.profile 에 다음을 추가한다.</p>
+
+<pre><code>export PATH=$PATH:/usr/local/go/bin  
+export GOPATH=$HOME/work
+</code></pre>
+
+<p>추가) app engine도 사용 할 경우에는 PATH에 app engine의 위치도 추가</p></li>
+
+<li><p>적용</p>
+
+<pre><code>$ source ~/.profile
+</code></pre></li>
+</ol>
+
+<h2 id="ctags-설치">ctags 설치</h2>
+
+<ol>
+<li><p>설치</p>
+
+<pre><code>$ sudo apt-get install ctags
+</code></pre></li>
+
+<li><p>go가 설치된 위치로 이동(/usr/local/go)해서 tag 생성</p>
+
+<pre><code>$ sudo ctags -R
+</code></pre></li>
+
+<li><p>vimrc 파일에 다음을 추가한다.</p>
+
+<pre><code>set tags +=/usr/local/go/tags
+</code></pre></li>
+</ol>
+
+<h2 id="python과-cmake-설치">python과 cmake 설치</h2>
+
+<ul>
+<li><p>YouCompleteMe라는 vim 플러그인의 정상적인 설치를 위해서 python과 cmake를 설치한다.</p>
+
+<pre><code>$ sudo apt-get install python-dev python3-dev  
+$ sudo apt-get install cmake
+</code></pre></li>
+</ul>
+
+<h2 id="vundle-vim을-이용한-nerdtree와-fatih-vim-go-설치">Vundle.vim을 이용한 NERDTree와 fatih/vim-go 설치</h2>
+
+<ul>
+<li><p>Vundle.vim 설치</p>
+
+<pre><code>$ git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+</code></pre></li>
+
+<li><p>/etc/vim/vimrc.local 을 생성해서 아래의 내용을 붙여 넣는다.</p>
+
+<pre><code class="language-Shell">set nocompatible &quot; be iMproved, required
+filetype off &quot; required
+
+set autoindent
+set smartindent
+set shiftwidth=4
+set number
+set expandtab
+set tabstop=4
+
+&quot; set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+&quot; alternatively, pass a path where Vundle should install plugins
+&quot;call vundle#begin('~/some/path/here')
+
+&quot; let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+&quot; The following are examples of different formats supported.
+&quot; Keep Plugin commands between vundle#begin/end.
+&quot; plugin on GitHub repo
+Plugin 'tpope/vim-fugitive'
+&quot; plugin from http://vim-scripts.org/vim/scripts.html
+Plugin 'L9'
+&quot; Git plugin not hosted on GitHub
+Plugin 'git://git.wincent.com/command-t.git'
+&quot; git repos on your local machine (i.e. when working on your own plugin)
+&quot;Plugin 'file:///home/gmarik/path/to/plugin'
+&quot; The sparkup vim script is in a subdirectory of this repo called vim.
+&quot; Pass the path to set the runtimepath properly.
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+&quot; Avoid a name conflict with L9
+&quot;Plugin 'user/L9', {'name': 'newL9'}
+
+Plugin 'The-NERD-tree'
+Plugin 'bling/vim-airline'
+Plugin 'fatih/vim-go'
+Plugin 'nsf/gocode'
+Plugin 'Tagbar'
+Plugin 'Valloric/YouCompleteMe'
+
+&quot; All of your Plugins must be added before the following line
+call vundle#end() &quot; required
+filetype plugin indent on &quot; required
+&quot; To ignore plugin indent changes, instead use:
+&quot;filetype plugin on
+&quot;
+&quot; Brief help
+&quot; :PluginList - lists configured plugins
+&quot; :PluginInstall - installs plugins; append `!` to update or just :PluginUpdate
+&quot; :PluginSearch foo - searches for foo; append `!` to refresh local cache
+&quot; :PluginClean - confirms removal of unused plugins; append `!` to auto-approve removal
+&quot;
+&quot; see :h vundle for more details or wiki for FAQ
+&quot; Put your non-Plugin stuff after this line
+</code></pre></li>
+
+<li><p>vim 실행해서 “ :PluginInstall “ 을 해서 지정된 플러그인들을 설치한다.</p></li>
+
+<li><p>NERDTree의 설정을 한다.</p>
+
+<pre><code>$ sudo vim /etc/vim/vimrc.local
+</code></pre></li>
+</ul>
+
+<p>을 열어서 적당한 곳에 아래의 내용을 붙여넣는다.</p>
+
+<pre><code>nmap &lt;F2&gt; :NERDTreeToggle&lt;CR&gt;
+let NERDTreeWinPos=&quot;left&quot;
+</code></pre>
+
+<ul>
+<li><p>Tagbar 설정<br />
+위의 NERDTree 설정 부분 아래에 추가한다.</p>
+
+<pre><code>nmap &lt;F3&gt; :Tagbar&lt;CR&gt;
+let Tagbar=&quot;right&quot;
+let g:tagbar_type_go = {
+\ 'ctagstype' : 'go',
+\ 'kinds'     : [
+    \ 'p:package',
+    \ 'i:imports:1',
+    \ 'c:constants',
+    \ 'v:variables',
+    \ 't:types',
+    \ 'n:interfaces',
+    \ 'w:fields',
+    \ 'e:embedded',
+    \ 'm:methods',
+    \ 'r:constructor',
+    \ 'f:functions'
+\ ],
+\ 'sro' : '.',
+\ 'kind2scope' : {
+    \ 't' : 'ctype',
+    \ 'n' : 'ntype'
+\ },
+\ 'scope2kind' : {
+    \ 'ctype' : 't',
+    \ 'ntype' : 'n'
+\ },
+\ 'ctagsbin'  : 'gotags',
+\ 'ctagsargs' : '-sort -silent'
+\ }
+</code></pre></li>
+</ul>
+
+<p>추가) vim-go 설치가 완료되고 난 다음에,<br />
+$GOPATH/bin 에 생성되어 있는, errcheck, gocode, gofmt, golint, gotags, goimports, gorename, oracle
+ 를 /usr/local/go/bin 에 복사/붙여넣기 한다.</p>
+
+<p>[참고] <a href="https://gist.github.com/sabzil/47d81a29b620a0d64f80">https://gist.github.com/sabzil/47d81a29b620a0d64f80</a></p>
+
+<ul>
+<li><p>YouCompleteMe 설치<br />
+YouCompleteMe의 설치를 완료하기 위해서 Bundle 디렉토리로 이동해서 Go언어 자동완성이 가능하도록 옵션을 지정해서 install을 한다.</p>
+
+<pre><code class="language-shell">$ cd ~/.vim/bundle/YouCompleteMe
+$ ./install.py --gocode-completer
+</code></pre></li>
+
+<li><p>cscope를 사용하기 위한 설정<br />
+[참고] <a href="https://github.com/sabzil/log/blob/master/cscope.md">https://github.com/sabzil/log/blob/master/cscope.md</a><br />
+[script] <a href="https://gist.github.com/sabzil/bc257991fe8932944d8fa9a9556eb223">https://gist.github.com/sabzil/bc257991fe8932944d8fa9a9556eb223</a></p></li>
+</ul>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/tags/first/" rel="tag">first</a></li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="post-nav flex">
+	<div class="post-nav__item post-nav__item--prev">
+		<a class="post-nav__link" href="/posts/pkg-config/" rel="prev"><span class="post-nav__caption">«&thinsp;Previous</span><p class="post-nav__post-title">pkg-config 사용</p></a>
+	</div>
+	<div class="post-nav__item post-nav__item--next">
+		<a class="post-nav__link" href="/posts/meta-tag-pkg-repository/" rel="next"><span class="post-nav__caption">Next&thinsp;»</span><p class="post-nav__post-title">pkg 원격저장소 연결하기</p></a>
+	</div>
+</nav>
+
+
+			</div>
+			<aside class="sidebar">
+<div class="widget-social widget">
+	<h4 class="widget-social__title widget__title">Info</h4>
+	<div class="widget-social__content widget__content">
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="GitHub" rel="noopener noreferrer" href="https://github.com/jaehoonkim" target="_blank">
+				<svg class="widget-social__link-icon icon icon-github" width="24" height="24" viewBox="0 0 384 374"><path d="m192 0c-106.1 0-192 85.8-192 191.7 0 84.7 55 156.6 131.3 181.9 9.6 1.8 13.1-4.2 13.1-9.2 0-4.6-.2-16.6-.3-32.6-53.4 11.6-64.7-25.7-64.7-25.7-8.7-22.1-21.3-28-21.3-28-17.4-11.9 1.3-11.6 1.3-11.6 19.3 1.4 29.4 19.8 29.4 19.8 17.1 29.3 44.9 20.8 55.9 15.9 1.7-12.4 6.7-20.8 12.2-25.6-42.6-4.8-87.5-21.3-87.5-94.8 0-20.9 7.5-38 19.8-51.4-2-4.9-8.6-24.3 1.9-50.7 0 0 16.1-5.2 52.8 19.7 15.3-4.2 31.7-6.4 48.1-6.5 16.3.1 32.7 2.2 48.1 6.5 36.7-24.8 52.8-19.7 52.8-19.7 10.5 26.4 3.9 45.9 1.9 50.7 12.3 13.4 19.7 30.5 19.7 51.4 0 73.7-44.9 89.9-87.7 94.6 6.9 5.9 13 17.6 13 35.5 0 25.6-.2 46.3-.2 52.6 0 5.1 3.5 11.1 13.2 9.2 76.2-25.5 131.2-97.3 131.2-182 0-105.9-86-191.7-192-191.7z"/></svg>
+				<span>GitHub</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="Email" href="mailto:jaehoon@shrinklabs.com">
+				<svg class="widget-social__link-icon icon icon-mail" width="24" height="24" viewBox="0 0 416 288"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg>
+				<span>jaehoon@shrinklabs.com</span>
+			</a>
+		</div>
+
+		
+	</div>
+</div>
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/posts/private-container-registry/">Kubernetes에서 Private Container Registry 사용</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/docker-error/">docker 설치 후 에러</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/k8s-with-kops-on-gce/">GCE에서 kops를 이용한 K8s 구성</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/docker-image/">docker image 저장소 위치 변경</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/nginx-ingress-controller-on-google-kubernetes-engine/">10.Nginx Ingress Controller on Google Kubernetes Engine</a></li>
+		</ul>
+	</div>
+</div>
+</aside>
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 ShrinkLabs.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+</body>
+</html>
