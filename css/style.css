@@ -188,7 +188,7 @@ h6 {
 }
 
 a {
-	color: #000;
+	color: #777;
 	text-decoration: none;
 }
 
@@ -1256,7 +1256,7 @@ textarea {
 	}
 
 	.list__title {
-		font-size: 16px;
+		font-size: 14px;
 		font-size: 1rem;
 	}
 
