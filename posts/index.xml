@@ -21,7 +21,7 @@
 만들어 놓은 이미지를 실행한다.
 $ kubectl -n shrink run sample-app --image=sample-app:latest --image-pull-policy=Never  다음과 같이 배포가 된 것을 확인 할 수 있다.
 $ kubectl -n shrink get pods NAME READY STATUS RESTARTS AGE sample-app-685bbd44c6-kgc4z 0/1 ErrImageNeverPull 0 5h24m  필요한 작업을 완료하고 난 다음 해당 이미지를 중지하고자 할 때,
-$ kubectl -n shrink delete pods/sample-app-685bbd44c6-kgc4z pod &amp;quot;shrink-deploy-685bbd44c6-kgc4z&amp;quot; deleted  삭제 되었다는 메세지가 나오지만 실제로는 삭제 되지 않는다.</description>
+$ kubectl -n shrink delete pods/sample-app-685bbd44c6-kgc4z pod &amp;quot;sample-app-685bbd44c6-kgc4z&amp;quot; deleted  삭제 되었다는 메세지가 나오지만 실제로는 삭제 되지 않는다.</description>
     </item>
     
     <item>
