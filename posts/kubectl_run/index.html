@@ -106,14 +106,14 @@ pod &quot;sample-app-685bbd44c6-kgc4z&quot; deleted
 
 <pre><code class="language-shell">PS&gt; kubectl -n shrink get pod
 NAME                             READY   STATUS              RESTARTS   AGE
-sample-app-685bbd44c6-kgc4z      0/1     ErrImageNeverPull   0          5h24m
+sample-app-685bbd44c6-kgc4z      1/1     Running             0          5h24m
 </code></pre>
 
 <p>모든 리소스를 조회해보면 다음과 같다.</p>
 
 <pre><code class="language-shell">PS&gt; kubectl -n shrink get all
 NAME                                 READY   STATUS              RESTARTS   AGE
-pod/sample-app-685bbd44c6-fxl8f      0/1     ErrImageNeverPull   0          7m3s
+pod/sample-app-685bbd44c6-fxl8f      1/1     Running             0          7m3s
 
 
 
