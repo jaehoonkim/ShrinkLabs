@@ -4,26 +4,31 @@
   
   <url>
     <loc>https://shrinklabs.com/categories/</loc>
-    <lastmod>2020-05-18T10:52:23+09:00</lastmod>
+    <lastmod>2020-05-19T01:05:57+09:00</lastmod>
   </url>
   
   <url>
     <loc>https://shrinklabs.com/posts/</loc>
-    <lastmod>2020-05-18T10:52:23+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://shrinklabs.com/posts/crosscompile_on_windows/</loc>
-    <lastmod>2020-05-18T10:52:23+09:00</lastmod>
+    <lastmod>2020-05-19T01:05:57+09:00</lastmod>
   </url>
   
   <url>
     <loc>https://shrinklabs.com/</loc>
-    <lastmod>2020-05-18T10:52:23+09:00</lastmod>
+    <lastmod>2020-05-19T01:05:57+09:00</lastmod>
   </url>
   
   <url>
     <loc>https://shrinklabs.com/tags/</loc>
+    <lastmod>2020-05-19T01:05:57+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://shrinklabs.com/posts/kubectl_run/</loc>
+    <lastmod>2020-05-19T01:05:57+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://shrinklabs.com/posts/crosscompile_on_windows/</loc>
     <lastmod>2020-05-18T10:52:23+09:00</lastmod>
   </url>
   
@@ -168,12 +173,12 @@
   </url>
   
   <url>
-    <loc>https://shrinklabs.com/categories/kvm/</loc>
+    <loc>https://shrinklabs.com/tags/kvm/</loc>
     <lastmod>2017-12-02T23:55:52+09:00</lastmod>
   </url>
   
   <url>
-    <loc>https://shrinklabs.com/tags/kvm/</loc>
+    <loc>https://shrinklabs.com/categories/kvm/</loc>
     <lastmod>2017-12-02T23:55:52+09:00</lastmod>
   </url>
   

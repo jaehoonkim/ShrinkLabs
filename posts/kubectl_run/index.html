@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>template을 생성할때 왜 이름을 지정할까? - ShrinkLabs</title>
+	<title>Windows기반의 minikube로 로컬 환경의 image 사용해서 배포하기 - ShrinkLabs</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
 	
@@ -36,50 +36,109 @@
 <main class="main" role="main">
 	<article class="post">
 		<header class="post__header">
-			<h1 class="post__title">template을 생성할때 왜 이름을 지정할까?</h1>
+			<h1 class="post__title">Windows기반의 minikube로 로컬 환경의 image 사용해서 배포하기</h1>
 			<div class="post__meta meta">
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text" datetime="2016-09-03T17:10:53&#43;09:00">September 03, 2016</time>
+	<time class="meta__text" datetime="2020-05-19T01:05:57&#43;09:00">May 19, 2020</time>
 </div>
 
 <div class="meta__item-categories meta__item">
 	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta__text"><a class="meta__link" href="/categories/code/" rel="category">code</a>
+	<span class="meta__text">
 	</span>
 </div></div>
 		</header><div class="content post__content clearfix">
-			<p>Go언어의 Template 엔진을 사용할때, 왜 New()의 파라미터로 이름을 만들어서 넘겨야 하는지가 궁금했었다.</p>
+			<p>실제 클러스터에 배포하기 전에 로컬 환경의 minikube를 이용해서 배포하고 테스트를 하기 위한 방법이 필요하면 다음과 같이 한다.</p>
 
-<p>Template and Associated templates라는 글을 읽고 어느 정도 이해를 하게 되었다.</p>
+<p>minikube를 시작하고, minikube에 내장되어 있는 docker 데몬을 사용하도록 한다. 이렇게 하면 호스의 Docker Registry를 사용하고 image도 로컬의 것을 사용할 수 있다.<br />
+(<a href="https://kubernetes.io/docs/setup/learning-environment/minikube/#use-local-images-by-re-using-the-docker-daemon">https://kubernetes.io/docs/setup/learning-environment/minikube/#use-local-images-by-re-using-the-docker-daemon</a>)</p>
 
-<p>다음은 위 글의 내용을 요약한 것이다.</p>
+<pre><code class="language-shell">PS&gt; minikube docker-env
+$Env:DOCKER_TLS_VERIFY = &quot;1&quot;
+$Env:DOCKER_HOST = &quot;tcp://192.168.182.22:2376&quot;
+$Env:DOCKER_CERT_PATH = &quot;C:\Users\ShrinkLabs\.minikube\certs&quot;
+# Run this command to configure your shell:
+# &amp; minikube docker-env | Invoke-Expression
 
-<p>template.New() 로 template을 만들때, 이름을 정해서 만든다.<br />
-이 때 FuncMap과 템플릿 리스트를 갖는 그룹(그룹의 이 글에서 사용하는 용어로 Associated Templates를 가르킨다)이 생성된다.<br />
-FuncMap에 대해서는,<br />
-<a href="https://golang.org/pkg/html/template/#FuncMap">https://golang.org/pkg/html/template/#FuncMap</a><br />
-<a href="http://goinbigdata.com/example-of-using-templates-in-golang/">http://goinbigdata.com/example-of-using-templates-in-golang/</a><br />
-<a href="http://technosophos.com/2013/11/23/using-custom-template-functions-in-go.html">http://technosophos.com/2013/11/23/using-custom-template-functions-in-go.html</a><br />
-를 확인해본다.</p>
+PS&gt; minikube docker-env | Invoke-Expression
+</code></pre>
 
-<p>New()를 했어도 아직 템플릿 리스트에서 관리되는 대상은 아니다.<br />
-Parse(&hellip;)를 하면 템플릿 리스트에 추가가 된다.</p>
+<p>이렇게 하면, minikube vm 안에 존재하는 docker 데몬과 통신을 하게 된다.</p>
 
-<p>처음에 생성한 template &ldquo;t1&rdquo;으로 New()를 하면 연관된 템플릿을 생성할 수 있다.<br />
-&ldquo;t1&rdquo;으로 생성한 template들은 동일한 템플릿 리스트에서 관리되어진다.</p>
+<p>이제 만들어 놓은 이미지를 실행한다.</p>
 
-<p>현재 템플릿 리스트에서는 &ldquo;t1&rdquo; 템플릿을 더 이상 만들 수 없다.</p>
+<pre><code class="language-shell">PS&gt; kubectl -n shrink run sample-app --image=sample-app:latest --port=9000 --serviceaccount=shrink-controller 
+</code></pre>
 
-<p>Lookup()으로 현재 템플릿 리스트에서 관리되고 있는 template을 찾을 수 있다.</p>
+<p>다음과 같이 배포가 된 것을 확인 할 수 있다.</p>
 
-<p>Templates() 함수로 템플릿 리스트의 template들을 모두 구한다.</p>
+<pre><code class="language-shell">PS&gt; kubectl -n shrink get pods
+NAME                             READY   STATUS              RESTARTS   AGE
+sample-app-685bbd44c6-kgc4z   0/1     ErrImageNeverPull   0          5h24m
+</code></pre>
 
-<p>Execute() 와 ExecuteTemplate() 의 차이<br />
-Execute() 는 호출한 template 객체를 실행한다.<br />
-ExecuteTemplate() 는 호출한 template 객체가 관리되는 템플릿 리스트에서 인자로 넘겨진 이름의 template 객체를 찾아서 실행한다.</p>
+<p>웹브라우저를 통해서 연결 상태를 확인하기 위해서 Service를 생성한다.</p>
 
-<p>ParseFiles() 는 파라미터로 넘겨진 파일 이름들을 템플릿 리스트에서 관리하는 리스트의 New()로 template을 생성할때 인자로 넘기는 name의 역할로 사용된다.</p>
+<pre><code class="language-shell">PS&gt; kubectl -n shrink expose deployment sample-app --type=&quot;LoadBalancer&quot;
+</code></pre>
+
+<p>생성된 Service를 확인하면, 다음과 같이 pending 상태이다.</p>
+
+<pre><code class="language-shell">PS&gt; kubectl -n shrink get services
+NAME             TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
+sample-app       LoadBalancer   10.102.191.6   &lt;pending&gt;     8500:32416/TCP   11s
+</code></pre>
+
+<p>이제 minikube를 통해서 url을 생성한다.</p>
+
+<pre><code class="language-shell">PS&gt; minikube -n shrink service sample-app --url
+* http://192.168.182.22:32416
+</code></pre>
+
+<p>필요한 테스트 작업을 완료하고 난 다음 해당 이미지를 중지하고자 할 때,</p>
+
+<pre><code class="language-shell">PS&gt; kubectl -n shrink delete pods/sample-app-685bbd44c6-kgc4z
+pod &quot;sample-app-685bbd44c6-kgc4z&quot; deleted
+</code></pre>
+
+<p>삭제 되었다는 메세지가 나오지만 실제로는 삭제 되지 않는다.</p>
+
+<pre><code class="language-shell">PS&gt; kubectl -n shrink get pod
+NAME                             READY   STATUS              RESTARTS   AGE
+sample-app-685bbd44c6-kgc4z   0/1     ErrImageNeverPull   0          5h24m
+</code></pre>
+
+<p>모든 리소스를 조회해보면 다음과 같다.</p>
+
+<pre><code class="language-shell">PS&gt; kubectl -n shrink get all
+NAME                                 READY   STATUS              RESTARTS   AGE
+pod/sample-app-685bbd44c6-fxl8f   0/1     ErrImageNeverPull   0          7m3s
+
+
+
+
+NAME                            READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/sample-app   0/1     1            0           5h36m
+
+NAME                                       DESIRED   CURRENT   READY   AGE
+replicaset.apps/sample-app-685bbd44c6   1         1         0       5h36m
+</code></pre>
+
+<p>여기에서 deployment를 삭제하면 관련된 모든 리소스가 삭제된다.</p>
+
+<pre><code class="language-shell">PS&gt; kubectl -n shrink delete deployment/sample-app
+deployment.extensions &quot;discovery&quot; deleted
+</code></pre>
+
+<p>다시 모든 리소스를 조회해보면 다음과 같이 모두 삭제된 걸 확인할 수 있다.</p>
+
+<pre><code class="language-shell">PS&gt; kubectl -n shrink get all
+
+No resources found.
+</code></pre>
+
+<p>이 작업으로 Service까지 삭제 되지는 않는다.</p>
 
 		</div>
 		
@@ -100,10 +159,7 @@ ExecuteTemplate() 는 호출한 template 객체가 관리되는 템플릿 리스
 
 <nav class="post-nav flex">
 	<div class="post-nav__item post-nav__item--prev">
-		<a class="post-nav__link" href="/posts/ifconfig/" rel="prev"><span class="post-nav__caption">«&thinsp;Previous</span><p class="post-nav__post-title">ifconfig 사용</p></a>
-	</div>
-	<div class="post-nav__item post-nav__item--next">
-		<a class="post-nav__link" href="/posts/vim-go/" rel="next"><span class="post-nav__caption">Next&thinsp;»</span><p class="post-nav__post-title">vim-go 기본 템플릿 비활성화</p></a>
+		<a class="post-nav__link" href="/posts/crosscompile_on_windows/" rel="prev"><span class="post-nav__caption">«&thinsp;Previous</span><p class="post-nav__post-title">Powershell에서 할 수 있는 Linux를 위한 빌드</p></a>
 	</div>
 </nav>
 

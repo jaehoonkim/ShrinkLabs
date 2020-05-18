@@ -39,6 +39,32 @@
 	<article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
+			<a href="/posts/running-mongodb-database-in-kubernetes-with-statefulsets/" rel="bookmark">
+			6.Running Mongodb Database in Kubernetes With Statefulsets
+			</a>
+		</h3>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2019-01-11T17:52:48&#43;09:00">January 11, 2019</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/containers/" rel="category">containers</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		지금까지의 과정 중에서 가장 어려웠다.;;; 그리고 제대로 이해를 한건지도 잘 모르겠다.
+일단을 이해했다고 생각되는 정도만 정리를 해봤다.
+이번 과정은 StatefulSet에 대한 이해를 목표로 하고 있다.
+StatefulSet에 대한 이해를 위해서는 Headless Service에 대한 이해와 StorageClass에 대한 이해가 필요했다.
+StorageClass는 상태를 갖는걸 확인하기 위한 실습이 필요하다보니, Volume을 사용해야 하고 StatefulSet의 scale을 조정하게 되는 것에 따라서 Volume도 같이 조정이 되어야 해서 StorageClass 컨트롤러를 통해서 Volume을 동적으로 조정할 수 있도록 하려고 사용 된 것 같다.
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
 			<a href="/posts/continuous-delivery-with-jenkins-in-kubernetes-engine/" rel="bookmark">
 			5.Continuous Delivery With Jenkins in Kubernetes Engine
 			</a>
@@ -264,40 +290,12 @@ var target[string]*item ... target[&quot;apple&quot;] = itm1 target[&quot;orange
 그리고 이런 걱정들은 다음의 2가지 원인 때문이지 않을까 라고 생각하게 되었다.
 첫 번째, 코드 작성 후 실행해서 결과를 확인하기 위해서 개인 개발 환경을 MessageQueue와 내가 보낸 요청에 대해 기대하는 응답을 전달해줄 MessageQueue 반대편의 모듈을 구성하기가 쉽지 않다는 것이었다.
 	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/posts/kvm-with-go/" rel="bookmark">
-			KVM 스터디(with go)
-			</a>
-		</h3>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text" datetime="2017-12-02T23:55:52&#43;09:00">December 02, 2017</time>
-</div>
-
-<div class="meta__item-categories meta__item">
-	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta__text"><a class="meta__link" href="/categories/kvm/" rel="category">kvm</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		주의, 이 글은 KVM이 뭔지도 제대로 모르면서 학습한 내용을 정리한거라서, 정확하지 않은 내용이 다수 포함되어 있을 수 있습니다.
-틀린 내용은 지적해 주시면 수정해서 반영하도록 하겠습니다.
-준비물 노트북(우분투 16.04)
-KVM이 뭔가요? 하이퍼바이저? 위키백과에 나와 있는 정의( https://ko.wikipedia.org/wiki/%ED%95%98%EC%9D%B4%ED%8D%BC%EB%B0%94%EC%9D%B4%EC%A0%80 ) 를 보면 이렇게 나와 있다.
-&ldquo;다수의 운영 체제를 동시에 실행하기 위한 논리적 플랫폼&rdquo;
-여기에 우리가 잘 알고 있는 VmWare, VirtualBox와 같은것도 있고, Xen, KVM 같이 좀 낯선 것들도 있다.
-내용을 읽다보면, 왠지 중요해 보이는 단어 Type1, Type2, 전가상화, 반가상화 뭐 이런 단어들이 나온다.
-	</div>
 </article>
 </main>
 
 <div class="pagination">
 	<a class="pagination__item pagination__item--prev btn" href="/">«</a>
-	<span class="pagination__item pagination__item--current">2/5</span>
+	<span class="pagination__item pagination__item--current">2/6</span>
 	<a class="pagination__item pagination__item--next btn" href="/page/3/">»</a>
 </div>
 
@@ -327,11 +325,11 @@ KVM이 뭔가요? 하이퍼바이저? 위키백과에 나와 있는 정의( http
 	<h4 class="widget__title">Recent Posts</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/posts/kubectl_run/">Windows기반의 minikube로 로컬 환경의 image 사용해서 배포하기</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/crosscompile_on_windows/">Powershell에서 할 수 있는 Linux를 위한 빌드</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/private-container-registry/">Kubernetes에서 Private Container Registry 사용</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/docker-error/">docker 설치 후 에러</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/k8s-with-kops-on-gce/">GCE에서 kops를 이용한 K8s 구성</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/docker-image/">docker image 저장소 위치 변경</a></li>
 		</ul>
 	</div>
 </div>

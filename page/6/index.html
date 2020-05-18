@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html class="no-js" lang="ko-kr">
 <head>
+	<meta name="generator" content="Hugo 0.59.1" />
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>cscope - ShrinkLabs</title>
+	<title>ShrinkLabs</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
-	<meta name="description" content="">
+	<meta name="description" content="distributed systems, containers and go ...">
 	
 	
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
-	<link rel="alternate" type="application/rss+xml" href="/tags/cscope/index.xml" title="ShrinkLabs">
+	<link rel="alternate" type="application/rss+xml" href="/index.xml" title="ShrinkLabs">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
 	<link rel="stylesheet" href="/css/style.css">
 	
@@ -35,41 +36,29 @@
 			<div class="primary">
 			
 <main class="main list" role="main">
-	<header class="main__header">
-		<h1 class="main__title">cscope</h1>
-	</header><article class="list__item post">
+	<article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
-			<a href="/posts/cscope/" rel="bookmark">
-			cscope 사용(Go)
+			<a href="/posts/test2/" rel="bookmark">
+			
 			</a>
 		</h3>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text" datetime="2018-08-21T16:34:04&#43;09:00">August 21, 2018</time>
-</div>
-
-<div class="meta__item-categories meta__item">
-	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta__text"><a class="meta__link" href="/categories/code/" rel="category">code</a>, <a class="meta__link" href="/categories/tools/" rel="category">tools</a>
-	</span>
-</div></div>
+		
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		Go언어 개발 환경(추가) Go언어로 작성한 코드를 분석하기 위해서 cscope가 필요할 때가 있다.
-vim에서 cscope를 사용하기 위한 과정을 정리해 보려고 한다.
-cscope를 설치한다. $ sudo apt-get install cscope  mkscope.sh 파일을 만든다. mkscope.sh의 내용은 다음과 같다.
-이 스크립트는 https://www.cnblogs.com/shaohef/p/7358111.html 의 내용을 수정해서 사용했다.
-#!/bin/bash # 기존에 존재하던 files와 out 파일을 제거한다 rm cscope.files cscope.out # $GOROOT가 존재하지 않으면 설정한다. if [&quot;$GOROOT&quot; = &quot;&quot;]; then echo &quot;GOROOT is not set&quot; GOROOT=`go env | grep &quot;GOROOT&quot; | cut -d &quot;=&quot; -f2` GOROOT=${GOROOT#\&quot;} GOROOT=${GOROOT%\&quot;} fi echo $GOROOT # Go 표준 패키지 go_src=$GOROOT/src # Go언어 표준 패키지로 제공되는 go 파일의 경로를 cscope.
+		
 	</div>
 </article>
 </main>
 
+<div class="pagination">
+	<a class="pagination__item pagination__item--prev btn" href="/page/5/">«</a>
+	<span class="pagination__item pagination__item--current">6/6</span>
+</div>
+
 
 			</div>
-			
-<aside class="sidebar">
+			<aside class="sidebar">
 <div class="widget-social widget">
 	<h4 class="widget-social__title widget__title">Contact</h4>
 	<div class="widget-social__content widget__content">
