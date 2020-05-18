@@ -75,7 +75,7 @@ PS&gt; minikube docker-env | Invoke-Expression
 
 <pre><code class="language-shell">PS&gt; kubectl -n shrink get pods
 NAME                             READY   STATUS              RESTARTS   AGE
-sample-app-685bbd44c6-kgc4z   0/1     ErrImageNeverPull   0          5h24m
+sample-app-685bbd44c6-kgc4z      0/1     ErrImageNeverPull   0          5h24m
 </code></pre>
 
 <p>웹브라우저를 통해서 연결 상태를 확인하기 위해서 Service를 생성한다.</p>
@@ -106,23 +106,23 @@ pod &quot;sample-app-685bbd44c6-kgc4z&quot; deleted
 
 <pre><code class="language-shell">PS&gt; kubectl -n shrink get pod
 NAME                             READY   STATUS              RESTARTS   AGE
-sample-app-685bbd44c6-kgc4z   0/1     ErrImageNeverPull   0          5h24m
+sample-app-685bbd44c6-kgc4z      0/1     ErrImageNeverPull   0          5h24m
 </code></pre>
 
 <p>모든 리소스를 조회해보면 다음과 같다.</p>
 
 <pre><code class="language-shell">PS&gt; kubectl -n shrink get all
 NAME                                 READY   STATUS              RESTARTS   AGE
-pod/sample-app-685bbd44c6-fxl8f   0/1     ErrImageNeverPull   0          7m3s
+pod/sample-app-685bbd44c6-fxl8f      0/1     ErrImageNeverPull   0          7m3s
 
 
 
 
 NAME                            READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/sample-app   0/1     1            0           5h36m
+deployment.apps/sample-app      0/1     1            0           5h36m
 
 NAME                                       DESIRED   CURRENT   READY   AGE
-replicaset.apps/sample-app-685bbd44c6   1         1         0       5h36m
+replicaset.apps/sample-app-685bbd44c6      1         1         0       5h36m
 </code></pre>
 
 <p>여기에서 deployment를 삭제하면 관련된 모든 리소스가 삭제된다.</p>
