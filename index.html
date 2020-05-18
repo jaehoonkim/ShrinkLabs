@@ -39,32 +39,6 @@
 	<article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
-			<a href="/posts/kubectl_run/" rel="bookmark">
-			로컬환경(minikube)에 배포/테스트/삭제
-			</a>
-		</h3>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text" datetime="2020-05-18T17:53:57&#43;09:00">May 18, 2020</time>
-</div>
-
-<div class="meta__item-categories meta__item">
-	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta__text">
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		실제 클러스터에 배포하기 전에 로컬 환경의 minikube를 이용해서 배포하고 테스트를 하기 위한 방법이 필요하면 다음과 같이 한다.
-만들어 놓은 이미지를 실행한다.
-$ kubectl -n shrink run sample-app --image=sample-app:latest --image-pull-policy=Never  다음과 같이 배포가 된 것을 확인 할 수 있다.
-$ kubectl -n shrink get pods NAME READY STATUS RESTARTS AGE sample-app-685bbd44c6-kgc4z 0/1 ErrImageNeverPull 0 5h24m  필요한 작업을 완료하고 난 다음 해당 이미지를 중지하고자 할 때,
-$ kubectl -n shrink delete pods/sample-app-685bbd44c6-kgc4z pod &quot;sample-app-685bbd44c6-kgc4z&quot; deleted  삭제 되었다는 메세지가 나오지만 실제로는 삭제 되지 않는다.
-	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
 			<a href="/posts/crosscompile_on_windows/" rel="bookmark">
 			Powershell에서 할 수 있는 Linux를 위한 빌드
 			</a>
@@ -292,11 +266,37 @@ $ curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get &gt;
 제공하는 서비스에서 외부의 서비스(slack)를 사용하기 위해서 민감한 정보인 token이 존재한다. 이 내용이 코드상 또는 image 상에 존재하지 않게 Image를 만들고자 한다.
 그래서 별도로 &ldquo;slack-token&rdquo; 파일을 만들어서 파일을 통해서 token 정보를 제공하도록 만들어 놓았다. 해당 파일을 경로와 파일명을 포함해서 환경변수 &ldquo;slack_token_path&rdquo;에 등록해 놓고, 코드상에서는 환경 변수인 &ldquo;slack_token_path&rdquo;에 지정되어 있는 경로의 파일로 부터 token 정보를 읽어서 사용한다.
 	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/posts/running-mongodb-database-in-kubernetes-with-statefulsets/" rel="bookmark">
+			6.Running Mongodb Database in Kubernetes With Statefulsets
+			</a>
+		</h3>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2019-01-11T17:52:48&#43;09:00">January 11, 2019</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/containers/" rel="category">containers</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		지금까지의 과정 중에서 가장 어려웠다.;;; 그리고 제대로 이해를 한건지도 잘 모르겠다.
+일단을 이해했다고 생각되는 정도만 정리를 해봤다.
+이번 과정은 StatefulSet에 대한 이해를 목표로 하고 있다.
+StatefulSet에 대한 이해를 위해서는 Headless Service에 대한 이해와 StorageClass에 대한 이해가 필요했다.
+StorageClass는 상태를 갖는걸 확인하기 위한 실습이 필요하다보니, Volume을 사용해야 하고 StatefulSet의 scale을 조정하게 되는 것에 따라서 Volume도 같이 조정이 되어야 해서 StorageClass 컨트롤러를 통해서 Volume을 동적으로 조정할 수 있도록 하려고 사용 된 것 같다.
+	</div>
 </article>
 </main>
 
 <div class="pagination">
-	<span class="pagination__item pagination__item--current">1/6</span>
+	<span class="pagination__item pagination__item--current">1/5</span>
 	<a class="pagination__item pagination__item--next btn" href="/page/2/">»</a>
 </div>
 
@@ -326,11 +326,11 @@ $ curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get &gt;
 	<h4 class="widget__title">Recent Posts</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
-			<li class="widget__item"><a class="widget__link" href="/posts/kubectl_run/">로컬환경(minikube)에 배포/테스트/삭제</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/crosscompile_on_windows/">Powershell에서 할 수 있는 Linux를 위한 빌드</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/private-container-registry/">Kubernetes에서 Private Container Registry 사용</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/docker-error/">docker 설치 후 에러</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/k8s-with-kops-on-gce/">GCE에서 kops를 이용한 K8s 구성</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/docker-image/">docker image 저장소 위치 변경</a></li>
 		</ul>
 	</div>
 </div>

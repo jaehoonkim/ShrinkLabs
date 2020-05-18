@@ -40,34 +40,6 @@
 	</header><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
-			<a href="/posts/kvm-with-go/" rel="bookmark">
-			KVM 스터디(with go)
-			</a>
-		</h3>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text" datetime="2017-12-02T23:55:52&#43;09:00">December 02, 2017</time>
-</div>
-
-<div class="meta__item-categories meta__item">
-	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta__text"><a class="meta__link" href="/categories/kvm/" rel="category">kvm</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		주의, 이 글은 KVM이 뭔지도 제대로 모르면서 학습한 내용을 정리한거라서, 정확하지 않은 내용이 다수 포함되어 있을 수 있습니다.
-틀린 내용은 지적해 주시면 수정해서 반영하도록 하겠습니다.
-준비물 노트북(우분투 16.04)
-KVM이 뭔가요? 하이퍼바이저? 위키백과에 나와 있는 정의( https://ko.wikipedia.org/wiki/%ED%95%98%EC%9D%B4%ED%8D%BC%EB%B0%94%EC%9D%B4%EC%A0%80 ) 를 보면 이렇게 나와 있다.
-&ldquo;다수의 운영 체제를 동시에 실행하기 위한 논리적 플랫폼&rdquo;
-여기에 우리가 잘 알고 있는 VmWare, VirtualBox와 같은것도 있고, Xen, KVM 같이 좀 낯선 것들도 있다.
-내용을 읽다보면, 왠지 중요해 보이는 단어 Type1, Type2, 전가상화, 반가상화 뭐 이런 단어들이 나온다.
-	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
 			<a href="/posts/core/" rel="bookmark">
 			core파일 만들기
 			</a>
@@ -313,12 +285,41 @@ vendoring을 왜 하나? Project A에서 사용하는 Pkg X의 리비전 1을 �
 Pkg X의 리비전을 Project A에 맞추면 Project B가 빌드를 실패하고, Project B에 맞추면 Project A가 빌드에 실패하게 된다.
 그래서 패키지들을 vendor 아래에 위치 시킨다.
 	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/posts/hugo/" rel="bookmark">
+			GitHub 페이지에 Hugo 올리기
+			</a>
+		</h3>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2016-10-13T14:17:19&#43;09:00">October 13, 2016</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/tools/" rel="category">tools</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		Blogger에서 Hugo( http://gohugo.io )로 갈아타는 과정을 정리해 본다.
+Hugo 를 설치한다 https://github.com/spf13/hugo/releases 에서 본인의 환경에 맞는걸 찾아서 설치한다.
+Linux는 deb를 제공하고 있지만, Windows는 exe파일을 제공하고 있어서 환경변수(PATH)를 잡아주던가, 환경변수가 잡혀있는곳에 복사를 해준다.
+(이름도 hugo.exe로 바꿔주는게 사용하기에 더 편리한것 같다.)
+MAC은 안 써봐서 잘 모르겠다&hellip;;;;
+github에 저장소를 만든다 github에서 호스팅을 받아서 hugo를 사용하기 위해서는 2개의 저장소를 만들어야 한다.
+hugo의 컨텐츠를 관리하기 위한 저장소가 필요하다.(ex: https://github.com/shrinklabs/blog)
+그리고 컨텐츠를 보여주기 위한 github의 페이지 저장소(ex: https://github.
+	</div>
 </article>
 </main>
 
 <div class="pagination">
 	<a class="pagination__item pagination__item--prev btn" href="/posts/page/2/">«</a>
-	<span class="pagination__item pagination__item--current">3/6</span>
+	<span class="pagination__item pagination__item--current">3/5</span>
 	<a class="pagination__item pagination__item--next btn" href="/posts/page/4/">»</a>
 </div>
 
@@ -349,11 +350,11 @@ Pkg X의 리비전을 Project A에 맞추면 Project B가 빌드를 실패하고
 	<h4 class="widget__title">Recent Posts</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
-			<li class="widget__item"><a class="widget__link" href="/posts/kubectl_run/">로컬환경(minikube)에 배포/테스트/삭제</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/crosscompile_on_windows/">Powershell에서 할 수 있는 Linux를 위한 빌드</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/private-container-registry/">Kubernetes에서 Private Container Registry 사용</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/docker-error/">docker 설치 후 에러</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/k8s-with-kops-on-gce/">GCE에서 kops를 이용한 K8s 구성</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/docker-image/">docker image 저장소 위치 변경</a></li>
 		</ul>
 	</div>
 </div>

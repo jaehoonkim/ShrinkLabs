@@ -6,23 +6,10 @@
     <description>Recent content in Posts on ShrinkLabs</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Mon, 18 May 2020 17:53:57 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 18 May 2020 10:52:23 +0900</lastBuildDate>
     
 	<atom:link href="https://shrinklabs.com/posts/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>로컬환경(minikube)에 배포/테스트/삭제</title>
-      <link>https://shrinklabs.com/posts/kubectl_run/</link>
-      <pubDate>Mon, 18 May 2020 17:53:57 +0900</pubDate>
-      
-      <guid>https://shrinklabs.com/posts/kubectl_run/</guid>
-      <description>실제 클러스터에 배포하기 전에 로컬 환경의 minikube를 이용해서 배포하고 테스트를 하기 위한 방법이 필요하면 다음과 같이 한다.
-만들어 놓은 이미지를 실행한다.
-$ kubectl -n shrink run sample-app --image=sample-app:latest --image-pull-policy=Never  다음과 같이 배포가 된 것을 확인 할 수 있다.
-$ kubectl -n shrink get pods NAME READY STATUS RESTARTS AGE sample-app-685bbd44c6-kgc4z 0/1 ErrImageNeverPull 0 5h24m  필요한 작업을 완료하고 난 다음 해당 이미지를 중지하고자 할 때,
-$ kubectl -n shrink delete pods/sample-app-685bbd44c6-kgc4z pod &amp;quot;sample-app-685bbd44c6-kgc4z&amp;quot; deleted  삭제 되었다는 메세지가 나오지만 실제로는 삭제 되지 않는다.</description>
-    </item>
     
     <item>
       <title>Powershell에서 할 수 있는 Linux를 위한 빌드</title>
