@@ -39,6 +39,30 @@
 	<article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
+			<a href="/posts/crosscompile_on_windows/" rel="bookmark">
+			Crosscompile_on_windows
+			</a>
+		</h3>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2020-05-18T10:52:23&#43;09:00">May 18, 2020</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text">
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		Windows 환경에서 개발 후 Linux 환경으로 배포하기 위해서 Linux용 바이너리로 빌드를 해야 한다. 다음의 방법으로 빌드 할 수 있다.
+Powershell에서 빌드를 한다.
+PS D:\ws\src\sample&gt; $env:GOOS=&quot;linux&quot;; go build  빌드 이후에는 필요에 따라서 &ldquo;GOOS&rdquo;를 다시 &ldquo;windows&rdquo;로 돌려 놓는다.
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
 			<a href="/posts/private-container-registry/" rel="bookmark">
 			Kubernetes에서 Private Container Registry 사용
 			</a>
@@ -267,32 +291,6 @@ $ curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get &gt;
 StatefulSet에 대한 이해를 위해서는 Headless Service에 대한 이해와 StorageClass에 대한 이해가 필요했다.
 StorageClass는 상태를 갖는걸 확인하기 위한 실습이 필요하다보니, Volume을 사용해야 하고 StatefulSet의 scale을 조정하게 되는 것에 따라서 Volume도 같이 조정이 되어야 해서 StorageClass 컨트롤러를 통해서 Volume을 동적으로 조정할 수 있도록 하려고 사용 된 것 같다.
 	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/posts/continuous-delivery-with-jenkins-in-kubernetes-engine/" rel="bookmark">
-			5.Continuous Delivery With Jenkins in Kubernetes Engine
-			</a>
-		</h3>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text" datetime="2019-01-10T11:40:50&#43;09:00">January 10, 2019</time>
-</div>
-
-<div class="meta__item-categories meta__item">
-	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta__text"><a class="meta__link" href="/categories/containers/" rel="category">containers</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		이번 과정은 Jenkins와 Kubernetes를 이용한 배포 자동화를 실습해 볼 수 있었다.
-분량은 많지만 이해가 어렵지는 않은 내용이었다.
-실습을 해보면서 Namespace라는 객체와 Helm이라는 패키지 관리 도구를 사용해 볼 수 있다. Namespace는 일반적으로 우리가 알고 있는 용도인데, 논리적으로 무언가를 구분지어서 사용하고 싶을때 사용하는게 목적이라고 보면 될 것 같다.
-이전 과정에서 배웠던 배포를 위한 전략에서는 label을 사용했었다면, 이번에는 Namespace를 사용해서 비슷한 문제 상황을 해결하는걸 경험해 볼 수 있다.
-그리고 helm은 Kubernetes의 클러스터에 올라갈 수 있도록 미리 정의해서 배포해 놓은걸 사용할 수 있게 해주는 도구였다.
-	</div>
 </article>
 </main>
 
@@ -327,11 +325,11 @@ StorageClass는 상태를 갖는걸 확인하기 위한 실습이 필요하다�
 	<h4 class="widget__title">Recent Posts</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/posts/crosscompile_on_windows/">Crosscompile_on_windows</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/private-container-registry/">Kubernetes에서 Private Container Registry 사용</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/docker-error/">docker 설치 후 에러</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/k8s-with-kops-on-gce/">GCE에서 kops를 이용한 K8s 구성</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/docker-image/">docker image 저장소 위치 변경</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/nginx-ingress-controller-on-google-kubernetes-engine/">10.Nginx Ingress Controller on Google Kubernetes Engine</a></li>
 		</ul>
 	</div>
 </div>

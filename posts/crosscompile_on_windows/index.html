@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>template을 생성할때 왜 이름을 지정할까? - ShrinkLabs</title>
+	<title>Crosscompile_on_windows - ShrinkLabs</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
 	
@@ -36,50 +36,28 @@
 <main class="main" role="main">
 	<article class="post">
 		<header class="post__header">
-			<h1 class="post__title">template을 생성할때 왜 이름을 지정할까?</h1>
+			<h1 class="post__title">Crosscompile_on_windows</h1>
 			<div class="post__meta meta">
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text" datetime="2016-09-03T17:10:53&#43;09:00">September 03, 2016</time>
+	<time class="meta__text" datetime="2020-05-18T10:52:23&#43;09:00">May 18, 2020</time>
 </div>
 
 <div class="meta__item-categories meta__item">
 	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta__text"><a class="meta__link" href="/categories/code/" rel="category">code</a>
+	<span class="meta__text">
 	</span>
 </div></div>
 		</header><div class="content post__content clearfix">
-			<p>Go언어의 Template 엔진을 사용할때, 왜 New()의 파라미터로 이름을 만들어서 넘겨야 하는지가 궁금했었다.</p>
+			<p>Windows 환경에서 개발 후 Linux 환경으로 배포하기 위해서 Linux용 바이너리로 빌드를 해야 한다.
+다음의 방법으로 빌드 할 수 있다.</p>
 
-<p>Template and Associated templates라는 글을 읽고 어느 정도 이해를 하게 되었다.</p>
+<p>Powershell에서 빌드를 한다.</p>
 
-<p>다음은 위 글의 내용을 요약한 것이다.</p>
+<pre><code class="language-shell">PS D:\ws\src\sample&gt; $env:GOOS=&quot;linux&quot;; go build
+</code></pre>
 
-<p>template.New() 로 template을 만들때, 이름을 정해서 만든다.<br />
-이 때 FuncMap과 템플릿 리스트를 갖는 그룹(그룹의 이 글에서 사용하는 용어로 Associated Templates를 가르킨다)이 생성된다.<br />
-FuncMap에 대해서는,<br />
-<a href="https://golang.org/pkg/html/template/#FuncMap">https://golang.org/pkg/html/template/#FuncMap</a><br />
-<a href="http://goinbigdata.com/example-of-using-templates-in-golang/">http://goinbigdata.com/example-of-using-templates-in-golang/</a><br />
-<a href="http://technosophos.com/2013/11/23/using-custom-template-functions-in-go.html">http://technosophos.com/2013/11/23/using-custom-template-functions-in-go.html</a><br />
-를 확인해본다.</p>
-
-<p>New()를 했어도 아직 템플릿 리스트에서 관리되는 대상은 아니다.<br />
-Parse(&hellip;)를 하면 템플릿 리스트에 추가가 된다.</p>
-
-<p>처음에 생성한 template &ldquo;t1&rdquo;으로 New()를 하면 연관된 템플릿을 생성할 수 있다.<br />
-&ldquo;t1&rdquo;으로 생성한 template들은 동일한 템플릿 리스트에서 관리되어진다.</p>
-
-<p>현재 템플릿 리스트에서는 &ldquo;t1&rdquo; 템플릿을 더 이상 만들 수 없다.</p>
-
-<p>Lookup()으로 현재 템플릿 리스트에서 관리되고 있는 template을 찾을 수 있다.</p>
-
-<p>Templates() 함수로 템플릿 리스트의 template들을 모두 구한다.</p>
-
-<p>Execute() 와 ExecuteTemplate() 의 차이<br />
-Execute() 는 호출한 template 객체를 실행한다.<br />
-ExecuteTemplate() 는 호출한 template 객체가 관리되는 템플릿 리스트에서 인자로 넘겨진 이름의 template 객체를 찾아서 실행한다.</p>
-
-<p>ParseFiles() 는 파라미터로 넘겨진 파일 이름들을 템플릿 리스트에서 관리하는 리스트의 New()로 template을 생성할때 인자로 넘기는 name의 역할로 사용된다.</p>
+<p>빌드 이후에는 필요에 따라서 &ldquo;GOOS&rdquo;를 다시 &ldquo;windows&rdquo;로 돌려 놓는다.</p>
 
 		</div>
 		
@@ -100,10 +78,7 @@ ExecuteTemplate() 는 호출한 template 객체가 관리되는 템플릿 리스
 
 <nav class="post-nav flex">
 	<div class="post-nav__item post-nav__item--prev">
-		<a class="post-nav__link" href="/posts/ifconfig/" rel="prev"><span class="post-nav__caption">«&thinsp;Previous</span><p class="post-nav__post-title">ifconfig 사용</p></a>
-	</div>
-	<div class="post-nav__item post-nav__item--next">
-		<a class="post-nav__link" href="/posts/vim-go/" rel="next"><span class="post-nav__caption">Next&thinsp;»</span><p class="post-nav__post-title">vim-go 기본 템플릿 비활성화</p></a>
+		<a class="post-nav__link" href="/posts/private-container-registry/" rel="prev"><span class="post-nav__caption">«&thinsp;Previous</span><p class="post-nav__post-title">Kubernetes에서 Private Container Registry 사용</p></a>
 	</div>
 </nav>
 
