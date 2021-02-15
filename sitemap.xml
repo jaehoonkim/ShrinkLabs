@@ -3,11 +3,22 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://shrinklabs.com/categories/</loc>
+    <loc>https://shrinklabs.com/post/hello/</loc>
+    <lastmod>2021-02-15T23:43:30+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://shrinklabs.com/post/</loc>
+    <lastmod>2021-02-15T23:43:30+09:00</lastmod>
   </url>
   
   <url>
     <loc>https://shrinklabs.com/</loc>
+    <lastmod>2021-02-15T23:43:30+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://shrinklabs.com/categories/</loc>
   </url>
   
   <url>
