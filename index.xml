@@ -22,25 +22,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://shrinklabs.com/home/subheader/</guid>
-      <description>ShrinkLabs는 클라우드 기반 기술을 연구하고 소프트웨어를 개발하는 그룹입니다.</description>
-    </item>
-    
-    <item>
-      <title>Project</title>
-      <link>https://shrinklabs.com/home/services/service2/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://shrinklabs.com/home/services/service2/</guid>
-      <description>Kubernetes 기반의 Container 관리 소프트웨어인 Shrink 프로젝트를 진행하고 있습니다.</description>
-    </item>
-    
-    <item>
-      <title>Research</title>
-      <link>https://shrinklabs.com/home/services/service1/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://shrinklabs.com/home/services/service1/</guid>
-      <description>Cloud 기반의 인프라와 Kubernetes를 분석합니다.</description>
+      <description>ShrinkLabs는 Container와 Container 관리 솔루션들을 연구하며 소프트웨어를 만들고 있습니다.</description>
     </item>
     
   </channel>
