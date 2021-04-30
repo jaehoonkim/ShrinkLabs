@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  	<meta charset="utf-8">
+  	<meta name="viewport"    content="width=device-width, initial-scale=1.0">
+  	<meta name="description" content="">
+  	<meta name="author"      content="map[]">
+    
+    	<title>7.Build Slack Bot With Node.js on Kubernetes</title>
+	<link rel="shortcut icon" href="https://shrinklabs.com/images/favicon.ico">
+
+	
+	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css" rel="stylesheet">
+	
+	
+	<script defer src="https://use.fontawesome.com/releases/v5.0.11/js/all.js" integrity="sha384-ImVoB8Er8knetgQakxuBS4G3RSkyD8IZVVQCAnmRJrDwqJFYUE4YOv+DbIofcO9C" crossorigin="anonymous"></script>
+	
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alice|Open+Sans:400,300,700">
+	
+	
+  
+  <link rel="stylesheet" href="https://shrinklabs.com/css/styles.min.16be9015b1d15d94201894c956885e507505d7b2f836db72cf9bb664b89c63ac6f9b7de5b6d4671478edb138a9c227c4c4e6619e22ef55bd586fa93fb6eed058.css" integrity="sha512-Fr6QFbHRXZQgGJTJVoheUHUF17L4Nttyz5u2ZLicY6xvm33lttRnFHjtsTipwifExOZhniLvVb1Yb6k/tu7QWA==">
+
+   
+  
+
+  </head>
+  
+  <body class="home">
+
+    
+      <header id="header">
+  <div id="head" class="parallax" data-parallax-speed="2" style="background-image:url('https://shrinklabs.com/images/bg_head.jpg');">
+    <h1 id="logo" class="text-center">
+      <img class='img-circle' src="https://shrinklabs.com/images/logo.png" alt="">
+      <span class="title"></span>
+      <span class="tagline"><br>
+        <a href="mailto:"></a>
+      </span>
+   </h1>
+</div>
+
+<nav class="navbar navbar-default navbar-sticky">
+    <div class="container-fluid">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="true">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
+
+            <ul class="nav navbar-nav">
+            
+                
+                <li>
+                    <a href="/">home</a>
+                </li>
+                
+            
+                
+                <li>
+                    <a href="/post/">blog</a>
+                </li>
+                
+            
+                
+                <li>
+                    <a href="/about/">About</a>
+                </li>
+                
+            
+            </ul>
+
+        </div> 
+        
+    </div>
+</nav>
+
+</header>
+    
+ 
+    
+<main id="main">
+
+	<div class="container">
+
+		<div class="row topspace">
+			<div class="col-sm-8 col-sm-offset-2">
+
+ 				<article class="post">
+					<header class="entry-header">
+ 						<div class="entry-meta">
+               <span class="posted-on">
+                  <time class="entry-date published" datetime="January 14, 2019">January 14, 2019</time>
+               </span>
+ 						</div>
+ 						<h1 class="entry-title"><a href="https://shrinklabs.com/post/container_build-slack-bot-with-nodejs-on-kubernetes/" rel="bookmark">7.Build Slack Bot With Node.js on Kubernetes</a></h1>
+					</header>
+					<div class="entry-content">
+						<p>이번 과정은 Secret 객체에 대해서 좀 더 자세하게 알아볼 수 있는 과정이었다.</p>
+<p>서비스를 제공하는 프로그램(node.js 코드)을 Docker image로 만든 다음 Registry Server에 Push를 한다.</p>
+<p>제공하는 서비스에서 외부의 서비스(slack)를 사용하기 위해서 민감한 정보인 token이 존재한다. 이 내용이 코드상 또는 image 상에 존재하지 않게 Image를 만들고자 한다.</p>
+<p>그래서 별도로 &ldquo;slack-token&rdquo; 파일을 만들어서 파일을 통해서 token 정보를 제공하도록 만들어 놓았다. 해당 파일을 경로와 파일명을 포함해서 환경변수 &ldquo;slack_token_path&quot;에 등록해 놓고, 코드상에서는 환경 변수인 &ldquo;slack_token_path&quot;에 지정되어 있는 경로의 파일로 부터 token 정보를 읽어서 사용한다.</p>
+<p>실습 과정에서 보여지는 Docker image를 만드는 Dockerfile에는 token 정보를 다루고 있지 않다. 이를 통해서 해당 정보는 배포가 되지 않는다는걸 알 수 있다.</p>
+<p>이제 Kubernetes 클러스터에서 배포를 하기 위해서 token 정보를 container들이 인식할 수 있도록 해주어야 한다.</p>
+<p>그래서 token 정보를 Secret으로 생성해서 클러스터에 배포한다.</p>
+<p>다시 반복해서 확인을 해보면, container에서 제공되는 서비스는 &ldquo;slack_token_path&rdquo; 라는 이름의 환경 변수를 읽어 파일 경로를 구할 수 있다. 이 경로를 통해서 token 정보를 알아낸다. 그리고 구해진 token 정보를 이용해서 slack이 제공하는 기능을 이용할 수 있다.</p>
+<p>이렇게 container에서 token 정보를 구할 수 있도록 하기 위해서, Deployment의 yaml 파일에서 container가 사용할 환경 변수를 등록할 수 있는 &ldquo;env&quot;를 이용해서 &ldquo;slack_token_path&quot;를 등록한다. 이 환경 변수(slack_token_path)는 token 정보가 존재하는 &ldquo;경로와 파일명&quot;의 조합이다.</p>
+<p>이 경로에 해당 파일을 만들기 위해서 volumeMounts를 이용해서 지정된 경로에 volume을 mount 한다.</p>
+<p>이때 사용되어질 &ldquo;secret&rdquo; 타입의 volume은 token 정보를 Pod에서 사용할 수 있도록 하는 &ldquo;Secret&rdquo; 객체이다.</p>
+<p>token은 민감한 정보이기 때문에 별도의 과정을 통해서 전달되어 진다고 상상해 볼 수 있다. 어떠한 방식으로든지 전달된 token을 이용해서 &ldquo;Secret&quot;을 생성하는 과정을 거칠 수 있다.</p>
+<p>Secret을 생성하는 인자 중 에 &ldquo;generic&quot;을 사용한다. generic은 로컬의 파일등을 이용해서 Secret을 만들겠다는 의미로 type에 따라서 Secret을 생성하는 방식을 달리 할 수도 있다.</p>
+
+					</div>
+				</article>
+
+			</div>
+		</div> 
+
+		<div class="row">
+			<div class="col-sm-8 col-sm-offset-2">
+
+				<div id="share">
+					
+				</div>
+			</div>
+		</div> 
+		<div class="clearfix"></div>
+
+		<div class="row">
+			<div class="col-sm-8 col-sm-offset-2">
+
+				<div id="comments">
+					
+				</div>
+			</div>
+		</div> 
+		<div class="clearfix"></div>
+
+	</div>	
+
+</main>
+
+    
+    
+      <footer id="footer">
+	<div class="container">
+		<div class="row">
+			
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Contact</h3>
+				<div class="widget-body">
+					<p>
+					
+					<br>
+					
+					</p>
+				</div>
+			</div>
+			
+
+			
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Follow me</h3>
+				<div class="widget-body">
+					<p class="follow-me-icons">
+            
+							
+								<a href="https://www.facebook.com/jaehoon" target="_blank"><i class="fab fa-facebook-square fa-1x"></i></a>
+							
+            
+							
+								<a href="https://twitter.com/jaehoonn_" target="_blank"><i class="fab fa-twitter-square fa-1x"></i></a>
+							
+            
+							
+								<a href="https://www.linkedin.com/in/jaehoonn" target="_blank"><i class="fab fa-linkedin fa-1x"></i></a>
+							
+            
+							
+								<a href="https://github.com/jaehoonn" target="_blank"><i class="fab fa-github fa-1x"></i></a>
+							
+            
+							
+								<a href="mailto:jaehoon@shrinklabs.com" target="_blank"><i class="fas fa-envelope-square fa-1x"></i></a>
+							
+            
+					</p>
+				</div>
+			</div>
+			
+
+			
+
+			
+
+		</div> 
+	</div>
+</footer>
+
+<footer id="underfooter">
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-6 widget">
+				<div class="widget-body">
+					<p></p>
+				</div>
+			</div>
+
+			<div class="col-md-6 widget">
+				<div class="widget-body">
+					<p class="text-right">
+						Copyright &copy; 2021, <br>
+						Design: <a href="http://www.gettemplate.com" rel="designer">Initio by GetTemplate</a> - 
+						Powered by: <a href="https://gohugo.io/" rel="poweredby">Hugo</a>
+					</p>
+				</div>
+			</div>
+
+		</div> 
+	</div>
+</footer>
+
+
+
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+
+
+
+<script src="https://shrinklabs.com/js/bundle.min.b4d4f6818b4e26d94fb4399ccecba55248c6c39b666a474da4289f5f9dd5de310f550d6db5ab597255174ef0acf2fd488c3e5d92f0cabc10600c94b70c601f28.js" integrity="sha512-tNT2gYtOJtlPtDmczsulUkjGw5tmakdNpCifX53V3jEPVQ1ttatZclUXTvCs8v1IjD5dkvDKvBBgDJS3DGAfKA=="></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'G-4LRCTZDF74', 'auto');
+  ga('send', 'pageview');
+</script>
+
+</body>
+</html>
+
+    
+  </body>
+  
+</html>

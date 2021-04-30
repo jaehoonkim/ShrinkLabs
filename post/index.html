@@ -36,7 +36,7 @@
       <img class='img-circle' src="https://shrinklabs.com/images/logo.png" alt="">
       <span class="title"></span>
       <span class="tagline"><br>
-        <a href="mailto:info@shrinklabs.com">info@shrinklabs.com</a>
+        <a href="mailto:"></a>
       </span>
    </h1>
 </div>
@@ -69,6 +69,12 @@
                 </li>
                 
             
+                
+                <li>
+                    <a href="/about/">About</a>
+                </li>
+                
+            
             </ul>
 
         </div> 
@@ -91,16 +97,833 @@
 					<header class="entry-header">
 						<div class="entry-meta">
                <span class="posted-on">
-                  <time class="entry-date published" datetime="February 15, 2021">February 15, 2021</time>
+                  <time class="entry-date published" datetime="February 24, 2021">February 24, 2021</time>
                </span>
 						</div>
 						<h1 class="entry-title">
-						  <a href="https://shrinklabs.com/post/hello/" rel="bookmark">Hello</a>
+						  <a href="https://shrinklabs.com/post/tool_klevr-agent/" rel="bookmark">klevr_agent 빌드 후 Docker Image 만들기</a>
 						</h1>
 					</header>
 					<div class="entry-content">
-						<p>Hello</p>
+						<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ git clone git@github.com:jaehoonn/klevr.git
+$ cd klevr
+$ chmod +x ./build.sh
+$ ./build.sh
+$ cd cmd/klebr-agent/Dockerfile
+$ docker build -t jaehoon/klevr-agent:0.2.6 .
+$ docker login -u jaehoon -p <span style="color:#f92672">{</span>password<span style="color:#f92672">}</span>
+$ docker push jaehoon/klevr-agent:0.2.6
+</code></pre></div>
+					</div>
+				</article>
+        
+				<article class="post">
+					<header class="entry-header">
+						<div class="entry-meta">
+               <span class="posted-on">
+                  <time class="entry-date published" datetime="February 19, 2021">February 19, 2021</time>
+               </span>
+						</div>
+						<h1 class="entry-title">
+						  <a href="https://shrinklabs.com/post/git_delete-local-branch/" rel="bookmark">local branch 삭제</a>
+						</h1>
+					</header>
+					<div class="entry-content">
+						<p>로컬에서 관리하고 있는 branch iss5783을 삭제한다.</p>
+<pre><code>$ git branch -d iss5783 
+</code></pre>
+					</div>
+				</article>
+        
+				<article class="post">
+					<header class="entry-header">
+						<div class="entry-meta">
+               <span class="posted-on">
+                  <time class="entry-date published" datetime="February 8, 2021">February 8, 2021</time>
+               </span>
+						</div>
+						<h1 class="entry-title">
+						  <a href="https://shrinklabs.com/post/tool_etcd-setting/" rel="bookmark">etcd 설정</a>
+						</h1>
+					</header>
+					<div class="entry-content">
+						<p>linux에서 etcd 클러스터 설정하기</p>
+<p>How To Setup a etcd Cluster On Linux – Beginners Guide( <a href="https://devopscube.com/setup-etcd-cluster-linux/">https://devopscube.com/setup-etcd-cluster-linux/</a> ) 를 읽고해보는 요약</p>
+<p>소개<br>
+etcd는,</p>
+<ul>
+<li>key-value 저장소 중 하나이다.</li>
+<li>raft 프로토콜을 사용한다.</li>
+<li>rest/grpc를 이용한다.</li>
+</ul>
+<p>준비물</p>
+<ul>
+<li>3개의 linux 서버</li>
+<li>각 서버의 호스트 이름</li>
+<li>방화벽 개방(2380, 2379)</li>
+</ul>
+<p>설정<br>
+etc-1: 10.128.0.2<br>
+etc-2: 10.128.0.4<br>
+etc-3: 10.128.0.3</p>
+<p>으로 호스트 이름과 ip를 사용한다. (ip는 각 상황에 맞춰서 사용한다.)</p>
+<p>각 서버 별로 1~6의 과정을 진행한다.</p>
+<ol>
+<li>src 폴더로 이동한다.</li>
+</ol>
+<pre><code>$ cd /usr/local/src
+</code></pre><ol start="2">
+<li>최신 버전의 etcd를 다운로드 한다.</li>
+</ol>
+<pre><code>$ sudo wget &quot;https://github.com/coreos/etcd/releases/download/v3.3.9/etcd-v3.3.9-linux-amd64.tar.gz&quot;
+</code></pre><ol start="3">
+<li>tar를 푼다.</li>
+</ol>
+<pre><code>$ sudo tar -xvf etcd-v3.3.9-linux-amd64.tar.gz
+</code></pre><ol start="4">
+<li>풀린 etcd 실행 파일들(etcd, etcctl)을 local/bin으로 이동한다.</li>
+</ol>
+<pre><code>$ sudo mv etcd-v3.3.9-linux-amd64/etcd* /usr/local/bin/
+</code></pre><ol start="5">
+<li>etcd 폴더와 사용자 그리고 그룹을 만든다. etcd 사용자로 etcd 서비스를 실행한다.</li>
+</ol>
+<pre><code>$ sudo mkdir -p /etc/etcd /var/lib/etcd
+$ groupadd -f -g 1501 etcd
+$ useradd -c &quot;etcd user&quot; -d /var/lib/etcd -s /bin/false -g etcd -u 1501 etcd
+$ chown -R etcd:etcd /var/lib/etcd
+</code></pre><ol start="6">
+<li>root 사용자로 다음의 작업을 한다.<br>
+시스템 IP와 호스트 이름을 설정할 수 있는 두 개의 환경 변수를 설정한다.</li>
+</ol>
+<pre><code>$ ETCD_HOST_IP=$(ip addr show eth0 | grep &quot;inet\b&quot; | awk '{print $2}' | cut -d/ -f1)
+$ ETCD_NAME=$(hostname -s)
+</code></pre><p>etcd용 systemd service 파일을 만든다.<br>
+&ndash;listen-client-urls</p>
+<p>note)
+–name, –initial-advertise-peer-urls, –listen-peer-urls, –listen-client-urls는 각 서버마다 다르다.
+ETCD_NAME 및 ETCD_HOST_IP 변수가 자동으로 대체된다.</p>
+<pre><code>cat &lt;&lt; EOF &gt; /lib/systemd/system/etcd.service
+[Unit]
+Description=etcd service
+Documentation=https://github.com/coreos/etcd
+ 
+[Service]
+User=etcd
+Type=notify
+ExecStart=/usr/local/bin/etcd \\
+ --name ${ETCD_NAME} \\
+ --data-dir /var/lib/etcd \\
+ --initial-advertise-peer-urls http://${ETCD_HOST_IP}:2380 \\
+ --listen-peer-urls http://${ETCD_HOST_IP}:2380 \\
+ --listen-client-urls http://${ETCD_HOST_IP}:2379,http://127.0.0.1:2379 \\
+ --advertise-client-urls http://${ETCD_HOST_IP}:2379 \\
+ --initial-cluster-token etcd-cluster-1 \\
+ --initial-cluster etcd-1=http://10.142.0.2:2380,etcd-2=http://10.142.0.4:2380,etcd-3=http://10.142.0.3:2380 \\
+ --initial-cluster-state new \\
+ --heartbeat-interval 1000 \\
+ --election-timeout 5000
+Restart=on-failure
+RestartSec=5
+ 
+[Install]
+WantedBy=multi-user.target
+EOF
+</code></pre><p>etcd 클러스터 구성하기</p>
+<p>모든 서버에서 구성이 되고 난 후 etcd 서비스를 시작하고 활성화 한다.
+첫번째 서버는 부트스트랩 노드로 동작하고 3개의 노드가 모두 시작되면 한 노드가 리더로 선정된다.</p>
+<pre><code>$ systemctl daemon-reload
+$ systemctl enable etcd
+$ systemctl start etcd.service
+$ systemctl status -l etcd.service
+</code></pre><p>etcd 클러스터 상태 확인</p>
+<p>etcdctl은 etcd 클러스터와 상호 작용하는 유틸리티이다. 이 유틸리티는 모든 노드의 &ldquo;/usr/local/bin&rdquo; 폴더에서 찾을 수 있다.
+클러스터 노드중 하나에서 다음과 같이 확인 할 수 있다.</p>
+<p>다음과 같이 클러스터의 상태를 확인 할 수 있다.</p>
+<pre><code>$ etcdctl cluster-health
+</code></pre><p>다음과 같이 하면 클러스터 멤버들의 상태와 리더의 상태를 확인 할 수 있다.</p>
+<pre><code>$ etcdctl  member list
+</code></pre><p>etcdctl은 기본으로 v2를 사용한다. 그래서 v3을 사용하기 위해서는 환경 변수로 &ldquo;ETCDCTL_API=3&quot;을 명시하면 v3의 기능을 사용할 수 있다.
+아니면 다음과 같이 사용할 수 도 있다.</p>
+<pre><code>$ ETCDCTL_API=3 etcdctl put name1 batman
+$ ETCDCTL_API=3 etcdctl put name2 ironman
+$ ETCDCTL_API=3 etcdctl put name3 superman
+$ ETCDCTL_API=3 etcdctl put name4 spiderman
+</code></pre><p>name3의 값을 얻기 위해서는 다음과 같이 한다.</p>
+<pre><code>$ ETCDCTL_API=3 etcdctl get name3
+</code></pre><p>key들을 나열하거나 prefix를 사용해서 나열 할 수 있다.</p>
+<pre><code>$ ETCDCTL_API=3 etcdctl get name1 name4 # lists range name1 to name 4
+$ ETCDCTL_API=3 etcdctl get --prefix name # lists all keys with name prefix
+</code></pre>
+					</div>
+				</article>
+        
+				<article class="post">
+					<header class="entry-header">
+						<div class="entry-meta">
+               <span class="posted-on">
+                  <time class="entry-date published" datetime="February 1, 2021">February 1, 2021</time>
+               </span>
+						</div>
+						<h1 class="entry-title">
+						  <a href="https://shrinklabs.com/post/git_remote-branch/" rel="bookmark">원격지의 branch 사용하기</a>
+						</h1>
+					</header>
+					<div class="entry-content">
+						<p>github에 있는 branch를 로컬로 받아와서 작업하고 싶을때 할 수 있는 방법</p>
+<p>원격지에 있는 branch 정보를 확인 할 수 있도록 업데이트한다.</p>
+<pre><code>$ git remote update
+</code></pre><p>원격지의 branch 확인</p>
+<pre><code>$ git branch -r
+  origin/HEAD -&gt; origin/master
+  origin/dev
+  origin/tapping
+  origin/master
+  origin/9999
+  origin/release
+  upstream/dev
+  upstream/master
+  upstream/8888
+  upstream/release
+</code></pre><p>branch들 중에서 &ldquo;origin/9999&quot;를 갖고 오고 싶다.</p>
+<pre><code>$ git checkout -t origin/9999
+</code></pre>
+					</div>
+				</article>
+        
+				<article class="post">
+					<header class="entry-header">
+						<div class="entry-meta">
+               <span class="posted-on">
+                  <time class="entry-date published" datetime="January 3, 2021">January 3, 2021</time>
+               </span>
+						</div>
+						<h1 class="entry-title">
+						  <a href="https://shrinklabs.com/post/git_upstream/" rel="bookmark">upstream 설정</a>
+						</h1>
+					</header>
+					<div class="entry-content">
+						<p>프로젝트 진행하는 과정에서 필요한 upstream 설정</p>
+<p>해당 내용은 kubernetes의 GitHub Workflow 문서를 참고 함
+( <a href="https://github.com/kubernetes/community/blob/master/contributors/guide/github-workflow.md">https://github.com/kubernetes/community/blob/master/contributors/guide/github-workflow.md</a> )</p>
+<ol>
+<li>
+<p>프로젝트를 <a href="https://github.com/kubernetes/kubernetes">https://github.com/kubernetes/kubernetes</a> 에서 내 github 계정으로 Fork한다.</p>
+</li>
+<li>
+<p>Fork한 프로젝트를 내 로컬로 clone 한다.</p>
+</li>
+</ol>
+<pre><code>$ git clone git@github.com:{your-account}/kubernetes.git
 
+// 작업 디렉토리로 이동
+$ cd kubernetes 
+
+// 현재 브랜치를 확인한다.
+$ git branch
+* master
+</code></pre><ol start="3">
+<li>upstream으로 사용할 remote를 추가한다. 최초 프로젝트를 추가한다.</li>
+</ol>
+<pre><code>$ git remote add upstream git@github.com:kubernetes/kubernetes.git
+</code></pre><ol start="4">
+<li>remote를 확인해 보면 upstream이 생성되어 있다.</li>
+</ol>
+<pre><code>$ git remote -v
+origin  git@github.com:{your-account}/kubernetes.git (fetch)
+origin  git@github.com:{your-account}/kubernetes.git (push)
+upstream        git@github.com:kubernetes/kubernetes.git (fetch)
+upstream        git@github.com:kubernetes/kubernetes.git (push)
+</code></pre><ol start="5">
+<li>clone 받은 프로젝트에서는 upstream으로 직접 push하지 않도록 한다.</li>
+</ol>
+<pre><code>$ git remote set-url --push upstream no_push
+</code></pre><ol start="6">
+<li>remote의 push가 no_push로 변경된 것 을 확인한다.</li>
+</ol>
+<pre><code>$ git remote -v
+origin  git@github.com:{your-account}/kubernetes.git (fetch)
+origin  git@github.com:{your-account}/kubernetes.git (push)
+upstream        git@github.com:kubernetes/kubernetes.git (fetch)
+upstream        no_push (push)
+</code></pre><ol start="7">
+<li>upstream의 변경된 내용을 fetch 받는다.</li>
+</ol>
+<pre><code>$ git fetch upstream
+remote: Enumerating objects: 20, done.
+remote: Counting objects: 100% (20/20), done.
+remote: Compressing objects: 100% (6/6), done.
+remote: Total 12 (delta 7), reused 8 (delta 5), pack-reused 0
+Unpacking objects: 100% (12/12), 2.00 KiB | 48.00 KiB/s, done.
+From github.com:kubernetes/kubernetes
+ * [new branch]      259    -&gt; upstream/259
+ * [new branch]      100    -&gt; upstream/100
+ * [new branch]      master       -&gt; upstream/master
+ * [new branch]      release      -&gt; upstream/release
+</code></pre><ol start="8">
+<li>fetch 받은 내용을 master 브랜치에 적용한다.</li>
+</ol>
+<pre><code>$ git checkout master
+
+$ git rebase upstream/master
+Successfully rebased and updated refs/heads/master.
+</code></pre><ol start="9">
+<li>master 브랜치에 upstream의 내용이 적용된 걸 확인한다.</li>
+</ol>
+<pre><code>$ git log
+.....
+</code></pre><ol start="10">
+<li>fork 받은 리모트에 적용한다.</li>
+</ol>
+<pre><code>$ git push origin master
+Total 0 (delta 0), reused 0 (delta 0), pack-reused 0
+To github.com:{your-account}/kubernetes.git
+   f89481d..922151e  master -&gt; master
+</code></pre>
+					</div>
+				</article>
+        
+				<article class="post">
+					<header class="entry-header">
+						<div class="entry-meta">
+               <span class="posted-on">
+                  <time class="entry-date published" datetime="May 19, 2020">May 19, 2020</time>
+               </span>
+						</div>
+						<h1 class="entry-title">
+						  <a href="https://shrinklabs.com/post/container_kubectl_run/" rel="bookmark">Windows기반의 minikube로 로컬 환경의 image 사용해서 배포하기</a>
+						</h1>
+					</header>
+					<div class="entry-content">
+						<p>실제 클러스터에 배포하기 전에 로컬 환경의 minikube를 이용해서 배포하고 테스트를 하기 위한 방법이 필요하면 다음과 같이 한다.</p>
+<p>minikube를 시작하고, minikube에 내장되어 있는 docker 데몬을 사용하도록 한다. 이렇게 하면 호스트 머신의 Docker Registry를 사용하고 image도 호스트 머신에 생성해 놓은 것을 사용할 수 있다.<br>
+(<a href="https://kubernetes.io/docs/setup/learning-environment/minikube/#use-local-images-by-re-using-the-docker-daemon">https://kubernetes.io/docs/setup/learning-environment/minikube/#use-local-images-by-re-using-the-docker-daemon</a>)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">PS&gt; minikube docker-env
+$Env:DOCKER_TLS_VERIFY <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;1&#34;</span>
+$Env:DOCKER_HOST <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;tcp://192.168.182.22:2376&#34;</span>
+$Env:DOCKER_CERT_PATH <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;C:\Users\jaehoonn\.minikube\certs&#34;</span>
+<span style="color:#75715e"># Run this command to configure your shell:</span>
+<span style="color:#75715e"># &amp; minikube docker-env | Invoke-Expression</span>
+
+PS&gt; minikube docker-env | Invoke-Expression
+</code></pre></div><p>이렇게 하면, minikube vm 안에 존재하는 docker 데몬과 통신을 하게 된다.</p>
+<p>이제 만들어 놓은 이미지를 실행한다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">PS&gt; kubectl -n jaehoonn run sample-app --image<span style="color:#f92672">=</span>sample-app:latest --port<span style="color:#f92672">=</span><span style="color:#ae81ff">9000</span> --serviceaccount<span style="color:#f92672">=</span>jaehoonn-controller 
+</code></pre></div><p>다음과 같이 배포가 된 것을 확인 할 수 있다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">PS&gt; kubectl -n jaehoonn get pods
+NAME                             READY   STATUS              RESTARTS   AGE
+sample-app-685bbd44c6-kgc4z      1/1     Running   <span style="color:#ae81ff">0</span>          5h24m
+</code></pre></div><p>웹브라우저를 통해서 연결 상태를 확인하기 위해서 Service를 생성한다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">PS&gt; kubectl -n jaehoonn expose deployment sample-app --type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;LoadBalancer&#34;</span>
+</code></pre></div><p>생성된 Service를 확인하면, 다음과 같이 pending 상태이다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">PS&gt; kubectl -n jaehoonn get services
+NAME             TYPE           CLUSTER-IP     EXTERNAL-IP   PORT<span style="color:#f92672">(</span>S<span style="color:#f92672">)</span>          AGE
+sample-app       LoadBalancer   10.102.191.6   &lt;pending&gt;     8500:32416/TCP   11s
+</code></pre></div><p>이제 minikube를 통해서 url을 생성한다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">PS&gt; minikube -n jaehoonn service sample-app --url
+* http://192.168.182.22:32416
+</code></pre></div><p>필요한 테스트 작업을 완료하고 난 다음 해당 이미지를 중지하고자 할 때,</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">PS&gt; kubectl -n jaehoonn delete pods/sample-app-685bbd44c6-kgc4z
+pod <span style="color:#e6db74">&#34;sample-app-685bbd44c6-kgc4z&#34;</span> deleted
+</code></pre></div><p>삭제 되었다는 메세지가 나오지만 실제로는 삭제 되지 않는다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">PS&gt; kubectl -n jaehoonn get pod
+NAME                             READY   STATUS              RESTARTS   AGE
+sample-app-685bbd44c6-kgc4z      1/1     Running             <span style="color:#ae81ff">0</span>          5h24m
+</code></pre></div><p>모든 리소스를 조회해보면 다음과 같다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">PS&gt; kubectl -n jaehoonn get all
+NAME                                 READY   STATUS              RESTARTS   AGE
+pod/sample-app-685bbd44c6-fxl8f      1/1     Running             <span style="color:#ae81ff">0</span>          7m3s
+
+
+
+
+NAME                            READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/sample-app      1/1     <span style="color:#ae81ff">1</span>            <span style="color:#ae81ff">0</span>           5h36m
+
+NAME                                       DESIRED   CURRENT   READY   AGE
+replicaset.apps/sample-app-685bbd44c6      <span style="color:#ae81ff">1</span>         <span style="color:#ae81ff">1</span>         <span style="color:#ae81ff">0</span>       5h36m
+</code></pre></div><p>여기에서 deployment를 삭제하면 관련된 모든 리소스가 삭제된다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">PS&gt; kubectl -n jaehoonn delete deployment/sample-app
+deployment.extensions <span style="color:#e6db74">&#34;discovery&#34;</span> deleted
+</code></pre></div><p>다시 모든 리소스를 조회해보면 다음과 같이 모두 삭제된 걸 확인할 수 있다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">PS&gt; kubectl -n jaehoonn get all
+
+No resources found.
+</code></pre></div><p>이 작업으로 Service까지 삭제 되지는 않는다.</p>
+
+					</div>
+				</article>
+        
+				<article class="post">
+					<header class="entry-header">
+						<div class="entry-meta">
+               <span class="posted-on">
+                  <time class="entry-date published" datetime="May 18, 2020">May 18, 2020</time>
+               </span>
+						</div>
+						<h1 class="entry-title">
+						  <a href="https://shrinklabs.com/post/go_crosscompile_on_windows/" rel="bookmark">Powershell에서 할 수 있는 Linux를 위한 빌드</a>
+						</h1>
+					</header>
+					<div class="entry-content">
+						<p>Windows 환경에서 개발 후 Linux 환경으로 배포하기 위해서 Linux용 바이너리로 빌드가 필요할 때가 있다.<br>
+다음의 방법으로 빌드 할 수 있다.</p>
+<p>Powershell에서 빌드하기 위한 방법은 아래와 같다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">PS D:<span style="color:#ae81ff">\w</span>s<span style="color:#ae81ff">\s</span>rc<span style="color:#ae81ff">\s</span>ample&gt; $env:GOOS<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;linux&#34;</span>; go build
+</code></pre></div><p>빌드 이후에는 필요에 따라서 &ldquo;GOOS&quot;를 다시 &ldquo;windows&quot;로 돌려 놓는다.</p>
+
+					</div>
+				</article>
+        
+				<article class="post">
+					<header class="entry-header">
+						<div class="entry-meta">
+               <span class="posted-on">
+                  <time class="entry-date published" datetime="April 10, 2020">April 10, 2020</time>
+               </span>
+						</div>
+						<h1 class="entry-title">
+						  <a href="https://shrinklabs.com/post/container_private-container-registry/" rel="bookmark">Kubernetes에서 Private Container Registry 사용</a>
+						</h1>
+					</header>
+					<div class="entry-content">
+						<p>Kubernetes에 배포하기 위해서 Container Registry(Private)을 사용하려면, 별도의 secret을 등록해야 한다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ kubectl create secret docker-registry <span style="color:#f92672">{</span>secret<span style="color:#f92672">}</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>--docker-server<span style="color:#f92672">={</span>registryserver<span style="color:#f92672">}</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>--docker-username<span style="color:#f92672">={</span>name<span style="color:#f92672">}</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>--docker-password<span style="color:#f92672">={</span>password<span style="color:#f92672">}</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>--docker-email<span style="color:#f92672">={</span>email<span style="color:#f92672">}</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>--namespace<span style="color:#f92672">={</span>namespace<span style="color:#f92672">}</span>
+</code></pre></div><p>namespace는 지정하지 않으면 default로 지정된다.</p>
+<p>그리고 Container Registry로 부터 image를 받아서 사용하기 위한 yaml 파일에 다음과 같이 추가한다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">apiVersion: v1
+kind: Pod
+metadata:
+  name: private-reg
+spec:
+  containers:
+  - name: private-reg-container
+    image: regcred/projectaa/private-reg:latest
+  imagePullSecrets:
+  - name: regcred
+</code></pre></div><p>&ldquo;imagePullSecrets&rdquo; 항목을 추가하고 containers.image에서 iamgePullSecretes.name을 base로 사용한다.</p>
+
+					</div>
+				</article>
+        
+				<article class="post">
+					<header class="entry-header">
+						<div class="entry-meta">
+               <span class="posted-on">
+                  <time class="entry-date published" datetime="April 8, 2020">April 8, 2020</time>
+               </span>
+						</div>
+						<h1 class="entry-title">
+						  <a href="https://shrinklabs.com/post/container_docker-error/" rel="bookmark">docker 설치 후 에러</a>
+						</h1>
+					</header>
+					<div class="entry-content">
+						<p>docker 설치 후 &ldquo;Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?&rdquo; 가 발생</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$sudo systemctl status docker
+
+$sudo systemctl start docker
+
+$sudo systemctl enable docker
+</code></pre></div>
+					</div>
+				</article>
+        
+				<article class="post">
+					<header class="entry-header">
+						<div class="entry-meta">
+               <span class="posted-on">
+                  <time class="entry-date published" datetime="March 5, 2020">March 5, 2020</time>
+               </span>
+						</div>
+						<h1 class="entry-title">
+						  <a href="https://shrinklabs.com/post/container_k8s-with-kops-on-gce/" rel="bookmark">GCE에서 kops를 이용한 K8s 구성</a>
+						</h1>
+					</header>
+					<div class="entry-content">
+						<h1 id="클러스터-배포용-vm-인스턴스-생성">클러스터 배포용 VM 인스턴스 생성</h1>
+<ul>
+<li>Kubernetes를 구성하기 위한 VM 인스턴스를 생성한다.</li>
+<li>&ldquo;ID 및 API 액세스&rdquo; 항목에서 액세스 범위를 &ldquo;모든 Cloud API에 대한 전체 액세스 허용&rdquo; 으로 선택한다. 또는 아래와 같이 서비스 계정에 권한을 설정하고 서비스 계정을 선택해도 된다.
+<ul>
+<li>GCP 관리 콘솔의 IAM&amp;Admin에서 서비스 계정을 하나 만든다. 서비스 계정이 갖고 있어야 하는 최소한의 권한은 다음과 같다.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">compute admin
+servce account admin
+service account key admin
+service account token creator
+service acount user
+storage admin
+DNS Administrator
+DNS Reader
+</code></pre></div><ul>
+<li>SSH로 연결 &amp; 업데이트</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">jaehoonn@jaehoonn:~$sudo apt-get update
+jaehoonn@jaehoonn:~$sudo apt-get dist-upgrade
+</code></pre></div></li>
+</ul>
+<h1 id="kubectl-설치">kubectl 설치</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">jaehoonn@jaehoonn:~$curl -LO https://storage.googleapis.com/kubernetes-release/release/<span style="color:#66d9ef">$(</span>curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt<span style="color:#66d9ef">)</span>/bin/linux/amd64/kubectl
+jaehoonn@jaehoonn:~$chmod +x ./kubectl
+jaehoonn@jaehoonn:~$sudo mv ./kubectl /usr/local/bin/kubectl
+</code></pre></div><h1 id="kops-설치">kops 설치</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">jaehoonn@jaehoonn:~$wget -O kops https://github.com/kubernetes/kops/releases/download/<span style="color:#66d9ef">$(</span>curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d <span style="color:#e6db74">&#39;&#34;&#39;</span> -f 4<span style="color:#66d9ef">)</span>/kops-linux-amd64
+jaehoonn@jaehoonn:~$chmod +x ./kops
+jaehoonn@jaehoonn:~$sudo mv ./kops /usr/local/bin/
+</code></pre></div><h1 id="gcp-tool-설치">GCP Tool 설치</h1>
+<ul>
+<li><a href="https://cloud.google.com/sdk/install">https://cloud.google.com/sdk/install</a></li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">jaehoonn@jaehoonn:~$export CLOUD_SDK_REPO<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;cloud-sdk-</span><span style="color:#66d9ef">$(</span>lsb_release -c -s<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+jaehoonn@jaehoonn:~$echo <span style="color:#e6db74">&#34;deb http://packages.cloud.google.com/apt </span>$CLOUD_SDK_REPO<span style="color:#e6db74"> main&#34;</span> | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+jaehoonn@jaehoonn:~$sudo apt-get install apt-transport-https ca-certificates
+jaehoonn@jaehoonn:~$curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+jaehoonn@jaehoonn:~$sudo apt-get update <span style="color:#f92672">&amp;&amp;</span> sudo apt-get install google-cloud-sdk
+</code></pre></div><ul>
+<li>추가 구성요소는 선택적으로 설치 한다. ( sudo apt-get install )</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">google-cloud-sdk-app-engine-python
+google-cloud-sdk-app-engine-python-extras
+google-cloud-sdk-app-engine-java
+google-cloud-sdk-app-engine-go
+google-cloud-sdk-datalab
+google-cloud-sdk-datastore-emulator
+google-cloud-sdk-pubsub-emulator
+google-cloud-sdk-cbt
+google-cloud-sdk-cloud-build-local
+google-cloud-sdk-bigtable-emulator
+kubectl
+</code></pre></div><ul>
+<li>GCP를 시작하기 위한 초기화</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">jaehoonn@jaehoonn:~$gcloud init
+Welcome! This command will take you through the configuration of gcloud.
+Your current configuration has been set to: <span style="color:#f92672">[</span>default<span style="color:#f92672">]</span>
+You can skip diagnostics next time by using the following flag:
+  gcloud init --skip-diagnostics
+Network diagnostic detects and fixes local network connection issues.
+Checking network connection...done.                                                                                
+Reachability Check passed.
+Network diagnostic passed <span style="color:#f92672">(</span>1/1 checks passed<span style="color:#f92672">)</span>.
+Choose the account you would like to use to perform operations <span style="color:#66d9ef">for</span> 
+this configuration:
+ <span style="color:#f92672">[</span>1<span style="color:#f92672">]</span> xxxxxxxxxxxx-compute@developer.gserviceaccount.com
+ <span style="color:#f92672">[</span>2<span style="color:#f92672">]</span> Log in with a new account
+Please enter your numeric choice: <span style="color:#ae81ff">1</span>
+
+You are logged in as: <span style="color:#f92672">[</span>xxxxxxxxxxxx-compute@developer.gserviceaccount.com<span style="color:#f92672">]</span>.
+Pick cloud project to use: 
+ <span style="color:#f92672">[</span>1<span style="color:#f92672">]</span> jaehoonn-000000
+ <span style="color:#f92672">[</span>2<span style="color:#f92672">]</span> Create a new project
+Please enter numeric choice or text value <span style="color:#f92672">(</span>must exactly match list 
+item<span style="color:#f92672">)</span>: <span style="color:#ae81ff">1</span>
+
+Your current project has been set to: <span style="color:#f92672">[</span>jaehoonn-000000<span style="color:#f92672">]</span>.
+
+Do you want to configure a default Compute Region and Zone? <span style="color:#f92672">(</span>Y/n<span style="color:#f92672">)</span>? y
+
+Which Google Compute Engine zone would you like to use as project 
+default?
+If you <span style="color:#66d9ef">do</span> not specify a zone via a command line flag <span style="color:#66d9ef">while</span> working 
+with Compute Engine resources, the default is assumed.
+ <span style="color:#f92672">[</span>1<span style="color:#f92672">]</span> us-east1-b
+ <span style="color:#f92672">[</span>2<span style="color:#f92672">]</span> us-east1-c
+ <span style="color:#f92672">[</span>3<span style="color:#f92672">]</span> us-east1-d
+ <span style="color:#f92672">[</span>4<span style="color:#f92672">]</span> us-east4-c
+ <span style="color:#f92672">[</span>5<span style="color:#f92672">]</span> us-east4-b
+ <span style="color:#f92672">[</span>6<span style="color:#f92672">]</span> us-east4-a
+ <span style="color:#f92672">[</span>7<span style="color:#f92672">]</span> us-central1-c
+ <span style="color:#f92672">[</span>8<span style="color:#f92672">]</span> us-central1-a
+ <span style="color:#f92672">[</span>9<span style="color:#f92672">]</span> us-central1-f
+ <span style="color:#f92672">[</span>10<span style="color:#f92672">]</span> us-central1-b
+ <span style="color:#f92672">[</span>11<span style="color:#f92672">]</span> us-west1-b
+ <span style="color:#f92672">[</span>12<span style="color:#f92672">]</span> us-west1-c
+ <span style="color:#f92672">[</span>13<span style="color:#f92672">]</span> us-west1-a
+ <span style="color:#f92672">[</span>14<span style="color:#f92672">]</span> europe-west4-a
+ <span style="color:#f92672">[</span>15<span style="color:#f92672">]</span> europe-west4-b
+ <span style="color:#f92672">[</span>16<span style="color:#f92672">]</span> europe-west4-c
+ <span style="color:#f92672">[</span>17<span style="color:#f92672">]</span> europe-west1-b
+ <span style="color:#f92672">[</span>18<span style="color:#f92672">]</span> europe-west1-d
+ <span style="color:#f92672">[</span>19<span style="color:#f92672">]</span> europe-west1-c
+ <span style="color:#f92672">[</span>20<span style="color:#f92672">]</span> europe-west3-c
+ <span style="color:#f92672">[</span>21<span style="color:#f92672">]</span> europe-west3-a
+ <span style="color:#f92672">[</span>22<span style="color:#f92672">]</span> europe-west3-b
+ <span style="color:#f92672">[</span>23<span style="color:#f92672">]</span> europe-west2-c
+ <span style="color:#f92672">[</span>24<span style="color:#f92672">]</span> europe-west2-b
+ <span style="color:#f92672">[</span>25<span style="color:#f92672">]</span> europe-west2-a
+ <span style="color:#f92672">[</span>26<span style="color:#f92672">]</span> asia-east1-b
+ <span style="color:#f92672">[</span>27<span style="color:#f92672">]</span> asia-east1-a
+ <span style="color:#f92672">[</span>28<span style="color:#f92672">]</span> asia-east1-c
+ <span style="color:#f92672">[</span>29<span style="color:#f92672">]</span> asia-southeast1-b
+ <span style="color:#f92672">[</span>30<span style="color:#f92672">]</span> asia-southeast1-a
+ <span style="color:#f92672">[</span>31<span style="color:#f92672">]</span> asia-southeast1-c
+ <span style="color:#f92672">[</span>32<span style="color:#f92672">]</span> asia-northeast1-b
+ <span style="color:#f92672">[</span>33<span style="color:#f92672">]</span> asia-northeast1-c
+ <span style="color:#f92672">[</span>34<span style="color:#f92672">]</span> asia-northeast1-a
+ <span style="color:#f92672">[</span>35<span style="color:#f92672">]</span> asia-south1-c
+ <span style="color:#f92672">[</span>36<span style="color:#f92672">]</span> asia-south1-b
+ <span style="color:#f92672">[</span>37<span style="color:#f92672">]</span> asia-south1-af
+ <span style="color:#f92672">[</span>38<span style="color:#f92672">]</span> australia-southeast1-b
+ <span style="color:#f92672">[</span>39<span style="color:#f92672">]</span> australia-southeast1-c
+ <span style="color:#f92672">[</span>40<span style="color:#f92672">]</span> australia-southeast1-a
+ <span style="color:#f92672">[</span>41<span style="color:#f92672">]</span> southamerica-east1-b
+ <span style="color:#f92672">[</span>42<span style="color:#f92672">]</span> southamerica-east1-c
+ <span style="color:#f92672">[</span>43<span style="color:#f92672">]</span> southamerica-east1-a
+ <span style="color:#f92672">[</span>44<span style="color:#f92672">]</span> asia-east2-a
+ <span style="color:#f92672">[</span>45<span style="color:#f92672">]</span> asia-east2-b
+ <span style="color:#f92672">[</span>46<span style="color:#f92672">]</span> asia-east2-c
+ <span style="color:#f92672">[</span>47<span style="color:#f92672">]</span> asia-northeast2-a
+ <span style="color:#f92672">[</span>48<span style="color:#f92672">]</span> asia-northeast2-b
+ <span style="color:#f92672">[</span>49<span style="color:#f92672">]</span> asia-northeast2-c
+ <span style="color:#f92672">[</span>50<span style="color:#f92672">]</span> europe-north1-a
+Did not print <span style="color:#f92672">[</span>12<span style="color:#f92672">]</span> options.
+Too many options <span style="color:#f92672">[</span>62<span style="color:#f92672">]</span>. Enter <span style="color:#e6db74">&#34;list&#34;</span> at prompt to print choices fully.
+Please enter numeric choice or text value <span style="color:#f92672">(</span>must exactly match list 
+item<span style="color:#f92672">)</span>: <span style="color:#ae81ff">8</span>
+
+Your project default Compute Engine zone has been set to <span style="color:#f92672">[</span>us-central1-a<span style="color:#f92672">]</span>.
+You can change it by running <span style="color:#f92672">[</span>gcloud config set compute/zone NAME<span style="color:#f92672">]</span>.
+Your project default Compute Engine region has been set to <span style="color:#f92672">[</span>us-central1<span style="color:#f92672">]</span>.
+You can change it by running <span style="color:#f92672">[</span>gcloud config set compute/region NAME<span style="color:#f92672">]</span>.
+Created a default .boto configuration file at <span style="color:#f92672">[</span>/home/jaehoonn/.boto<span style="color:#f92672">]</span>. See this file and
+<span style="color:#f92672">[</span>https://cloud.google.com/storage/docs/gsutil/commands/config<span style="color:#f92672">]</span> <span style="color:#66d9ef">for</span> more
+information about configuring Google Cloud Storage.
+Your Google Cloud SDK is configured and ready to use!
+* Commands that require authentication will use xxxxxxxxxxxx-compute@developer.gserviceaccount.com by default
+* Commands will reference project <span style="color:#e6db74">`</span>jaehoonn-000000<span style="color:#e6db74">`</span> by default
+* Compute Engine commands will use region <span style="color:#e6db74">`</span>us-central1<span style="color:#e6db74">`</span> by default
+* Compute Engine commands will use zone <span style="color:#e6db74">`</span>us-central1-a<span style="color:#e6db74">`</span> by default
+Run <span style="color:#e6db74">`</span>gcloud help config<span style="color:#e6db74">`</span> to learn how to change individual settings
+This gcloud configuration is called <span style="color:#f92672">[</span>default<span style="color:#f92672">]</span>. You can create additional configurations <span style="color:#66d9ef">if</span> you work with multiple accounts and/or projects.
+Run <span style="color:#e6db74">`</span>gcloud topic configurations<span style="color:#e6db74">`</span> to learn more.
+Some things to try next:
+* Run <span style="color:#e6db74">`</span>gcloud --help<span style="color:#e6db74">`</span> to see the Cloud Platform services you can interact with. And run <span style="color:#e6db74">`</span>gcloud help COMMAND<span style="color:#e6db74">`</span> to get help on any gcloud command.
+* Run <span style="color:#e6db74">`</span>gcloud topic --help<span style="color:#e6db74">`</span> to learn about advanced features of the SDK like arg files and output formatting
+jaehoonn@jaehoonn:~$
+</code></pre></div><ul>
+<li>선택 사항
+<ul>
+<li>&ldquo;Please enter your numeric choice: 1&rdquo;
+<ul>
+<li>연결되어 있는 서비스 계정인 &ldquo;[1] <a href="mailto:xxxxxxxxxxxx-compute@developer.gserviceaccount.com">xxxxxxxxxxxx-compute@developer.gserviceaccount.com</a>&rdquo; 를 선택</li>
+</ul>
+</li>
+<li>&ldquo;Please enter numeric choice or text value (must exactly match list
+item): 1&rdquo;
+<ul>
+<li>연결하고자 하는 프로젝트인 &ldquo;[1] jaehoonn-000000&rdquo; 를 선택</li>
+</ul>
+</li>
+<li>&ldquo;Do you want to configure a default Compute Region and Zone? (Y/n)? y&rdquo;
+<ul>
+<li>기본으로 제공되고 있는 region과 zone을 사용</li>
+</ul>
+</li>
+<li>&ldquo;Please enter numeric choice or text value (must exactly match list
+item): 8&rdquo;</li>
+</ul>
+</li>
+</ul>
+<h1 id="스토리지버킷-생성">스토리지(버킷) 생성</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">jaehoonn@jaehoonn:~$ gsutil mb gs://jaehoonn-cluster-state-store
+Creating gs://jaehoonn-cluster-state-store/...
+jaehoonn@jaehoonn:~$ export KOPS_STATE_STORE<span style="color:#f92672">=</span>gs://jaehoonn-cluster-state-store/
+</code></pre></div><ul>
+<li>kops는 클러스터 구성을 유지하기 위한 상태 저장소로서 &ldquo;Storage&quot;의 &ldquo;Bucket&quot;을 이용한다.
+<ul>
+<li>mb: Make buckets</li>
+</ul>
+</li>
+<li>Bucket의 이름은 필요한 형태로 만들면 된다. (ex, jaehoonn-cluster-state-store)</li>
+</ul>
+<h1 id="클러스터-생성">클러스터 생성</h1>
+<ul>
+<li>Google Cloud에서 사용할 정보</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">jaehoonn@jaehoonn:~$ PROJECT<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>gcloud config get-value project<span style="color:#e6db74">`</span>
+jaehoonn@jaehoonn:~$ export KOPS_FEATURE_FLAGS<span style="color:#f92672">=</span>AlphaAllowGCE <span style="color:#75715e"># to unlock the GCE features</span>
+</code></pre></div><ul>
+<li>Kubernetes 클러스터 생성(상태 저장소)</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">jaehoonn@jaehoonn:~$ kops create cluster --name<span style="color:#f92672">=</span>jaehoonn-cluster.k8s.local --zones<span style="color:#f92672">=</span>us-central1-a --state<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>KOPS_STATE_STORE<span style="color:#e6db74">}</span> --project<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>PROJECT<span style="color:#e6db74">}</span>
+
+ManagedFile/jaehoonn-cluster.k8s.local-addons-dns-controller.addons.k8s.io-k8s-1.6
+        Location                addons/dns-controller.addons.k8s.io/k8s-1.6.yaml
+
+  ManagedFile/jaehoonn-cluster.k8s.local-addons-dns-controller.addons.k8s.io-pre-k8s-1.6
+        Location                addons/dns-controller.addons.k8s.io/pre-k8s-1.6.yaml
+
+  ManagedFile/jaehoonn-cluster.k8s.local-addons-kube-dns.addons.k8s.io-k8s-1.12
+        Location                addons/kube-dns.addons.k8s.io/k8s-1.12.yaml
+
+  ManagedFile/jaehoonn-cluster.k8s.local-addons-kube-dns.addons.k8s.io-k8s-1.6
+        Location                addons/kube-dns.addons.k8s.io/k8s-1.6.yaml
+
+  ManagedFile/jaehoonn-cluster.k8s.local-addons-kube-dns.addons.k8s.io-pre-k8s-1.6
+        Location                addons/kube-dns.addons.k8s.io/pre-k8s-1.6.yaml
+
+  ManagedFile/jaehoonn-cluster.k8s.local-addons-kubelet-api.rbac.addons.k8s.io-k8s-1.9
+        Location                addons/kubelet-api.rbac.addons.k8s.io/k8s-1.9.yaml
+
+  ManagedFile/jaehoonn-cluster.k8s.local-addons-limit-range.addons.k8s.io
+        Location                addons/limit-range.addons.k8s.io/v1.5.0.yaml
+
+  ManagedFile/jaehoonn-cluster.k8s.local-addons-rbac.addons.k8s.io-k8s-1.8
+        Location                addons/rbac.addons.k8s.io/k8s-1.8.yaml
+
+  ManagedFile/jaehoonn-cluster.k8s.local-addons-storage-gce.addons.k8s.io-v1.6.0
+        Location                addons/storage-gce.addons.k8s.io/v1.6.0.yaml
+
+  ManagedFile/jaehoonn-cluster.k8s.local-addons-storage-gce.addons.k8s.io-v1.7.0
+        Location                addons/storage-gce.addons.k8s.io/v1.7.0.yaml
+
+  ManagedFile/etcd-cluster-spec-events
+        Location                backups/etcd/events/control/etcd-cluster-spec
+
+  ManagedFile/etcd-cluster-spec-main
+        Location                backups/etcd/main/control/etcd-cluster-spec
+
+  ManagedFile/manifests-etcdmanager-events
+        Location                manifests/etcd/events.yaml
+
+  ManagedFile/manifests-etcdmanager-main
+        Location                manifests/etcd/main.yaml
+
+  Secret/admin
+
+  Secret/kube
+
+  Secret/kube-proxy
+
+  Secret/kubelet
+
+  Secret/system:controller_manager
+
+  Secret/system:dns
+
+  Secret/system:logging
+
+  Secret/system:monitoring
+
+  Secret/system:scheduler
+
+  StorageBucketAcl/serviceaccount-backup-readwrite-jaehoonn-cluster-state-store
+        Bucket                  jaehoonn-cluster-state-store
+        Entity                  xxxx-000000000000-compute@developer.gserviceaccount.com
+        Role                    WRITER
+
+  TargetPool/api-jaehoonn-cluster-k8s-local
+
+Must specify --yes to apply changes
+
+Cluster configuration has been created.
+
+Suggestions:
+ * list clusters with: kops get cluster
+ * edit this cluster with: kops edit cluster jaehoonn-cluster.k8s.local
+ * edit your node instance group: kops edit ig --name<span style="color:#f92672">=</span>jaehoonn-cluster.k8s.local nodes
+ * edit your master instance group: kops edit ig --name<span style="color:#f92672">=</span>jaehoonn-cluster.k8s.local master-us-central1-a
+
+Finally configure your cluster with: kops update cluster --name jaehoonn-cluster.k8s.local --yes
+
+jaehoonn@jaehoonn:~$
+</code></pre></div><ul>
+<li>Kubernetes 클러스터 생성(VM 인스턴스에 직접 생성)</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">jaehoonn@jaehoonn:~$ kops update cluster --name jaehoonn-cluster.k8s.local --yes
+I1106 05:42:52.576477   <span style="color:#ae81ff">26628</span> apply_cluster.go:559<span style="color:#f92672">]</span> Gossip DNS: skipping DNS validation
+W1106 05:42:52.641383   <span style="color:#ae81ff">26628</span> external_access.go:36<span style="color:#f92672">]</span> TODO: Harmonize gcemodel ExternalAccessModelBuilder with awsmodel
+W1106 05:42:52.641597   <span style="color:#ae81ff">26628</span> firewall.go:35<span style="color:#f92672">]</span> TODO: Harmonize gcemodel with awsmodel <span style="color:#66d9ef">for</span> firewall - GCE model is way too open
+W1106 05:42:52.641685   <span style="color:#ae81ff">26628</span> firewall.go:63<span style="color:#f92672">]</span> Adding overlay network <span style="color:#66d9ef">for</span> X -&gt; node rule - HACK
+W1106 05:42:52.641750   <span style="color:#ae81ff">26628</span> firewall.go:64<span style="color:#f92672">]</span> We should probably use subnets?
+W1106 05:42:52.641824   <span style="color:#ae81ff">26628</span> firewall.go:118<span style="color:#f92672">]</span> Adding overlay network <span style="color:#66d9ef">for</span> X -&gt; master rule - HACK
+W1106 05:42:52.770317   <span style="color:#ae81ff">26628</span> storageacl.go:71<span style="color:#f92672">]</span> we need to split master / node roles
+W1106 05:42:52.770353   <span style="color:#ae81ff">26628</span> storageacl.go:86<span style="color:#f92672">]</span> adding bucket level write ACL to gs://jaehoonn-cluster-state-store to support etcd backup
+W1106 05:42:52.770450   <span style="color:#ae81ff">26628</span> autoscalinggroup.go:108<span style="color:#f92672">]</span> enabling storage-rw <span style="color:#66d9ef">for</span> etcd backups
+I1106 05:42:54.889249   <span style="color:#ae81ff">26628</span> executor.go:103<span style="color:#f92672">]</span> Tasks: <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">done</span> / <span style="color:#ae81ff">66</span> total; <span style="color:#ae81ff">39</span> can run
+I1106 05:42:55.253887   <span style="color:#ae81ff">26628</span> address.go:123<span style="color:#f92672">]</span> GCE creating address: <span style="color:#e6db74">&#34;api-jaehoonn-cluster-k8s-local&#34;</span>
+I1106 05:42:55.387139   <span style="color:#ae81ff">26628</span> vfs_castore.go:729<span style="color:#f92672">]</span> Issuing new certificate: <span style="color:#e6db74">&#34;etcd-peers-ca-events&#34;</span>
+I1106 05:42:55.672462   <span style="color:#ae81ff">26628</span> vfs_castore.go:729<span style="color:#f92672">]</span> Issuing new certificate: <span style="color:#e6db74">&#34;apiserver-aggregator-ca&#34;</span>
+I1106 05:42:55.765508   <span style="color:#ae81ff">26628</span> vfs_castore.go:729<span style="color:#f92672">]</span> Issuing new certificate: <span style="color:#e6db74">&#34;etcd-manager-ca-main&#34;</span>
+I1106 05:42:55.985020   <span style="color:#ae81ff">26628</span> vfs_castore.go:729<span style="color:#f92672">]</span> Issuing new certificate: <span style="color:#e6db74">&#34;etcd-peers-ca-main&#34;</span>
+I1106 05:42:56.327905   <span style="color:#ae81ff">26628</span> vfs_castore.go:729<span style="color:#f92672">]</span> Issuing new certificate: <span style="color:#e6db74">&#34;etcd-clients-ca&#34;</span>
+I1106 05:42:56.593223   <span style="color:#ae81ff">26628</span> vfs_castore.go:729<span style="color:#f92672">]</span> Issuing new certificate: <span style="color:#e6db74">&#34;ca&#34;</span>
+I1106 05:42:56.803652   <span style="color:#ae81ff">26628</span> vfs_castore.go:729<span style="color:#f92672">]</span> Issuing new certificate: <span style="color:#e6db74">&#34;etcd-manager-ca-events&#34;</span>
+I1106 05:43:08.063339   <span style="color:#ae81ff">26628</span> executor.go:103<span style="color:#f92672">]</span> Tasks: <span style="color:#ae81ff">39</span> <span style="color:#66d9ef">done</span> / <span style="color:#ae81ff">66</span> total; <span style="color:#ae81ff">25</span> can run
+I1106 05:43:08.238400   <span style="color:#ae81ff">26628</span> instancetemplate.go:214<span style="color:#f92672">]</span> We should be using NVME <span style="color:#66d9ef">for</span> GCE
+I1106 05:43:08.240753   <span style="color:#ae81ff">26628</span> instancetemplate.go:214<span style="color:#f92672">]</span> We should be using NVME <span style="color:#66d9ef">for</span> GCE
+I1106 05:43:08.248537   <span style="color:#ae81ff">26628</span> instancetemplate.go:214<span style="color:#f92672">]</span> We should be using NVME <span style="color:#66d9ef">for</span> GCE
+I1106 05:43:08.249786   <span style="color:#ae81ff">26628</span> instancetemplate.go:214<span style="color:#f92672">]</span> We should be using NVME <span style="color:#66d9ef">for</span> GCE
+I1106 05:43:10.777593   <span style="color:#ae81ff">26628</span> vfs_castore.go:729<span style="color:#f92672">]</span> Issuing new certificate: <span style="color:#e6db74">&#34;kube-controller-manager&#34;</span>
+I1106 05:43:11.412793   <span style="color:#ae81ff">26628</span> vfs_castore.go:729<span style="color:#f92672">]</span> Issuing new certificate: <span style="color:#e6db74">&#34;kube-scheduler&#34;</span>
+I1106 05:43:11.665669   <span style="color:#ae81ff">26628</span> vfs_castore.go:729<span style="color:#f92672">]</span> Issuing new certificate: <span style="color:#e6db74">&#34;apiserver-proxy-client&#34;</span>
+I1106 05:43:11.698639   <span style="color:#ae81ff">26628</span> vfs_castore.go:729<span style="color:#f92672">]</span> Issuing new certificate: <span style="color:#e6db74">&#34;apiserver-aggregator&#34;</span>
+I1106 05:43:12.071948   <span style="color:#ae81ff">26628</span> vfs_castore.go:729<span style="color:#f92672">]</span> Issuing new certificate: <span style="color:#e6db74">&#34;kubelet-api&#34;</span>
+I1106 05:43:12.189613   <span style="color:#ae81ff">26628</span> vfs_castore.go:729<span style="color:#f92672">]</span> Issuing new certificate: <span style="color:#e6db74">&#34;kubelet&#34;</span>
+I1106 05:43:12.465094   <span style="color:#ae81ff">26628</span> vfs_castore.go:729<span style="color:#f92672">]</span> Issuing new certificate: <span style="color:#e6db74">&#34;kops&#34;</span>
+I1106 05:43:12.539693   <span style="color:#ae81ff">26628</span> vfs_castore.go:729<span style="color:#f92672">]</span> Issuing new certificate: <span style="color:#e6db74">&#34;master&#34;</span>
+I1106 05:43:12.633503   <span style="color:#ae81ff">26628</span> vfs_castore.go:729<span style="color:#f92672">]</span> Issuing new certificate: <span style="color:#e6db74">&#34;kube-proxy&#34;</span>
+I1106 05:43:12.812512   <span style="color:#ae81ff">26628</span> vfs_castore.go:729<span style="color:#f92672">]</span> Issuing new certificate: <span style="color:#e6db74">&#34;kubecfg&#34;</span>
+I1106 05:43:21.263578   <span style="color:#ae81ff">26628</span> executor.go:103<span style="color:#f92672">]</span> Tasks: <span style="color:#ae81ff">64</span> <span style="color:#66d9ef">done</span> / <span style="color:#ae81ff">66</span> total; <span style="color:#ae81ff">2</span> can run
+I1106 05:43:32.802331   <span style="color:#ae81ff">26628</span> executor.go:103<span style="color:#f92672">]</span> Tasks: <span style="color:#ae81ff">66</span> <span style="color:#66d9ef">done</span> / <span style="color:#ae81ff">66</span> total; <span style="color:#ae81ff">0</span> can run
+I1106 05:43:33.070437   <span style="color:#ae81ff">26628</span> update_cluster.go:294<span style="color:#f92672">]</span> Exporting kubecfg <span style="color:#66d9ef">for</span> cluster
+kops has set your kubectl context to jaehoonn-cluster.k8s.local
+
+Cluster is starting.  It should be ready in a few minutes.
+
+Suggestions:
+ * validate cluster: kops validate cluster
+ * list nodes: kubectl get nodes --show-labels
+ * ssh to the master: ssh -i ~/.ssh/id_rsa admin@api.jaehoonn-cluster.k8s.local
+ * the admin user is specific to Debian. If not using Debian please use the appropriate user based on your OS.
+ * read about installing addons at: https://github.com/kubernetes/kops/blob/master/docs/addons.md.
+
+jaehoonn@jaehoonn:~$
+</code></pre></div><ul>
+<li>클러스터 상태 확인(클러스터 생성 완료되고 5~10분뒤에 확인)</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">jaehoonn@jaehoonn:~$ kops validate cluster
+Using cluster from kubectl context: jaehoonn-cluster.k8s.local
+
+Validating cluster jaehoonn-cluster.k8s.local
+
+I1106 05:50:12.213436   <span style="color:#ae81ff">26733</span> gce_cloud.go:273<span style="color:#f92672">]</span> Scanning zones: <span style="color:#f92672">[</span>us-central1-c us-central1-a us-central1-f us-central1-b<span style="color:#f92672">]</span>
+INSTANCE GROUPS
+NAME                    ROLE    MACHINETYPE     MIN     MAX     SUBNETS
+master-us-central1-a    Master  n1-standard-1   <span style="color:#ae81ff">1</span>       <span style="color:#ae81ff">1</span>       us-central1
+nodes                   Node    n1-standard-2   <span style="color:#ae81ff">2</span>       <span style="color:#ae81ff">2</span>       us-central1
+
+NODE STATUS
+NAME                            ROLE    READY
+master-us-central1-a-dg9q       master  True
+nodes-2f58                      node    True
+nodes-9t48                      node    True
+
+Your cluster jaehoonn-cluster.k8s.local is ready
+jaehoonn@jaehoonn:~$
+</code></pre></div><ul>
+<li>kubectl 동작 확인</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">jaehoonn@jaehoonn:~$ kubectl get pods --all-namespaces
+NAMESPACE     NAME                                                READY   STATUS    RESTARTS   AGE
+kube-system   dns-controller-7f9457558d-fmnpk                     1/1     Running   <span style="color:#ae81ff">0</span>          4m53s
+kube-system   etcd-manager-events-master-us-central1-a-dg9q       1/1     Running   <span style="color:#ae81ff">0</span>          3m26s
+kube-system   etcd-manager-main-master-us-central1-a-dg9q         1/1     Running   <span style="color:#ae81ff">0</span>          4m4s
+kube-system   kube-apiserver-master-us-central1-a-dg9q            1/1     Running   <span style="color:#ae81ff">1</span>          4m27s
+kube-system   kube-controller-manager-master-us-central1-a-dg9q   1/1     Running   <span style="color:#ae81ff">0</span>          4m29s
+kube-system   kube-dns-66d58c65d5-6nllr                           3/3     Running   <span style="color:#ae81ff">0</span>          4m53s
+kube-system   kube-dns-66d58c65d5-6qk7c                           3/3     Running   <span style="color:#ae81ff">0</span>          3m55s
+kube-system   kube-dns-autoscaler-6567f59ccb-xzp98                1/1     Running   <span style="color:#ae81ff">0</span>          4m51s
+kube-system   kube-proxy-master-us-central1-a-dg9q                1/1     Running   <span style="color:#ae81ff">0</span>          4m6s
+kube-system   kube-proxy-nodes-2f58                               1/1     Running   <span style="color:#ae81ff">0</span>          3m41s
+kube-system   kube-proxy-nodes-9t48                               1/1     Running   <span style="color:#ae81ff">0</span>          3m25s
+kube-system   kube-scheduler-master-us-central1-a-dg9q            1/1     Running   <span style="color:#ae81ff">0</span>          4m33s
+jaehoonn@jaehoonn:~$
+</code></pre></div>
 					</div>
 				</article>
         
@@ -110,6 +933,35 @@
 		<center class="">
 			<ul class="pagination">
         
+<ul class="pagination">
+  <li class="page-item">
+    <a href="/post/" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
+  </li>
+  <li class="page-item disabled">
+    <a  class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+  </li>
+  <li class="page-item active">
+    <a class="page-link" href="/post/">1</a>
+  </li>
+  <li class="page-item">
+    <a class="page-link" href="/post/page/2/">2</a>
+  </li>
+  <li class="page-item">
+    <a class="page-link" href="/post/page/3/">3</a>
+  </li>
+  <li class="page-item disabled">
+    <span aria-hidden="true">&nbsp;&hellip;&nbsp;</span>
+  </li>
+  <li class="page-item">
+    <a class="page-link" href="/post/page/6/">6</a>
+  </li>
+  <li class="page-item">
+    <a href="/post/page/2/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+  </li>
+  <li class="page-item">
+    <a href="/post/page/6/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+  </li>
+</ul>
 
 
 			</ul>
@@ -128,7 +980,7 @@
 				<h3 class="widget-title">Contact</h3>
 				<div class="widget-body">
 					<p>
-					<a href="mailto:info@shrinklabs.com">info@shrinklabs.com</a><br>
+					
 					<br>
 					
 					</p>
@@ -143,23 +995,23 @@
 					<p class="follow-me-icons">
             
 							
-								<a href="https://www.facebook.com/shrinklabs" target="_blank"><i class="fab fa-facebook-square fa-1x"></i></a>
+								<a href="https://www.facebook.com/jaehoon" target="_blank"><i class="fab fa-facebook-square fa-1x"></i></a>
 							
             
 							
-								<a href="https://twitter.com/shrinklabs" target="_blank"><i class="fab fa-twitter-square fa-1x"></i></a>
+								<a href="https://twitter.com/jaehoonn_" target="_blank"><i class="fab fa-twitter-square fa-1x"></i></a>
 							
             
 							
-								<a href="https://www.instagram.com/shrinklabs" target="_blank"><i class="fab fa-instagram fa-1x"></i></a>
+								<a href="https://www.linkedin.com/in/jaehoonn" target="_blank"><i class="fab fa-linkedin fa-1x"></i></a>
 							
             
 							
-            
-							
-								<a href="https://github.com/shrinklabs" target="_blank"><i class="fab fa-github fa-1x"></i></a>
+								<a href="https://github.com/jaehoonn" target="_blank"><i class="fab fa-github fa-1x"></i></a>
 							
             
+							
+								<a href="mailto:jaehoon@shrinklabs.com" target="_blank"><i class="fas fa-envelope-square fa-1x"></i></a>
 							
             
 					</p>

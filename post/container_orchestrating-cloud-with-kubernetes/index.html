@@ -6,7 +6,7 @@
   	<meta name="description" content="">
   	<meta name="author"      content="map[]">
     
-    	<title>Hello</title>
+    	<title>3.Orchestrating the Cloud With Kubernetes</title>
 	<link rel="shortcut icon" href="https://shrinklabs.com/images/favicon.ico">
 
 	
@@ -36,7 +36,7 @@
       <img class='img-circle' src="https://shrinklabs.com/images/logo.png" alt="">
       <span class="title"></span>
       <span class="tagline"><br>
-        <a href="mailto:info@shrinklabs.com">info@shrinklabs.com</a>
+        <a href="mailto:"></a>
       </span>
    </h1>
 </div>
@@ -69,6 +69,12 @@
                 </li>
                 
             
+                
+                <li>
+                    <a href="/about/">About</a>
+                </li>
+                
+            
             </ul>
 
         </div> 
@@ -91,13 +97,23 @@
 					<header class="entry-header">
  						<div class="entry-meta">
                <span class="posted-on">
-                  <time class="entry-date published" datetime="February 15, 2021">February 15, 2021</time>
+                  <time class="entry-date published" datetime="January 9, 2019">January 9, 2019</time>
                </span>
  						</div>
- 						<h1 class="entry-title"><a href="https://shrinklabs.com/post/hello/" rel="bookmark">Hello</a></h1>
+ 						<h1 class="entry-title"><a href="https://shrinklabs.com/post/container_orchestrating-cloud-with-kubernetes/" rel="bookmark">3.Orchestrating the Cloud With Kubernetes</a></h1>
 					</header>
 					<div class="entry-content">
-						<p>Hello</p>
+						<p>이번 장은 우선 &ldquo;nginx&quot;와 &ldquo;monolith&quot;라는 단어에 현혹되지 않도록 주의를 해야 할 것 같다.</p>
+<p>최초에 nginx가 실행되는 Pod는 그거대로 Kubnernetes 작동에 대한 내용이고, Pod에 대한 내용에서 언급되는 nginx와 monolith는 또 그것대로의 내용을 설명한다.</p>
+<p>그리고 다음에 나오는 port-forward에 대한 내용은 또 완전히 별개의 내용이다.</p>
+<p>port-forward는 &ldquo;Service&quot;로 노출하지 않는 Pod에 대해서 테스트등을 해보기 위해서 아주 유용한 도구인 것 같다.</p>
+<p>port-forward로 &ldquo;monolith&rdquo; Pod의 80 포트를 10080을 지정하면 local의 10080 포트를 사용하고 있는것 처럼 이용이 가능하다.</p>
+<p>&ldquo;Service&quot;는 Pod가 수시로 죽고 살아나는 과정 중에서 외부에 노출될 수 있는 일정한 IP를 제공하기 위한 목적이다.</p>
+<p>&ldquo;Service&quot;는 &ldquo;selector&quot;를 이용해서 Pod에 지정된 &ldquo;label&rdquo; 별로 Pod들을 선택할 수 있다. 그리고 &ldquo;Service&quot;의 형태로는 &ldquo;ClusterIP&rdquo;, &ldquo;NodePort&rdquo;, &ldquo;LoadBalancer&quot;가 있다.</p>
+<p>&ldquo;secure-monolith&rdquo; Pod를 생성하는 과정중에 &ldquo;secret&quot;와 &ldquo;configmap&quot;을 생성하는게 나오는데 아직은 크게 신경쓰지 않아도 될 것 같다.</p>
+<p>둘 다 비슷한 성격을 갖는데, &ldquo;secret&quot;는 패스워드 처럼 민감 데이터를 다루는 성격이고, &ldquo;configmap&quot;은 환경 설정과 같은 성격의 정보를 다룬다. 특성 또는 상태를 갖는 정보를 포함하지 않고 Pod가 관리될 수 있도록 해준다.</p>
+<p>&ldquo;Deployment&quot;는 &ldquo;replicas&rdquo; 항목에 지정된 만큼의 Pod를 관리하기 위한 용도이다.</p>
+<p>앞부분에서 약간의 착각을 할 수 있는 부분이 있기는 했었지만 전체적으로 간단하게라도 kubernetes를 이용한 관리방법에 대해서 이해를 할 수 있는 장 이었던것 같다.</p>
 
 					</div>
 				</article>
@@ -139,7 +155,7 @@
 				<h3 class="widget-title">Contact</h3>
 				<div class="widget-body">
 					<p>
-					<a href="mailto:info@shrinklabs.com">info@shrinklabs.com</a><br>
+					
 					<br>
 					
 					</p>
@@ -154,23 +170,23 @@
 					<p class="follow-me-icons">
             
 							
-								<a href="https://www.facebook.com/shrinklabs" target="_blank"><i class="fab fa-facebook-square fa-1x"></i></a>
+								<a href="https://www.facebook.com/jaehoon" target="_blank"><i class="fab fa-facebook-square fa-1x"></i></a>
 							
             
 							
-								<a href="https://twitter.com/shrinklabs" target="_blank"><i class="fab fa-twitter-square fa-1x"></i></a>
+								<a href="https://twitter.com/jaehoonn_" target="_blank"><i class="fab fa-twitter-square fa-1x"></i></a>
 							
             
 							
-								<a href="https://www.instagram.com/shrinklabs" target="_blank"><i class="fab fa-instagram fa-1x"></i></a>
+								<a href="https://www.linkedin.com/in/jaehoonn" target="_blank"><i class="fab fa-linkedin fa-1x"></i></a>
 							
             
 							
-            
-							
-								<a href="https://github.com/shrinklabs" target="_blank"><i class="fab fa-github fa-1x"></i></a>
+								<a href="https://github.com/jaehoonn" target="_blank"><i class="fab fa-github fa-1x"></i></a>
 							
             
+							
+								<a href="mailto:jaehoon@shrinklabs.com" target="_blank"><i class="fas fa-envelope-square fa-1x"></i></a>
 							
             
 					</p>
