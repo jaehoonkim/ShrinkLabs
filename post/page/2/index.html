@@ -137,23 +137,23 @@ $ sudo systemctl restart docker
 						</h1>
 					</header>
 					<div class="entry-content">
-						<p>이번 과정에서는 &ldquo;Ingress&quot;에 대해서 알아 볼 수 있었다.</p>
-<p>&ldquo;Ingress&quot;는 resource와 controller로 구성되어 있다.</p>
+						<p>이번 과정에서는 &ldquo;Ingress&quot;에 대해서 알아 볼 수 있었습니다.</p>
+<p>&ldquo;Ingress&quot;는 resource와 controller로 구성되어 있습니다.</p>
 <p>resource는 &ldquo;Ingress&quot;의 동작에 대한 규칙을 정해 놓은 yaml이며,</p>
-<p>controller는 layer7에 해당하는 로드밸런서의 역할을 제공한다. 즉 http 요청에 대한 처리와 부하 분산을 제공한다.</p>
-<p>controller로는 gce, nginx, envoy, haproxy, istio, kong, traefik 을 이용할 수 있다.</p>
-<p>과정에서는 &ldquo;hello-app&rdquo; 이라는 &ldquo;Service&quot;를 노출한다. 그리고 helm을 이용해서 nginx-ingress를 kubernetes cluster에 설치한다.</p>
-<p>kind가 &ldquo;Ingress&quot;인 yaml 파일을 만든다. 이때 &ldquo;path: /hello&quot;로 지정하며, backend를 &ldquo;serviceName: hello-app&quot;과 &ldquo;servicePort: 8080&rdquo; 으로 지정을 한다.</p>
-<p>이렇게 해서 &ldquo;nginx-ingress-controller&quot;가 제공하는 &ldquo;EXTERNAL-IP&quot;에 &ldquo;/hello&quot;로 웹브라우저에서 연결을 해보면 서비스가 제공되는 것을 확인해 볼 수 있다.</p>
-<p>&ldquo;Ingress&quot;를 통해서 로드밸런서를 제공하기 위해서는 &ldquo;Service&rdquo; 생성 과정에서 type의 지정이 필요하다.</p>
-<p>&ldquo;Pod&quot;는 죽고 사는 과정이 계속해서 반복되고 ip가 계속해서 변동된다.</p>
-<p>이러한 &ldquo;Pod&quot;를 선택적으로 동일한 ip로 접근하기 위해서 &ldquo;Service&quot;를 사용한다.</p>
-<p>이 &ldquo;Service&quot;들이 제공하는 타입에 따라서 서비스가 제공되는 형태가 변경이 된다.</p>
-<p>clusterip는 클러스터 내부에서만 접근 가능한 형태의 service 이다.</p>
-<p>그리고 nodeport는 &ldquo;node이름:port&quot;로 외부에서도 접근이 가능하도록 서비스를 제공하는 형태이다.</p>
-<p>loadbalancer는 클라우드 서비스를 제공하는 벤더들에서 제공하는 로드밸런서를 사용한다.</p>
-<p>마지막으로 externalname은 외부의 서비스를 클러스터 내부에서 사용하고자 할 때 사용하는 형태이다.</p>
-<p>이와 같이 클라우드 서비스 벤더에서 제공하는 로드밸런서를 사용할때는 &ldquo;Service&quot;의 타입을 loadbalancer로 지정하고, &ldquo;Ingress&quot;를 통해서 제공하는 로드밸런서를 사용할때는 nodeport를 사용해서 &ldquo;Service&quot;를 생성한다.</p>
+<p>controller는 layer7에 해당하는 로드밸런서의 역할을 제공합니다. 즉 http 요청에 대한 처리와 부하 분산을 제공합니다.</p>
+<p>controller로는 gce, nginx, envoy, haproxy, istio, kong, traefik 을 이용할 수 있습니다.</p>
+<p>과정에서는 &ldquo;hello-app&rdquo; 이라는 &ldquo;Service&quot;를 노출합니다. 그리고 helm을 이용해서 nginx-ingress를 kubernetes cluster에 설치합니다.</p>
+<p>kind가 &ldquo;Ingress&quot;인 yaml 파일을 만듭니다. 이때 &ldquo;path: /hello&quot;로 지정하며, backend를 &ldquo;serviceName: hello-app&quot;과 &ldquo;servicePort: 8080&rdquo; 으로 지정을 합니다.</p>
+<p>이렇게 해서 &ldquo;nginx-ingress-controller&quot;가 제공하는 &ldquo;EXTERNAL-IP&quot;에 &ldquo;/hello&quot;로 웹브라우저에서 연결을 해보면 서비스가 제공되는 것을 확인해 볼 수 있습니다.</p>
+<p>&ldquo;Ingress&quot;를 통해서 로드밸런서를 제공하기 위해서는 &ldquo;Service&rdquo; 생성 과정에서 type의 지정이 필요합니다.</p>
+<p>&ldquo;Pod&quot;는 죽고 사는 과정이 계속해서 반복되고 ip가 계속해서 변동됩니다.</p>
+<p>이러한 &ldquo;Pod&quot;를 선택적으로 동일한 ip로 접근하기 위해서 &ldquo;Service&quot;를 사용합니다.</p>
+<p>이 &ldquo;Service&quot;들이 제공하는 타입에 따라서 서비스가 제공되는 형태가 변경이 됩니다.</p>
+<p>clusterip는 클러스터 내부에서만 접근 가능한 형태의 service 입니다.</p>
+<p>그리고 nodeport는 &ldquo;node이름:port&quot;로 외부에서도 접근이 가능하도록 서비스를 제공하는 형태입니다.</p>
+<p>loadbalancer는 클라우드 서비스를 제공하는 벤더들에서 제공하는 로드밸런서를 사용합니다.</p>
+<p>마지막으로 externalname은 외부의 서비스를 클러스터 내부에서 사용하고자 할 때 사용하는 형태입니다.</p>
+<p>이와 같이 클라우드 서비스 벤더에서 제공하는 로드밸런서를 사용할때는 &ldquo;Service&quot;의 타입을 loadbalancer로 지정하고, &ldquo;Ingress&quot;를 통해서 제공하는 로드밸런서를 사용할때는 nodeport를 사용해서 &ldquo;Service&quot;를 생성합니다.</p>
 
 					</div>
 				</article>
@@ -215,9 +215,9 @@ $ kubectl -n kube-system delete serviceaccount tiller
 						</h1>
 					</header>
 					<div class="entry-content">
-						<p>이번 과정의 실습을 진행하면서 클러스터에 대한 접근을 제한 할 수 있도록 하기 위한 방법에 대해서 알 수 있었다. 하지만 전체 내용에 대해서 정확하게 이해를 하지 못했다.</p>
-<p>해당 내용은 이후에 비공개 클러스터 설정(<a href="https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters">https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters</a>) 에 대한 내용이 실습 내용과 동일하므로 추후에 이해가 가능한 시점이 되면 다시 한번 시도해 보려고 한다.</p>
-<p>아래는 내용을 이해하기 위해서 학습했던 내용들의 링크이다.</p>
+						<p>이번 과정의 실습을 진행하면서 클러스터에 대한 접근을 제한 할 수 있도록 하기 위한 방법에 대해서 알 수 있었습니다. 하지만 전체 내용에 대해서 정확하게 이해를 하지 못했습니다.</p>
+<p>해당 내용은 이후에 비공개 클러스터 설정(<a href="https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters">https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters</a>) 에 대한 내용이 실습 내용과 동일하므로 추후에 이해가 가능한 시점이 되면 다시 한번 시도해 보려고 합니다.</p>
+<p>아래는 내용을 이해하기 위해서 학습했던 내용들의 링크입니다.</p>
 <ul>
 <li>
 <p>네트워크 입문: <a href="http://kujung.tistory.com/category/%EB%98%A5%20%EC%8B%B8%EA%B8%B0/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC">http://kujung.tistory.com/category/%EB%98%A5%20%EC%8B%B8%EA%B8%B0/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC</a></p>
@@ -232,7 +232,7 @@ $ kubectl -n kube-system delete serviceaccount tiller
 <p>서브넷 마스크와 서브넷팅 계산법: <a href="http://korean-daeddo.blogspot.com/2016/01/blog-post_26.html">http://korean-daeddo.blogspot.com/2016/01/blog-post_26.html</a></p>
 </li>
 </ul>
-<p>그리고 구글 클라우드 플랫폼 서비스에서 제공하는 GKE 관련 문서(<a href="https://cloud.google.com/kubernetes-engine/docs/">https://cloud.google.com/kubernetes-engine/docs/</a>) 들 중에서 함께 보면 도움이 되는 부분들이다.</p>
+<p>그리고 구글 클라우드 플랫폼 서비스에서 제공하는 GKE 관련 문서(<a href="https://cloud.google.com/kubernetes-engine/docs/">https://cloud.google.com/kubernetes-engine/docs/</a>) 들 중에서 함께 보면 도움이 되는 부분들입니다.</p>
 <ul>
 <li>
 <p>별칭 IP를 사용하여 VPC 네이티브 클러스터 만들기: <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/alias-ips?hl=ko">https://cloud.google.com/kubernetes-engine/docs/how-to/alias-ips?hl=ko</a></p>
@@ -241,7 +241,7 @@ $ kubectl -n kube-system delete serviceaccount tiller
 <p>네트워크 개요: <a href="https://cloud.google.com/kubernetes-engine/docs/concepts/network-overview?hl=ko">https://cloud.google.com/kubernetes-engine/docs/concepts/network-overview?hl=ko</a></p>
 </li>
 </ul>
-<p>그 외에도 &ldquo;CIDR&rdquo; 에 대해서 학습을 할 수 있었다.</p>
+<p>그 외에도 &ldquo;CIDR&rdquo; 에 대해서 학습을 할 수 있었습니다.</p>
 
 					</div>
 				</article>
@@ -287,17 +287,17 @@ $ kubectl -n kube-system delete serviceaccount tiller
 						</h1>
 					</header>
 					<div class="entry-content">
-						<p>지금까지의 과정 중에서 가장 어려웠다.;;; 그리고 제대로 이해를 한건지도 잘 모르겠다.</p>
-<p>일단을 이해했다고 생각되는 정도만 정리를 해봤다.</p>
-<p>이번 과정은 StatefulSet에 대한 이해를 목표로 하고 있다.</p>
-<p>StatefulSet에 대한 이해를 위해서는 Headless Service에 대한 이해와 StorageClass에 대한 이해가 필요했다.</p>
-<p>StorageClass는 상태를 갖는걸 확인하기 위한 실습이 필요하다보니, Volume을 사용해야 하고 StatefulSet의 scale을 조정하게 되는 것에 따라서 Volume도 같이 조정이 되어야 해서 StorageClass 컨트롤러를 통해서 Volume을 동적으로 조정할 수 있도록 하려고 사용 된 것 같다.</p>
-<p>(StorageClass는 다음에 기회가 되면 다시 좀 알아 봐야 할 것 같다.)</p>
-<p>StatefulSet의 목적은 기존에 Deployment에서 상태가 없는 Pod들을 관리하기 위한 목적이 포함되어 있었다고 하면, 이 컨트롤러는 상태를 갖는 Pod를 관리하기 위한 목적이라고 이해를 했다. 데이터라는 상태를 갖는 mongodb를 실습에서 사용을 한 것 같다.</p>
-<p>그리고 Deployment같은 컨트롤러의 경우에 Service 컨트롤러를 통해서 노출을 시켜줄 수 있었던 것 처럼 StatefulSet도 Service 컨트롤러를 이용해서 노출을 한다. 여기에서 StatefulSet은 Headless Service라고 불리는 설정으로 노출이 되게 된다. Service를 정의하고 있는 yaml파일을 보시면 “clusterIP: None”으로 지정이 되어 있는걸 볼 수 있다. 이는 로드밸런서의 영향을 받지 않는 서비스를 정의할 때 사용한다고 한다.</p>
-<p>StatefulSet 컨트롤러를 통해서 관리되는 Pod는 생성되는 순서도 중요하기 때문에 Pod를 조회해보면 이름이 mongo-0, mongo-1&hellip; 과 같이 순서를 확인할 수 있는 숫자가 붙어 있다.</p>
-<p>생성되는 순서도 0부터 차례대로 생성이 되고 scale을 통해서 replicas를 조정하면 차례대로 늘어나고 역순으로 줄어드는걸 확인 할 수 있었다.</p>
-<p>Volume에 대한 이해가 없이 StatefuleSet을 바로 이해를 하려고 한다는게 무리가 있어 보인다. 그래서 이후에 꼭 Volume에 대한 이해를 해보는 기회를 갖어야 할 것 같다.</p>
+						<p>지금까지의 과정 중에서 가장 어려웠습니다.;;; 그리고 제대로 이해를 한건지도 잘 모르겠습니다.</p>
+<p>일단을 이해했다고 생각되는 정도만 정리를 해봤습니다.</p>
+<p>이번 과정은 StatefulSet에 대한 이해를 목표로 하고 있습니다.</p>
+<p>StatefulSet에 대한 이해를 위해서는 Headless Service에 대한 이해와 StorageClass에 대한 이해가 필요했습니다.</p>
+<p>StorageClass는 상태를 갖는걸 확인하기 위한 실습이 필요하다보니, Volume을 사용해야 하고 StatefulSet의 scale을 조정하게 되는 것에 따라서 Volume도 같이 조정이 되어야 해서 StorageClass 컨트롤러를 통해서 Volume을 동적으로 조정할 수 있도록 하려고 사용 된 것 같습니다.</p>
+<p>(StorageClass는 다음에 기회가 되면 다시 좀 알아 봐야 할 것 같습니다.)</p>
+<p>StatefulSet의 목적은 기존에 Deployment에서 상태가 없는 Pod들을 관리하기 위한 목적이 포함되어 있었다고 하면, 이 컨트롤러는 상태를 갖는 Pod를 관리하기 위한 목적이라고 이해를 했습니다. 데이터라는 상태를 갖는 mongodb를 실습에서 사용을 한 것 같습니다.</p>
+<p>그리고 Deployment같은 컨트롤러의 경우에 Service 컨트롤러를 통해서 노출을 시켜줄 수 있었던 것 처럼 StatefulSet도 Service 컨트롤러를 이용해서 노출을 합니다. 여기에서 StatefulSet은 Headless Service라고 불리는 설정으로 노출이 되게 됩니다. Service를 정의하고 있는 yaml파일을 보시면 “clusterIP: None”으로 지정이 되어 있는걸 볼 수 있습니다. 이는 로드밸런서의 영향을 받지 않는 서비스를 정의할 때 사용한다고 합니다.</p>
+<p>StatefulSet 컨트롤러를 통해서 관리되는 Pod는 생성되는 순서도 중요하기 때문에 Pod를 조회해보면 이름이 mongo-0, mongo-1&hellip; 과 같이 순서를 확인할 수 있는 숫자가 붙어 있습니다.</p>
+<p>생성되는 순서도 0부터 차례대로 생성이 되고 scale을 통해서 replicas를 조정하면 차례대로 늘어나고 역순으로 줄어드는걸 확인 할 수 있었습니다.</p>
+<p>Volume에 대한 이해가 없이 StatefuleSet을 바로 이해를 하려고 한다는게 무리가 있어 보입니다. 그래서 이후에 꼭 Volume에 대한 이해를 해보는 기회를 갖어야 할 것 같습니다.</p>
 
 					</div>
 				</article>
@@ -344,23 +344,23 @@ $ kubectl -n kube-system delete serviceaccount tiller
 						</h1>
 					</header>
 					<div class="entry-content">
-						<p>이번 장에서는 &ldquo;Deployment&quot;가 어떤 역할을 할 수 있으며, 이를 이용해서 취할 수 있는 배포 전략에 대해서 알아볼 수 있었다.</p>
-<p>(이번 장에서 실습을 위해서는 필수적으로 compute/zone 설정을 us-central1-a로 지정해 놓아야 cluster 생성을 정상적으로 할 수 있다.)</p>
-<p>Deployment 뿐만이 아니라 다른 객체들을 사용하기 위해서도 yaml을 작성할때 각 필드에 대한 정보를 어디에서 확인해야 하는지가 궁금했다.</p>
+						<p>이번 장에서는 &ldquo;Deployment&quot;가 어떤 역할을 할 수 있으며, 이를 이용해서 취할 수 있는 배포 전략에 대해서 알아볼 수 있었습니다.</p>
+<p>(이번 장에서 실습을 위해서는 필수적으로 compute/zone 설정을 us-central1-a로 지정해 놓아야 cluster 생성을 정상적으로 할 수 있습니다.)</p>
+<p>Deployment 뿐만이 아니라 다른 객체들을 사용하기 위해서도 yaml을 작성할때 각 필드에 대한 정보를 어디에서 확인해야 하는지가 궁금했습니다.</p>
 <pre><code>$ kubectl explain deployment
 
 $ kubectl explain --recursive
 
 $ kubectl explain deployment.metadata.name
-</code></pre><p>등과 같이 확인을 할 수 있다.</p>
-<p>Deployment는 ReplicaSet으로 Pod를 관리할 수 있도록 한다. 그래서 &ldquo;replicas&quot;를 조정해서 서비스를 확장하거나 축소할 수 있다.</p>
-<p>Deployment가 수정되면 Rolling 업데이트 방식으로 기존의 Pod가 줄어들면서 새로운 Deployment가 적용된 Pod가 늘어나는 방식으로 교체가 된다.</p>
-<p>ReplicaSet을 조회해보고  rollout의 history를 조회해서 업데이트의 상태를 확인해 볼 수 있었다. 이렇게 Deployment가 적용되는 방식에 대해서는 &ldquo;rollout&quot;의 pause, status, resume, undo 등으로 상태등을 조정할 수 도 있었다.</p>
-<p>배포를 관리하는 방식으로 Canary, Blue-Green 과 같은 방식들이 있다.</p>
-<p>처음에 Canary 배포에 대한 부분은 실습을 하다만 느낌이 들었는데, 그런 느낌은 Canary 배포의 목적에 대해서 알지 못 해서 그랬던것 같다.</p>
-<p>실제 배포를 하기 전에 서비스의 실사용 환경에서 제한된 사용자를 선택해서 테스트 해보기 위한 정도라고 생각을 하고 실습을 다시 해보니 괜찮은 방법 같아 보였다. 실 서비스로 사용되어지는 Deployment와 배포되기 전에 확인을 위해서 사용되어질 Deployment(Canary)를 구분 지었을때, 문제가 발생하거나 하면 Deployment(Canary)만 조정을 하면 되니 신속한 관리가 가능할것 같았다.</p>
-<p>Blue-Green 전략은 두 개의 Deployment(Blue/Green)를 적용해 놓고 Service를 원하는 Deployment에 적용시켜 놓는 방식으로 클러스터의 자원을 충분히 확보할 수 있을때 사용하면 좋은 전략인것 같다.</p>
-<p>배포를 위한 전략들을 하나씩 실습해보면서 Deployment, Service 등의 각 객체의 특성을 잘 파악하고 있어야만, 어떻게 배치 할 수 있는지 그리고 어떤 식으로 운영할지에 대해서 계획 세울수 있겠다 싶었다.</p>
+</code></pre><p>등과 같이 확인을 할 수 있습니다.</p>
+<p>Deployment는 ReplicaSet으로 Pod를 관리할 수 있도록 합니다. 그래서 &ldquo;replicas&quot;를 조정해서 서비스를 확장하거나 축소할 수 있습니다.</p>
+<p>Deployment가 수정되면 Rolling 업데이트 방식으로 기존의 Pod가 줄어들면서 새로운 Deployment가 적용된 Pod가 늘어나는 방식으로 교체가 됩니다.</p>
+<p>ReplicaSet을 조회해보고  rollout의 history를 조회해서 업데이트의 상태를 확인해 볼 수 있었습니다. 이렇게 Deployment가 적용되는 방식에 대해서는 &ldquo;rollout&quot;의 pause, status, resume, undo 등으로 상태등을 조정할 수 도 있었습니다.</p>
+<p>배포를 관리하는 방식으로 Canary, Blue-Green 과 같은 방식들이 있습니다.</p>
+<p>처음에 Canary 배포에 대한 부분은 실습을 하다만 느낌이 들었는데, 그런 느낌은 Canary 배포의 목적에 대해서 알지 못 해서 그랬던것 같습니다.</p>
+<p>실제 배포를 하기 전에 서비스의 실사용 환경에서 제한된 사용자를 선택해서 테스트 해보기 위한 정도라고 생각을 하고 실습을 다시 해보니 괜찮은 방법 같아 보였습니다. 실 서비스로 사용되어지는 Deployment와 배포되기 전에 확인을 위해서 사용되어질 Deployment(Canary)를 구분 지었을때, 문제가 발생하거나 하면 Deployment(Canary)만 조정을 하면 되니 신속한 관리가 가능할것 같았습니다.</p>
+<p>Blue-Green 전략은 두 개의 Deployment(Blue/Green)를 적용해 놓고 Service를 원하는 Deployment에 적용시켜 놓는 방식으로 클러스터의 자원을 충분히 확보할 수 있을때 사용하면 좋은 전략인것 같습니다.</p>
+<p>배포를 위한 전략들을 하나씩 실습해보면서 Deployment, Service 등의 각 객체의 특성을 잘 파악하고 있어야만, 어떻게 배치 할 수 있는지 그리고 어떤 식으로 운영할지에 대해서 계획 세울수 있겠다 싶었습니다.</p>
 
 					</div>
 				</article>
@@ -377,17 +377,17 @@ $ kubectl explain deployment.metadata.name
 						</h1>
 					</header>
 					<div class="entry-content">
-						<p>이번 장은 우선 &ldquo;nginx&quot;와 &ldquo;monolith&quot;라는 단어에 현혹되지 않도록 주의를 해야 할 것 같다.</p>
-<p>최초에 nginx가 실행되는 Pod는 그거대로 Kubnernetes 작동에 대한 내용이고, Pod에 대한 내용에서 언급되는 nginx와 monolith는 또 그것대로의 내용을 설명한다.</p>
-<p>그리고 다음에 나오는 port-forward에 대한 내용은 또 완전히 별개의 내용이다.</p>
-<p>port-forward는 &ldquo;Service&quot;로 노출하지 않는 Pod에 대해서 테스트등을 해보기 위해서 아주 유용한 도구인 것 같다.</p>
-<p>port-forward로 &ldquo;monolith&rdquo; Pod의 80 포트를 10080을 지정하면 local의 10080 포트를 사용하고 있는것 처럼 이용이 가능하다.</p>
-<p>&ldquo;Service&quot;는 Pod가 수시로 죽고 살아나는 과정 중에서 외부에 노출될 수 있는 일정한 IP를 제공하기 위한 목적이다.</p>
-<p>&ldquo;Service&quot;는 &ldquo;selector&quot;를 이용해서 Pod에 지정된 &ldquo;label&rdquo; 별로 Pod들을 선택할 수 있다. 그리고 &ldquo;Service&quot;의 형태로는 &ldquo;ClusterIP&rdquo;, &ldquo;NodePort&rdquo;, &ldquo;LoadBalancer&quot;가 있다.</p>
-<p>&ldquo;secure-monolith&rdquo; Pod를 생성하는 과정중에 &ldquo;secret&quot;와 &ldquo;configmap&quot;을 생성하는게 나오는데 아직은 크게 신경쓰지 않아도 될 것 같다.</p>
-<p>둘 다 비슷한 성격을 갖는데, &ldquo;secret&quot;는 패스워드 처럼 민감 데이터를 다루는 성격이고, &ldquo;configmap&quot;은 환경 설정과 같은 성격의 정보를 다룬다. 특성 또는 상태를 갖는 정보를 포함하지 않고 Pod가 관리될 수 있도록 해준다.</p>
-<p>&ldquo;Deployment&quot;는 &ldquo;replicas&rdquo; 항목에 지정된 만큼의 Pod를 관리하기 위한 용도이다.</p>
-<p>앞부분에서 약간의 착각을 할 수 있는 부분이 있기는 했었지만 전체적으로 간단하게라도 kubernetes를 이용한 관리방법에 대해서 이해를 할 수 있는 장 이었던것 같다.</p>
+						<p>이번 장은 우선 &ldquo;nginx&quot;와 &ldquo;monolith&quot;라는 단어에 현혹되지 않도록 주의를 해야 할 것 같습니다.</p>
+<p>최초에 nginx가 실행되는 Pod는 그거대로 Kubnernetes 작동에 대한 내용이고, Pod에 대한 내용에서 언급되는 nginx와 monolith는 또 그것대로의 내용을 설명합니다.</p>
+<p>그리고 다음에 나오는 port-forward에 대한 내용은 또 완전히 별개의 내용입니다.</p>
+<p>port-forward는 &ldquo;Service&quot;로 노출하지 않는 Pod에 대해서 테스트등을 해보기 위해서 아주 유용한 도구인 것 같습니다.</p>
+<p>port-forward로 &ldquo;monolith&rdquo; Pod의 80 포트를 10080을 지정하면 local의 10080 포트를 사용하고 있는것 처럼 이용이 가능합니다.</p>
+<p>&ldquo;Service&quot;는 Pod가 수시로 죽고 살아나는 과정 중에서 외부에 노출될 수 있는 일정한 IP를 제공하기 위한 목적입니다.</p>
+<p>&ldquo;Service&quot;는 &ldquo;selector&quot;를 이용해서 Pod에 지정된 &ldquo;label&rdquo; 별로 Pod들을 선택할 수 있습니다. 그리고 &ldquo;Service&quot;의 형태로는 &ldquo;ClusterIP&rdquo;, &ldquo;NodePort&rdquo;, &ldquo;LoadBalancer&quot;가 있습니다.</p>
+<p>&ldquo;secure-monolith&rdquo; Pod를 생성하는 과정중에 &ldquo;secret&quot;와 &ldquo;configmap&quot;을 생성하는게 나오는데 아직은 크게 신경쓰지 않아도 될 것 같습니다.</p>
+<p>둘 다 비슷한 성격을 갖는데, &ldquo;secret&quot;는 패스워드 처럼 민감 데이터를 다루는 성격이고, &ldquo;configmap&quot;은 환경 설정과 같은 성격의 정보를 다룹니다. 특성 또는 상태를 갖는 정보를 포함하지 않고 Pod가 관리될 수 있도록 해줍니다.</p>
+<p>&ldquo;Deployment&quot;는 &ldquo;replicas&rdquo; 항목에 지정된 만큼의 Pod를 관리하기 위한 용도입니다.</p>
+<p>앞부분에서 약간의 착각을 할 수 있는 부분이 있기는 했었지만 전체적으로 간단하게라도 kubernetes를 이용한 관리방법에 대해서 이해를 할 수 있는 장 이었던것 같습니다.</p>
 
 					</div>
 				</article>

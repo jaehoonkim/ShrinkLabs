@@ -32,7 +32,7 @@
       <pubDate>Fri, 19 Feb 2021 07:17:00 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/git_delete-local-branch/</guid>
-      <description>로컬에서 관리하고 있는 branch iss5783을 삭제한다.
+      <description>로컬에서 관리하고 있는 branch iss5783을 삭제합니다.
 $ git branch -d iss5783 </description>
     </item>
     
@@ -63,9 +63,9 @@ etc-3: 10.128.0.3
       
       <guid>https://shrinklabs.com/post/git_remote-branch/</guid>
       <description>github에 있는 branch를 로컬로 받아와서 작업하고 싶을때 할 수 있는 방법
-원격지에 있는 branch 정보를 확인 할 수 있도록 업데이트한다.
+원격지에 있는 branch 정보를 확인 할 수 있도록 업데이트 합니다.
 $ git remote update 원격지의 branch 확인
-$ git branch -r origin/HEAD -&amp;gt; origin/master origin/dev origin/tapping origin/master origin/9999 origin/release upstream/dev upstream/master upstream/8888 upstream/release branch들 중에서 &amp;ldquo;origin/9999&amp;quot;를 갖고 오고 싶다.
+$ git branch -r origin/HEAD -&amp;gt; origin/master origin/dev origin/tapping origin/master origin/9999 origin/release upstream/dev upstream/master upstream/8888 upstream/release branch들 중에서 &amp;ldquo;origin/9999&amp;quot;를 갖고 오고 싶습니다.
 $ git checkout -t origin/9999 </description>
     </item>
     
@@ -76,10 +76,10 @@ $ git checkout -t origin/9999 </description>
       
       <guid>https://shrinklabs.com/post/git_upstream/</guid>
       <description>프로젝트 진행하는 과정에서 필요한 upstream 설정
-해당 내용은 kubernetes의 GitHub Workflow 문서를 참고 함 ( https://github.com/kubernetes/community/blob/master/contributors/guide/github-workflow.md )
-  프로젝트를 https://github.com/kubernetes/kubernetes 에서 내 github 계정으로 Fork한다.
-  Fork한 프로젝트를 내 로컬로 clone 한다.
-  $ git clone git@github.com:{your-account}/kubernetes.git // 작업 디렉토리로 이동 $ cd kubernetes // 현재 브랜치를 확인한다. $ git branch * master upstream으로 사용할 remote를 추가한다. 최초 프로젝트를 추가한다.  $ git remote add upstream git@github.com:kubernetes/kubernetes.git remote를 확인해 보면 upstream이 생성되어 있다.</description>
+해당 내용은 kubernetes의 GitHub Workflow 문서를 참고 했습니다. ( https://github.com/kubernetes/community/blob/master/contributors/guide/github-workflow.md )
+  프로젝트를 https://github.com/kubernetes/kubernetes 에서 내 github 계정으로 Fork 합니다.
+  Fork한 프로젝트를 내 로컬로 clone 합니다.
+  $ git clone git@github.com:{your-account}/kubernetes.git // 작업 디렉토리로 이동 $ cd kubernetes // 현재 브랜치를 확인합니다. $ git branch * master upstream으로 사용할 remote를 추가 합니다. 최초 프로젝트를 추가 합니다.  $ git remote add upstream git@github.</description>
     </item>
     
     <item>
@@ -88,10 +88,10 @@ $ git checkout -t origin/9999 </description>
       <pubDate>Tue, 19 May 2020 01:05:57 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/container_kubectl_run/</guid>
-      <description>실제 클러스터에 배포하기 전에 로컬 환경의 minikube를 이용해서 배포하고 테스트를 하기 위한 방법이 필요하면 다음과 같이 한다.
-minikube를 시작하고, minikube에 내장되어 있는 docker 데몬을 사용하도록 한다. 이렇게 하면 호스트 머신의 Docker Registry를 사용하고 image도 호스트 머신에 생성해 놓은 것을 사용할 수 있다.
+      <description>실제 클러스터에 배포하기 전에 로컬 환경의 minikube를 이용해서 배포하고 테스트를 하기 위한 방법이 필요하면 다음과 같이 합니다.
+minikube를 시작하고, minikube에 내장되어 있는 docker 데몬을 사용하도록 합니다. 이렇게 하면 호스트 머신의 Docker Registry를 사용하고 image도 호스트 머신에 생성해 놓은 것을 사용할 수 있습니다.
 (https://kubernetes.io/docs/setup/learning-environment/minikube/#use-local-images-by-re-using-the-docker-daemon)
-PS&amp;gt; minikube docker-env $Env:DOCKER_TLS_VERIFY = &amp;#34;1&amp;#34; $Env:DOCKER_HOST = &amp;#34;tcp://192.168.182.22:2376&amp;#34; $Env:DOCKER_CERT_PATH = &amp;#34;C:\Users\jaehoonn\.minikube\certs&amp;#34; # Run this command to configure your shell: # &amp;amp; minikube docker-env | Invoke-Expression PS&amp;gt; minikube docker-env | Invoke-Expression 이렇게 하면, minikube vm 안에 존재하는 docker 데몬과 통신을 하게 된다.</description>
+PS&amp;gt; minikube docker-env $Env:DOCKER_TLS_VERIFY = &amp;#34;1&amp;#34; $Env:DOCKER_HOST = &amp;#34;tcp://192.168.182.22:2376&amp;#34; $Env:DOCKER_CERT_PATH = &amp;#34;C:\Users\jaehoonn\.minikube\certs&amp;#34; # Run this command to configure your shell: # &amp;amp; minikube docker-env | Invoke-Expression PS&amp;gt; minikube docker-env | Invoke-Expression 이렇게 하면, minikube vm 안에 존재하는 docker 데몬과 통신을 하게 됩니다.</description>
     </item>
     
     <item>
@@ -100,10 +100,10 @@ PS&amp;gt; minikube docker-env $Env:DOCKER_TLS_VERIFY = &amp;#34;1&amp;#34; $Env
       <pubDate>Mon, 18 May 2020 10:52:23 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/go_crosscompile_on_windows/</guid>
-      <description>Windows 환경에서 개발 후 Linux 환경으로 배포하기 위해서 Linux용 바이너리로 빌드가 필요할 때가 있다.
-다음의 방법으로 빌드 할 수 있다.
-Powershell에서 빌드하기 위한 방법은 아래와 같다.
-PS D:\ws\src\sample&amp;gt; $env:GOOS=&amp;#34;linux&amp;#34;; go build 빌드 이후에는 필요에 따라서 &amp;ldquo;GOOS&amp;quot;를 다시 &amp;ldquo;windows&amp;quot;로 돌려 놓는다.</description>
+      <description>Windows 환경에서 개발 후 Linux 환경으로 배포하기 위해서 Linux용 바이너리로 빌드가 필요할 때가 있습니다.
+다음의 방법으로 빌드 할 수 있습니다.
+Powershell에서 빌드하기 위한 방법은 아래와 같습니다.
+PS D:\ws\src\sample&amp;gt; $env:GOOS=&amp;#34;linux&amp;#34;; go build 빌드 이후에는 필요에 따라서 &amp;ldquo;GOOS&amp;quot;를 다시 &amp;ldquo;windows&amp;quot;로 돌려 놓습니다.</description>
     </item>
     
     <item>
@@ -112,10 +112,10 @@ PS D:\ws\src\sample&amp;gt; $env:GOOS=&amp;#34;linux&amp;#34;; go build 빌드 �
       <pubDate>Fri, 10 Apr 2020 16:31:48 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/container_private-container-registry/</guid>
-      <description>Kubernetes에 배포하기 위해서 Container Registry(Private)을 사용하려면, 별도의 secret을 등록해야 한다.
-$ kubectl create secret docker-registry {secret} \ --docker-server={registryserver} \ --docker-username={name} \ --docker-password={password} \ --docker-email={email} \ --namespace={namespace} namespace는 지정하지 않으면 default로 지정된다.
-그리고 Container Registry로 부터 image를 받아서 사용하기 위한 yaml 파일에 다음과 같이 추가한다.
-apiVersion: v1 kind: Pod metadata: name: private-reg spec: containers: - name: private-reg-container image: regcred/projectaa/private-reg:latest imagePullSecrets: - name: regcred &amp;ldquo;imagePullSecrets&amp;rdquo; 항목을 추가하고 containers.image에서 iamgePullSecretes.name을 base로 사용한다.</description>
+      <description>Kubernetes에 배포하기 위해서 Container Registry(Private)을 사용하려면, 별도의 secret을 등록해야 합니다.
+$ kubectl create secret docker-registry {secret} \ --docker-server={registryserver} \ --docker-username={name} \ --docker-password={password} \ --docker-email={email} \ --namespace={namespace} namespace는 지정하지 않으면 default로 지정됩니다.
+그리고 Container Registry로 부터 image를 받아서 사용하기 위한 yaml 파일에 다음과 같이 추가합니다.
+apiVersion: v1 kind: Pod metadata: name: private-reg spec: containers: - name: private-reg-container image: regcred/projectaa/private-reg:latest imagePullSecrets: - name: regcred &amp;ldquo;imagePullSecrets&amp;rdquo; 항목을 추가하고 containers.image에서 iamgePullSecretes.name을 base로 사용합니다.</description>
     </item>
     
     <item>
@@ -134,7 +134,7 @@ $sudo systemctl status docker $sudo systemctl start docker $sudo systemctl enabl
       <pubDate>Thu, 05 Mar 2020 21:36:13 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/container_k8s-with-kops-on-gce/</guid>
-      <description>클러스터 배포용 VM 인스턴스 생성  Kubernetes를 구성하기 위한 VM 인스턴스를 생성한다. &amp;ldquo;ID 및 API 액세스&amp;rdquo; 항목에서 액세스 범위를 &amp;ldquo;모든 Cloud API에 대한 전체 액세스 허용&amp;rdquo; 으로 선택한다. 또는 아래와 같이 서비스 계정에 권한을 설정하고 서비스 계정을 선택해도 된다.  GCP 관리 콘솔의 IAM&amp;amp;Admin에서 서비스 계정을 하나 만든다. 서비스 계정이 갖고 있어야 하는 최소한의 권한은 다음과 같다.  compute admin servce account admin service account key admin service account token creator service acount user storage admin DNS Administrator DNS Reader  SSH로 연결 &amp;amp; 업데이트  jaehoonn@jaehoonn:~$sudo apt-get update jaehoonn@jaehoonn:~$sudo apt-get dist-upgrade   kubectl 설치 jaehoonn@jaehoonn:~$curl -LO https://storage.</description>
+      <description>클러스터 배포용 VM 인스턴스 생성  Kubernetes를 구성하기 위한 VM 인스턴스를 생성합니다. &amp;ldquo;ID 및 API 액세스&amp;rdquo; 항목에서 액세스 범위를 &amp;ldquo;모든 Cloud API에 대한 전체 액세스 허용&amp;rdquo; 으로 선택한다. 또는 아래와 같이 서비스 계정에 권한을 설정하고 서비스 계정을 선택해도 됩니다.  GCP 관리 콘솔의 IAM&amp;amp;Admin에서 서비스 계정을 하나 만듭니다. 서비스 계정이 갖고 있어야 하는 최소한의 권한은 다음과 같습니다.  compute admin servce account admin service account key admin service account token creator service acount user storage admin DNS Administrator DNS Reader  SSH로 연결 &amp;amp; 업데이트  jaehoonn@jaehoonn:~$sudo apt-get update jaehoonn@jaehoonn:~$sudo apt-get dist-upgrade   kubectl 설치 jaehoonn@jaehoonn:~$curl -LO https://storage.</description>
     </item>
     
     <item>
@@ -152,13 +152,13 @@ $sudo systemctl status docker $sudo systemctl start docker $sudo systemctl enabl
       <pubDate>Mon, 21 Jan 2019 17:05:30 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/container_nginx-ingress-controller-on-google-kubernetes-engine/</guid>
-      <description>이번 과정에서는 &amp;ldquo;Ingress&amp;quot;에 대해서 알아 볼 수 있었다.
-&amp;ldquo;Ingress&amp;quot;는 resource와 controller로 구성되어 있다.
+      <description>이번 과정에서는 &amp;ldquo;Ingress&amp;quot;에 대해서 알아 볼 수 있었습니다.
+&amp;ldquo;Ingress&amp;quot;는 resource와 controller로 구성되어 있습니다.
 resource는 &amp;ldquo;Ingress&amp;quot;의 동작에 대한 규칙을 정해 놓은 yaml이며,
-controller는 layer7에 해당하는 로드밸런서의 역할을 제공한다. 즉 http 요청에 대한 처리와 부하 분산을 제공한다.
-controller로는 gce, nginx, envoy, haproxy, istio, kong, traefik 을 이용할 수 있다.
-과정에서는 &amp;ldquo;hello-app&amp;rdquo; 이라는 &amp;ldquo;Service&amp;quot;를 노출한다. 그리고 helm을 이용해서 nginx-ingress를 kubernetes cluster에 설치한다.
-kind가 &amp;ldquo;Ingress&amp;quot;인 yaml 파일을 만든다. 이때 &amp;ldquo;path: /hello&amp;quot;로 지정하며, backend를 &amp;ldquo;serviceName: hello-app&amp;quot;과 &amp;ldquo;servicePort: 8080&amp;rdquo; 으로 지정을 한다.</description>
+controller는 layer7에 해당하는 로드밸런서의 역할을 제공합니다. 즉 http 요청에 대한 처리와 부하 분산을 제공합니다.
+controller로는 gce, nginx, envoy, haproxy, istio, kong, traefik 을 이용할 수 있습니다.
+과정에서는 &amp;ldquo;hello-app&amp;rdquo; 이라는 &amp;ldquo;Service&amp;quot;를 노출합니다. 그리고 helm을 이용해서 nginx-ingress를 kubernetes cluster에 설치합니다.
+kind가 &amp;ldquo;Ingress&amp;quot;인 yaml 파일을 만듭니다. 이때 &amp;ldquo;path: /hello&amp;quot;로 지정하며, backend를 &amp;ldquo;serviceName: hello-app&amp;quot;과 &amp;ldquo;servicePort: 8080&amp;rdquo; 으로 지정을 합니다.</description>
     </item>
     
     <item>
@@ -180,9 +180,9 @@ $ curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get &amp
       <pubDate>Wed, 16 Jan 2019 01:46:28 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/container_setting-up-private-kubernetes-cluster/</guid>
-      <description>이번 과정의 실습을 진행하면서 클러스터에 대한 접근을 제한 할 수 있도록 하기 위한 방법에 대해서 알 수 있었다. 하지만 전체 내용에 대해서 정확하게 이해를 하지 못했다.
-해당 내용은 이후에 비공개 클러스터 설정(https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters) 에 대한 내용이 실습 내용과 동일하므로 추후에 이해가 가능한 시점이 되면 다시 한번 시도해 보려고 한다.
-아래는 내용을 이해하기 위해서 학습했던 내용들의 링크이다.
+      <description>이번 과정의 실습을 진행하면서 클러스터에 대한 접근을 제한 할 수 있도록 하기 위한 방법에 대해서 알 수 있었습니다. 하지만 전체 내용에 대해서 정확하게 이해를 하지 못했습니다.
+해당 내용은 이후에 비공개 클러스터 설정(https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters) 에 대한 내용이 실습 내용과 동일하므로 추후에 이해가 가능한 시점이 되면 다시 한번 시도해 보려고 합니다.
+아래는 내용을 이해하기 위해서 학습했던 내용들의 링크입니다.
   네트워크 입문: http://kujung.tistory.com/category/%EB%98%A5%20%EC%8B%B8%EA%B8%B0/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC
   IPv4 네트워크 주소와 호스트 주소/서브넷팅/IP Class: http://itsaessak.tistory.com/174
   IP 주소체계와 클래스 구별법 (IPV4): http://korean-daeddo.</description>
@@ -206,11 +206,11 @@ $ curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get &amp
       <pubDate>Fri, 11 Jan 2019 17:52:48 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/container_running-mongodb-database-in-kubernetes-with-statefulsets/</guid>
-      <description>지금까지의 과정 중에서 가장 어려웠다.;;; 그리고 제대로 이해를 한건지도 잘 모르겠다.
-일단을 이해했다고 생각되는 정도만 정리를 해봤다.
-이번 과정은 StatefulSet에 대한 이해를 목표로 하고 있다.
-StatefulSet에 대한 이해를 위해서는 Headless Service에 대한 이해와 StorageClass에 대한 이해가 필요했다.
-StorageClass는 상태를 갖는걸 확인하기 위한 실습이 필요하다보니, Volume을 사용해야 하고 StatefulSet의 scale을 조정하게 되는 것에 따라서 Volume도 같이 조정이 되어야 해서 StorageClass 컨트롤러를 통해서 Volume을 동적으로 조정할 수 있도록 하려고 사용 된 것 같다.</description>
+      <description>지금까지의 과정 중에서 가장 어려웠습니다.;;; 그리고 제대로 이해를 한건지도 잘 모르겠습니다.
+일단을 이해했다고 생각되는 정도만 정리를 해봤습니다.
+이번 과정은 StatefulSet에 대한 이해를 목표로 하고 있습니다.
+StatefulSet에 대한 이해를 위해서는 Headless Service에 대한 이해와 StorageClass에 대한 이해가 필요했습니다.
+StorageClass는 상태를 갖는걸 확인하기 위한 실습이 필요하다보니, Volume을 사용해야 하고 StatefulSet의 scale을 조정하게 되는 것에 따라서 Volume도 같이 조정이 되어야 해서 StorageClass 컨트롤러를 통해서 Volume을 동적으로 조정할 수 있도록 하려고 사용 된 것 같습니다.</description>
     </item>
     
     <item>
@@ -232,10 +232,10 @@ StorageClass는 상태를 갖는걸 확인하기 위한 실습이 필요하다�
       <pubDate>Wed, 09 Jan 2019 11:15:55 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/container_managing-deployments-using-kubernetes/</guid>
-      <description>이번 장에서는 &amp;ldquo;Deployment&amp;quot;가 어떤 역할을 할 수 있으며, 이를 이용해서 취할 수 있는 배포 전략에 대해서 알아볼 수 있었다.
-(이번 장에서 실습을 위해서는 필수적으로 compute/zone 설정을 us-central1-a로 지정해 놓아야 cluster 생성을 정상적으로 할 수 있다.)
-Deployment 뿐만이 아니라 다른 객체들을 사용하기 위해서도 yaml을 작성할때 각 필드에 대한 정보를 어디에서 확인해야 하는지가 궁금했다.
-$ kubectl explain deployment $ kubectl explain --recursive $ kubectl explain deployment.metadata.name 등과 같이 확인을 할 수 있다.</description>
+      <description>이번 장에서는 &amp;ldquo;Deployment&amp;quot;가 어떤 역할을 할 수 있으며, 이를 이용해서 취할 수 있는 배포 전략에 대해서 알아볼 수 있었습니다.
+(이번 장에서 실습을 위해서는 필수적으로 compute/zone 설정을 us-central1-a로 지정해 놓아야 cluster 생성을 정상적으로 할 수 있습니다.)
+Deployment 뿐만이 아니라 다른 객체들을 사용하기 위해서도 yaml을 작성할때 각 필드에 대한 정보를 어디에서 확인해야 하는지가 궁금했습니다.
+$ kubectl explain deployment $ kubectl explain --recursive $ kubectl explain deployment.metadata.name 등과 같이 확인을 할 수 있습니다.</description>
     </item>
     
     <item>
@@ -244,11 +244,11 @@ $ kubectl explain deployment $ kubectl explain --recursive $ kubectl explain dep
       <pubDate>Wed, 09 Jan 2019 01:26:47 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/container_orchestrating-cloud-with-kubernetes/</guid>
-      <description>이번 장은 우선 &amp;ldquo;nginx&amp;quot;와 &amp;ldquo;monolith&amp;quot;라는 단어에 현혹되지 않도록 주의를 해야 할 것 같다.
-최초에 nginx가 실행되는 Pod는 그거대로 Kubnernetes 작동에 대한 내용이고, Pod에 대한 내용에서 언급되는 nginx와 monolith는 또 그것대로의 내용을 설명한다.
-그리고 다음에 나오는 port-forward에 대한 내용은 또 완전히 별개의 내용이다.
-port-forward는 &amp;ldquo;Service&amp;quot;로 노출하지 않는 Pod에 대해서 테스트등을 해보기 위해서 아주 유용한 도구인 것 같다.
-port-forward로 &amp;ldquo;monolith&amp;rdquo; Pod의 80 포트를 10080을 지정하면 local의 10080 포트를 사용하고 있는것 처럼 이용이 가능하다.</description>
+      <description>이번 장은 우선 &amp;ldquo;nginx&amp;quot;와 &amp;ldquo;monolith&amp;quot;라는 단어에 현혹되지 않도록 주의를 해야 할 것 같습니다.
+최초에 nginx가 실행되는 Pod는 그거대로 Kubnernetes 작동에 대한 내용이고, Pod에 대한 내용에서 언급되는 nginx와 monolith는 또 그것대로의 내용을 설명합니다.
+그리고 다음에 나오는 port-forward에 대한 내용은 또 완전히 별개의 내용입니다.
+port-forward는 &amp;ldquo;Service&amp;quot;로 노출하지 않는 Pod에 대해서 테스트등을 해보기 위해서 아주 유용한 도구인 것 같습니다.
+port-forward로 &amp;ldquo;monolith&amp;rdquo; Pod의 80 포트를 10080을 지정하면 local의 10080 포트를 사용하고 있는것 처럼 이용이 가능합니다.</description>
     </item>
     
     <item>
@@ -269,10 +269,10 @@ Kubernetes의 클러스터를 생성하는 과정은 Google Cloud Platform에서
       <pubDate>Tue, 08 Jan 2019 10:48:08 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/container_introduction-to-docker/</guid>
-      <description>구글에서 지원해주는 “2019 클라우드 스터디잼 입문반” 스터디에 참여하기 시작했다. 이 스터디는 어떠한 형태로든 모인 멤버들이 일정 기간(1/7~1/27) 동안에 실습이 겸해진 과정(QWIKLABS - Kubernetes in the Google Cloud)을 완수하는 방식이다.
-첫번째 과정으로 “Introduction to Docker” 을 진행 했다. 다음은 과정을 진행하면서 학습할 수 있었던 내용의 요약이다.
-처음 해보는 과정이라서 그런지 익숙해지기 위한 시간이 약간 필요했지만 그다지 어렵지는 않았다.
-Docker의 Image와 Container 그리고 Dockerfile의 이해를 위한 몇 가지의 실습이 진행되었다. 실습들을 통해서 Image와 Container를 어떻게 구분지어서 생각해야 하는지를 학습할 수 있었다.</description>
+      <description>구글에서 지원해주는 “2019 클라우드 스터디잼 입문반” 스터디에 참여하기 시작했습니다. 이 스터디는 어떠한 형태로든 모인 멤버들이 일정 기간(1/7~1/27) 동안에 실습이 겸해진 과정(QWIKLABS - Kubernetes in the Google Cloud)을 완수하는 방식입니다.
+첫번째 과정으로 “Introduction to Docker” 을 진행 했습니다. 다음은 과정을 진행하면서 학습할 수 있었던 내용의 요약입니다.
+처음 해보는 과정이라서 그런지 익숙해지기 위한 시간이 약간 필요했지만 그다지 어렵지는 않았습니다.
+Docker의 Image와 Container 그리고 Dockerfile의 이해를 위한 몇 가지의 실습이 진행되었습니다. 실습들을 통해서 Image와 Container를 어떻게 구분지어서 생각해야 하는지를 학습할 수 있었습니다.</description>
     </item>
     
     <item>
@@ -294,9 +294,9 @@ cscope를 설치한다. $ sudo apt-get install cscope mkscope.sh 파일을 만�
       <pubDate>Tue, 31 Jul 2018 10:09:41 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/git_reset/</guid>
-      <description>&amp;ldquo;iss-123&amp;rdquo; 브랜치에서 작업하던 내용을 실수로 &amp;ldquo;iss-133&amp;rdquo; 브랜치로 push 하는 어이없는 실수를 했을때 &amp;ldquo;iss-133&amp;quot;에 push 된 내용을 이전으로 되돌려 놓아야 한다.
-git log로 이전 commit의 id를 확인한다. (ex, d50fd96d2d7e5e5cf689b0943f2b2d20d4c2dda4)
-[iss-133] $ git reset --hard d50fd96d2d7e5e5cf689b0943f2b2d20d4c2dda4 이제 변경된 내용을 push 한다.
+      <description>&amp;ldquo;iss-123&amp;rdquo; 브랜치에서 작업하던 내용을 실수로 &amp;ldquo;iss-133&amp;rdquo; 브랜치로 push 하는 어이없는 실수를 했을때 &amp;ldquo;iss-133&amp;quot;에 push 된 내용을 이전으로 되돌려 놓아야 합니다.
+git log로 이전 commit의 id를 확인합니다. (ex, d50fd96d2d7e5e5cf689b0943f2b2d20d4c2dda4)
+[iss-133] $ git reset --hard d50fd96d2d7e5e5cf689b0943f2b2d20d4c2dda4 이제 변경된 내용을 push 합니다.
 [iss-13] $ git push --force origin prj </description>
     </item>
     
@@ -344,16 +344,16 @@ Type1은 호스트에 하이퍼바이저가 존재하고, Type2는 호스트 OS�
       <pubDate>Tue, 01 Aug 2017 13:59:57 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/go_core/</guid>
-      <description>Go언어에서도 core dump를 만드는 방법이 있었다.
-데이브체니님이 정리해 놓은 무려 2015년도의 글이다.
+      <description>Go언어에서도 core dump를 만드는 방법이 있었습니다.
+데이브체니님이 정리해 놓은 무려 2015년도의 글 입니다.
 https://dave.cheney.net/2015/11/29/a-whirlwind-tour-of-gos-runtime-environment-variables
-환경변수로 GOTRACEBACK 을 crash로 설정만 해주면 된다.
-이런것도 모르고 Go언어에서는 dump를 생성할 수 없다고 말하고 다녔다&amp;hellip;;
-근데 위에 처럼 환경변수 설정하고도 core 파일이 안생긴다면, 다음 블로그의 글을 참고해 보면 좋을것 같다.
+환경변수로 GOTRACEBACK 을 crash로 설정만 해주면 됩니다.
+이런것도 모르고 Go언어에서는 dump를 생성할 수 없다고 말하고 다녔습니다&amp;hellip;;
+근데 위에 처럼 환경변수 설정하고도 core 파일이 안생긴다면, 다음 블로그의 글을 참고해 보면 좋을것 같습니다.
 http://lapan.tistory.com/68
-블로그의 내용처럼 ulimit -a 로 확인 해보니 core file size가 0으로 되어 있다.
-ulimit -c unlimited 로 해주었다.
-이제 panic을 발생시켜 보면 core 파일이 잘 만들어져 있는걸 확인 할 수 있다.</description>
+블로그의 내용처럼 ulimit -a 로 확인 해보니 core file size가 0으로 되어 있습니다.
+ulimit -c unlimited 로 해주었습니다.
+이제 panic을 발생시켜 보면 core 파일이 잘 만들어져 있는걸 확인 할 수 있습니다.</description>
     </item>
     
     <item>
@@ -387,12 +387,12 @@ delve사용 프로세스 실행 제어, 변수, 스레드/goroutine 상태, CPU 
       <pubDate>Thu, 25 May 2017 15:43:40 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/go_build/</guid>
-      <description>소개 Go언어로 개발을 하다보면 debug모드 release모드 같이 별도의 빌드 환경을 구성하고 싶을때가 있다.
-그래서 build 옵션으로 특정한 환경별로 결과를 달리 할 수 있는 방법에 대해서 테스트한 내용을 정리해본다.
-빌드 go 파일들을 빌드하기 위해서는 일반적으로 다음과 같이 한다.
-$ go build Go언어 문서중에 보면 https://golang.org/pkg/go/build/#hdr-Build_Constraints[Build Constraints] 에 관한 내용이 있다.
-이 내용은 build 할 때 조건을 줄 수 있다는 내용이고 방법은 다음과 같이 하면 된다고 한다.
-코드의 상단에 &amp;ldquo;// +build linux&amp;rdquo; 하고 한 칸을 띄우고 &amp;ldquo;package blah&amp;rdquo; 를 시작한다.</description>
+      <description>소개 Go언어로 개발을 하다보면 debug모드 release모드 같이 별도의 빌드 환경을 구성하고 싶을때가 있습니다.
+그래서 build 옵션으로 특정한 환경별로 결과를 달리 할 수 있는 방법에 대해서 테스트한 내용을 정리해봅니다.
+빌드 go 파일들을 빌드하기 위해서는 일반적으로 다음과 같이 합니다.
+$ go build Go언어 문서중에 보면 https://golang.org/pkg/go/build/#hdr-Build_Constraints[Build Constraints] 에 관한 내용이 있습니다.
+이 내용은 build 할 때 조건을 줄 수 있다는 내용이고 방법은 다음과 같이 하면 된다고 합니다.
+코드의 상단에 &amp;ldquo;// +build linux&amp;rdquo; 하고 한 칸을 띄우고 &amp;ldquo;package blah&amp;rdquo; 를 시작합니다.</description>
     </item>
     
     <item>
@@ -704,12 +704,12 @@ slcieHeader := (*reflect.</description>
       <pubDate>Tue, 03 Sep 2013 17:10:53 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/go_cgo-type/</guid>
-      <description>c로 만들어져 있던 라이브러리를 cgo를 이용해서 포팅(?)을 하는 작업을 하다보면 난감한 부분들이 종종 나타난다.
-그중에 한가지가 c에서 사용하던 구조체의 파라미터명이 go 에서 미리정의된 명칭일 경우가 있다.
-대표적인 예로 &amp;ldquo;type&amp;quot;이라는 파라미터명이다.
-c에서는 T_CCI_COL_INFO(cubrid의 cci에서 사용되는 구조체중에 하나) 의 필드중에 하나가 type이라는 필드가 하나 있다.
+      <description>c로 만들어져 있던 라이브러리를 cgo를 이용해서 포팅(?)을 하는 작업을 하다보면 난감한 부분들이 종종 나타납니다.
+그중에 한가지가 c에서 사용하던 구조체의 파라미터명이 go 에서 미리정의된 명칭일 경우가 있습니다.
+대표적인 예로 &amp;ldquo;type&amp;quot;이라는 파라미터명 입니다.
+c에서는 T_CCI_COL_INFO(cubrid의 cci에서 사용되는 구조체중에 하나) 의 필드중에 하나가 type이라는 필드가 하나 있습니다.
 이걸 go에서 사용을 하려고 하니,,,
-&amp;ldquo;&amp;hellip;expected selector or type assertion, found &amp;lsquo;type&amp;rsquo; &amp;quot; 이라는 결과를 만나게 된다.
+&amp;ldquo;&amp;hellip;expected selector or type assertion, found &amp;lsquo;type&amp;rsquo; &amp;quot; 이라는 결과를 만나게 됩니다.
 이걸 도대체 어떻게 사용해야 하나 고민을 하던중, golang.org 에 있는 문서 http://golang.</description>
     </item>
     

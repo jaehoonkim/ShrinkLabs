@@ -104,14 +104,14 @@
 					</header>
 					<div class="entry-content">
 						<p>프로젝트 진행하는 과정에서 필요한 upstream 설정</p>
-<p>해당 내용은 kubernetes의 GitHub Workflow 문서를 참고 함
+<p>해당 내용은 kubernetes의 GitHub Workflow 문서를 참고 했습니다.
 ( <a href="https://github.com/kubernetes/community/blob/master/contributors/guide/github-workflow.md">https://github.com/kubernetes/community/blob/master/contributors/guide/github-workflow.md</a> )</p>
 <ol>
 <li>
-<p>프로젝트를 <a href="https://github.com/kubernetes/kubernetes">https://github.com/kubernetes/kubernetes</a> 에서 내 github 계정으로 Fork한다.</p>
+<p>프로젝트를 <a href="https://github.com/kubernetes/kubernetes">https://github.com/kubernetes/kubernetes</a> 에서 내 github 계정으로 Fork 합니다.</p>
 </li>
 <li>
-<p>Fork한 프로젝트를 내 로컬로 clone 한다.</p>
+<p>Fork한 프로젝트를 내 로컬로 clone 합니다.</p>
 </li>
 </ol>
 <pre><code>$ git clone git@github.com:{your-account}/kubernetes.git
@@ -119,15 +119,15 @@
 // 작업 디렉토리로 이동
 $ cd kubernetes 
 
-// 현재 브랜치를 확인한다.
+// 현재 브랜치를 확인합니다.
 $ git branch
 * master
 </code></pre><ol start="3">
-<li>upstream으로 사용할 remote를 추가한다. 최초 프로젝트를 추가한다.</li>
+<li>upstream으로 사용할 remote를 추가 합니다. 최초 프로젝트를 추가 합니다.</li>
 </ol>
 <pre><code>$ git remote add upstream git@github.com:kubernetes/kubernetes.git
 </code></pre><ol start="4">
-<li>remote를 확인해 보면 upstream이 생성되어 있다.</li>
+<li>remote를 확인해 보면 upstream이 생성되어 있습니다.</li>
 </ol>
 <pre><code>$ git remote -v
 origin  git@github.com:{your-account}/kubernetes.git (fetch)
@@ -135,11 +135,11 @@ origin  git@github.com:{your-account}/kubernetes.git (push)
 upstream        git@github.com:kubernetes/kubernetes.git (fetch)
 upstream        git@github.com:kubernetes/kubernetes.git (push)
 </code></pre><ol start="5">
-<li>clone 받은 프로젝트에서는 upstream으로 직접 push하지 않도록 한다.</li>
+<li>clone 받은 프로젝트에서는 upstream으로 직접 push하지 않도록 합니다.</li>
 </ol>
 <pre><code>$ git remote set-url --push upstream no_push
 </code></pre><ol start="6">
-<li>remote의 push가 no_push로 변경된 것 을 확인한다.</li>
+<li>remote의 push가 no_push로 변경된 것 을 확인 합니다.</li>
 </ol>
 <pre><code>$ git remote -v
 origin  git@github.com:{your-account}/kubernetes.git (fetch)
@@ -147,7 +147,7 @@ origin  git@github.com:{your-account}/kubernetes.git (push)
 upstream        git@github.com:kubernetes/kubernetes.git (fetch)
 upstream        no_push (push)
 </code></pre><ol start="7">
-<li>upstream의 변경된 내용을 fetch 받는다.</li>
+<li>upstream의 변경된 내용을 fetch 받습니다.</li>
 </ol>
 <pre><code>$ git fetch upstream
 remote: Enumerating objects: 20, done.
@@ -161,19 +161,19 @@ From github.com:kubernetes/kubernetes
  * [new branch]      master       -&gt; upstream/master
  * [new branch]      release      -&gt; upstream/release
 </code></pre><ol start="8">
-<li>fetch 받은 내용을 master 브랜치에 적용한다.</li>
+<li>fetch 받은 내용을 master 브랜치에 적용 합니다.</li>
 </ol>
 <pre><code>$ git checkout master
 
 $ git rebase upstream/master
 Successfully rebased and updated refs/heads/master.
 </code></pre><ol start="9">
-<li>master 브랜치에 upstream의 내용이 적용된 걸 확인한다.</li>
+<li>master 브랜치에 upstream의 내용이 적용된 걸 확인 합니다.</li>
 </ol>
 <pre><code>$ git log
 .....
 </code></pre><ol start="10">
-<li>fork 받은 리모트에 적용한다.</li>
+<li>fork 받은 리모트에 적용 합니다.</li>
 </ol>
 <pre><code>$ git push origin master
 Total 0 (delta 0), reused 0 (delta 0), pack-reused 0

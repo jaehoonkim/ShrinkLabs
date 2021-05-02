@@ -485,13 +485,13 @@ sliceHeader.Data = uintptr(unsafe.Pointer(c_col_info))
 						</h1>
 					</header>
 					<div class="entry-content">
-						<p>c로 만들어져 있던 라이브러리를 cgo를 이용해서 포팅(?)을 하는 작업을 하다보면 난감한 부분들이 종종 나타난다.</p>
-<p>그중에 한가지가 c에서 사용하던 구조체의 파라미터명이 go 에서 미리정의된 명칭일 경우가 있다.<br>
-대표적인 예로 &ldquo;type&quot;이라는 파라미터명이다.<br>
-c에서는 T_CCI_COL_INFO(cubrid의 cci에서 사용되는 구조체중에 하나) 의 필드중에 하나가 type이라는 필드가 하나 있다.<br>
+						<p>c로 만들어져 있던 라이브러리를 cgo를 이용해서 포팅(?)을 하는 작업을 하다보면 난감한 부분들이 종종 나타납니다.</p>
+<p>그중에 한가지가 c에서 사용하던 구조체의 파라미터명이 go 에서 미리정의된 명칭일 경우가 있습니다.<br>
+대표적인 예로 &ldquo;type&quot;이라는 파라미터명 입니다.<br>
+c에서는 T_CCI_COL_INFO(cubrid의 cci에서 사용되는 구조체중에 하나) 의 필드중에 하나가 type이라는 필드가 하나 있습니다.<br>
 이걸 go에서 사용을 하려고 하니,,,<br>
-&ldquo;&hellip;expected selector or type assertion, found &lsquo;type&rsquo; &quot;  이라는 결과를 만나게 된다.</p>
-<p>이걸 도대체 어떻게 사용해야 하나 고민을 하던중, golang.org 에 있는 문서 <a href="http://golang.org/cmd/cgo/">http://golang.org/cmd/cgo/</a> 에서 해결을 할 수 있었다.</p>
+&ldquo;&hellip;expected selector or type assertion, found &lsquo;type&rsquo; &quot;  이라는 결과를 만나게 됩니다.</p>
+<p>이걸 도대체 어떻게 사용해야 하나 고민을 하던중, golang.org 에 있는 문서 <a href="http://golang.org/cmd/cgo/">http://golang.org/cmd/cgo/</a> 에서 해결을 할 수 있었습니다.</p>
 <blockquote>
 <p>Within the Go file, C identifiers or field names that are keywords in Go can be accessed by prefixing them with an underscore: if x points at a C struct with a field named &ldquo;type&rdquo;, x._type accesses the field.</p>
 </blockquote>

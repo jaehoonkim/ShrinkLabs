@@ -103,10 +103,10 @@
  						<h1 class="entry-title"><a href="https://shrinklabs.com/post/git_reset/" rel="bookmark">git push된 내용을 특정한 commit으로 되돌리기</a></h1>
 					</header>
 					<div class="entry-content">
-						<p>&ldquo;iss-123&rdquo; 브랜치에서 작업하던 내용을 실수로 &ldquo;iss-133&rdquo; 브랜치로 push 하는 어이없는 실수를 했을때 &ldquo;iss-133&quot;에 push 된 내용을 이전으로 되돌려 놓아야 한다.</p>
-<p>git log로 이전 commit의 id를 확인한다. (ex, d50fd96d2d7e5e5cf689b0943f2b2d20d4c2dda4)</p>
+						<p>&ldquo;iss-123&rdquo; 브랜치에서 작업하던 내용을 실수로 &ldquo;iss-133&rdquo; 브랜치로 push 하는 어이없는 실수를 했을때 &ldquo;iss-133&quot;에 push 된 내용을 이전으로 되돌려 놓아야 합니다.</p>
+<p>git log로 이전 commit의 id를 확인합니다. (ex, d50fd96d2d7e5e5cf689b0943f2b2d20d4c2dda4)</p>
 <pre><code>[iss-133] $ git reset --hard d50fd96d2d7e5e5cf689b0943f2b2d20d4c2dda4
-</code></pre><p>이제 변경된 내용을 push 한다.</p>
+</code></pre><p>이제 변경된 내용을 push 합니다.</p>
 <pre><code>[iss-13] $ git push --force origin prj
 </code></pre>
 					</div>
