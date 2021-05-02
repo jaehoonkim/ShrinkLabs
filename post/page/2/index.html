@@ -106,18 +106,18 @@
 					</header>
 					<div class="entry-content">
 						<ul>
-<li>새로운 디스크를 추가한다.
+<li>새로운 디스크를 추가합니다.
 <ul>
-<li>여기에서는 &ldquo;/docker&rdquo; 에 mount 되어 있는걸로 가정한다.</li>
+<li>여기에서는 &ldquo;/docker&rdquo; 에 mount 되어 있는걸로 가정합니다.</li>
 </ul>
 </li>
-<li>&ldquo;etc/docker/daemon.json&rdquo; 에 다음의 내용을 추가한다.</li>
+<li>&ldquo;etc/docker/daemon.json&rdquo; 에 다음의 내용을 추가합니다.</li>
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">{</span>
   <span style="color:#e6db74">&#34;data-root&#34;</span>: <span style="color:#e6db74">&#34;/docker&#34;</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><ul>
-<li>docker 서비스를 재시작한다.</li>
+<li>docker 서비스를 재시작합니다.</li>
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ sudo systemctl daemon-reload
 $ sudo systemctl restart docker
@@ -170,35 +170,35 @@ $ sudo systemctl restart docker
 						</h1>
 					</header>
 					<div class="entry-content">
-						<p>이번 과정은 kubernetes에서 사용할 수 있는 패키지 관리자에 대해서 알아 볼 수 있었다.</p>
-<p>Helm은 클라이언트 역할을 하는 helm, 서버 역할을 하는 tiller 그리고 설정 정보들의 관리를 위한 chart로 이루어져 있다.</p>
-<p>여기에서 클라이언트(helm)라고 하는건 클러스터의 외부에서 작업을 지시하기 위한 도구이고, 실제로 클러스터 안쪽에서 동작 하는건 서버(tiller)라고 보면 된다.</p>
+						<p>이번 과정은 kubernetes에서 사용할 수 있는 패키지 관리자에 대해서 알아 볼 수 있었습니다.</p>
+<p>Helm은 클라이언트 역할을 하는 helm, 서버 역할을 하는 tiller 그리고 설정 정보들의 관리를 위한 chart로 이루어져 있습니다.</p>
+<p>여기에서 클라이언트(helm)라고 하는건 클러스터의 외부에서 작업을 지시하기 위한 도구이고, 실제로 클러스터 안쪽에서 동작 하는건 서버(tiller)라고 보면 됩니다.</p>
 <p>helm의 설치는 간단합니다.</p>
 <pre><code>$ curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get &gt; get_helm.sh
 
 $ chmod 700 get_helm.sh
 
 $ ./get_helm.sh
-</code></pre><p>근데 이 과정 다음에 갑자기 tiller를 위한 계정을 만들고 해당 계정을 무언가에 바인딩을 한다.</p>
-<p>이 과정은 tiller가 클러스터 전체에서 권한을 갖기 위한 방법으로 여기면 될 것 같다.</p>
-<p>비교가 적절할지 모르겠지만, 리눅스에서는 &ldquo;sudo&rdquo; 로 권한을 얻고, 윈도우에서 &ldquo;관리자 권한&quot;을 얻는 것 처럼 tiller에게도 더 높은 권한을 갖을 수 있도록 해주는 과정이라고 이해를 했다.</p>
-<p>(권한에 대한 내용은 &ldquo;<a href="http://bcho.tistory.com/1272%22">http://bcho.tistory.com/1272&quot;</a> 를 참고하면 좋을것 같다.)</p>
-<p>계정을 생성하고 권한을 설정하는 과정은 다음과 같다.</p>
+</code></pre><p>근데 이 과정 다음에 갑자기 tiller를 위한 계정을 만들고 해당 계정을 무언가에 바인딩을 합니다.</p>
+<p>이 과정은 tiller가 클러스터 전체에서 권한을 갖기 위한 방법으로 여기면 될 것 같습니다.</p>
+<p>비교가 적절할지 모르겠지만, 리눅스에서는 &ldquo;sudo&rdquo; 로 권한을 얻고, 윈도우에서 &ldquo;관리자 권한&quot;을 얻는 것 처럼 tiller에게도 더 높은 권한을 갖을 수 있도록 해주는 과정이라고 이해를 했습니다.</p>
+<p>(권한에 대한 내용은 &ldquo;<a href="http://bcho.tistory.com/1272%22">http://bcho.tistory.com/1272&quot;</a> 를 참고하면 좋을것 같습니다.)</p>
+<p>계정을 생성하고 권한을 설정하는 과정은 다음과 같습니다.</p>
 <pre><code>$ kubectl -n kube-system create serviceaccount tiller
 
 $ kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller
-</code></pre><p>그리고 권한을 제거하고 계정을 삭제하는 과정은 다음과 같이한다.</p>
+</code></pre><p>그리고 권한을 제거하고 계정을 삭제하는 과정은 다음과 같이합니다.</p>
 <pre><code>$ kubectl delete clusterrolebinding tiller
 
 $ kubectl -n kube-system delete serviceaccount tiller
-</code></pre><p>이러한 과정은 kubernetes의 권한 관리 방식을 rbac를 이용할 경우에 이렇게 하고, rbac 이외에 abac라는 방식은 다른 방법이 존재하는것 같다.</p>
-<p>계정을 생성했으면 tiller를 설치한다.</p>
+</code></pre><p>이러한 과정은 kubernetes의 권한 관리 방식을 rbac를 이용할 경우에 이렇게 하고, rbac 이외에 abac라는 방식은 다른 방법이 존재하는것 같습니다.</p>
+<p>계정을 생성했으면 tiller를 설치합니다.</p>
 <pre><code>$ helm init --service-account=tiller
-</code></pre><p>tiller가 설치된 후에 &ldquo;kubectl get po &ndash;namespace kube-system&rdquo; 로 확인해 보면 &ldquo;tiller-deploy-blahblah&quot;가 실행되고 있는걸 확인 할 수 있다.</p>
+</code></pre><p>tiller가 설치된 후에 &ldquo;kubectl get po &ndash;namespace kube-system&rdquo; 로 확인해 보면 &ldquo;tiller-deploy-blahblah&quot;가 실행되고 있는걸 확인 할 수 있습니다.</p>
 <p>그리고 tiller를 제거하기 위해서는</p>
 <pre><code>$ kubectl -n kube-system delete deployment tiller-deploy
-</code></pre><p>를 해주고 위에서 이야기했던 권한 제거하는 작업을 해주면 된다.</p>
-<p>그리고 chart를 업데이트하고 chart를 이용해서 설치하는 과정은 아무런 고민없이 사용이 가능할 정도로 간단다.</p>
+</code></pre><p>를 해주고 위에서 이야기했던 권한 제거하는 작업을 해주면 됩니다.</p>
+<p>그리고 chart를 업데이트하고 chart를 이용해서 설치하는 과정은 아무런 고민없이 사용이 가능할 정도로 간단합니다.</p>
 
 					</div>
 				</article>
@@ -258,19 +258,19 @@ $ kubectl -n kube-system delete serviceaccount tiller
 						</h1>
 					</header>
 					<div class="entry-content">
-						<p>이번 과정은 Secret 객체에 대해서 좀 더 자세하게 알아볼 수 있는 과정이었다.</p>
-<p>서비스를 제공하는 프로그램(node.js 코드)을 Docker image로 만든 다음 Registry Server에 Push를 한다.</p>
-<p>제공하는 서비스에서 외부의 서비스(slack)를 사용하기 위해서 민감한 정보인 token이 존재한다. 이 내용이 코드상 또는 image 상에 존재하지 않게 Image를 만들고자 한다.</p>
-<p>그래서 별도로 &ldquo;slack-token&rdquo; 파일을 만들어서 파일을 통해서 token 정보를 제공하도록 만들어 놓았다. 해당 파일을 경로와 파일명을 포함해서 환경변수 &ldquo;slack_token_path&quot;에 등록해 놓고, 코드상에서는 환경 변수인 &ldquo;slack_token_path&quot;에 지정되어 있는 경로의 파일로 부터 token 정보를 읽어서 사용한다.</p>
-<p>실습 과정에서 보여지는 Docker image를 만드는 Dockerfile에는 token 정보를 다루고 있지 않다. 이를 통해서 해당 정보는 배포가 되지 않는다는걸 알 수 있다.</p>
-<p>이제 Kubernetes 클러스터에서 배포를 하기 위해서 token 정보를 container들이 인식할 수 있도록 해주어야 한다.</p>
-<p>그래서 token 정보를 Secret으로 생성해서 클러스터에 배포한다.</p>
-<p>다시 반복해서 확인을 해보면, container에서 제공되는 서비스는 &ldquo;slack_token_path&rdquo; 라는 이름의 환경 변수를 읽어 파일 경로를 구할 수 있다. 이 경로를 통해서 token 정보를 알아낸다. 그리고 구해진 token 정보를 이용해서 slack이 제공하는 기능을 이용할 수 있다.</p>
-<p>이렇게 container에서 token 정보를 구할 수 있도록 하기 위해서, Deployment의 yaml 파일에서 container가 사용할 환경 변수를 등록할 수 있는 &ldquo;env&quot;를 이용해서 &ldquo;slack_token_path&quot;를 등록한다. 이 환경 변수(slack_token_path)는 token 정보가 존재하는 &ldquo;경로와 파일명&quot;의 조합이다.</p>
-<p>이 경로에 해당 파일을 만들기 위해서 volumeMounts를 이용해서 지정된 경로에 volume을 mount 한다.</p>
-<p>이때 사용되어질 &ldquo;secret&rdquo; 타입의 volume은 token 정보를 Pod에서 사용할 수 있도록 하는 &ldquo;Secret&rdquo; 객체이다.</p>
-<p>token은 민감한 정보이기 때문에 별도의 과정을 통해서 전달되어 진다고 상상해 볼 수 있다. 어떠한 방식으로든지 전달된 token을 이용해서 &ldquo;Secret&quot;을 생성하는 과정을 거칠 수 있다.</p>
-<p>Secret을 생성하는 인자 중 에 &ldquo;generic&quot;을 사용한다. generic은 로컬의 파일등을 이용해서 Secret을 만들겠다는 의미로 type에 따라서 Secret을 생성하는 방식을 달리 할 수도 있다.</p>
+						<p>이번 과정은 Secret 객체에 대해서 좀 더 자세하게 알아볼 수 있는 과정이었습니다.</p>
+<p>서비스를 제공하는 프로그램(node.js 코드)을 Docker image로 만든 다음 Registry Server에 Push를 합니다.</p>
+<p>제공하는 서비스에서 외부의 서비스(slack)를 사용하기 위해서 민감한 정보인 token이 존재한다. 이 내용이 코드상 또는 image 상에 존재하지 않게 Image를 만들고자 합니다.</p>
+<p>그래서 별도로 &ldquo;slack-token&rdquo; 파일을 만들어서 파일을 통해서 token 정보를 제공하도록 만들어 놓았습니다. 해당 파일을 경로와 파일명을 포함해서 환경변수 &ldquo;slack_token_path&quot;에 등록해 놓고, 코드상에서는 환경 변수인 &ldquo;slack_token_path&quot;에 지정되어 있는 경로의 파일로 부터 token 정보를 읽어서 사용합니다.</p>
+<p>실습 과정에서 보여지는 Docker image를 만드는 Dockerfile에는 token 정보를 다루고 있지 않습니다. 이를 통해서 해당 정보는 배포가 되지 않는다는걸 알 수 있습니다.</p>
+<p>이제 Kubernetes 클러스터에서 배포를 하기 위해서 token 정보를 container들이 인식할 수 있도록 해주어야 합니다.</p>
+<p>그래서 token 정보를 Secret으로 생성해서 클러스터에 배포합니다.</p>
+<p>다시 반복해서 확인을 해보면, container에서 제공되는 서비스는 &ldquo;slack_token_path&rdquo; 라는 이름의 환경 변수를 읽어 파일 경로를 구할 수 있습니다. 이 경로를 통해서 token 정보를 알아냅니다. 그리고 구해진 token 정보를 이용해서 slack이 제공하는 기능을 이용할 수 있습니다.</p>
+<p>이렇게 container에서 token 정보를 구할 수 있도록 하기 위해서, Deployment의 yaml 파일에서 container가 사용할 환경 변수를 등록할 수 있는 &ldquo;env&quot;를 이용해서 &ldquo;slack_token_path&quot;를 등록합니다. 이 환경 변수(slack_token_path)는 token 정보가 존재하는 &ldquo;경로와 파일명&quot;의 조합입니다.</p>
+<p>이 경로에 해당 파일을 만들기 위해서 volumeMounts를 이용해서 지정된 경로에 volume을 mount 합니다.</p>
+<p>이때 사용되어질 &ldquo;secret&rdquo; 타입의 volume은 token 정보를 Pod에서 사용할 수 있도록 하는 &ldquo;Secret&rdquo; 객체입니다.</p>
+<p>token은 민감한 정보이기 때문에 별도의 과정을 통해서 전달되어 진다고 상상해 볼 수 있습니다. 어떠한 방식으로든지 전달된 token을 이용해서 &ldquo;Secret&quot;을 생성하는 과정을 거칠 수 있습니다.</p>
+<p>Secret을 생성하는 인자 중 에 &ldquo;generic&quot;을 사용합니다. generic은 로컬의 파일등을 이용해서 Secret을 만들겠다는 의미로 type에 따라서 Secret을 생성하는 방식을 달리 할 수도 있습니다.</p>
 
 					</div>
 				</article>
@@ -314,20 +314,20 @@ $ kubectl -n kube-system delete serviceaccount tiller
 						</h1>
 					</header>
 					<div class="entry-content">
-						<p>이번 과정은 Jenkins와 Kubernetes를 이용한 배포 자동화를 실습해 볼 수 있었다.</p>
-<p>분량은 많지만 이해가 어렵지는 않은 내용이었다.</p>
-<p>실습을 해보면서 Namespace라는 객체와 Helm이라는 패키지 관리 도구를 사용해 볼 수 있다. Namespace는 일반적으로 우리가 알고 있는 용도인데, 논리적으로 무언가를 구분지어서 사용하고 싶을때 사용하는게 목적이라고 보면 될 것 같다.</p>
-<p>이전 과정에서 배웠던 배포를 위한 전략에서는 label을 사용했었다면, 이번에는 Namespace를 사용해서 비슷한 문제 상황을 해결하는걸 경험해 볼 수 있다.</p>
-<p>그리고 helm은 Kubernetes의 클러스터에 올라갈 수 있도록 미리 정의해서 배포해 놓은걸 사용할 수 있게 해주는 도구였다. 이번 실습 과정 중에는 Jenkins를 helm을 이용해서 설치를 했다.</p>
-<p>(뒤에 있는 과정 중에서 helm을 좀 더 자세하게 다루는것 같으니 여기서는 이렇다는 정도만 확인하고 넘어가도 될 것 같다.)</p>
-<p>이제 Jenkins를 통해서 배포가 자동화 되는 시나리오를 학습해 보기 위해서 서비스가 제공되는 과정을 만들어 놓는다.</p>
-<p>실제 서비스와 Canary 배포를 위한 Namespace를 &ldquo;production&rdquo;, &ldquo;canary&quot;로 만들어서 배포를 하고 Service를 적용해 놓았다.</p>
-<p>그리고 Jenkins에서 Pipeline을 만들어 놓는다.</p>
-<p>이 과정중에서 가장 중요한건 &ldquo;Scan Multibranch Pipeline Trigger&quot;가 아닐까 싶다.</p>
-<p>이 설정으로 인해서 지정한 git 경로의 branch들에 변화가 생기는걸 지속적으로 확인하고 변화가 있을때 배포 작업을 시작한다. branch에 변화가 생긴걸 확인하게 되면 build 및 기타등등의 Jenkins가 목적으로 하는 작업들을 수행 후, Jenkins에서 Kubernetes의 클러스터에 해당하는 branch 명으로 Namespace를 만들어서 배포하게 된다.</p>
-<p>개발하는데 사용이 되었던 branch가 &ldquo;new-feature&quot;라면 &ldquo;new-feature&quot;라는 이름의 Namespace가 생성되고 해당 Namespace에 배포를 하게 된다. Canary 배포를 하고자 한다면, branch를 &ldquo;canary&quot;로 만들어서 배포를 하면 된다. 그리고 master branch의 경우에는 Jenkinsfile에 보면, master branch의 경우 &ldquo;production&rdquo; Namespace를 이용하도록 지정되어 있다.</p>
-<p>이번 과정에서는 Namespace를 활용하면, 하나의 Kubernetes 클러스터 상에서도 각자 목적이 다른 솔루션들이 영역 구분을 하고 배치해도 흐름이 끊기지 않고 계속해서 작업이 이어지도록 할 수 있다는걸 학습했다.</p>
-<p>각 객체들(Deployment, Service, Namespace &hellip;)의 정의와 특성 그리고 한계점에 대해서 명확하게 파악해 놓으면 필요한 상황별로 설계를 하는데 도움이 많이 될 것 같다.</p>
+						<p>이번 과정은 Jenkins와 Kubernetes를 이용한 배포 자동화를 실습해 볼 수 있었습니다.</p>
+<p>분량은 많지만 이해가 어렵지는 않은 내용이었습니다.</p>
+<p>실습을 해보면서 Namespace라는 객체와 Helm이라는 패키지 관리 도구를 사용해 볼 수 있습니다. Namespace는 일반적으로 우리가 알고 있는 용도인데, 논리적으로 무언가를 구분지어서 사용하고 싶을때 사용하는게 목적이라고 보면 될 것 같습니다.</p>
+<p>이전 과정에서 배웠던 배포를 위한 전략에서는 label을 사용했었다면, 이번에는 Namespace를 사용해서 비슷한 문제 상황을 해결하는걸 경험해 볼 수 있습니다.</p>
+<p>그리고 helm은 Kubernetes의 클러스터에 올라갈 수 있도록 미리 정의해서 배포해 놓은걸 사용할 수 있게 해주는 도구였습니다. 이번 실습 과정 중에는 Jenkins를 helm을 이용해서 설치를 했습니다.</p>
+<p>(뒤에 있는 과정 중에서 helm을 좀 더 자세하게 다루는것 같으니 여기서는 이렇다는 정도만 확인하고 넘어가도 될 것 같습니다.)</p>
+<p>이제 Jenkins를 통해서 배포가 자동화 되는 시나리오를 학습해 보기 위해서 서비스가 제공되는 과정을 만들어 놓습니다.</p>
+<p>실제 서비스와 Canary 배포를 위한 Namespace를 &ldquo;production&rdquo;, &ldquo;canary&quot;로 만들어서 배포를 하고 Service를 적용해 놓았습니다.</p>
+<p>그리고 Jenkins에서 Pipeline을 만들어 놓습니다.</p>
+<p>이 과정중에서 가장 중요한건 &ldquo;Scan Multibranch Pipeline Trigger&quot;가 아닐까 싶습니다.</p>
+<p>이 설정으로 인해서 지정한 git 경로의 branch들에 변화가 생기는걸 지속적으로 확인하고 변화가 있을때 배포 작업을 시작합니다. branch에 변화가 생긴걸 확인하게 되면 build 및 기타등등의 Jenkins가 목적으로 하는 작업들을 수행 후, Jenkins에서 Kubernetes의 클러스터에 해당하는 branch 명으로 Namespace를 만들어서 배포하게 됩니다.</p>
+<p>개발하는데 사용이 되었던 branch가 &ldquo;new-feature&quot;라면 &ldquo;new-feature&quot;라는 이름의 Namespace가 생성되고 해당 Namespace에 배포를 하게 됩니다. Canary 배포를 하고자 한다면, branch를 &ldquo;canary&quot;로 만들어서 배포를 하면 됩니다. 그리고 master branch의 경우에는 Jenkinsfile에 보면, master branch의 경우 &ldquo;production&rdquo; Namespace를 이용하도록 지정되어 있습니다.</p>
+<p>이번 과정에서는 Namespace를 활용하면, 하나의 Kubernetes 클러스터 상에서도 각자 목적이 다른 솔루션들이 영역 구분을 하고 배치해도 흐름이 끊기지 않고 계속해서 작업이 이어지도록 할 수 있다는걸 학습했습니다.</p>
+<p>각 객체들(Deployment, Service, Namespace &hellip;)의 정의와 특성 그리고 한계점에 대해서 명확하게 파악해 놓으면 필요한 상황별로 설계를 하는데 도움이 많이 될 것 같습니다.</p>
 
 					</div>
 				</article>
@@ -404,16 +404,16 @@ $ kubectl explain deployment.metadata.name
 						</h1>
 					</header>
 					<div class="entry-content">
-						<p>2번째 과정에서는 Kubernetes의 기본적인 동작 방식에 대해서 알아 볼 수 있었다.</p>
-<p>Kubernetes의 클러스터를 생성하는 과정은 Google Cloud Platform에서 기능을 제공하고 있어서 아주 간편했다.</p>
-<p>책을 보면서 Kubernetes 공부를 처음 시작하는 과정에서 가장 시간을 많이 소비하게 되는 부분이었는데, 플랫폼에서 제공되는 기능을 glcoud를 이용해서 node와 각 node의 기본적인 설정을 지정후 cluster를 생성하는 명령 하나로 모든 과정이 생략될 수 있게 되었다.</p>
-<p>그리고 Registry Server에 등록해 놓았던 Image를 이용해서 직접 &ldquo;Pod&quot;를 만들어보고, &ldquo;Pod&quot;의 개념과 &ldquo;Deployment&quot;의 개념이 무엇인지에 대해서 대략적으로 알아 볼 수 있었다.</p>
-<p>다음으로 &ldquo;Service&quot;를 이용하면, 배포된 &ldquo;Pod&quot;들이 어떻게 외부에 노출이 될 수 있는지에 대해서 알아 볼 수 있었다.</p>
-<p>기존에는 로컬 머신에서 VM들을 생성해서 학습을 하다 보니 외부에 정말 노출이 되는건가? 라는 의문이 들었었는데, &ldquo;LoadBalancer&quot;를 통해서 IP를 할당 받아서 해보니, 제공하고자 하는 기능이 &ldquo;Service&quot;를 통해서 외부에 노출이 될 수 있다는걸 확인 할 수 있었다.</p>
-<p>서비스의 규모를 조정하기 위해서 scale을 이용해서 Pod를 관리하는걸 확인해 볼 수 있기도 했다.</p>
-<p>마지막으로 서비스가 업데이트되었을때 배포를 하기 위한 과정에 대해서 알아보면서 Image를 새로 만들고 Registry Server에 재 등록을 하고 Deployment를 수정하는 과정을 실습해볼 수 있었다. 과정중에 약간 아쉬웠던 점은 Deployment가 수정되고 난 다음에 기존에 Pod가 종료되고 새로운 버전의 Pod가 활성화 되는 과정에 대해서도 확인을 해보면 과정을 이해하는데 더 좋을것 같았다.</p>
-<p>(Deployment를 edit하는 과정을 완료하고, 바로 &ldquo;kubectl get pods&quot;를 해보면 확인이 가능하다.)</p>
-<p>추가 사항으로 Kubernetes 대시보드를 보기 위한 방법을 학습하는 부분에서는 해당 url 뒤에 &ldquo;ui&quot;로 변경을 해보았으나 대시보드가 보여지지는 않았다.</p>
+						<p>2번째 과정에서는 Kubernetes의 기본적인 동작 방식에 대해서 알아 볼 수 있었습니다.</p>
+<p>Kubernetes의 클러스터를 생성하는 과정은 Google Cloud Platform에서 기능을 제공하고 있어서 아주 간편했습니다.</p>
+<p>책을 보면서 Kubernetes 공부를 처음 시작하는 과정에서 가장 시간을 많이 소비하게 되는 부분이었는데, 플랫폼에서 제공되는 기능을 glcoud를 이용해서 node와 각 node의 기본적인 설정을 지정후 cluster를 생성하는 명령 하나로 모든 과정이 생략될 수 있게 되었습니다.</p>
+<p>그리고 Registry Server에 등록해 놓았던 Image를 이용해서 직접 &ldquo;Pod&quot;를 만들어보고, &ldquo;Pod&quot;의 개념과 &ldquo;Deployment&quot;의 개념이 무엇인지에 대해서 대략적으로 알아 볼 수 있었습니다.</p>
+<p>다음으로 &ldquo;Service&quot;를 이용하면, 배포된 &ldquo;Pod&quot;들이 어떻게 외부에 노출이 될 수 있는지에 대해서 알아 볼 수 있었습니다.</p>
+<p>기존에는 로컬 머신에서 VM들을 생성해서 학습을 하다 보니 외부에 정말 노출이 되는건가? 라는 의문이 들었었는데, &ldquo;LoadBalancer&quot;를 통해서 IP를 할당 받아서 해보니, 제공하고자 하는 기능이 &ldquo;Service&quot;를 통해서 외부에 노출이 될 수 있다는걸 확인 할 수 있었습니다.</p>
+<p>서비스의 규모를 조정하기 위해서 scale을 이용해서 Pod를 관리하는걸 확인해 볼 수 있기도 했습니다.</p>
+<p>마지막으로 서비스가 업데이트되었을때 배포를 하기 위한 과정에 대해서 알아보면서 Image를 새로 만들고 Registry Server에 재 등록을 하고 Deployment를 수정하는 과정을 실습해볼 수 있었습니다. 과정중에 약간 아쉬웠던 점은 Deployment가 수정되고 난 다음에 기존에 Pod가 종료되고 새로운 버전의 Pod가 활성화 되는 과정에 대해서도 확인을 해보면 과정을 이해하는데 더 좋을것 같았습니다.</p>
+<p>(Deployment를 edit하는 과정을 완료하고, 바로 &ldquo;kubectl get pods&quot;를 해보면 확인이 가능합니다.)</p>
+<p>추가 사항으로 Kubernetes 대시보드를 보기 위한 방법을 학습하는 부분에서는 해당 url 뒤에 &ldquo;ui&quot;로 변경을 해보았으나 대시보드가 보여지지는 않았습니다.</p>
 
 					</div>
 				</article>

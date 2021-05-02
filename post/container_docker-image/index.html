@@ -104,18 +104,18 @@
 					</header>
 					<div class="entry-content">
 						<ul>
-<li>새로운 디스크를 추가한다.
+<li>새로운 디스크를 추가합니다.
 <ul>
-<li>여기에서는 &ldquo;/docker&rdquo; 에 mount 되어 있는걸로 가정한다.</li>
+<li>여기에서는 &ldquo;/docker&rdquo; 에 mount 되어 있는걸로 가정합니다.</li>
 </ul>
 </li>
-<li>&ldquo;etc/docker/daemon.json&rdquo; 에 다음의 내용을 추가한다.</li>
+<li>&ldquo;etc/docker/daemon.json&rdquo; 에 다음의 내용을 추가합니다.</li>
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">{</span>
   <span style="color:#e6db74">&#34;data-root&#34;</span>: <span style="color:#e6db74">&#34;/docker&#34;</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><ul>
-<li>docker 서비스를 재시작한다.</li>
+<li>docker 서비스를 재시작합니다.</li>
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ sudo systemctl daemon-reload
 $ sudo systemctl restart docker
