@@ -131,19 +131,19 @@
 					</header>
 					<div class="entry-content">
 						<h2 id="go언어-개발-환경추가">Go언어 개발 환경(추가)</h2>
-<p>Go언어로 작성한 코드를 분석하기 위해서 cscope가 필요할 때가 있다.<br>
-vim에서 cscope를 사용하기 위한 과정을 정리해 보려고 한다.</p>
-<h2 id="cscope를-설치한다">cscope를 설치한다.</h2>
+<p>Go언어로 작성한 코드를 분석하기 위해서 cscope가 필요할 때가 있습니다.<br>
+vim에서 cscope를 사용하기 위한 과정을 정리해 보려고 합니다.</p>
+<h2 id="cscope를-설치합니다">cscope를 설치합니다.</h2>
 <pre><code>$ sudo apt-get install cscope
-</code></pre><h2 id="mkscopesh-파일을-만든다">mkscope.sh 파일을 만든다.</h2>
-<p>mkscope.sh의 내용은 다음과 같다.<br>
-이 스크립트는 <a href="https://www.cnblogs.com/shaohef/p/7358111.html">https://www.cnblogs.com/shaohef/p/7358111.html</a> 의 내용을 수정해서 사용했다.</p>
+</code></pre><h2 id="mkscopesh-파일을-만듭니다">mkscope.sh 파일을 만듭니다.</h2>
+<p>mkscope.sh의 내용은 다음과 같습니다.<br>
+이 스크립트는 <a href="https://www.cnblogs.com/shaohef/p/7358111.html">https://www.cnblogs.com/shaohef/p/7358111.html</a> 의 내용을 수정해서 사용했습니다.</p>
 <pre><code>#!/bin/bash
 
-# 기존에 존재하던 files와 out 파일을 제거한다
+# 기존에 존재하던 files와 out 파일을 제거합니다
 rm cscope.files cscope.out
 
-# $GOROOT가 존재하지 않으면 설정한다.
+# $GOROOT가 존재하지 않으면 설정합니다.
 if [&quot;$GOROOT&quot; = &quot;&quot;]; then
     echo &quot;GOROOT is not set&quot;
     GOROOT=`go env | grep &quot;GOROOT&quot; | cut -d &quot;=&quot; -f2`
@@ -155,14 +155,14 @@ echo $GOROOT
 # Go 표준 패키지
 go_src=$GOROOT/src
 
-# Go언어 표준 패키지로 제공되는 go 파일의 경로를 cscope.files로 만든다.
+# Go언어 표준 패키지로 제공되는 go 파일의 경로를 cscope.files로 만듭니다.
 find $go_src -name &quot;*.go&quot; -print &gt; cscope.files
-# 현재 디렉토리 존재하는 go 파일의 경로를 cscope.files로 만든다.
+# 현재 디렉토리 존재하는 go 파일의 경로를 cscope.files로 만듭니다.
 find . -name &quot;*.go&quot; -print &gt; cscope.files
 
 
 # cscope 옵션으로 -b 옵션을 사용해서 데이터 베이스 생성 후에 심볼 찾기 화면이 안보이게 하고, 
-# -k 옵션을 사용해서 default include(/usr/include) 경로의 내용을 사용하지 않도록 한다.
+# -k 옵션을 사용해서 default include(/usr/include) 경로의 내용을 사용하지 않도록 합니다.
 if cscope -b -k; then
     echo &quot;Done&quot;
 else
@@ -170,26 +170,26 @@ else
     exit 1
 fi
 
-</code></pre><h2 id="mkscopesh-의-사용권한을-변경한다">mkscope.sh 의 사용권한을 변경한다.</h2>
+</code></pre><h2 id="mkscopesh-의-사용권한을-변경합니다">mkscope.sh 의 사용권한을 변경합니다.</h2>
 <pre><code>$ sudo chmod 755 mkscope.sh
-</code></pre><h2 id="mkscopesh를-사용하기-편리하게-경로를-이동한다usrlocalbin">mkscope.sh를 사용하기 편리하게 경로를 이동한다.(/usr/local/bin)</h2>
+</code></pre><h2 id="mkscopesh를-사용하기-편리하게-경로를-이동합니다usrlocalbin">mkscope.sh를 사용하기 편리하게 경로를 이동합니다.(/usr/local/bin)</h2>
 <pre><code>$ sudo mv mkscope.sh /usr/local/bin
 </code></pre><h2 id="cscope를-편리하게-사용하기-위해서-quickr-cscopevim을-설치">cscope를 편리하게 사용하기 위해서 quickr-cscope.vim을 설치</h2>
 <p>vimrc.local에 vundle을 추가</p>
 <pre><code>Plugin 'ronakg/quickr-cscope.vim'
-</code></pre><p>quickr-cscope의 단축키는 다음과 같다.</p>
-<pre><code>&lt;leader&gt;g : 커서 아래의 함수가 선언되어 있는 곳으로 이동한다.
-&lt;leader&gt;s: 커서 아래의 단어를 검색을 한다.
-&lt;leader&gt;c: 커서 아래의 함수를 호출하는 함수들을 찾는다.
-&lt;leader&gt;f: 커서 아래의 단어로된 파일을 검색한다.
-&lt;leader&gt;i: 커서 아래의 함수 또는 키워드의 정의 내용을 출력한다.
-&lt;leader&gt;t: 커서 아래의 단어로된 문자열을 검색한다.
-&lt;leader&gt;d: 커서 아래의 함수가 호출하는 함수들을 출력한다.
-&lt;leader&gt;e: egrep를 사용한 검색을 한다.
-</code></pre><p>그리고 다음과 같이 직접 사용할 수 도 있다.</p>
+</code></pre><p>quickr-cscope의 단축키는 다음과 같습니다.</p>
+<pre><code>&lt;leader&gt;g : 커서 아래의 함수가 선언되어 있는 곳으로 이동합니다.
+&lt;leader&gt;s: 커서 아래의 단어를 검색을 합니다.
+&lt;leader&gt;c: 커서 아래의 함수를 호출하는 함수들을 찾습니다.
+&lt;leader&gt;f: 커서 아래의 단어로된 파일을 검색합니다.
+&lt;leader&gt;i: 커서 아래의 함수 또는 키워드의 정의 내용을 출력합니다.
+&lt;leader&gt;t: 커서 아래의 단어로된 문자열을 검색합니다.
+&lt;leader&gt;d: 커서 아래의 함수가 호출하는 함수들을 출력합니다.
+&lt;leader&gt;e: egrep를 사용한 검색을 합니다.
+</code></pre><p>그리고 다음과 같이 직접 사용할 수 도 있습니다.</p>
 <pre><code>:cs find {g|s|c|f|i|t|d|e} keyword 
 </code></pre><h2 id="분석하기">분석하기</h2>
-<p>vi를 시작하기 전에 항상 mkscope.sh를 실행해서 수정된 내용이 cscope에서 사용하는 데이터베이스인 cscope.out에 반영될 수 있도록 한다.</p>
+<p>vi를 시작하기 전에 항상 mkscope.sh를 실행해서 수정된 내용이 cscope에서 사용하는 데이터베이스인 cscope.out에 반영될 수 있도록 합니다.</p>
 
 					</div>
 				</article>

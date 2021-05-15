@@ -281,11 +281,11 @@ Docker의 Image와 Container 그리고 Dockerfile의 이해를 위한 몇 가지
       <pubDate>Tue, 21 Aug 2018 16:34:04 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/go_cscope/</guid>
-      <description>Go언어 개발 환경(추가) Go언어로 작성한 코드를 분석하기 위해서 cscope가 필요할 때가 있다.
-vim에서 cscope를 사용하기 위한 과정을 정리해 보려고 한다.
-cscope를 설치한다. $ sudo apt-get install cscope mkscope.sh 파일을 만든다. mkscope.sh의 내용은 다음과 같다.
-이 스크립트는 https://www.cnblogs.com/shaohef/p/7358111.html 의 내용을 수정해서 사용했다.
-#!/bin/bash # 기존에 존재하던 files와 out 파일을 제거한다 rm cscope.files cscope.out # $GOROOT가 존재하지 않으면 설정한다. if [&amp;quot;$GOROOT&amp;quot; = &amp;quot;&amp;quot;]; then echo &amp;quot;GOROOT is not set&amp;quot; GOROOT=`go env | grep &amp;quot;GOROOT&amp;quot; | cut -d &amp;quot;=&amp;quot; -f2` GOROOT=${GOROOT#\&amp;quot;} GOROOT=${GOROOT%\&amp;quot;} fi echo $GOROOT # Go 표준 패키지 go_src=$GOROOT/src # Go언어 표준 패키지로 제공되는 go 파일의 경로를 cscope.</description>
+      <description>Go언어 개발 환경(추가) Go언어로 작성한 코드를 분석하기 위해서 cscope가 필요할 때가 있습니다.
+vim에서 cscope를 사용하기 위한 과정을 정리해 보려고 합니다.
+cscope를 설치합니다. $ sudo apt-get install cscope mkscope.sh 파일을 만듭니다. mkscope.sh의 내용은 다음과 같습니다.
+이 스크립트는 https://www.cnblogs.com/shaohef/p/7358111.html 의 내용을 수정해서 사용했습니다.
+#!/bin/bash # 기존에 존재하던 files와 out 파일을 제거합니다 rm cscope.files cscope.out # $GOROOT가 존재하지 않으면 설정합니다. if [&amp;quot;$GOROOT&amp;quot; = &amp;quot;&amp;quot;]; then echo &amp;quot;GOROOT is not set&amp;quot; GOROOT=`go env | grep &amp;quot;GOROOT&amp;quot; | cut -d &amp;quot;=&amp;quot; -f2` GOROOT=${GOROOT#\&amp;quot;} GOROOT=${GOROOT%\&amp;quot;} fi echo $GOROOT # Go 표준 패키지 go_src=$GOROOT/src # Go언어 표준 패키지로 제공되는 go 파일의 경로를 cscope.</description>
     </item>
     
     <item>
@@ -550,13 +550,13 @@ $ apt-get install --reinstall net-tools </description>
       <pubDate>Mon, 18 Jul 2016 10:16:09 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/go_css-html/</guid>
-      <description>Go의 &amp;ldquo;net/http&amp;quot;와 &amp;ldquo;html/template&amp;quot;를 이용해서 html과 css로 만들어진 웹페이지를 만들려고 할때, html 파일이 보여질때 css가 적용되지 않은 상태로 보여진다.
-이 때 어떻게 해야 하는지 방법을 찾아가던 과정을 기록으로 남겨 놓는다.
-프로젝트의 디렉토리 구조는 다음과 같다.
+      <description>Go의 &amp;ldquo;net/http&amp;quot;와 &amp;ldquo;html/template&amp;quot;를 이용해서 html과 css로 만들어진 웹페이지를 만들려고 할때, html 파일이 보여질때 css가 적용되지 않은 상태로 보여집니다.
+이 때 어떻게 해야 하는지 방법을 찾아가던 과정을 기록으로 남겨 놓습니다.
+프로젝트의 디렉토리 구조는 다음과 같습니다.
 src\ + prj + main.go + static style.css + template index.html 그래서 이렇게&amp;hellip;
-func main() { http.HandleFunc(&amp;#34;/&amp;#34;, indexHandler) http.ListenAndServe(&amp;#34;:8080&amp;#34;, nil) } func indexHandler(...) { // index.html } 와 같이 하면 될 줄 알았다.
-그런데 안된다.
-그래서 어떻게 해야 하는지 찾아보니, FileServer로 css파일을 제공해 주면 된다고 한다.</description>
+func main() { http.HandleFunc(&amp;#34;/&amp;#34;, indexHandler) http.ListenAndServe(&amp;#34;:8080&amp;#34;, nil) } func indexHandler(...) { // index.html } 와 같이 하면 될 줄 알았습니다.
+그런데 안됩니다.
+그래서 어떻게 해야 하는지 찾아보니, FileServer로 css파일을 제공해 주면 된다고 합니다.</description>
     </item>
     
     <item>
