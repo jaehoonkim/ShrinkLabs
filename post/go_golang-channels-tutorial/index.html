@@ -103,28 +103,28 @@
  						<h1 class="entry-title"><a href="https://shrinklabs.com/post/go_golang-channels-tutorial/" rel="bookmark">Golang channels tutorial</a></h1>
 					</header>
 					<div class="entry-content">
-						<p>최근에 goroutine과 channel에 대해서 학습하다가 설명이 잘 되어 있는 글을 찾아서 번역(이라고 하기에는 뭐하고 정리?) 를 해봤다.
-제대로 이해를 못하고 잘 못 번역을 한 부분이 있을 수 도 있으니&hellip;꼭 원본을 보길 권장한다.;;;</p>
+						<p>최근에 goroutine과 channel에 대해서 학습하다가 설명이 잘 되어 있는 글을 찾아서 번역(이라고 하기에는 뭐하고 정리?) 를 해봤습니다.
+제대로 이해를 못하고 잘 못 번역을 한 부분이 있을 수 도 있으니&hellip;꼭 원본을 보길 권장합니다.</p>
 <p>원본 : <a href="http://guzalexander.com/2013/12/06/golang-channels-tutorial.html">http://guzalexander.com/2013/12/06/golang-channels-tutorial.html</a></p>
 <hr>
-<p>Go언어는 병렬 프로그램 작성을 위해서 내장 도구를 갖고 있다. go를 함수 호출 앞에 놓으면 동일한 주소에 위치하는 코드를 독립적인 병렬 스레드로 실행을 시작한다. 이런 쓰레드를 Go언어에서는 goroutine이라고 부른다. 여기에서 말하는 concurrently는  parallel을 의미하지는 않는다. (역주: 그렇지만 번역은 “병렬” 이라고 칭하겠다.;;;) Goroutines은 하드웨어에서 병렬(parallel) 실행이 가능할때 병렬(concurrent)아키텍처를 생성하는 것을 의미한다.
-Concurrency is not parallelism 에 대한 토크가 있다.<br>
-goroutine 예제를 실행해 보자:</p>
+<p>Go언어는 병렬 프로그램 작성을 위해서 내장 도구를 갖고 있습니다. go를 함수 호출 앞에 놓으면 동일한 주소에 위치하는 코드를 독립적인 병렬 스레드로 실행을 시작합니다. 이런 쓰레드를 Go언어에서는 goroutine이라고 부릅니다. 여기에서 말하는 concurrently는  parallel을 의미하지는 않습니다. (역주: 그렇지만 번역은 “병렬” 이라고 칭하겠습니다.) Goroutines은 하드웨어에서 병렬(parallel) 실행이 가능할때 병렬(concurrent)아키텍처를 생성하는 것을 의미 합니다.
+Concurrency is not parallelism 에 대한 토크가 있습니다.<br>
+goroutine 예제를 실행해 보겠습니다:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
      <span style="color:#75715e">// Start a goroutine and execute println concurrently
 </span><span style="color:#75715e"></span>     <span style="color:#66d9ef">go</span> println(<span style="color:#e6db74">&#34;goroutine message&#34;</span>)
      println(<span style="color:#e6db74">&#34;main function message&#34;</span>)
 }
-</code></pre></div><p>이 프로그램은 &ldquo;main function message” 와 아마도 &ldquo;goroutine message” 를 찍을 것이다. 아마도 라고한건 goroutine 몇 가지 특징이 나타날 수 있기 때문이다 코드를 호출하는 goroutine이 시작될때, main함수는 goroutine이 끝나기를 기다리지 않고, 계속해서  실행이 된다. main함수는 println을 호출하고 나서 실행을 종료한다 그리고 Go언어에서 그건 생성된 모든 goroutine들과 전체 프로그램의 실행 중지를 말한다. 그렇지만 그러한 일이 발생하기전에 우리의 goroutine은 “goroutine message” 문자를 인쇄하고 코드 실행을 완료 할 수 있을거다.</p>
-<p>알다시피 이런 상황을 피할 수 있는 어떤 방법이 있어야만 한다. 그래서 Go언어에는 channel 이란게 있다.</p>
+</code></pre></div><p>이 프로그램은 &ldquo;main function message” 와 아마도 &ldquo;goroutine message” 를 찍을 것입니다. 아마도 라고한건 goroutine 몇 가지 특징이 나타날 수 있기 때문입니다. 코드를 호출하는 goroutine이 시작될때, main함수는 goroutine이 끝나기를 기다리지 않고, 계속해서 실행이 됩니다. main 함수는 println을 호출하고 나서 실행을 종료합니다 그리고 Go언어에서 그건 생성된 모든 goroutine들과 전체 프로그램의 실행 중지를 말합니다. 그렇지만 그러한 일이 발생하기전에 우리의 goroutine은 “goroutine message” 문자를 인쇄하고 코드 실행을 완료 할 수 있을 겁니다.</p>
+<p>알다시피 이런 상황을 피할 수 있는 어떤 방법이 있어야만 합니다. 그래서 Go언어에는 channel 이란게 있습니다.</p>
 <h2 id="channels-basics">Channels basics</h2>
-<p>Channel은 동시에 동작하는 함수들의 실행을 동기화하고 특정한 값을 넘겨서 그들이 대화할 수 있는 방법을 제공한다. Channel은 몇 가지의 특징이 있다: channel을 통해서 보낼 수 있는 타입의 요소는, 용량(capacity:버퍼의 사이즈) 그리고 “&lt;-” 연산자로 지정된 커뮤니케이션의 방향이 있다. make 함수를 사용해서 channel을 할당할 수 있다:</p>
+<p>Channel은 동시에 동작하는 함수들의 실행을 동기화하고 특정한 값을 넘겨서 그들이 대화할 수 있는 방법을 제공합니다. Channel은 몇 가지의 특징이 있습니다: channel을 통해서 보낼 수 있는 타입의 요소는, 용량(capacity:버퍼의 사이즈) 그리고 “&lt;-” 연산자로 지정된 커뮤니케이션의 방향이 있습니다. make 함수를 사용해서 channel을 할당할 수 있습니다:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>)       <span style="color:#75715e">// by default the capacity is 0
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">s</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">string</span>, <span style="color:#ae81ff">3</span>) <span style="color:#75715e">// non-zero capacity
 </span><span style="color:#75715e"></span>
 <span style="color:#a6e22e">r</span> <span style="color:#f92672">:=</span> make(<span style="color:#f92672">&lt;-</span><span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">bool</span>)          <span style="color:#75715e">// can only read from
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">w</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span><span style="color:#f92672">&lt;-</span> []<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">FileInfo</span>) <span style="color:#75715e">// can only write to
-</span></code></pre></div><p>Channel은 first-class values(역주: first-class object의 의미로 생각했음) 이고 다른 변수들처럼 어디에서나 사용될 수 있다: 구조체의 요소, 함수의 인자로, 함수에서 반환되는 값으로 그리고 다른 channel을 위한 타입으로도 사용될 수 있다:</p>
+</span></code></pre></div><p>Channel은 first-class values(역주: first-class object의 의미로 생각했음) 이고 다른 변수들처럼 어디에서나 사용될 수 있습니다: 구조체의 요소, 함수의 인자로, 함수에서 반환되는 값으로 그리고 다른 channel을 위한 타입으로도 사용될 수 있습니다:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// a channel which:
 </span><span style="color:#75715e">//  - you can only write to
 </span><span style="color:#75715e">//  - holds another channel as its value
@@ -138,14 +138,14 @@ goroutine 예제를 실행해 보자:</p>
      <span style="color:#a6e22e">b</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">bool</span>)
      <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">b</span>
 }
-</code></pre></div><p>channel을 쓰고 읽기 위해서 “&lt;-” 연산자가 있다. channel 변수에 대해서 상대적인 연산자의 위치에 따라서 읽기 또는 쓰기 동작이 정해진다. 다음 예제에서 그 사용법을 보여주고 있지만, 이 코드는 나중에 설명할 몇 가지 원인 때문에 동작하지 않는다.</p>
+</code></pre></div><p>channel을 쓰고 읽기 위해서 “&lt;-” 연산자가 있습니다. channel 변수에 대해서 상대적인 연산자의 위치에 따라서 읽기 또는 쓰기 동작이 정해집니다. 다음 예제에서 그 사용법을 보여주고 있지만, 이 코드는 나중에 설명할 몇 가지 원인 때문에 동작하지 않습니다.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
      <span style="color:#a6e22e">c</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>)
      <span style="color:#a6e22e">c</span> <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">42</span>    <span style="color:#75715e">// write to a channel
 </span><span style="color:#75715e"></span>     <span style="color:#a6e22e">val</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">c</span> <span style="color:#75715e">// read from a channel
 </span><span style="color:#75715e"></span>     println(<span style="color:#a6e22e">val</span>)
 }
-</code></pre></div><p>이제 channel이 무엇인지, 어떻게 만들고 기본 동작의 수행을 어떻게 하는지 알았으니, 첫번째 예제로 돌아가서 channel이 어떻게 도움을 주는지 알아보자.</p>
+</code></pre></div><p>이제 channel이 무엇인지, 어떻게 만들고 기본 동작의 수행을 어떻게 하는지 알았으니, 첫번째 예제로 돌아가서 channel이 어떻게 도움을 주는지 알아보겠습니다.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
      <span style="color:#75715e">// Create a channel to synchronize goroutines
 </span><span style="color:#75715e"></span>     <span style="color:#a6e22e">done</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">bool</span>)
@@ -163,8 +163,8 @@ goroutine 예제를 실행해 보자:</p>
      println(<span style="color:#e6db74">&#34;main function message&#34;</span>)
      <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">done</span> <span style="color:#75715e">// Wait for the goroutine to finish
 </span><span style="color:#75715e"></span>}
-</code></pre></div><p>이 프로그램은 두 메세지를 인쇄 할 것이다. 왜? “done” channel은 버퍼 없기 때문이다. unbuffered channel에서 모든 동작은 수신자와 송신자 모두가 통신 준비가 되기 전까지 실행이 멈춰있게 된다. 그게 unbuffered channel을 동기식이라고 부르는 이유이다. “&lt;-done” 으로 읽는 작업을 하는 main 함수는 goroutine에서 channel에 data를 쓰기 전까지 동작이 블락될 것이다. 그래서 읽는 작업이 성공한 후에만 프로그램이 끝난다.</p>
-<p>다음의 경우 버퍼가 완전히 차있지 않으면 쓰는 동작을 할 수 있고, 버퍼가 비어 있지 않으면 블럭없이 성공적으로 모두 읽을 수 있는 버퍼를 갖고 있다. 이러한 channel을 비동기식이라고 부른다. 동기와 비동기의 차이를 보여주는 예는 다음과 같다:</p>
+</code></pre></div><p>이 프로그램은 두 메세지를 인쇄 할 것 입니다. 왜? “done” channel은 버퍼 없기 때문입니다. unbuffered channel에서 모든 동작은 수신자와 송신자 모두가 통신 준비가 되기 전까지 실행이 멈춰 있게 됩니다. 그게 unbuffered channel을 동기식이라고 부르는 이유입니다. “&lt;-done” 으로 읽는 작업을 하는 main 함수는 goroutine에서 channel에 data를 쓰기 전까지 동작이 블락될 것 입니다. 그래서 읽는 작업이 성공한 후에만 프로그램이 끝납니다.</p>
+<p>다음의 경우 버퍼가 완전히 차있지 않으면 쓰는 동작을 할 수 있고, 버퍼가 비어 있지 않으면 블럭없이 성공적으로 모두 읽을 수 있는 버퍼를 갖고 있습니다. 이러한 channel을 비동기식이라고 부릅니다. 동기와 비동기의 차이를 보여주는 예는 다음과 같습니다:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
      <span style="color:#a6e22e">message</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">string</span>) <span style="color:#75715e">// no buffer
 </span><span style="color:#75715e"></span>     <span style="color:#a6e22e">count</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">3</span>
@@ -182,7 +182,7 @@ goroutine 예제를 실행해 보자:</p>
           <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">message</span>)
      }
 }
-</code></pre></div><p>이 예에서 “message” 는 동기식 channel이고 그 결과이다:</p>
+</code></pre></div><p>이 예에서 “message” 는 동기식 channel이고 그 결과 입니다:</p>
 <pre><code>send message
 // wait for 3 seconds
 message 1
@@ -190,8 +190,8 @@ send message
 send message
 message 2
 message 3
-</code></pre><p>goroutine에서 channel에 첫번째 쓰는 동작을 하고 난 후에 channel에 모든 쓰기 동작은 첫번째 읽기 동작이 수행되기전 (대략 3초 후)까지 블락되었다.</p>
-<p>이제 “message” channel에서  버퍼를 제공해보자. 즉 새로 작성한 라인은 “message := make(chan string, 2)” 처럼 보일것이다. 이번에는 결과과 다음과 같이 보일거다:</p>
+</code></pre><p>goroutine에서 channel에 첫번째 쓰는 동작을 하고 난 후에 channel에 모든 쓰기 동작은 첫번째 읽기 동작이 수행되기전 (대략 3초 후)까지 블락되었습니다.</p>
+<p>이제 “message” channel에서  버퍼를 제공해보겠습니다. 즉 새로 작성한 라인은 “message := make(chan string, 2)” 처럼 보일것입니다. 이번에는 결과과 다음과 같이 보일겁니다:</p>
 <pre><code>send message
 send message
 send message
@@ -199,25 +199,25 @@ send message
 message 1
 message 2
 message 3
-</code></pre><p>이제 3개의 message를 저장할 수 있도록 한 channel의 버퍼에서 첫 번째 읽기를 위한 대기 없이 모든 쓰기 동작을 할 수 있는 걸 볼 수 있다. channel의 capacity를 변경해서 시스템의 처리량을 제한하고 정보량을 제어할 수 있게 되었다.</p>
+</code></pre><p>이제 3개의 message를 저장할 수 있도록 한 channel의 버퍼에서 첫 번째 읽기를 위한 대기 없이 모든 쓰기 동작을 할 수 있는 걸 볼 수 있습니다. channel의 capacity를 변경해서 시스템의 처리량을 제한하고 정보량을 제어할 수 있게 되었습니다.</p>
 <h2 id="deadlock">Deadlock</h2>
-<p>이제 실행할 수 없었던 읽고/쓰기 동작 예제로 돌아가 보자.</p>
+<p>이제 실행할 수 없었던 읽고/쓰기 동작 예제로 돌아가 보겠습니다.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
      <span style="color:#a6e22e">c</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>)
      <span style="color:#a6e22e">c</span> <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">42</span>    <span style="color:#75715e">// write to a channel
 </span><span style="color:#75715e"></span>     <span style="color:#a6e22e">val</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">c</span> <span style="color:#75715e">// read from a channel
 </span><span style="color:#75715e"></span>     println(<span style="color:#a6e22e">val</span>)
 }
-</code></pre></div><p>실행해 보면 이런 에러들을 볼 수 있다.(상세한건 다를 수 있다.)</p>
+</code></pre></div><p>실행해 보면 이런 에러들을 볼 수 있습니다.(상세한건 다를 수 있습니다.)</p>
 <pre><code>fatal error: all goroutines are asleep - deadlock!
 
 goroutine 1 [chan send]:
 main.main()
      /fullpathtofile/channelsio.go:5 +0x54
 exit status 2
-</code></pre><p>이 에러를 deadlock이라고 부른다. 이 상황은 두 goroutine이 서로를 기다리면서 둘 다 실행을 할 수 없는 것이다. Go언어는 런타임에서 deadlock을 찾을 수 있기때문에 이런 에러를 볼 수 있다. 커뮤니케이션 동작이 블락되었기 때문에 에러가 발생한 것이다.</p>
-<p>이 코드는 싱글쓰레드에서 한줄 씩, 차례대로 실행된다. 프로그램 실행이 channel에 쓰기 동작( c &lt;- 42 ) 에서 블락되어 있는건, 우리가 알고 있는 것 처럼, 동기 channel에서 쓰기 동작은 그걸 받는 쪽에서 데이터를 받을 준비가 되어야만 성공할 수 있기 때문이다. 그래서 다음 라인에 리시버를 만들어 주기만 하면 된다.</p>
-<p>이 코드를 동작하게 하기 위해 다음과 같이 작성하면 된다:</p>
+</code></pre><p>이 에러를 deadlock이라고 부릅니다. 이 상황은 두 goroutine이 서로를 기다리면서 둘 다 실행을 할 수 없는 것입니다. Go언어는 런타임에서 deadlock을 찾을 수 있기 때문에 이런 에러를 볼 수 있습니다. 커뮤니케이션 동작이 블락되었기 때문에 에러가 발생한 것입니다.</p>
+<p>이 코드는 싱글쓰레드에서 한줄 씩, 차례대로 실행됩니다. 프로그램 실행이 channel에 쓰기 동작( c &lt;- 42 ) 에서 블락되어 있는건, 우리가 알고 있는 것 처럼, 동기 channel에서 쓰기 동작은 그걸 받는 쪽에서 데이터를 받을 준비가 되어야만 성공할 수 있기 때문입니다. 그래서 다음 라인에 리시버를 만들어 주기만 하면 됩니다.</p>
+<p>이 코드를 동작하게 하기 위해 다음과 같이 작성하면 됩니다:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
      <span style="color:#a6e22e">c</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>)
      
@@ -250,14 +250,14 @@ exit status 2
           <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">msg</span>)
      }
 }
-</code></pre></div><p>이 코드는 동작하지 않는다. 위에서 말한대로 range는 channel이 close되기 전까지 작업을 계속하게 된다. close 함수로 channel을 닫아줘야만 한다. goroutine 부분은 이처럼 보여질거다:</p>
+</code></pre></div><p>이 코드는 동작하지 않습니다. 위에서 말한대로 range는 channel이 close되기 전까지 작업을 계속하게 됩니다. close 함수로 channel을 닫아줘야만 합니다. goroutine 부분은 이처럼 보여질겁니다:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
      <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">1</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;=</span> <span style="color:#a6e22e">count</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
           <span style="color:#a6e22e">message</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;message %d&#34;</span>, <span style="color:#a6e22e">i</span>)
      }
      close(<span style="color:#a6e22e">message</span>)
 }()
-</code></pre></div><p>channel을 close 하게 되면 한가지 더 유용한 기능이 있다. - 닫힌 channel 에 읽기 동작을 하면 블락이 되지 않고 channel 타입의 기본값을 반환한다.</p>
+</code></pre></div><p>channel을 close 하게 되면 한가지 더 유용한 기능이 있습니다. - 닫힌 channel 에 읽기 동작을 하면 블락이 되지 않고 channel 타입의 기본값을 반환합니다.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">done</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">bool</span>)
 close(<span style="color:#a6e22e">done</span>)
 
@@ -265,7 +265,7 @@ close(<span style="color:#a6e22e">done</span>)
 </span><span style="color:#75715e">// because it’s the default value for bool type
 </span><span style="color:#75715e"></span>println(<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">done</span>)
 println(<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">done</span>)
-</code></pre></div><p>이 방법은 goroutine의 동기화에 사용할 수도 있다. 예제중에 하나를 동기화 해보자 :</p>
+</code></pre></div><p>이 방법은 goroutine의 동기화에 사용할 수도 있습니다. 예제중에 하나를 동기화 해보겠습니다 :</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
      <span style="color:#a6e22e">done</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">bool</span>)
 
@@ -280,7 +280,7 @@ println(<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">done
      println(<span style="color:#e6db74">&#34;main function message&#34;</span>)
      <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">done</span> 
 }
-</code></pre></div><p>여기에서 “done” channel은 오직 실행을 동기화 하는데만 쓰이고 데이터를 전송하지는 못한다. 이럴때 사용하는 패턴이 있다:</p>
+</code></pre></div><p>여기에서 “done” channel은 오직 실행을 동기화 하는데만 쓰이고 데이터를 전송하지는 못 합니다. 이럴때 사용하는 패턴이 있습니다:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
      <span style="color:#75715e">// Data is irrelevant
 </span><span style="color:#75715e"></span>     <span style="color:#a6e22e">done</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">struct</span>{})
@@ -297,7 +297,7 @@ println(<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">done
 }
 </code></pre></div><p>goroutine에서 close한 channel에 읽기 동작을 하면 블럭되지도 않고 main 함수도 계속 실행이 된다.</p>
 <h2 id="multiple-channels-and-select">Multiple channels and select</h2>
-<p>실제 프로그램에서는 더 많은 goroutine과 channel이 필요할 거다. 독립적인 부분이 많아 지면 더 효과적인 동기화가 필요할거다. 복잡한 예제를 보자:</p>
+<p>실제 프로그램에서는 더 많은 goroutine과 channel이 필요할것입니다. 독립적인 부분이 많아지면 더 효과적인 동기화가 필요할겁니다. 복잡한 예제를 보겠습니다:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">getMessagesChannel</span>(<span style="color:#a6e22e">msg</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">delay</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Duration</span>) <span style="color:#f92672">&lt;-</span><span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">string</span> {
      <span style="color:#a6e22e">c</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">string</span>)
      <span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
@@ -321,7 +321,7 @@ println(<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">done
           println(<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">c3</span>)
      }
 }
-</code></pre></div><p>우리는 channel을 만들고 일정한 간격으로 3개의 메세지로 channel을 채우는 goroutine을 생성하는 함수를 갖고 있다. 3번째 channel c3는 제일 짧은 간격이라서 다른것들보다 먼저 메세지가 보여지게 될 것 같다. (역주: except 가 아니라 expect 인것 같다.) 그렇지만 결과는 다음과 같다:</p>
+</code></pre></div><p>우리는 channel을 만들고 일정한 간격으로 3개의 메세지로 channel을 채우는 goroutine을 생성하는 함수를 갖고 있습니다. 3번째 channel c3는 제일 짧은 간격이라서 다른것들보다 먼저 메세지가 보여지게 될 것 같습니다. (역주: except 가 아니라 expect 인것 같습니다.) 그렇지만 결과는 다음과 같습니다:</p>
 <pre><code>first 1
 second 1
 third 1
@@ -331,8 +331,8 @@ third 2
 first 3
 second 3
 third 3
-</code></pre><p>분명히 연속해서 출력되었다.300밀리초단위로 루프 반복과 다른 작업을  하는 첫번쨰 channel에 대한 읽기 동작은 기다려야하기 때문이다. 우리는 실제로 모든 channel에서 어떤것이든 바로 메세지를 읽기를 원한다.</p>
-<p>여러 channel에서 커뮤니케이션 작업을 위해서 Go언어에는 “select” 가 있다. “switch”와 비슷하지만, 모든 case에는 커뮤니케이션 동작(read, write)만 있다. “case”의 동작이 수행되면 그에 맞는 코드 블록이 실행된다. 그래서 우리가 원하는걸 하도록 작성하면된다:</p>
+</code></pre><p>분명히 연속해서 출력되었습니다. 300밀리초단위로 루프 반복과 다른 작업을  하는 첫번쨰 channel에 대한 읽기 동작은 기다려야하기 때문입니다. 우리는 실제로 모든 channel에서 어떤것이든 바로 메세지를 읽기를 원합니다.</p>
+<p>여러 channel에서 커뮤니케이션 작업을 위해서 Go언어에는 “select” 가 있습니다. “switch”와 비슷하지만, 모든 case에는 커뮤니케이션 동작(read, write)만 있습니다. “case”의 동작이 수행되면 그에 맞는 코드 블록이 실행됩니다. 그래서 우리가 원하는걸 하도록 작성하면됩니다:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">1</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">9</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
      <span style="color:#66d9ef">select</span> {
      <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">msg</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">c1</span>:
@@ -343,8 +343,8 @@ third 3
           println(<span style="color:#a6e22e">msg</span>)
      }
 }
-</code></pre></div><p>숫자 9는 channel에서 3번 쓰는 동작을 한다. 그래서 9번 루프를 돌면서 select를 했다. 프로그램에서 무한 루프로 “select”를 실행하는건 보통 데몬으로서 실행되는걸 의미한다. 그렇지만 여기에서는 한번 실행이 되고나면 deadlock에 걸리게 될 것이다.</p>
-<p>이제 예상한 결과를 얻었다. 그리고 읽기 작업중에 다른 작업을 차단하지 않는다. 결과이다:</p>
+</code></pre></div><p>숫자 9는 channel에서 3번 쓰는 동작을 합니다. 그래서 9번 루프를 돌면서 select를 했습니다. 프로그램에서 무한 루프로 “select”를 실행하는건 보통 데몬으로서 실행되는걸 의미합니다. 그렇지만 여기에서는 한번 실행이 되고나면 deadlock에 걸리게 될 것입니다.</p>
+<p>이제 예상한 결과를 얻었습니다. 그리고 읽기 작업중에 다른 작업을 차단하지 않습니다. 결과입니다:</p>
 <pre><code>first 1
 second 1
 third 1 // this channel does not wait for others
@@ -355,7 +355,7 @@ first 2
 second 3
 first 3
 </code></pre><h2 id="conclusion">Conclusion</h2>
-<p>Channel은 Go언어에서 아주 강력하고 흥미로운 구조이다. 그렇지만 그걸 효과적으로 사용하기 위해서는 어떻게 동작하는지 꼭 이해를 해야한다. 여기에서는 꼭 필요한 기본들에 대해서만 설명을 했다. 더 학습하기 위해서 다음들을 보면 좋을 것 같다.</p>
+<p>Channel은 Go언어에서 아주 강력하고 흥미로운 구조입니다. 그렇지만 그걸 효과적으로 사용하기 위해서는 어떻게 동작하는지 꼭 이해를 해야합니다. 여기에서는 꼭 필요한 기본들에 대해서만 설명을 했습니다. 더 학습하기 위해서 다음들을 보면 좋을 것 같습니다.</p>
 <ul>
 <li><a href="https://blog.golang.org/concurrency-is-not-parallelism">Concurrency is not parallelism</a> - early mentioned talk from Rob Pike</li>
 <li><a href="https://www.youtube.com/watch?v=f6kdp27TYZs">Go Concurrency Patterns</a></li>

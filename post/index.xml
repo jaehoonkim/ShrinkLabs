@@ -361,14 +361,14 @@ ulimit -c unlimited 로 해주었습니다.
       <pubDate>Sun, 18 Jun 2017 23:13:14 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/go_delve/</guid>
-      <description>소개 delve는 Go언어를 위한 debugger 이다.
-delve설치 설치를 하기위해서는 Go 1.5 이상의 버전이 필요하다.
+      <description>소개 delve는 Go언어를 위한 debugger 입니다.
+delve설치 설치를 하기 위해서는 Go 1.5 이상의 버전이 필요합니다.
 지금 시점에 Go 1.5를 사용하지 않을테니&amp;hellip;
-다음의 명령으로 설치한다.
-$ go get github.com/derekparker/delve/cmd/dlv 이제 설치 끝! (Windows랑 MAC은 모르겠다.)
-delve사용 프로세스 실행 제어, 변수, 스레드/goroutine 상태, CPU 레지스터 상태 등을 확인 할 수 있다.
+다음의 명령으로 설치합니다.
+$ go get github.com/derekparker/delve/cmd/dlv 이제 설치 끝! (Windows랑 MAC은 모르겠습니다.)
+delve사용 프로세스 실행 제어, 변수, 스레드/goroutine 상태, CPU 레지스터 상태 등을 확인 할 수 있습니다.
   Commands
- attach: 실행중인 프로세스에 연결해서 디버깅을 한다. $ dlv attach pid [executable] 실행중인 프로세스에 디버그 세션을 연결해서 프로세스를 제어한다.</description>
+ attach: 실행중인 프로세스에 연결해서 디버깅을 합니다. $ dlv attach pid [executable] 실행중인 프로세스에 디버그 세션을 연결해서 프로세스를 제어합니다.</description>
     </item>
     
     <item>
@@ -431,7 +431,7 @@ package main import { &amp;#34;net/http&amp;#34; &amp;#34;github.com/gorilla/mux
       <pubDate>Fri, 25 Nov 2016 00:52:47 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/go_encode/</guid>
-      <description>Javascript에서 encodeURIComponent() 함수를 사용해서 전달받은 문자열을 디코딩해서 보기 위해서는 &amp;ldquo;net/url&amp;rdquo; 패키지의 QueryUnescape() 함수를 사용할 수 있다.
+      <description>Javascript에서 encodeURIComponent() 함수를 사용해서 전달받은 문자열을 디코딩해서 보기 위해서는 &amp;ldquo;net/url&amp;rdquo; 패키지의 QueryUnescape() 함수를 사용할 수 있습니다.
 email, err := url.QueryUnescape(user.Email) </description>
     </item>
     
@@ -657,9 +657,9 @@ $ pkg-config --list-all 현재 설치된 라이브러리들의 정보가 나오�
       <pubDate>Wed, 10 Dec 2014 13:12:58 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/go_golang-channels-tutorial/</guid>
-      <description>최근에 goroutine과 channel에 대해서 학습하다가 설명이 잘 되어 있는 글을 찾아서 번역(이라고 하기에는 뭐하고 정리?) 를 해봤다. 제대로 이해를 못하고 잘 못 번역을 한 부분이 있을 수 도 있으니&amp;hellip;꼭 원본을 보길 권장한다.;;;
+      <description>최근에 goroutine과 channel에 대해서 학습하다가 설명이 잘 되어 있는 글을 찾아서 번역(이라고 하기에는 뭐하고 정리?) 를 해봤습니다. 제대로 이해를 못하고 잘 못 번역을 한 부분이 있을 수 도 있으니&amp;hellip;꼭 원본을 보길 권장합니다.
 원본 : http://guzalexander.com/2013/12/06/golang-channels-tutorial.html
- Go언어는 병렬 프로그램 작성을 위해서 내장 도구를 갖고 있다. go를 함수 호출 앞에 놓으면 동일한 주소에 위치하는 코드를 독립적인 병렬 스레드로 실행을 시작한다. 이런 쓰레드를 Go언어에서는 goroutine이라고 부른다. 여기에서 말하는 concurrently는 parallel을 의미하지는 않는다. (역주: 그렇지만 번역은 “병렬” 이라고 칭하겠다.</description>
+ Go언어는 병렬 프로그램 작성을 위해서 내장 도구를 갖고 있습니다. go를 함수 호출 앞에 놓으면 동일한 주소에 위치하는 코드를 독립적인 병렬 스레드로 실행을 시작합니다. 이런 쓰레드를 Go언어에서는 goroutine이라고 부릅니다. 여기에서 말하는 concurrently는 parallel을 의미하지는 않습니다. (역주: 그렇지만 번역은 “병렬” 이라고 칭하겠습니다.</description>
     </item>
     
     <item>
@@ -679,12 +679,12 @@ package main import ( &amp;#34;io/ioutil&amp;#34; &amp;#34;crypto/md5&amp;#34; &
       <pubDate>Tue, 17 Sep 2013 17:10:53 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/go_go-slice-from-c-array/</guid>
-      <description>cgo를 이용하다보면, C언어로 작성된 라이브러리의 리턴값으로 포인터에 구조체가 할당되어서 넘어올때가 있다.
-C언어에서 넘어오는 구조체 배열이 포인터 형태로 넘어오니, Go의 포인터에 할당을 해서 사용 해봤다.
-당연히 제대로 동작하지 않는다. C언어로 작성된 라이브러리에서 넘어오는 값은 배열이니, Go언어에서는 slices에 할당을 하는게 맞는것 같다.
-다음의 내용을 보면, array를 어떻게 slices에 할당을 해야 할지에 대해서 잘 설명이 되어 있다.
+      <description>cgo를 이용하다보면, C언어로 작성된 라이브러리의 리턴값으로 포인터에 구조체가 할당되어서 넘어올때가 있습니다.
+C언어에서 넘어오는 구조체 배열이 포인터 형태로 넘어오니, Go의 포인터에 할당을 해서 사용 해봤습니다.
+당연히 제대로 동작하지 않습니다. C언어로 작성된 라이브러리에서 넘어오는 값은 배열이니, Go언어에서는 slices에 할당을 하는게 맞는것 같습니다.
+다음의 내용을 보면, array를 어떻게 slices에 할당을 해야 할지에 대해서 잘 설명이 되어 있습니다.
 &amp;ldquo;Turning C arrays into Go slcies&amp;rdquo; ( https://code.google.com/p/go-wiki/wiki/cgo )
-아래는 cubrid driver를 만들면서 사용한 코드이다.
+아래는 cubrid driver를 만들면서 사용한 코드입니다.
 slcieHeader := (*reflect.</description>
     </item>
     
