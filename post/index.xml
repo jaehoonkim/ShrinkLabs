@@ -296,7 +296,7 @@ git log로 이전 commit의 id를 확인합니다. (ex, d50fd96d2d7e5e5cf689b094
       <pubDate>Thu, 12 Jul 2018 16:52:08 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/go_key_exists_in_map/</guid>
-      <description>map을 사용할때 해당하는 키가 map에 존재하는지 확인이 필요할 때가 있다.
+      <description>map을 사용할때 해당하는 키가 map에 존재하는지 확인이 필요할 때가 있습니다.
 var target[string]*item ... target[&amp;#34;apple&amp;#34;] = itm1 target[&amp;#34;orange&amp;#34;] = itm2 ... value, ok := target[&amp;#34;kiwi&amp;#34;] </description>
     </item>
     
@@ -321,11 +321,11 @@ var target[string]*item ... target[&amp;#34;apple&amp;#34;] = itm1 target[&amp;#
       
       <guid>https://shrinklabs.com/post/go_kvm-with-go/</guid>
       <description>준비물 노트북(우분투 16.04)
-KVM이 뭔가요? 하이퍼바이저? 위키백과에 나와 있는 정의( https://ko.wikipedia.org/wiki/%ED%95%98%EC%9D%B4%ED%8D%BC%EB%B0%94%EC%9D%B4%EC%A0%80 ) 를 보면 이렇게 나와 있다.
+KVM이 뭔가요? 하이퍼바이저? 위키백과에 나와 있는 정의( https://ko.wikipedia.org/wiki/%ED%95%98%EC%9D%B4%ED%8D%BC%EB%B0%94%EC%9D%B4%EC%A0%80 ) 를 보면 이렇게 나와 있습니다.
 &amp;ldquo;다수의 운영 체제를 동시에 실행하기 위한 논리적 플랫폼&amp;rdquo;
-여기에 우리가 잘 알고 있는 VmWare, VirtualBox와 같은것도 있고, Xen, KVM 같이 좀 낯선 것들도 있다.
-내용을 읽다보면, 왠지 중요해 보이는 단어 Type1, Type2, 전가상화, 반가상화 뭐 이런 단어들이 나온다.
-Type1은 호스트에 하이퍼바이저가 존재하고, Type2는 호스트 OS에 설치된 응용 프로그램 형태로 하이퍼바이저가 존재하는거라고 보면 될 거같다.</description>
+여기에 우리가 잘 알고 있는 VmWare, VirtualBox와 같은것도 있고, Xen, KVM 같이 좀 낯선 것들도 있습니다.
+내용을 읽다보면, 왠지 중요해 보이는 단어 Type1, Type2, 전가상화, 반가상화 뭐 이런 단어들이 나옵니다.
+Type1은 호스트에 하이퍼바이저가 존재하고, Type2는 호스트 OS에 설치된 응용 프로그램 형태로 하이퍼바이저가 존재하는거라고 보면 될 것 같습니다.</description>
     </item>
     
     <item>
@@ -553,7 +553,7 @@ func main() { http.HandleFunc(&amp;#34;/&amp;#34;, indexHandler) http.ListenAndS
       <pubDate>Sun, 17 Jul 2016 17:10:53 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/go_http-handlefunc-handle/</guid>
-      <description>HandleFunc  http.ResponseWriter 와 *http.Request를 인자로 받는 함수를 전달받는다. 내부적으로 ServeHTTP가 구현된 ServeMux를 사용한다.  package main import ( &amp;#34;net/http&amp;#34; ) func indexHandler(w http.ResponseWriter, r *http.Request) { .... } func main() { http.HandleFunc(&amp;#34;/&amp;#34;, indexHandler) http.ListenAndServe(&amp;#34;:8080&amp;#34;, nil) } Handle  http.Handler 인터페이스를 구현한 객체를 전달받는다. 인자로 전달받은 객체는 http.Handler의 ServeHTTP(http.ResponseWriter, *http.Request)가 구현되어 있어야 한다.  package main import ( &amp;#34;net/http&amp;#34; ) type indexHandler struct { } func (index *AppHandler) ServeHTTP(w http.ResponseWriter, r *http.</description>
+      <description>HandleFunc  http.ResponseWriter 와 *http.Request를 인자로 받는 함수를 전달받습니다. 내부적으로 ServeHTTP가 구현된 ServeMux를 사용합니다.  package main import ( &amp;#34;net/http&amp;#34; ) func indexHandler(w http.ResponseWriter, r *http.Request) { .... } func main() { http.HandleFunc(&amp;#34;/&amp;#34;, indexHandler) http.ListenAndServe(&amp;#34;:8080&amp;#34;, nil) } Handle  http.Handler 인터페이스를 구현한 객체를 전달받습니다. 인자로 전달받은 객체는 http.Handler의 ServeHTTP(http.ResponseWriter, *http.Request)가 구현되어 있어야 합니다.  package main import ( &amp;#34;net/http&amp;#34; ) type indexHandler struct { } func (index *AppHandler) ServeHTTP(w http.ResponseWriter, r *http.</description>
     </item>
     
     <item>
