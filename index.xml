@@ -413,13 +413,12 @@ RabbitMQ라는게 뭐지? AMQP를 구현한 메세지 브로커
       <pubDate>Sat, 10 Dec 2016 18:22:48 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/go_multipart-contenttype/</guid>
-      <description>mime/multipart를 사용해서 파일을 업로드 하려 할때 파일을 업로드할 필드를 생성하기 위해서 CreateFormFile()을 사용한다.
-이를 이용해서 파일을 업로드하면 &amp;ldquo;Content-Type&amp;quot;이 &amp;ldquo;application/octet-stream&amp;rdquo; 으로 고정되어진다.
-src/mime/multipart/writer.go의 CreateFormFile을 확인해 보면 다음과 같이 고정되어 있는걸 확인 할 수 있다.
-h.Set(&amp;#34;Content-Type&amp;#34;, &amp;#34;application/octet-stream&amp;#34;) 관련한 이슈가 올라온게 혹시 있지 않을까 해서 찾아보니.
-이런 이슈가 있었다.
+      <description>mime/multipart를 사용해서 파일을 업로드 하려 할때 파일을 업로드할 필드를 생성하기 위해서 CreateFormFile()을 사용합니다.
+이를 이용해서 파일을 업로드하면 &amp;ldquo;Content-Type&amp;quot;이 &amp;ldquo;application/octet-stream&amp;rdquo; 으로 고정 되어집니다.
+src/mime/multipart/writer.go의 CreateFormFile을 확인해 보면 다음과 같이 고정되어 있는걸 확인 할 수 있습니다.
+h.Set(&amp;#34;Content-Type&amp;#34;, &amp;#34;application/octet-stream&amp;#34;) 관련한 이슈가 올라온게 혹시 있지 않을까 해서 찾아보니 이런 이슈가 있었습니다.
 https://github.com/golang/go/issues/16425
-bradfitz는 다음과 같이 답변을 하고 있다.
+bradfitz는 다음과 같이 답변을 하고 있습니다.
  Use CreatePart. CreateFormFile is a very thin wrapper around CreatePart. Click https://golang.org/pkg/mime/multipart/#Writer.CreateFormField[] and then click the CreateFormFile heading to see its source code.</description>
     </item>
     
@@ -627,12 +626,12 @@ import &amp;ldquo;github.com/jaehoonn/lotto/command&amp;rdquo; 와 같이 사용
       <pubDate>Thu, 11 Jun 2015 13:43:41 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/go_meta-tag-pkg-repository/</guid>
-      <description>최근에 go소스들을 분석하면서 특이한 pkg import 경로들을 보게되었다.
-import &amp;#34;rsc.io/pdf&amp;#34; 와 같은 &amp;ldquo;github.com/rsc/pdf&amp;rdquo; 와 동일한 내용인데 그리고 rsc는 russ cox가 사용하는 닉네임인데&amp;hellip;그럼 같은 pkg인가?
-그래서 웹브라우저에서 rsc.io/pdf 를 입력하면 godoc로 이동을 하네?
-어떻게 한걸까!? 궁금했다. 그리고 왠지 멋있어 보였다&amp;hellip;;
-그러다가 우연히 rob pike의 github page(https://github.com/robpike/robpike.github.io)를 보게 되었다.
-index.html 에 이렇게만 코드가 되어 있었다.
+      <description>최근에 go소스들을 분석하면서 특이한 pkg import 경로들을 보게 되었습니다.
+import &amp;#34;rsc.io/pdf&amp;#34; 와 같은 &amp;ldquo;github.com/rsc/pdf&amp;rdquo; 와 동일한 내용인데 그리고 rsc는 russ cox가 사용하는 닉네임인데 그럼 같은 pkg 인가 싶었습니다?
+그래서 웹브라우저에서 rsc.io/pdf 를 입력하면 godoc로 이동을 합니다.
+어떻게 한걸까!? 궁금했습니다. 그리고 왠지 멋있어 보였습니다&amp;hellip;;
+그러다가 우연히 rob pike의 github page(https://github.com/robpike/robpike.github.io)를 보게 되었습니다.
+index.html 에 이렇게만 코드가 되어 있었습니다.
 &amp;lt;meta name=&amp;quot;go-import&amp;quot; content=&amp;quot;robpike.io/cmd hg https://code.google.com/p/rspace.cmd&amp;quot;&amp;gt; This is a git repository holding a redirect for the Go repositories referenced by robpike.</description>
     </item>
     
@@ -651,12 +650,12 @@ index.html 에 이렇게만 코드가 되어 있었다.
       <pubDate>Fri, 06 Mar 2015 01:28:09 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/go_pkg-config/</guid>
-      <description>Go언어를 사용하다보면 C로 만들어진 라이브러리를 사용하기 위해서 cgo가 필요할 때 가 있다. 라이브러리를 링크하고 하는 몇 가지 절차를 거치게 되는데, 이때 pkg-config라는걸 사용하면 편리하다.
-pkg-config를 사용하면 컴파일하는데 필요한 라이브러리와 헤더정보를 Go코드상에서 동일한 경로로 제공해줄 수 있게 된다.
-pkg-config가 설치되어 있지 않을 경우에는 다음과 같이 설치를 해준다.
-$ sudo apt-get install pkg-config 이제 설치되어 있는 라이브러리 목록을 한번 보자.
-$ pkg-config --list-all 현재 설치된 라이브러리들의 정보가 나오게 된다.
-그런데 내가 원하는 라이브러리의 정보가 나타나지 않는다.</description>
+      <description>Go언어를 사용하다보면 C로 만들어진 라이브러리를 사용하기 위해서 cgo가 필요할 때 가 있습니다. 라이브러리를 링크하고 하는 몇 가지 절차를 거치게 되는데, 이때 pkg-config라는걸 사용하면 편리합니다.
+pkg-config를 사용하면 컴파일하는데 필요한 라이브러리와 헤더정보를 Go코드상에서 동일한 경로로 제공해줄 수 있게 됩니다.
+pkg-config가 설치되어 있지 않을 경우에는 다음과 같이 설치를 해줄 수 있습니다.
+$ sudo apt-get install pkg-config 이제 설치되어 있는 라이브러리 목록을 한번 보겠습니다.
+$ pkg-config --list-all 현재 설치된 라이브러리들의 정보가 나오게 됩니다.
+그런데 내가 원하는 라이브러리의 정보가 나타나지 않습니다.</description>
     </item>
     
     <item>
@@ -676,8 +675,7 @@ $ pkg-config --list-all 현재 설치된 라이브러리들의 정보가 나오�
       <pubDate>Tue, 08 Oct 2013 17:10:53 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/go_md5/</guid>
-      <description>Qt로 만드는 클라이언트에서 이미지 파일에 대해서 만들어진 md5 hash를 검증 해보기 위해서, 같은 이미지 파일에 대해서 Go언어로 md5 hash를 만들었을때 동일한 값이 생성되면 제대로 만들어진거 아닐까 해서, 만들어 봄.
-(사실은 일하기 싫어서 괜히 한번 해 본&amp;hellip;)
+      <description>Qt로 만드는 클라이언트에서 이미지 파일에 대해서 만들어진 md5 hash를 검증 해보기 위해서, 같은 이미지 파일에 대해서 Go언어로 md5 hash를 만들었을때 동일한 값이 생성되면 제대로 만들어진거 아닐까 해서, 만들어 봤습니다.
 package main import ( &amp;#34;io/ioutil&amp;#34; &amp;#34;crypto/md5&amp;#34; &amp;#34;fmt&amp;#34; ) func main() { data, err := ioutil.ReadFile(&amp;#34;1.jpg&amp;#34;) if err != nil { return; } hash := md5.New() hash.Write(data) hashData := hash.Sum(nil) fmt.Printf(&amp;#34;%x&amp;#34;, hashData) } </description>
     </item>
     

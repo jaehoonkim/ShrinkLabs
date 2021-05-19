@@ -103,20 +103,20 @@
  						<h1 class="entry-title"><a href="https://shrinklabs.com/post/go_pkg-config/" rel="bookmark">pkg-config 사용</a></h1>
 					</header>
 					<div class="entry-content">
-						<p>Go언어를 사용하다보면 C로 만들어진 라이브러리를 사용하기 위해서 cgo가 필요할 때 가 있다.
-라이브러리를 링크하고 하는 몇 가지 절차를 거치게 되는데, 이때 pkg-config라는걸 사용하면 편리하다.</p>
-<p>pkg-config를 사용하면 컴파일하는데 필요한 라이브러리와 헤더정보를 Go코드상에서 동일한 경로로 제공해줄 수 있게 된다.</p>
-<p>pkg-config가 설치되어 있지 않을 경우에는 다음과 같이 설치를 해준다.</p>
+						<p>Go언어를 사용하다보면 C로 만들어진 라이브러리를 사용하기 위해서 cgo가 필요할 때 가 있습니다.
+라이브러리를 링크하고 하는 몇 가지 절차를 거치게 되는데, 이때 pkg-config라는걸 사용하면 편리합니다.</p>
+<p>pkg-config를 사용하면 컴파일하는데 필요한 라이브러리와 헤더정보를 Go코드상에서 동일한 경로로 제공해줄 수 있게 됩니다.</p>
+<p>pkg-config가 설치되어 있지 않을 경우에는 다음과 같이 설치를 해줄 수 있습니다.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Shell" data-lang="Shell">$ sudo apt-get install pkg-config
-</code></pre></div><p>이제 설치되어 있는 라이브러리 목록을 한번 보자.</p>
+</code></pre></div><p>이제 설치되어 있는 라이브러리 목록을 한번 보겠습니다.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Shell" data-lang="Shell">$ pkg-config --list-all
-</code></pre></div><p>현재 설치된 라이브러리들의 정보가 나오게 된다.</p>
-<p>그런데 내가 원하는 라이브러리의 정보가 나타나지 않는다.</p>
-<p>라이브러리 정보의 관리는 /usr/lib/pkgconfig 경로에 있는 .pc 파일들을 통해서 되어진다.
-직접 소스를 컴파일해서 사용하는 라이이브러리의 경우 /usr/local/lib/pkgconfig 에 있는 경우도 있다. 또는 Qt와 같은 경우에는 /home/{user}/Qt5.4.1/5.4/gcc_64/lib/pkgconfig 의 경로에 pc파일이 존재한다.</p>
-<p>이렇게 기본경로가 아닌곳에 존재하는 pc파일들을 관리하기 위해서 PKG_CONFIG_PATH라는 환경변수를 사용할 수 있다.</p>
+</code></pre></div><p>현재 설치된 라이브러리들의 정보가 나오게 됩니다.</p>
+<p>그런데 내가 원하는 라이브러리의 정보가 나타나지 않습니다.</p>
+<p>라이브러리 정보의 관리는 /usr/lib/pkgconfig 경로에 있는 .pc 파일들을 통해서 됩니다.
+직접 소스를 컴파일해서 사용하는 라이이브러리의 경우 /usr/local/lib/pkgconfig 에 있는 경우도 있습니다. 또는 Qt와 같은 경우에는 /home/{user}/Qt5.4.1/5.4/gcc_64/lib/pkgconfig 의 경로에 pc파일이 존재합니다.</p>
+<p>이렇게 기본경로가 아닌곳에 존재하는 pc파일들을 관리하기 위해서 PKG_CONFIG_PATH라는 환경변수를 사용할 수 있습니다.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Shell" data-lang="Shell">$ export PKG_CONFIG_PATH<span style="color:#f92672">=</span>”$PKG_CONFIG_PATH:/home/<span style="color:#f92672">{</span>user<span style="color:#f92672">}</span>/Qt5.4.1/5.4/gcc_64/lib/pkgconfig”
-</code></pre></div><p>와 같이 해준다. 구분은 &ldquo;:&rdquo; 로 해준다.</p>
+</code></pre></div><p>와 같이 해줍니다. 구분은 &ldquo;:&rdquo; 로 합니다.</p>
 <p>[참고] <a href="http://ko.wikipedia.org/wiki/Pkg-config">http://ko.wikipedia.org/wiki/Pkg-config</a><br>
 [참고] <a href="http://tjcplpllog.blogspot.kr/2014/08/pkg-config.html">http://tjcplpllog.blogspot.kr/2014/08/pkg-config.html</a><br>
 [참고] <a href="http://blog.daum.net/heyjun/15705389">http://blog.daum.net/heyjun/15705389</a><br>

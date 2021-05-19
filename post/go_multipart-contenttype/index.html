@@ -103,19 +103,18 @@
  						<h1 class="entry-title"><a href="https://shrinklabs.com/post/go_multipart-contenttype/" rel="bookmark">CreateFormFile()을 사용하면 Content-Type이 고정되는 현상</a></h1>
 					</header>
 					<div class="entry-content">
-						<p>mime/multipart를 사용해서 파일을 업로드 하려 할때 파일을 업로드할 필드를 생성하기 위해서 CreateFormFile()을 사용한다.<br>
-이를 이용해서 파일을 업로드하면 &ldquo;Content-Type&quot;이 &ldquo;application/octet-stream&rdquo; 으로 고정되어진다.</p>
-<p>src/mime/multipart/writer.go의 CreateFormFile을 확인해 보면 다음과 같이 고정되어 있는걸 확인 할 수 있다.</p>
+						<p>mime/multipart를 사용해서 파일을 업로드 하려 할때 파일을 업로드할 필드를 생성하기 위해서 CreateFormFile()을 사용합니다.<br>
+이를 이용해서 파일을 업로드하면 &ldquo;Content-Type&quot;이 &ldquo;application/octet-stream&rdquo; 으로 고정 되어집니다.</p>
+<p>src/mime/multipart/writer.go의 CreateFormFile을 확인해 보면 다음과 같이 고정되어 있는걸 확인 할 수 있습니다.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">h</span>.<span style="color:#a6e22e">Set</span>(<span style="color:#e6db74">&#34;Content-Type&#34;</span>, <span style="color:#e6db74">&#34;application/octet-stream&#34;</span>)
-</code></pre></div><p>관련한 이슈가 올라온게 혹시 있지 않을까 해서 찾아보니.<br>
-이런 이슈가 있었다.<br>
+</code></pre></div><p>관련한 이슈가 올라온게 혹시 있지 않을까 해서 찾아보니 이런 이슈가 있었습니다.<br>
 <a href="https://github.com/golang/go/issues/16425">https://github.com/golang/go/issues/16425</a></p>
-<p>bradfitz는 다음과 같이 답변을 하고 있다.</p>
+<p>bradfitz는 다음과 같이 답변을 하고 있습니다.</p>
 <blockquote>
 <p>Use CreatePart.
 CreateFormFile is a very thin wrapper around CreatePart. Click <a href="https://golang.org/pkg/mime/multipart/#Writer.CreateFormField%5B%5D">https://golang.org/pkg/mime/multipart/#Writer.CreateFormField[]</a> and then click the CreateFormFile heading to see its source code.</p>
 </blockquote>
-<p>그래서 난 CreateFormFile() 함수의 구현을 수정해서 CreateFormImage()함수를 만들어서 사용하기로 했다.</p>
+<p>그래서 난 CreateFormFile() 함수의 구현을 수정해서 CreateFormImage()함수를 만들어서 사용하기로 했습니다.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">file</span>, <span style="color:#a6e22e">fileHeader</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">FormFile</span>(<span style="color:#e6db74">&#34;image&#34;</span>)
 <span style="color:#f92672">...</span>
 <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">b</span> <span style="color:#a6e22e">bytes</span>.<span style="color:#a6e22e">Buffer</span>
@@ -125,8 +124,8 @@ CreateFormFile is a very thin wrapper around CreatePart. Click <a href="https://
 <span style="color:#a6e22e">h</span>.<span style="color:#a6e22e">Set</span>(<span style="color:#e6db74">&#34;Content-Disposition&#34;</span>,  <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">`form-data; name=&#34;%s&#34;; filename=&#34;%s&#34;`</span>, <span style="color:#a6e22e">escapeQuotes</span>(<span style="color:#e6db74">&#34;image&#34;</span>), <span style="color:#a6e22e">escapeQuotes</span>(<span style="color:#a6e22e">fileHeader</span>.<span style="color:#a6e22e">Filename</span>)))
 <span style="color:#a6e22e">h</span>.<span style="color:#a6e22e">Set</span>(<span style="color:#e6db74">&#34;Content-Type&#34;</span>, <span style="color:#e6db74">&#34;image/jpeg&#34;</span>)
 <span style="color:#a6e22e">fw</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">wr</span>.<span style="color:#a6e22e">CreatePart</span>(<span style="color:#a6e22e">h</span>)
-</code></pre></div><p>CreateFormFile()을 사용하던 부분을 위의 코드로 교체해서 전송 하면 Content Type이 원하는 형태(image/jpeg&rdquo;)로 전달이 되어진것을 확인 할 수 있다.<br>
-escapeQuotes() 함수는 &hellip;/multipart/writer.go의 구현을 참고하면 된다.</p>
+</code></pre></div><p>CreateFormFile()을 사용하던 부분을 위의 코드로 교체해서 전송 하면 Content Type이 원하는 형태(image/jpeg&rdquo;)로 전달이 되어진것을 확인 할 수 있습니다.<br>
+escapeQuotes() 함수는 &hellip;/multipart/writer.go의 구현을 참고하면 됩니다.</p>
 
 					</div>
 				</article>
