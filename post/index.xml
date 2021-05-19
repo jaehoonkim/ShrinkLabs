@@ -506,18 +506,17 @@ let g:go_template_file = &amp;quot;hello_world.go&amp;quot; 로 해도 된다.</
       <pubDate>Sat, 03 Sep 2016 17:10:53 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/go_template/</guid>
-      <description>Go언어의 Template 엔진을 사용할때, 왜 New()의 파라미터로 이름을 만들어서 넘겨야 하는지가 궁금했었다.
-Template and Associated templates라는 글을 읽고 어느 정도 이해를 하게 되었다.
-다음은 위 글의 내용을 요약한 것이다.
-template.New() 로 template을 만들때, 이름을 정해서 만든다.
-이 때 FuncMap과 템플릿 리스트를 갖는 그룹(그룹의 이 글에서 사용하는 용어로 Associated Templates를 가르킨다)이 생성된다.
+      <description>Go언어의 Template 엔진을 사용할때, 왜 New()의 파라미터로 이름을 만들어서 넘겨야 하는지가 궁금 했었습니다.
+Template and Associated templates라는 글을 읽고 어느 정도 이해를 하게 되었습니다.
+다음은 위 글의 내용을 요약한 것 입니다.
+template.New() 로 template을 만들때, 이름을 정해서 만듭니다.
+이 때 FuncMap과 템플릿 리스트를 갖는 그룹(그룹의 이 글에서 사용하는 용어로 Associated Templates를 가르킨다)이 생성 됩니다.
 FuncMap에 대해서는,
 https://golang.org/pkg/html/template/#FuncMap
 http://goinbigdata.com/example-of-using-templates-in-golang/
 http://technosophos.com/2013/11/23/using-custom-template-functions-in-go.html
-를 확인해본다.
-New()를 했어도 아직 템플릿 리스트에서 관리되는 대상은 아니다.
-Parse(&amp;hellip;)를 하면 템플릿 리스트에 추가가 된다.</description>
+를 확인해 봅니다.
+New()를 했어도 아직 템플릿 리스트에서 관리되는 대상은 아닙니다.</description>
     </item>
     
     <item>

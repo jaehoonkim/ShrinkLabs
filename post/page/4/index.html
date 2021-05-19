@@ -154,13 +154,13 @@ sudo service rabbitmq-server restart
 <h2 id="go언어에서-rabbitmq-사용">Go언어에서 RabbitMQ 사용</h2>
 <ul>
 <li>패키지는 amqp를 사용 (<a href="https://github.com/streadway/amqp">https://github.com/streadway/amqp</a>)</li>
-<li>tutorial(<a href="http://www.rabbitmq.com/getstarted.html">http://www.rabbitmq.com/getstarted.html</a>) 을 보면 6개의 챕터로 나누어져 있으며, 각 챕터마다 Go언어를 사용한 내용이 존재한다.</li>
-<li>tutorial의 예제 코드는 github(<a href="https://github.com/rabbitmq/rabbitmq-tutorials/tree/master/go">https://github.com/rabbitmq/rabbitmq-tutorials/tree/master/go</a>) 에서 확인 할 수 있다.</li>
+<li>tutorial(<a href="http://www.rabbitmq.com/getstarted.html">http://www.rabbitmq.com/getstarted.html</a>) 을 보면 6개의 챕터로 나누어져 있으며, 각 챕터마다 Go언어를 사용한 내용이 존재 합니다.</li>
+<li>tutorial의 예제 코드는 github(<a href="https://github.com/rabbitmq/rabbitmq-tutorials/tree/master/go">https://github.com/rabbitmq/rabbitmq-tutorials/tree/master/go</a>) 에서 확인 할 수 있습니다.</li>
 </ul>
 <h2 id="amqp-패키지">amqp 패키지</h2>
 <ul>
 <li>
-<p>Type은 다음과 같은 것들이 있다.</p>
+<p>Type은 다음과 같은 것들이 있습니다.</p>
 <ul>
 <li>Acknowledger</li>
 <li>Authentication</li>
@@ -184,10 +184,10 @@ sudo service rabbitmq-server restart
 <p>여기에서 Acknowledger와 Authentication은 인터페이스 이므로 패스,<br>
 패키지 내부에서 사용하는 타입(?)들인 Blocking, Configuration, Decimal, Error, Publishing, Queue, Table도 패스<br>
 Config, URI, Delivery는 DialXXX, Open 함수, Connection, Channel 타입에서 사용하는 용도이므로 대충 이런거구나 하고 패스<br>
-Connection, Channel 타입에 대해서만 좀 알아 보면 좋을것 같다.</p>
+Connection, Channel 타입에 대해서만 좀 알아 보면 좋을것 같습니다.</p>
 </li>
 <li>
-<p>Connection의 메소드들에 대해서 알아보자</p>
+<p>Connection의 메소드들에 대해서 알아보겠습니다</p>
 <ul>
 <li>Channel()</li>
 <li>Close()</li>
@@ -197,7 +197,7 @@ Connection, Channel 타입에 대해서만 좀 알아 보면 좋을것 같다.</
 </ul>
 </li>
 <li>
-<p>Channel의 메소드들에 대해서 알아보자</p>
+<p>Channel의 메소드들에 대해서 알아보겠습니다</p>
 <ul>
 <li>Acknowledger 인터페이스의 구현 메소드<br>
 Ack(), Nack(), Reject()</li>
@@ -222,8 +222,8 @@ Tx(, Commit, Rollback)</li>
 </ol>
 <h2 id="hello-world">&ldquo;Hello World&rdquo;</h2>
 <ul>
-<li>응용프로그램에서 RabbitMQ로 전달되는 메세지는 큐에 저장된다.</li>
-<li>여러개의 Porducer에서 메세지를 큐에 전달을 하며, 여러개의 Consumer에서 데이터를 수신하려고 시도할 수 있다.</li>
+<li>응용프로그램에서 RabbitMQ로 전달되는 메세지는 큐에 저장됩니다.</li>
+<li>여러개의 Porducer에서 메세지를 큐에 전달을 하며, 여러개의 Consumer에서 데이터를 수신하려고 시도할 수 있습니다.</li>
 <li>RaabbitMQ 클라이언트 라이브러리를 설치</li>
 </ul>
 <pre><code>go get github.com/streadway/amqp
@@ -234,24 +234,24 @@ Tx(, Commit, Rollback)</li>
 </code></pre></div><p>연결 포트는 5672번을 사용 (관리 플러그인은 15672번 포트를 사용)</p>
 <ul>
 <li>Connection<br>
-Dial(&hellip;) 에서 Connection 타입을 만든다.</li>
+Dial(&hellip;) 에서 Connection 타입을 만듭니다.</li>
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">ch</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">conn</span>.<span style="color:#a6e22e">Channel</span>()
 </code></pre></div><p>Connection은 소켓 연결 관리, 프로토콜 버전 협상(?), 인증을 처리<br>
-Connection을 통해서 Channel을 생성한다.</p>
+Connection을 통해서 Channel을 생성 합니다.</p>
 <ul>
 <li>Channel<br>
 채널을 통해서 큐를 생성</li>
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">q</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">ch</span>.<span style="color:#a6e22e">QueueDeclare</span>(<span style="color:#f92672">...</span>)
-</code></pre></div><p>큐에 대한 설정을 할 수 있을것 같다.<br>
+</code></pre></div><p>큐에 대한 설정을 할 수 있을것 같습니다.<br>
 name: 큐의 이름<br>
 durable: 브로커 재시작 후에도 큐의 상태를 유지(true)<br>
 autoDelete: 소비자가 없으면 유지 되지 않는다(true)<br>
 exclusive: 다른 연결에서 큐를 사용하지 못함(true)<br>
 noWait: 대기열이 서버에서 선언(true)<br>
 args: 사용자 정의 큐를 구성할때 사용<br>
-참고) 결합된 큐가 없을때, 목적지 큐를 찾지 못하면 그냥 사라진다.</p>
+참고) 결합된 큐가 없을때, 목적지 큐를 찾지 못하면 그냥 사라집니다.</p>
 <ul>
 <li>보내기/받기
 <ul>
@@ -266,8 +266,8 @@ queue:<br>
 consumer:  <br>
 autoAck:   <br>
 exclusive: true이면 서버가 메세지의 소비자, false이면 다수의 소비자가 존재<br>
-noLocal: 동일한 연결에 대해서 한번 정송한 메세지를 다시 전송하지 않는다<br>
-noWait: 요청이 들어오면 바로 전송한다.<br>
+noLocal: 동일한 연결에 대해서 한번 전송한 메세지를 다시 전송하지 않습니다<br>
+noWait: 요청이 들어오면 바로 전송합니다.<br>
 args:</li>
 </ul>
 </li>
@@ -796,27 +796,27 @@ $ ctrl-b {(})
 						</h1>
 					</header>
 					<div class="entry-content">
-						<p>Go언어의 Template 엔진을 사용할때, 왜 New()의 파라미터로 이름을 만들어서 넘겨야 하는지가 궁금했었다.</p>
-<p>Template and Associated templates라는 글을 읽고 어느 정도 이해를 하게 되었다.</p>
-<p>다음은 위 글의 내용을 요약한 것이다.</p>
-<p>template.New() 로 template을 만들때, 이름을 정해서 만든다.<br>
-이 때 FuncMap과 템플릿 리스트를 갖는 그룹(그룹의 이 글에서 사용하는 용어로 Associated Templates를 가르킨다)이 생성된다.<br>
+						<p>Go언어의 Template 엔진을 사용할때, 왜 New()의 파라미터로 이름을 만들어서 넘겨야 하는지가 궁금 했었습니다.</p>
+<p>Template and Associated templates라는 글을 읽고 어느 정도 이해를 하게 되었습니다.</p>
+<p>다음은 위 글의 내용을 요약한 것 입니다.</p>
+<p>template.New() 로 template을 만들때, 이름을 정해서 만듭니다.<br>
+이 때 FuncMap과 템플릿 리스트를 갖는 그룹(그룹의 이 글에서 사용하는 용어로 Associated Templates를 가르킨다)이 생성 됩니다.<br>
 FuncMap에 대해서는,<br>
 <a href="https://golang.org/pkg/html/template/#FuncMap">https://golang.org/pkg/html/template/#FuncMap</a><br>
 <a href="http://goinbigdata.com/example-of-using-templates-in-golang/">http://goinbigdata.com/example-of-using-templates-in-golang/</a><br>
 <a href="http://technosophos.com/2013/11/23/using-custom-template-functions-in-go.html">http://technosophos.com/2013/11/23/using-custom-template-functions-in-go.html</a><br>
-를 확인해본다.</p>
-<p>New()를 했어도 아직 템플릿 리스트에서 관리되는 대상은 아니다.<br>
-Parse(&hellip;)를 하면 템플릿 리스트에 추가가 된다.</p>
-<p>처음에 생성한 template &ldquo;t1&quot;으로 New()를 하면 연관된 템플릿을 생성할 수 있다.<br>
-&ldquo;t1&quot;으로 생성한 template들은 동일한 템플릿 리스트에서 관리되어진다.</p>
-<p>현재 템플릿 리스트에서는 &ldquo;t1&rdquo; 템플릿을 더 이상 만들 수 없다.</p>
-<p>Lookup()으로 현재 템플릿 리스트에서 관리되고 있는 template을 찾을 수 있다.</p>
-<p>Templates() 함수로 템플릿 리스트의 template들을 모두 구한다.</p>
+를 확인해 봅니다.</p>
+<p>New()를 했어도 아직 템플릿 리스트에서 관리되는 대상은 아닙니다.<br>
+Parse(&hellip;)를 하면 템플릿 리스트에 추가가 됩니다.</p>
+<p>처음에 생성한 template &ldquo;t1&quot;으로 New()를 하면 연관된 템플릿을 생성할 수 있습니다.<br>
+&ldquo;t1&quot;으로 생성한 template들은 동일한 템플릿 리스트에서 관리 됩니다.</p>
+<p>현재 템플릿 리스트에서는 &ldquo;t1&rdquo; 템플릿을 더 이상 만들 수 없습니다.</p>
+<p>Lookup()으로 현재 템플릿 리스트에서 관리되고 있는 template을 찾을 수 있습니다.</p>
+<p>Templates() 함수로 템플릿 리스트의 template들을 모두 구합니다.</p>
 <p>Execute() 와 ExecuteTemplate() 의 차이<br>
-Execute() 는 호출한 template 객체를 실행한다.<br>
-ExecuteTemplate() 는 호출한 template 객체가 관리되는 템플릿 리스트에서 인자로 넘겨진 이름의 template 객체를 찾아서 실행한다.</p>
-<p>ParseFiles() 는 파라미터로 넘겨진 파일 이름들을 템플릿 리스트에서 관리하는 리스트의 New()로 template을 생성할때 인자로 넘기는 name의 역할로 사용된다.</p>
+Execute() 는 호출한 template 객체를 실행 합니다.<br>
+ExecuteTemplate() 는 호출한 template 객체가 관리되는 템플릿 리스트에서 인자로 넘겨진 이름의 template 객체를 찾아서 실행 합니다.</p>
+<p>ParseFiles() 는 파라미터로 넘겨진 파일 이름들을 템플릿 리스트에서 관리하는 리스트의 New()로 template을 생성할때 인자로 넘기는 name의 역할로 사용 됩니다.</p>
 
 					</div>
 				</article>
