@@ -598,14 +598,14 @@ func main() { http.HandleFunc(&amp;#34;/&amp;#34;, indexHandler) http.ListenAndS
       
       <guid>https://shrinklabs.com/post/go_vendor/</guid>
       <description>프로젝트 내부에서 별도의 패키지를 만들어서 사용을 하려고 할때면,
-import 경로를 &amp;ldquo;github.com/blah/project/internalpkg&amp;rdquo; 처럼 다 써야 했었다.
-이제 vendor를 사용하면 pkg 이름만 import 해서 사용할 수 있게 되었다.
-샘플 프로젝트는 다음과 같다.
+import 경로를 &amp;ldquo;github.com/blah/project/internalpkg&amp;rdquo; 처럼 다 써야 했었습니다.
+이제 vendor를 사용하면 pkg 이름만 import 해서 사용할 수 있게 되었습니다.
+샘플 프로젝트는 다음과 같습니다.
 https://github.com/jaehoonn/lotto
 샘플 프로젝트에 대해서 약간의 설명을 더하면,
 기존에는 command 패키지를 commands.go 에서 import 하기 위해서,
-import &amp;ldquo;github.com/jaehoonn/lotto/command&amp;rdquo; 와 같이 사용해야 했었다.
-이렇게 되면 lotto 프로젝트를 다른 사람이 fork 해서 사용하려고 하면 일일이 import 경로를 변경해줘야 하는 문제가 생기게 된다.
+import &amp;ldquo;github.com/jaehoonn/lotto/command&amp;rdquo; 와 같이 사용해야 했었습니다.
+이렇게 되면 lotto 프로젝트를 다른 사람이 fork 해서 사용하려고 하면 일일이 import 경로를 변경해줘야 하는 문제가 생기게 됩니다.
 그래서 go1.</description>
     </item>
     
@@ -704,12 +704,12 @@ c에서는 T_CCI_COL_INFO(cubrid의 cci에서 사용되는 구조체중에 하�
       <pubDate>Fri, 23 Aug 2013 14:12:58 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/go_testing/</guid>
-      <description>개요 Go 언어용 패키지를 만들려면, 테스트코드를 해야 개발이 진행이 좀 더 원활하게 되는 것 같다.
-그래서 간단하게 테스트 코드 작성하는 방법을 정리해봤다.
+      <description>개요 Go 언어용 패키지를 만들려면, 테스트코드를 작성해야 진행이 좀 더 원활하게 되는것 같습니다.
+그래서 간단하게 테스트 코드 작성하는 방법을 정리해봤습니다.
 abc 패키지를 만들어서 테스트하기 src\abc\abc.go
-src\abc\abc_test.go 와 같이 파일을 만들어 놓는다.
-abc.go를 다음과 같이 작성한다.
-// abc.go  package abc import ( &amp;#34;fmt&amp;#34; ) func A_Method() { fmt.Println(&amp;#34;test A Method&amp;#34;) } 그리고 abc_test.go를 다음과 같이 작성한다.
+src\abc\abc_test.go 와 같이 파일을 만들어 놓습니다.
+abc.go를 다음과 같이 작성합니다.
+// abc.go  package abc import ( &amp;#34;fmt&amp;#34; ) func A_Method() { fmt.Println(&amp;#34;test A Method&amp;#34;) } 그리고 abc_test.go를 다음과 같이 작성합니다.
 // abc_test.go  package abc import ( &amp;#34;testing&amp;#34; ) func TestA_Method(t *testing.T) { A_Method() } 그리고 $GOPATH/src/abc/ 에서</description>
     </item>
     
