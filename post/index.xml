@@ -33,17 +33,16 @@ $ git branch -d iss5783 </description>
       
       <guid>https://shrinklabs.com/post/tool_etcd-setting/</guid>
       <description>linux에서 etcd 클러스터 설정하기
-How To Setup a etcd Cluster On Linux – Beginners Guide( https://devopscube.com/setup-etcd-cluster-linux/ ) 를 읽고해보는 요약
+How To Setup a etcd Cluster On Linux – Beginners Guide( https://devopscube.com/setup-etcd-cluster-linux/ ) 를 읽고해보는 요약입니다.
 소개
 etcd는,
- key-value 저장소 중 하나이다. raft 프로토콜을 사용한다. rest/grpc를 이용한다.  준비물
+ key-value 저장소 중 하나 입니다. raft 프로토콜을 사용합니다. rest/grpc를 이용합니다.  준비물
  3개의 linux 서버 각 서버의 호스트 이름 방화벽 개방(2380, 2379)  설정
 etc-1: 10.128.0.2
 etc-2: 10.128.0.4
 etc-3: 10.128.0.3
-으로 호스트 이름과 ip를 사용한다. (ip는 각 상황에 맞춰서 사용한다.)
-각 서버 별로 1~6의 과정을 진행한다.
- src 폴더로 이동한다.</description>
+으로 호스트 이름과 ip를 사용합니다. (ip는 각 상황에 맞춰서 사용합니다.)
+각 서버 별로 1~6의 과정을 진행합니다.</description>
     </item>
     
     <item>
