@@ -473,17 +473,17 @@ pkg
 src
 </code></pre><h2 id="go-설치">Go 설치</h2>
 <ol>
-<li>기존에 설치된 버전이 있다면 삭제한다.</li>
+<li>기존에 설치된 버전이 있다면 삭제합니다.</li>
 </ol>
 <pre><code>$ rm -r /usr/local/go
 </code></pre><ol start="2">
 <li><a href="http://golang.org/doc/install">http://golang.org/doc/install</a> 에서 다운로드<br>
-(또는$ wget &ndash;no-check-certificate <a href="https://storage.googleapis.com/golang/go1.7.1.linux-amd64.tar.gz">https://storage.googleapis.com/golang/go1.7.1.linux-amd64.tar.gz</a> 와 같이 원하는 OS 및 버전에 맞는 Go 바이너리를 wget으로 받을 수도 있다.)</li>
-<li>/usr/loca/go에 압축을 푼다.</li>
+(또는$ wget &ndash;no-check-certificate <a href="https://storage.googleapis.com/golang/go1.7.1.linux-amd64.tar.gz">https://storage.googleapis.com/golang/go1.7.1.linux-amd64.tar.gz</a> 와 같이 원하는 OS 및 버전에 맞는 Go 바이너리를 wget으로 받을 수도 있습니다.)</li>
+<li>/usr/loca/go에 압축을 풉니다.</li>
 </ol>
 <pre><code>$ sudo tar -C /usr/local -xzf gox.x.x.linux-xxx.tar.gz
 </code></pre><ol start="4">
-<li>$HOME/.profile 에 다음을 추가한다.</li>
+<li>$HOME/.profile 에 다음을 추가합니다.</li>
 </ol>
 <pre><code>export PATH=$PATH:/usr/local/go/bin  
 export GOPATH=$HOME/work
@@ -502,12 +502,12 @@ export GOPATH=$HOME/work
 </ol>
 <pre><code>$ sudo ctags -R
 </code></pre><ol start="3">
-<li>vimrc 파일에 다음을 추가한다.</li>
+<li>vimrc 파일에 다음을 추가합니다.</li>
 </ol>
 <pre><code>set tags +=/usr/local/go/tags
 </code></pre><h2 id="python과-cmake-설치">python과 cmake 설치</h2>
 <ul>
-<li>YouCompleteMe라는 vim 플러그인의 정상적인 설치를 위해서 python과 cmake를 설치한다.
+<li>YouCompleteMe라는 vim 플러그인의 정상적인 설치를 위해서 python과 cmake를 설치합니다.
 <pre><code>$ sudo apt-get install python-dev python3-dev  
 $ sudo apt-get install cmake
 </code></pre></li>
@@ -517,7 +517,7 @@ $ sudo apt-get install cmake
 <li>Vundle.vim 설치
 <pre><code>$ git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 </code></pre></li>
-<li>/etc/vim/vimrc.local 을 생성해서 아래의 내용을 붙여 넣는다.</li>
+<li>/etc/vim/vimrc.local 을 생성해서 아래의 내용을 붙여 넣습니다.</li>
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Shell" data-lang="Shell">set nocompatible <span style="color:#e6db74">&#34; be iMproved, required
 </span><span style="color:#e6db74">filetype off &#34;</span> required
@@ -577,19 +577,19 @@ call vundle#end<span style="color:#f92672">()</span> <span style="color:#e6db74"
 <span style="color:#e6db74">&#34; Put your non-Plugin stuff after this line
 </span></code></pre></div><ul>
 <li>
-<p>vim 실행해서 “ :PluginInstall “ 을 해서 지정된 플러그인들을 설치한다.</p>
+<p>vim 실행해서 “ :PluginInstall “ 을 해서 지정된 플러그인들을 설치합니다.</p>
 </li>
 <li>
-<p>NERDTree의 설정을 한다.</p>
+<p>NERDTree의 설정을 합니다.</p>
 </li>
 </ul>
 <pre><code>$ sudo vim /etc/vim/vimrc.local
-</code></pre><p>을 열어서 적당한 곳에 아래의 내용을 붙여넣는다.</p>
+</code></pre><p>을 열어서 적당한 곳에 아래의 내용을 붙여넣습니다.</p>
 <pre><code>nmap &lt;F2&gt; :NERDTreeToggle&lt;CR&gt;
 let NERDTreeWinPos=&quot;left&quot;
 </code></pre><ul>
 <li>Tagbar 설정<br>
-위의 NERDTree 설정 부분 아래에 추가한다.</li>
+위의 NERDTree 설정 부분 아래에 추가합니다.</li>
 </ul>
 <pre><code>nmap &lt;F3&gt; :Tagbar&lt;CR&gt;
 let Tagbar=&quot;right&quot;
@@ -622,11 +622,11 @@ let g:tagbar_type_go = {
     \ }
 </code></pre><p>추가) vim-go 설치가 완료되고 난 다음에,<br>
 $GOPATH/bin 에 생성되어 있는, errcheck, gocode, gofmt, golint, gotags, goimports, gorename, oracle
-를 /usr/local/go/bin 에 복사/붙여넣기 한다.</p>
+를 /usr/local/go/bin 에 복사/붙여넣기 합니다.</p>
 <p>[참고] <a href="https://gist.github.com/jaehoonn/47d81a29b620a0d64f80">https://gist.github.com/jaehoonn/47d81a29b620a0d64f80</a></p>
 <ul>
 <li>YouCompleteMe 설치<br>
-YouCompleteMe의 설치를 완료하기 위해서 Bundle 디렉토리로 이동해서 Go언어 자동완성이 가능하도록 옵션을 지정해서 install을 한다.</li>
+YouCompleteMe의 설치를 완료하기 위해서 Bundle 디렉토리로 이동해서 Go언어 자동완성이 가능하도록 옵션을 지정해서 install을 합니다.</li>
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ cd ~/.vim/bundle/YouCompleteMe
 $ ./install.py --gocode-completer
