@@ -2,36 +2,36 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ShrinkLabs</title>
-    <link>https://shrinklabs.com/</link>
+    <link>https://shrinklabs.com/post/</link>
     <description>Recent content on ShrinkLabs</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 24 Feb 2021 03:08:00 +0900</lastBuildDate><atom:link href="https://shrinklabs.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 24 Feb 2021 03:08:00 +0900</lastBuildDate><atom:link href="https://shrinklabs.com/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>klevr_agent 빌드 후 Docker Image 만들기</title>
-      <link>https://shrinklabs.com/post/tool_klevr-agent/</link>
+      <link>https://shrinklabs.com/post/post/tool_klevr-agent/</link>
       <pubDate>Wed, 24 Feb 2021 03:08:00 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/tool_klevr-agent/</guid>
+      <guid>https://shrinklabs.com/post/post/tool_klevr-agent/</guid>
       <description>$ git clone git@github.com:jaehoonn/klevr.git $ cd klevr $ chmod +x ./build.sh $ ./build.sh $ cd cmd/klebr-agent/Dockerfile $ docker build -t jaehoon/klevr-agent:0.2.6 . $ docker login -u jaehoon -p {password} $ docker push jaehoon/klevr-agent:0.2.6 </description>
     </item>
     
     <item>
       <title>local branch 삭제</title>
-      <link>https://shrinklabs.com/post/git_delete-local-branch/</link>
+      <link>https://shrinklabs.com/post/post/git_delete-local-branch/</link>
       <pubDate>Fri, 19 Feb 2021 07:17:00 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/git_delete-local-branch/</guid>
+      <guid>https://shrinklabs.com/post/post/git_delete-local-branch/</guid>
       <description>로컬에서 관리하고 있는 branch iss5783을 삭제합니다.
 $ git branch -d iss5783 </description>
     </item>
     
     <item>
       <title>etcd 설정</title>
-      <link>https://shrinklabs.com/post/tool_etcd-setting/</link>
+      <link>https://shrinklabs.com/post/post/tool_etcd-setting/</link>
       <pubDate>Mon, 08 Feb 2021 02:20:00 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/tool_etcd-setting/</guid>
+      <guid>https://shrinklabs.com/post/post/tool_etcd-setting/</guid>
       <description>linux에서 etcd 클러스터 설정하기
 How To Setup a etcd Cluster On Linux – Beginners Guide( https://devopscube.com/setup-etcd-cluster-linux/ ) 를 읽고해보는 요약입니다.
 소개
@@ -47,10 +47,10 @@ etc-3: 10.128.0.3
     
     <item>
       <title>원격지의 branch 사용하기</title>
-      <link>https://shrinklabs.com/post/git_remote-branch/</link>
+      <link>https://shrinklabs.com/post/post/git_remote-branch/</link>
       <pubDate>Mon, 01 Feb 2021 07:17:00 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/git_remote-branch/</guid>
+      <guid>https://shrinklabs.com/post/post/git_remote-branch/</guid>
       <description>github에 있는 branch를 로컬로 받아와서 작업하고 싶을때 할 수 있는 방법
 원격지에 있는 branch 정보를 확인 할 수 있도록 업데이트 합니다.
 $ git remote update 원격지의 branch 확인
@@ -60,10 +60,10 @@ $ git checkout -t origin/9999 </description>
     
     <item>
       <title>upstream 설정</title>
-      <link>https://shrinklabs.com/post/git_upstream/</link>
+      <link>https://shrinklabs.com/post/post/git_upstream/</link>
       <pubDate>Sun, 03 Jan 2021 03:29:09 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/git_upstream/</guid>
+      <guid>https://shrinklabs.com/post/post/git_upstream/</guid>
       <description>프로젝트 진행하는 과정에서 필요한 upstream 설정
 해당 내용은 kubernetes의 GitHub Workflow 문서를 참고 했습니다. ( https://github.com/kubernetes/community/blob/master/contributors/guide/github-workflow.md )
   프로젝트를 https://github.com/kubernetes/kubernetes 에서 내 github 계정으로 Fork 합니다.
@@ -73,10 +73,10 @@ $ git checkout -t origin/9999 </description>
     
     <item>
       <title>Windows기반의 minikube로 로컬 환경의 image 사용해서 배포하기</title>
-      <link>https://shrinklabs.com/post/container_kubectl_run/</link>
+      <link>https://shrinklabs.com/post/post/container_kubectl_run/</link>
       <pubDate>Tue, 19 May 2020 01:05:57 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/container_kubectl_run/</guid>
+      <guid>https://shrinklabs.com/post/post/container_kubectl_run/</guid>
       <description>실제 클러스터에 배포하기 전에 로컬 환경의 minikube를 이용해서 배포하고 테스트를 하기 위한 방법이 필요하면 다음과 같이 합니다.
 minikube를 시작하고, minikube에 내장되어 있는 docker 데몬을 사용하도록 합니다. 이렇게 하면 호스트 머신의 Docker Registry를 사용하고 image도 호스트 머신에 생성해 놓은 것을 사용할 수 있습니다.
 (https://kubernetes.io/docs/setup/learning-environment/minikube/#use-local-images-by-re-using-the-docker-daemon)
@@ -85,10 +85,10 @@ PS&amp;gt; minikube docker-env $Env:DOCKER_TLS_VERIFY = &amp;#34;1&amp;#34; $Env
     
     <item>
       <title>Powershell에서 할 수 있는 Linux를 위한 빌드</title>
-      <link>https://shrinklabs.com/post/go_crosscompile_on_windows/</link>
+      <link>https://shrinklabs.com/post/post/go_crosscompile_on_windows/</link>
       <pubDate>Mon, 18 May 2020 10:52:23 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/go_crosscompile_on_windows/</guid>
+      <guid>https://shrinklabs.com/post/post/go_crosscompile_on_windows/</guid>
       <description>Windows 환경에서 개발 후 Linux 환경으로 배포하기 위해서 Linux용 바이너리로 빌드가 필요할 때가 있습니다.
 다음의 방법으로 빌드 할 수 있습니다.
 Powershell에서 빌드하기 위한 방법은 아래와 같습니다.
@@ -97,10 +97,10 @@ PS D:\ws\src\sample&amp;gt; $env:GOOS=&amp;#34;linux&amp;#34;; go build 빌드 �
     
     <item>
       <title>Kubernetes에서 Private Container Registry 사용</title>
-      <link>https://shrinklabs.com/post/container_private-container-registry/</link>
+      <link>https://shrinklabs.com/post/post/container_private-container-registry/</link>
       <pubDate>Fri, 10 Apr 2020 16:31:48 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/container_private-container-registry/</guid>
+      <guid>https://shrinklabs.com/post/post/container_private-container-registry/</guid>
       <description>Kubernetes에 배포하기 위해서 Container Registry(Private)을 사용하려면, 별도의 secret을 등록해야 합니다.
 $ kubectl create secret docker-registry {secret} \ --docker-server={registryserver} \ --docker-username={name} \ --docker-password={password} \ --docker-email={email} \ --namespace={namespace} namespace는 지정하지 않으면 default로 지정됩니다.
 그리고 Container Registry로 부터 image를 받아서 사용하기 위한 yaml 파일에 다음과 같이 추가합니다.
@@ -109,38 +109,38 @@ apiVersion: v1 kind: Pod metadata: name: private-reg spec: containers: - name: p
     
     <item>
       <title>docker 설치 후 에러</title>
-      <link>https://shrinklabs.com/post/container_docker-error/</link>
+      <link>https://shrinklabs.com/post/post/container_docker-error/</link>
       <pubDate>Wed, 08 Apr 2020 21:27:50 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/container_docker-error/</guid>
+      <guid>https://shrinklabs.com/post/post/container_docker-error/</guid>
       <description>docker 설치 후 &amp;ldquo;Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?&amp;rdquo; 가 발생
 $sudo systemctl status docker $sudo systemctl start docker $sudo systemctl enable docker </description>
     </item>
     
     <item>
       <title>GCE에서 kops를 이용한 K8s 구성</title>
-      <link>https://shrinklabs.com/post/container_k8s-with-kops-on-gce/</link>
+      <link>https://shrinklabs.com/post/post/container_k8s-with-kops-on-gce/</link>
       <pubDate>Thu, 05 Mar 2020 21:36:13 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/container_k8s-with-kops-on-gce/</guid>
+      <guid>https://shrinklabs.com/post/post/container_k8s-with-kops-on-gce/</guid>
       <description>클러스터 배포용 VM 인스턴스 생성  Kubernetes를 구성하기 위한 VM 인스턴스를 생성합니다. &amp;ldquo;ID 및 API 액세스&amp;rdquo; 항목에서 액세스 범위를 &amp;ldquo;모든 Cloud API에 대한 전체 액세스 허용&amp;rdquo; 으로 선택한다. 또는 아래와 같이 서비스 계정에 권한을 설정하고 서비스 계정을 선택해도 됩니다.  GCP 관리 콘솔의 IAM&amp;amp;Admin에서 서비스 계정을 하나 만듭니다. 서비스 계정이 갖고 있어야 하는 최소한의 권한은 다음과 같습니다.  compute admin servce account admin service account key admin service account token creator service acount user storage admin DNS Administrator DNS Reader  SSH로 연결 &amp;amp; 업데이트  jaehoonn@jaehoonn:~$sudo apt-get update jaehoonn@jaehoonn:~$sudo apt-get dist-upgrade   kubectl 설치 jaehoonn@jaehoonn:~$curl -LO https://storage.</description>
     </item>
     
     <item>
       <title>docker image 저장소 위치 변경</title>
-      <link>https://shrinklabs.com/post/container_docker-image/</link>
+      <link>https://shrinklabs.com/post/post/container_docker-image/</link>
       <pubDate>Thu, 05 Mar 2020 12:05:00 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/container_docker-image/</guid>
+      <guid>https://shrinklabs.com/post/post/container_docker-image/</guid>
       <description> 새로운 디스크를 추가합니다.  여기에서는 &amp;ldquo;/docker&amp;rdquo; 에 mount 되어 있는걸로 가정합니다.   &amp;ldquo;etc/docker/daemon.json&amp;rdquo; 에 다음의 내용을 추가합니다.  { &amp;#34;data-root&amp;#34;: &amp;#34;/docker&amp;#34; }  docker 서비스를 재시작합니다.  $ sudo systemctl daemon-reload $ sudo systemctl restart docker </description>
     </item>
     
     <item>
       <title>10.Nginx Ingress Controller on Google Kubernetes Engine</title>
-      <link>https://shrinklabs.com/post/container_nginx-ingress-controller-on-google-kubernetes-engine/</link>
+      <link>https://shrinklabs.com/post/post/container_nginx-ingress-controller-on-google-kubernetes-engine/</link>
       <pubDate>Mon, 21 Jan 2019 17:05:30 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/container_nginx-ingress-controller-on-google-kubernetes-engine/</guid>
+      <guid>https://shrinklabs.com/post/post/container_nginx-ingress-controller-on-google-kubernetes-engine/</guid>
       <description>이번 과정에서는 &amp;ldquo;Ingress&amp;quot;에 대해서 알아 볼 수 있었습니다.
 &amp;ldquo;Ingress&amp;quot;는 resource와 controller로 구성되어 있습니다.
 resource는 &amp;ldquo;Ingress&amp;quot;의 동작에 대한 규칙을 정해 놓은 yaml이며,
@@ -152,10 +152,10 @@ kind가 &amp;ldquo;Ingress&amp;quot;인 yaml 파일을 만듭니다. 이때 &amp
     
     <item>
       <title>9.Helm Package Management</title>
-      <link>https://shrinklabs.com/post/container_helm-package-management/</link>
+      <link>https://shrinklabs.com/post/post/container_helm-package-management/</link>
       <pubDate>Thu, 17 Jan 2019 15:04:00 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/container_helm-package-management/</guid>
+      <guid>https://shrinklabs.com/post/post/container_helm-package-management/</guid>
       <description>이번 과정은 kubernetes에서 사용할 수 있는 패키지 관리자에 대해서 알아 볼 수 있었습니다.
 Helm은 클라이언트 역할을 하는 helm, 서버 역할을 하는 tiller 그리고 설정 정보들의 관리를 위한 chart로 이루어져 있습니다.
 여기에서 클라이언트(helm)라고 하는건 클러스터의 외부에서 작업을 지시하기 위한 도구이고, 실제로 클러스터 안쪽에서 동작 하는건 서버(tiller)라고 보면 됩니다.
@@ -165,10 +165,10 @@ $ curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get &amp
     
     <item>
       <title>8.Setting Up a Private Kubernetes Cluster</title>
-      <link>https://shrinklabs.com/post/container_setting-up-private-kubernetes-cluster/</link>
+      <link>https://shrinklabs.com/post/post/container_setting-up-private-kubernetes-cluster/</link>
       <pubDate>Wed, 16 Jan 2019 01:46:28 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/container_setting-up-private-kubernetes-cluster/</guid>
+      <guid>https://shrinklabs.com/post/post/container_setting-up-private-kubernetes-cluster/</guid>
       <description>이번 과정의 실습을 진행하면서 클러스터에 대한 접근을 제한 할 수 있도록 하기 위한 방법에 대해서 알 수 있었습니다. 하지만 전체 내용에 대해서 정확하게 이해를 하지 못했습니다.
 해당 내용은 이후에 비공개 클러스터 설정(https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters) 에 대한 내용이 실습 내용과 동일하므로 추후에 이해가 가능한 시점이 되면 다시 한번 시도해 보려고 합니다.
 아래는 내용을 이해하기 위해서 학습했던 내용들의 링크입니다.
@@ -179,10 +179,10 @@ $ curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get &amp
     
     <item>
       <title>7.Build Slack Bot With Node.js on Kubernetes</title>
-      <link>https://shrinklabs.com/post/container_build-slack-bot-with-nodejs-on-kubernetes/</link>
+      <link>https://shrinklabs.com/post/post/container_build-slack-bot-with-nodejs-on-kubernetes/</link>
       <pubDate>Mon, 14 Jan 2019 13:17:21 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/container_build-slack-bot-with-nodejs-on-kubernetes/</guid>
+      <guid>https://shrinklabs.com/post/post/container_build-slack-bot-with-nodejs-on-kubernetes/</guid>
       <description>이번 과정은 Secret 객체에 대해서 좀 더 자세하게 알아볼 수 있는 과정이었습니다.
 서비스를 제공하는 프로그램(node.js 코드)을 Docker image로 만든 다음 Registry Server에 Push를 합니다.
 제공하는 서비스에서 외부의 서비스(slack)를 사용하기 위해서 민감한 정보인 token이 존재한다. 이 내용이 코드상 또는 image 상에 존재하지 않게 Image를 만들고자 합니다.
@@ -191,10 +191,10 @@ $ curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get &amp
     
     <item>
       <title>6.Running Mongodb Database in Kubernetes With Statefulsets</title>
-      <link>https://shrinklabs.com/post/container_running-mongodb-database-in-kubernetes-with-statefulsets/</link>
+      <link>https://shrinklabs.com/post/post/container_running-mongodb-database-in-kubernetes-with-statefulsets/</link>
       <pubDate>Fri, 11 Jan 2019 17:52:48 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/container_running-mongodb-database-in-kubernetes-with-statefulsets/</guid>
+      <guid>https://shrinklabs.com/post/post/container_running-mongodb-database-in-kubernetes-with-statefulsets/</guid>
       <description>지금까지의 과정 중에서 가장 어려웠습니다.;;; 그리고 제대로 이해를 한건지도 잘 모르겠습니다.
 일단을 이해했다고 생각되는 정도만 정리를 해봤습니다.
 이번 과정은 StatefulSet에 대한 이해를 목표로 하고 있습니다.
@@ -204,10 +204,10 @@ StorageClass는 상태를 갖는걸 확인하기 위한 실습이 필요하다�
     
     <item>
       <title>5.Continuous Delivery With Jenkins in Kubernetes Engine</title>
-      <link>https://shrinklabs.com/post/container_continuous-delivery-with-jenkins-in-kubernetes-engine/</link>
+      <link>https://shrinklabs.com/post/post/container_continuous-delivery-with-jenkins-in-kubernetes-engine/</link>
       <pubDate>Thu, 10 Jan 2019 11:40:50 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/container_continuous-delivery-with-jenkins-in-kubernetes-engine/</guid>
+      <guid>https://shrinklabs.com/post/post/container_continuous-delivery-with-jenkins-in-kubernetes-engine/</guid>
       <description>이번 과정은 Jenkins와 Kubernetes를 이용한 배포 자동화를 실습해 볼 수 있었습니다.
 분량은 많지만 이해가 어렵지는 않은 내용이었습니다.
 실습을 해보면서 Namespace라는 객체와 Helm이라는 패키지 관리 도구를 사용해 볼 수 있습니다. Namespace는 일반적으로 우리가 알고 있는 용도인데, 논리적으로 무언가를 구분지어서 사용하고 싶을때 사용하는게 목적이라고 보면 될 것 같습니다.
@@ -217,10 +217,10 @@ StorageClass는 상태를 갖는걸 확인하기 위한 실습이 필요하다�
     
     <item>
       <title>4.Managing Deployments Using Kubernetes</title>
-      <link>https://shrinklabs.com/post/container_managing-deployments-using-kubernetes/</link>
+      <link>https://shrinklabs.com/post/post/container_managing-deployments-using-kubernetes/</link>
       <pubDate>Wed, 09 Jan 2019 11:15:55 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/container_managing-deployments-using-kubernetes/</guid>
+      <guid>https://shrinklabs.com/post/post/container_managing-deployments-using-kubernetes/</guid>
       <description>이번 장에서는 &amp;ldquo;Deployment&amp;quot;가 어떤 역할을 할 수 있으며, 이를 이용해서 취할 수 있는 배포 전략에 대해서 알아볼 수 있었습니다.
 (이번 장에서 실습을 위해서는 필수적으로 compute/zone 설정을 us-central1-a로 지정해 놓아야 cluster 생성을 정상적으로 할 수 있습니다.)
 Deployment 뿐만이 아니라 다른 객체들을 사용하기 위해서도 yaml을 작성할때 각 필드에 대한 정보를 어디에서 확인해야 하는지가 궁금했습니다.
@@ -229,10 +229,10 @@ $ kubectl explain deployment $ kubectl explain --recursive $ kubectl explain dep
     
     <item>
       <title>3.Orchestrating the Cloud With Kubernetes</title>
-      <link>https://shrinklabs.com/post/container_orchestrating-cloud-with-kubernetes/</link>
+      <link>https://shrinklabs.com/post/post/container_orchestrating-cloud-with-kubernetes/</link>
       <pubDate>Wed, 09 Jan 2019 01:26:47 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/container_orchestrating-cloud-with-kubernetes/</guid>
+      <guid>https://shrinklabs.com/post/post/container_orchestrating-cloud-with-kubernetes/</guid>
       <description>이번 장은 우선 &amp;ldquo;nginx&amp;quot;와 &amp;ldquo;monolith&amp;quot;라는 단어에 현혹되지 않도록 주의를 해야 할 것 같습니다.
 최초에 nginx가 실행되는 Pod는 그거대로 Kubnernetes 작동에 대한 내용이고, Pod에 대한 내용에서 언급되는 nginx와 monolith는 또 그것대로의 내용을 설명합니다.
 그리고 다음에 나오는 port-forward에 대한 내용은 또 완전히 별개의 내용입니다.
@@ -242,10 +242,10 @@ port-forward로 &amp;ldquo;monolith&amp;rdquo; Pod의 80 포트를 10080을 지�
     
     <item>
       <title>2.Hello Node Kubernetes</title>
-      <link>https://shrinklabs.com/post/container_hello-node-kubernetes/</link>
+      <link>https://shrinklabs.com/post/post/container_hello-node-kubernetes/</link>
       <pubDate>Tue, 08 Jan 2019 13:13:09 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/container_hello-node-kubernetes/</guid>
+      <guid>https://shrinklabs.com/post/post/container_hello-node-kubernetes/</guid>
       <description>2번째 과정에서는 Kubernetes의 기본적인 동작 방식에 대해서 알아 볼 수 있었습니다.
 Kubernetes의 클러스터를 생성하는 과정은 Google Cloud Platform에서 기능을 제공하고 있어서 아주 간편했습니다.
 책을 보면서 Kubernetes 공부를 처음 시작하는 과정에서 가장 시간을 많이 소비하게 되는 부분이었는데, 플랫폼에서 제공되는 기능을 glcoud를 이용해서 node와 각 node의 기본적인 설정을 지정후 cluster를 생성하는 명령 하나로 모든 과정이 생략될 수 있게 되었습니다.
@@ -254,10 +254,10 @@ Kubernetes의 클러스터를 생성하는 과정은 Google Cloud Platform에서
     
     <item>
       <title>1.Introduction to Docker</title>
-      <link>https://shrinklabs.com/post/container_introduction-to-docker/</link>
+      <link>https://shrinklabs.com/post/post/container_introduction-to-docker/</link>
       <pubDate>Tue, 08 Jan 2019 10:48:08 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/container_introduction-to-docker/</guid>
+      <guid>https://shrinklabs.com/post/post/container_introduction-to-docker/</guid>
       <description>구글에서 지원해주는 “2019 클라우드 스터디잼 입문반” 스터디에 참여하기 시작했습니다. 이 스터디는 어떠한 형태로든 모인 멤버들이 일정 기간(1/7~1/27) 동안에 실습이 겸해진 과정(QWIKLABS - Kubernetes in the Google Cloud)을 완수하는 방식입니다.
 첫번째 과정으로 “Introduction to Docker” 을 진행 했습니다. 다음은 과정을 진행하면서 학습할 수 있었던 내용의 요약입니다.
 처음 해보는 과정이라서 그런지 익숙해지기 위한 시간이 약간 필요했지만 그다지 어렵지는 않았습니다.
@@ -266,10 +266,10 @@ Docker의 Image와 Container 그리고 Dockerfile의 이해를 위한 몇 가지
     
     <item>
       <title>cscope 사용(Go)</title>
-      <link>https://shrinklabs.com/post/go_cscope/</link>
+      <link>https://shrinklabs.com/post/post/go_cscope/</link>
       <pubDate>Tue, 21 Aug 2018 16:34:04 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/go_cscope/</guid>
+      <guid>https://shrinklabs.com/post/post/go_cscope/</guid>
       <description>Go언어 개발 환경(추가) Go언어로 작성한 코드를 분석하기 위해서 cscope가 필요할 때가 있습니다.
 vim에서 cscope를 사용하기 위한 과정을 정리해 보려고 합니다.
 cscope를 설치합니다. $ sudo apt-get install cscope mkscope.sh 파일을 만듭니다. mkscope.sh의 내용은 다음과 같습니다.
@@ -279,10 +279,10 @@ cscope를 설치합니다. $ sudo apt-get install cscope mkscope.sh 파일을 �
     
     <item>
       <title>git push된 내용을 특정한 commit으로 되돌리기</title>
-      <link>https://shrinklabs.com/post/git_reset/</link>
+      <link>https://shrinklabs.com/post/post/git_reset/</link>
       <pubDate>Tue, 31 Jul 2018 10:09:41 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/git_reset/</guid>
+      <guid>https://shrinklabs.com/post/post/git_reset/</guid>
       <description>&amp;ldquo;iss-123&amp;rdquo; 브랜치에서 작업하던 내용을 실수로 &amp;ldquo;iss-133&amp;rdquo; 브랜치로 push 하는 어이없는 실수를 했을때 &amp;ldquo;iss-133&amp;quot;에 push 된 내용을 이전으로 되돌려 놓아야 합니다.
 git log로 이전 commit의 id를 확인합니다. (ex, d50fd96d2d7e5e5cf689b0943f2b2d20d4c2dda4)
 [iss-133] $ git reset --hard d50fd96d2d7e5e5cf689b0943f2b2d20d4c2dda4 이제 변경된 내용을 push 합니다.
@@ -291,20 +291,20 @@ git log로 이전 commit의 id를 확인합니다. (ex, d50fd96d2d7e5e5cf689b094
     
     <item>
       <title>map에 key가 존재하는지 확인</title>
-      <link>https://shrinklabs.com/post/go_key_exists_in_map/</link>
+      <link>https://shrinklabs.com/post/post/go_key_exists_in_map/</link>
       <pubDate>Thu, 12 Jul 2018 16:52:08 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/go_key_exists_in_map/</guid>
+      <guid>https://shrinklabs.com/post/post/go_key_exists_in_map/</guid>
       <description>map을 사용할때 해당하는 키가 map에 존재하는지 확인이 필요할 때가 있습니다.
 var target[string]*item ... target[&amp;#34;apple&amp;#34;] = itm1 target[&amp;#34;orange&amp;#34;] = itm2 ... value, ok := target[&amp;#34;kiwi&amp;#34;] </description>
     </item>
     
     <item>
       <title>Go언어 프로젝트에서 테스트 코드 작성 경험</title>
-      <link>https://shrinklabs.com/post/go_writing-a-unit-test/</link>
+      <link>https://shrinklabs.com/post/post/go_writing-a-unit-test/</link>
       <pubDate>Wed, 21 Feb 2018 23:02:29 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/go_writing-a-unit-test/</guid>
+      <guid>https://shrinklabs.com/post/post/go_writing-a-unit-test/</guid>
       <description>테스트 코드는 왜? 현재 프로젝트를 진행 중 코딩을 할 때면 계속해서 의심과 두려움이 들었다.
 &amp;ldquo;내가 제대로 작성하고 있는 게 맞나?&amp;rdquo;
 &amp;ldquo;이렇게 작성하면 다른 데에서 문제가 생기는 건 아닌가?&amp;rdquo;
@@ -315,10 +315,10 @@ var target[string]*item ... target[&amp;#34;apple&amp;#34;] = itm1 target[&amp;#
     
     <item>
       <title>KVM 스터디(with go)</title>
-      <link>https://shrinklabs.com/post/go_kvm-with-go/</link>
+      <link>https://shrinklabs.com/post/post/go_kvm-with-go/</link>
       <pubDate>Sat, 02 Dec 2017 23:55:52 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/go_kvm-with-go/</guid>
+      <guid>https://shrinklabs.com/post/post/go_kvm-with-go/</guid>
       <description>준비물 노트북(우분투 16.04)
 KVM이 뭔가요? 하이퍼바이저? 위키백과에 나와 있는 정의( https://ko.wikipedia.org/wiki/%ED%95%98%EC%9D%B4%ED%8D%BC%EB%B0%94%EC%9D%B4%EC%A0%80 ) 를 보면 이렇게 나와 있습니다.
 &amp;ldquo;다수의 운영 체제를 동시에 실행하기 위한 논리적 플랫폼&amp;rdquo;
@@ -329,10 +329,10 @@ Type1은 호스트에 하이퍼바이저가 존재하고, Type2는 호스트 OS�
     
     <item>
       <title>core파일 만들기</title>
-      <link>https://shrinklabs.com/post/go_core/</link>
+      <link>https://shrinklabs.com/post/post/go_core/</link>
       <pubDate>Tue, 01 Aug 2017 13:59:57 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/go_core/</guid>
+      <guid>https://shrinklabs.com/post/post/go_core/</guid>
       <description>Go언어에서도 core dump를 만드는 방법이 있었습니다.
 데이브체니님이 정리해 놓은 무려 2015년도의 글 입니다.
 https://dave.cheney.net/2015/11/29/a-whirlwind-tour-of-gos-runtime-environment-variables
@@ -347,19 +347,19 @@ ulimit -c unlimited 로 해주었습니다.
     
     <item>
       <title>docker 시작하기</title>
-      <link>https://shrinklabs.com/post/container_docker/</link>
+      <link>https://shrinklabs.com/post/post/container_docker/</link>
       <pubDate>Thu, 27 Jul 2017 00:25:51 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/container_docker/</guid>
+      <guid>https://shrinklabs.com/post/post/container_docker/</guid>
       <description>docker ce 설치  오래된 버전 제거  $ sudo apt-get remove docker docker-engine docker.io  패키지 인덱스 업데이트  $ sudo apt-get update  apt가 https를 통해서 저장소를 사용할 수 있도록 패키지를 설치  $ sudo apt-get install \  apt-transport-https \  ca-certificates \  curl \  software-properties-common  docker의 공식 GPG 키를 추가  $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -  fingerprint를 확인  $ sudo apt-key fingerprint 0EBFCD88  안정화 버전의 저장소를 추가  $ sudo add-apt-repository \  &amp;#34;deb [arch=amd64] https://download.</description>
     </item>
     
     <item>
       <title>delve를 사용한 Go언어 디버깅</title>
-      <link>https://shrinklabs.com/post/go_delve/</link>
+      <link>https://shrinklabs.com/post/post/go_delve/</link>
       <pubDate>Sun, 18 Jun 2017 23:13:14 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/go_delve/</guid>
+      <guid>https://shrinklabs.com/post/post/go_delve/</guid>
       <description>소개 delve는 Go언어를 위한 debugger 입니다.
 delve설치 설치를 하기 위해서는 Go 1.5 이상의 버전이 필요합니다.
 지금 시점에 Go 1.5를 사용하지 않을테니&amp;hellip;
@@ -372,10 +372,10 @@ delve사용 프로세스 실행 제어, 변수, 스레드/goroutine 상태, CPU 
     
     <item>
       <title>build</title>
-      <link>https://shrinklabs.com/post/go_build/</link>
+      <link>https://shrinklabs.com/post/post/go_build/</link>
       <pubDate>Thu, 25 May 2017 15:43:40 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/go_build/</guid>
+      <guid>https://shrinklabs.com/post/post/go_build/</guid>
       <description>소개 Go언어로 개발을 하다보면 debug모드 release모드 같이 별도의 빌드 환경을 구성하고 싶을때가 있습니다.
 그래서 build 옵션으로 특정한 환경별로 결과를 달리 할 수 있는 방법에 대해서 테스트한 내용을 정리해봅니다.
 빌드 go 파일들을 빌드하기 위해서는 일반적으로 다음과 같이 합니다.
@@ -386,10 +386,10 @@ $ go build Go언어 문서중에 보면 https://golang.org/pkg/go/build/#hdr-Bui
     
     <item>
       <title>RabbitMQ 스터디(with go)</title>
-      <link>https://shrinklabs.com/post/go_rabbitmqwithgo/</link>
+      <link>https://shrinklabs.com/post/post/go_rabbitmqwithgo/</link>
       <pubDate>Wed, 19 Apr 2017 23:43:52 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/go_rabbitmqwithgo/</guid>
+      <guid>https://shrinklabs.com/post/post/go_rabbitmqwithgo/</guid>
       <description>Go언어로 RabbitMQ를 어떻게 이용할 수 있는지 스터디하는 내용들을 대충 대충 정리하는 중&amp;hellip;
 RabbitMQ라는게 뭐지? AMQP를 구현한 메세지 브로커
 여기 저기에 있는 클라이언트들(Producer/Consumer)이 메세지를 서로 주고 받을 수 있도록 해주는 그런거?
@@ -398,10 +398,10 @@ RabbitMQ라는게 뭐지? AMQP를 구현한 메세지 브로커
     
     <item>
       <title>CreateFormFile()을 사용하면 Content-Type이 고정되는 현상</title>
-      <link>https://shrinklabs.com/post/go_multipart-contenttype/</link>
+      <link>https://shrinklabs.com/post/post/go_multipart-contenttype/</link>
       <pubDate>Sat, 10 Dec 2016 18:22:48 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/go_multipart-contenttype/</guid>
+      <guid>https://shrinklabs.com/post/post/go_multipart-contenttype/</guid>
       <description>mime/multipart를 사용해서 파일을 업로드 하려 할때 파일을 업로드할 필드를 생성하기 위해서 CreateFormFile()을 사용합니다.
 이를 이용해서 파일을 업로드하면 &amp;ldquo;Content-Type&amp;quot;이 &amp;ldquo;application/octet-stream&amp;rdquo; 으로 고정 되어집니다.
 src/mime/multipart/writer.go의 CreateFormFile을 확인해 보면 다음과 같이 고정되어 있는걸 확인 할 수 있습니다.
@@ -413,10 +413,10 @@ bradfitz는 다음과 같이 답변을 하고 있습니다.
     
     <item>
       <title>Go코드로 HTML Form 전송</title>
-      <link>https://shrinklabs.com/post/go_html-form/</link>
+      <link>https://shrinklabs.com/post/post/go_html-form/</link>
       <pubDate>Tue, 06 Dec 2016 01:13:41 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/go_html-form/</guid>
+      <guid>https://shrinklabs.com/post/post/go_html-form/</guid>
       <description>HTML, Javascript를 사용해서 Post방식으로 Form을 전송하는 동작을 Go 코드를 작성해 보려고 합니다.
 우선 POST로 전송된 Form을 받아서 처리를 하는 서버쪽을 다음과 같은 구성을 갖는 코드로 만듭니다.
 package main import { &amp;#34;net/http&amp;#34; &amp;#34;github.com/gorilla/mux&amp;#34; } func main() { r := mux.Newrouter().StrictSlash(false) r.HandleFunc(&amp;#34;/upload&amp;#34;, upload).Methods(&amp;#34;POST&amp;#34;) http.ListenAndServe(&amp;#34;:8080&amp;#34;, r) } func upload(w http.ResponseWriter, r *http.Request) { if r.Method == &amp;#34;POST&amp;#34; { } } 이렇게 &amp;ldquo;http://localhost:8080/upload&amp;rdquo; 를 통해서 POST 방식으로 전달되는 요청을 받아서 처리하기 위한 큰틀을 만들었습니다.</description>
@@ -424,20 +424,20 @@ package main import { &amp;#34;net/http&amp;#34; &amp;#34;github.com/gorilla/mux
     
     <item>
       <title>인코딩된 텍스트 디코딩하기</title>
-      <link>https://shrinklabs.com/post/go_encode/</link>
+      <link>https://shrinklabs.com/post/post/go_encode/</link>
       <pubDate>Fri, 25 Nov 2016 00:52:47 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/go_encode/</guid>
+      <guid>https://shrinklabs.com/post/post/go_encode/</guid>
       <description>Javascript에서 encodeURIComponent() 함수를 사용해서 전달받은 문자열을 디코딩해서 보기 위해서는 &amp;ldquo;net/url&amp;rdquo; 패키지의 QueryUnescape() 함수를 사용할 수 있습니다.
 email, err := url.QueryUnescape(user.Email) </description>
     </item>
     
     <item>
       <title>vendor 관리</title>
-      <link>https://shrinklabs.com/post/go_govendor/</link>
+      <link>https://shrinklabs.com/post/post/go_govendor/</link>
       <pubDate>Fri, 14 Oct 2016 18:16:35 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/go_govendor/</guid>
+      <guid>https://shrinklabs.com/post/post/go_govendor/</guid>
       <description>vendoring되어 있는 패키지를 관리해야 할 이유가 무엇인지에 대해서 찾아보다가 좋은 글을 발견했습니다.
 https://gocodecloud.com/blog/2016/03/29/go-vendoring-beginner-tutorial/
 이 글을 읽고 이해한 정도만을 요약해 봅니다
@@ -448,10 +448,10 @@ Pkg X의 리비전을 Project A에 맞추면 Project B가 빌드를 실패하고
     
     <item>
       <title>GitHub 페이지에 Hugo 올리기</title>
-      <link>https://shrinklabs.com/post/tool_hugo/</link>
+      <link>https://shrinklabs.com/post/post/tool_hugo/</link>
       <pubDate>Thu, 13 Oct 2016 14:17:19 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/tool_hugo/</guid>
+      <guid>https://shrinklabs.com/post/post/tool_hugo/</guid>
       <description>Blogger에서 Hugo( http://gohugo.io )로 갈아타는 과정을 정리해 봅니다.
 Hugo 를 설치합니다 https://github.com/spf13/hugo/releases 에서 본인의 환경에 맞는걸 찾아서 설치합니다.
 Linux는 deb를 제공하고 있지만, Windows는 exe파일을 제공하고 있어서 환경변수(PATH)를 잡아주던가, 환경변수가 잡혀있는곳에 복사를 해줍니다.
@@ -464,19 +464,19 @@ hugo의 컨텐츠를 관리하기 위한 저장소가 필요합니다.(ex: https
     
     <item>
       <title>tmux</title>
-      <link>https://shrinklabs.com/post/tool_tmux/</link>
+      <link>https://shrinklabs.com/post/post/tool_tmux/</link>
       <pubDate>Wed, 12 Oct 2016 01:28:09 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/tool_tmux/</guid>
+      <guid>https://shrinklabs.com/post/post/tool_tmux/</guid>
       <description>tmux 시작 $ tmux $ tmux new-session(or new) -s [세션 이름] -n [윈도우 이름] tmux 종료 $ ctrl-d $ exit tmux detach(현재 클라이언트) $ ctrl-b, d tmux attach $ tmux attach -t [세션 이름] window 생성 $ ctrl-b, c window 리스트 $ ctrl-b, w window 이동(현재의 이전(다음, 이전) $ ctrl-b, l(n, p) window 종료 $ ctrl-b, &amp;amp; window 이름 변경 $ ctrl-b, , pane 가로 나누기 $ ctrl-b, % pane 세로 나누기 $ ctrl-b, &amp;quot; pane 의 번호를 화면에 출력 $ ctrl-b, q pane 크기 조절 $ ctrl-b, (ctrl + 방향키) 모든 pane의 크기 동일하게 만들기 $ ctrl-b alt-1 # 모든 vertical split 넓이를 동일하게 변경 $ ctrl-b alt-2 # 모든 horizontal split의 넓이를 동일하게 변경 pane 이동하기 $ ctrl-b, o pane 이동하기 $ ctrl-b, 방향키 $ ctrl-b {(}) pane 삭제하기 $ ctrl-d pane 화면 스크롤 모드 시작 $ ctrl-b, [ pane 화면 스크롤 모드 종료 $ q 입력되는 내용을 모든 pane에 동일하게 적용 $ ctrl-b : setw synchronize-panes http://nodeqa.</description>
     </item>
     
     <item>
       <title>vi 팁</title>
-      <link>https://shrinklabs.com/post/tool_vi/</link>
+      <link>https://shrinklabs.com/post/post/tool_vi/</link>
       <pubDate>Mon, 05 Sep 2016 01:28:09 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/tool_vi/</guid>
+      <guid>https://shrinklabs.com/post/post/tool_vi/</guid>
       <description>현재 작업중인 파일의 경로와 이름 확인 현재 작업중인 파일의 경로 또는 이름이 궁금할 경우가 있습니다.
 ctrl + g 또는
 : f 80컬럼에 버티컬 라인 vi에서 80컬럼의 버티컬 라인을 생성하려면 다음과 같이 합니다.
@@ -488,10 +488,10 @@ set colorcolumn=80 을 적용하면, 빨간색 라인이 생깁니다.
     
     <item>
       <title>vim-go 기본 템플릿 비활성화</title>
-      <link>https://shrinklabs.com/post/go_vim-go/</link>
+      <link>https://shrinklabs.com/post/post/go_vim-go/</link>
       <pubDate>Mon, 05 Sep 2016 01:28:09 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/go_vim-go/</guid>
+      <guid>https://shrinklabs.com/post/post/go_vim-go/</guid>
       <description>vim-go가 언제부터인가 main.go 를 만들면 템플릿으로 fmt.Println(&amp;ldquo;vim-go&amp;rdquo;) 를 찍어주는 코드를 자동으로 생성해 주기 시작했습니다.
 나는 아무것도 나오지 않기를 바랬는데, 이런게 나와서 매번 지우는 작업을 하는게 싫었습니다. 그래서 설정중에 go_template_autocreate 를 조절했습니다.
 let g:go_template_autocreate = 0 와 같이 하면 이제 아무것도 없는 빈 화면이 나옵니다.
@@ -501,10 +501,10 @@ let g:go_template_file = &amp;quot;hello_world.go&amp;quot; 로 해도 됩니다
     
     <item>
       <title>template을 생성할때 왜 이름을 지정할까?</title>
-      <link>https://shrinklabs.com/post/go_template/</link>
+      <link>https://shrinklabs.com/post/post/go_template/</link>
       <pubDate>Sat, 03 Sep 2016 17:10:53 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/go_template/</guid>
+      <guid>https://shrinklabs.com/post/post/go_template/</guid>
       <description>Go언어의 Template 엔진을 사용할때, 왜 New()의 파라미터로 이름을 만들어서 넘겨야 하는지가 궁금 했었습니다.
 Template and Associated templates라는 글을 읽고 어느 정도 이해를 하게 되었습니다.
 다음은 위 글의 내용을 요약한 것 입니다.
@@ -520,10 +520,10 @@ New()를 했어도 아직 템플릿 리스트에서 관리되는 대상은 아�
     
     <item>
       <title>ifconfig 사용</title>
-      <link>https://shrinklabs.com/post/tool_ifconfig/</link>
+      <link>https://shrinklabs.com/post/post/tool_ifconfig/</link>
       <pubDate>Thu, 21 Jul 2016 01:28:09 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/tool_ifconfig/</guid>
+      <guid>https://shrinklabs.com/post/post/tool_ifconfig/</guid>
       <description>임시로 사용할 개발환경을 만들기 위해서 ubuntu 이미지를 사용하는데,
 ifconfig 명령이 동작하지 않아서 보니, net-tools가 온전하게 설치되었지가 않은것 같습니다.
 $ apt-get install --reinstall net-tools </description>
@@ -531,10 +531,10 @@ $ apt-get install --reinstall net-tools </description>
     
     <item>
       <title>css와 같은 정적 컨텐츠를 html에서 사용하기 위한 팁</title>
-      <link>https://shrinklabs.com/post/go_css-html/</link>
+      <link>https://shrinklabs.com/post/post/go_css-html/</link>
       <pubDate>Mon, 18 Jul 2016 10:16:09 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/go_css-html/</guid>
+      <guid>https://shrinklabs.com/post/post/go_css-html/</guid>
       <description>Go의 &amp;ldquo;net/http&amp;quot;와 &amp;ldquo;html/template&amp;quot;를 이용해서 html과 css로 만들어진 웹페이지를 만들려고 할때, html 파일이 보여질때 css가 적용되지 않은 상태로 보여집니다.
 이 때 어떻게 해야 하는지 방법을 찾아가던 과정을 기록으로 남겨 놓습니다.
 프로젝트의 디렉토리 구조는 다음과 같습니다.
@@ -546,56 +546,56 @@ func main() { http.HandleFunc(&amp;#34;/&amp;#34;, indexHandler) http.ListenAndS
     
     <item>
       <title>http 패키지의 HandleFunc과 Handle</title>
-      <link>https://shrinklabs.com/post/go_http-handlefunc-handle/</link>
+      <link>https://shrinklabs.com/post/post/go_http-handlefunc-handle/</link>
       <pubDate>Sun, 17 Jul 2016 17:10:53 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/go_http-handlefunc-handle/</guid>
+      <guid>https://shrinklabs.com/post/post/go_http-handlefunc-handle/</guid>
       <description>HandleFunc  http.ResponseWriter 와 *http.Request를 인자로 받는 함수를 전달받습니다. 내부적으로 ServeHTTP가 구현된 ServeMux를 사용합니다.  package main import ( &amp;#34;net/http&amp;#34; ) func indexHandler(w http.ResponseWriter, r *http.Request) { .... } func main() { http.HandleFunc(&amp;#34;/&amp;#34;, indexHandler) http.ListenAndServe(&amp;#34;:8080&amp;#34;, nil) } Handle  http.Handler 인터페이스를 구현한 객체를 전달받습니다. 인자로 전달받은 객체는 http.Handler의 ServeHTTP(http.ResponseWriter, *http.Request)가 구현되어 있어야 합니다.  package main import ( &amp;#34;net/http&amp;#34; ) type indexHandler struct { } func (index *AppHandler) ServeHTTP(w http.ResponseWriter, r *http.</description>
     </item>
     
     <item>
       <title>VM 설정</title>
-      <link>https://shrinklabs.com/post/tool_vm/</link>
+      <link>https://shrinklabs.com/post/post/tool_vm/</link>
       <pubDate>Thu, 21 Apr 2016 14:39:36 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/tool_vm/</guid>
+      <guid>https://shrinklabs.com/post/post/tool_vm/</guid>
       <description>Labs 머신에서 사용할 vm을 생성할때 특이점
  vm 생성 Settings -&amp;gt; Network(Attached to: Bridged Adapter) Start(Network &amp;amp; Host Name)  Host Name: 지정 Ethernet(enp0s3): On Configure - IPv4 Settings  Method: Manual Addresses: Labs-Network guide 문서의 subnetmask, dns, gateway 그리고 사용할 ip 참조 Require IPv4 addressing for this connection to complete 항목 선택      </description>
     </item>
     
     <item>
       <title>zsh(oh-my-zsh) 사용</title>
-      <link>https://shrinklabs.com/post/tool_zsh/</link>
+      <link>https://shrinklabs.com/post/post/tool_zsh/</link>
       <pubDate>Thu, 21 Apr 2016 14:39:36 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/tool_zsh/</guid>
+      <guid>https://shrinklabs.com/post/post/tool_zsh/</guid>
       <description>zsh 설치하고 기본 쉘 변경 $ sudo apt-get install zsh $ which zsh /usr/bin/zsh $ chsh -s /usr/bin/zsh oh-my-zsh 설치 $ curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh 설정(개인 취향) .zshrc 의 ZSH_THEME를 minimal 로 변경</description>
     </item>
     
     <item>
       <title>protobuf 사용</title>
-      <link>https://shrinklabs.com/post/tool_protobuf/</link>
+      <link>https://shrinklabs.com/post/post/tool_protobuf/</link>
       <pubDate>Thu, 21 Apr 2016 13:35:10 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/tool_protobuf/</guid>
+      <guid>https://shrinklabs.com/post/post/tool_protobuf/</guid>
       <description>설치  protoc 최신 버전 확인 ( https://github.com/google/protobuf/releases )  $ curl -OL https://github.com/protocolbuffers/protobuf/releases/download/v3.15.6/protoc-3.15.6-linux-x86_64.zip $ unzip protoc-3.6.1-linux-x86\_64.zip -d protoc3 $ sudo mv protoc3/bin/\* /usr/local/bin/ $ sudo mv protoc3/include/\* /usr/local/include/ $ sudo chown $USER /usr/local/bin/protoc $ sudo chown -R $USER /usr/local/include/google 원본: Install protobuf 3.6.1 on Ubuntu 16.04 (github.com)</description>
     </item>
     
     <item>
       <title>terminator 사용</title>
-      <link>https://shrinklabs.com/post/tool_terminator/</link>
+      <link>https://shrinklabs.com/post/post/tool_terminator/</link>
       <pubDate>Thu, 21 Apr 2016 13:35:10 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/tool_terminator/</guid>
+      <guid>https://shrinklabs.com/post/post/tool_terminator/</guid>
       <description>설치 $sudo apt-get install terminator 단축키 분할(수직): ctrl + shift + e 분할(수평): ctrl + shift + o 닫기(현재 창): ctrl + shift + w 닫기(전체): ctrl + shift + q 새 탭: ctrl + shift + t 분할된 화면간 이동: alt + 방향키 </description>
     </item>
     
     <item>
       <title>vendor 사용 팁(내부 패키지)</title>
-      <link>https://shrinklabs.com/post/go_vendor/</link>
+      <link>https://shrinklabs.com/post/post/go_vendor/</link>
       <pubDate>Wed, 09 Mar 2016 14:12:58 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/go_vendor/</guid>
+      <guid>https://shrinklabs.com/post/post/go_vendor/</guid>
       <description>프로젝트 내부에서 별도의 패키지를 만들어서 사용을 하려고 할때면,
 import 경로를 &amp;ldquo;github.com/blah/project/internalpkg&amp;rdquo; 처럼 다 써야 했었습니다.
 이제 vendor를 사용하면 pkg 이름만 import 해서 사용할 수 있게 되었습니다.
@@ -610,10 +610,10 @@ import &amp;ldquo;github.com/jaehoonn/lotto/command&amp;rdquo; 와 같이 사용
     
     <item>
       <title>pkg 원격저장소 연결하기</title>
-      <link>https://shrinklabs.com/post/go_meta-tag-pkg-repository/</link>
+      <link>https://shrinklabs.com/post/post/go_meta-tag-pkg-repository/</link>
       <pubDate>Thu, 11 Jun 2015 13:43:41 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/go_meta-tag-pkg-repository/</guid>
+      <guid>https://shrinklabs.com/post/post/go_meta-tag-pkg-repository/</guid>
       <description>최근에 go소스들을 분석하면서 특이한 pkg import 경로들을 보게 되었습니다.
 import &amp;#34;rsc.io/pdf&amp;#34; 와 같은 &amp;ldquo;github.com/rsc/pdf&amp;rdquo; 와 동일한 내용인데 그리고 rsc는 russ cox가 사용하는 닉네임인데 그럼 같은 pkg 인가 싶었습니다?
 그래서 웹브라우저에서 rsc.io/pdf 를 입력하면 godoc로 이동을 합니다.
@@ -625,19 +625,19 @@ index.html 에 이렇게만 코드가 되어 있었습니다.
     
     <item>
       <title>개발환경 설정</title>
-      <link>https://shrinklabs.com/post/tool_setting/</link>
+      <link>https://shrinklabs.com/post/post/tool_setting/</link>
       <pubDate>Sat, 23 May 2015 01:28:09 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/tool_setting/</guid>
+      <guid>https://shrinklabs.com/post/post/tool_setting/</guid>
       <description>업데이트 $ sudo apt-get update $ sudo apt-get install build-essential vim 설치 $ sudo apt-get install vim vim 8.0 $ sudo add-apt-repository ppa:jonathonf/vim $ sudo apt-get update xclip 설치 $ sudo apt-get install xclip wget 설치(사용이 필요한 경우에만 설치) $ sudo apt-get install wget git 설치  git 설치와 설정  $ sudo apt-get install git $ git config –-global user.name “blah” $ git config –-global user.email “blah@blah.com” $ git config --global core.</description>
     </item>
     
     <item>
       <title>pkg-config 사용</title>
-      <link>https://shrinklabs.com/post/go_pkg-config/</link>
+      <link>https://shrinklabs.com/post/post/go_pkg-config/</link>
       <pubDate>Fri, 06 Mar 2015 01:28:09 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/go_pkg-config/</guid>
+      <guid>https://shrinklabs.com/post/post/go_pkg-config/</guid>
       <description>Go언어를 사용하다보면 C로 만들어진 라이브러리를 사용하기 위해서 cgo가 필요할 때 가 있습니다. 라이브러리를 링크하고 하는 몇 가지 절차를 거치게 되는데, 이때 pkg-config라는걸 사용하면 편리합니다.
 pkg-config를 사용하면 컴파일하는데 필요한 라이브러리와 헤더정보를 Go코드상에서 동일한 경로로 제공해줄 수 있게 됩니다.
 pkg-config가 설치되어 있지 않을 경우에는 다음과 같이 설치를 해줄 수 있습니다.
@@ -648,10 +648,10 @@ $ pkg-config --list-all 현재 설치된 라이브러리들의 정보가 나오�
     
     <item>
       <title>Golang channels tutorial</title>
-      <link>https://shrinklabs.com/post/go_golang-channels-tutorial/</link>
+      <link>https://shrinklabs.com/post/post/go_golang-channels-tutorial/</link>
       <pubDate>Wed, 10 Dec 2014 13:12:58 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/go_golang-channels-tutorial/</guid>
+      <guid>https://shrinklabs.com/post/post/go_golang-channels-tutorial/</guid>
       <description>최근에 goroutine과 channel에 대해서 학습하다가 설명이 잘 되어 있는 글을 찾아서 번역(이라고 하기에는 뭐하고 정리?) 를 해봤습니다. 제대로 이해를 못하고 잘 못 번역을 한 부분이 있을 수 도 있으니&amp;hellip;꼭 원본을 보길 권장합니다.
 원본 : http://guzalexander.com/2013/12/06/golang-channels-tutorial.html
  Go언어는 병렬 프로그램 작성을 위해서 내장 도구를 갖고 있습니다. go를 함수 호출 앞에 놓으면 동일한 주소에 위치하는 코드를 독립적인 병렬 스레드로 실행을 시작합니다. 이런 쓰레드를 Go언어에서는 goroutine이라고 부릅니다. 여기에서 말하는 concurrently는 parallel을 의미하지는 않습니다. (역주: 그렇지만 번역은 “병렬” 이라고 칭하겠습니다.</description>
@@ -659,20 +659,20 @@ $ pkg-config --list-all 현재 설치된 라이브러리들의 정보가 나오�
     
     <item>
       <title>md5 패키지 사용예</title>
-      <link>https://shrinklabs.com/post/go_md5/</link>
+      <link>https://shrinklabs.com/post/post/go_md5/</link>
       <pubDate>Tue, 08 Oct 2013 17:10:53 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/go_md5/</guid>
+      <guid>https://shrinklabs.com/post/post/go_md5/</guid>
       <description>Qt로 만드는 클라이언트에서 이미지 파일에 대해서 만들어진 md5 hash를 검증 해보기 위해서, 같은 이미지 파일에 대해서 Go언어로 md5 hash를 만들었을때 동일한 값이 생성되면 제대로 만들어진거 아닐까 해서, 만들어 봤습니다.
 package main import ( &amp;#34;io/ioutil&amp;#34; &amp;#34;crypto/md5&amp;#34; &amp;#34;fmt&amp;#34; ) func main() { data, err := ioutil.ReadFile(&amp;#34;1.jpg&amp;#34;) if err != nil { return; } hash := md5.New() hash.Write(data) hashData := hash.Sum(nil) fmt.Printf(&amp;#34;%x&amp;#34;, hashData) } </description>
     </item>
     
     <item>
       <title>C언어의 배열을 Go언어의 slices로 변환</title>
-      <link>https://shrinklabs.com/post/go_go-slice-from-c-array/</link>
+      <link>https://shrinklabs.com/post/post/go_go-slice-from-c-array/</link>
       <pubDate>Tue, 17 Sep 2013 17:10:53 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/go_go-slice-from-c-array/</guid>
+      <guid>https://shrinklabs.com/post/post/go_go-slice-from-c-array/</guid>
       <description>cgo를 이용하다보면, C언어로 작성된 라이브러리의 리턴값으로 포인터에 구조체가 할당되어서 넘어올때가 있습니다.
 C언어에서 넘어오는 구조체 배열이 포인터 형태로 넘어오니, Go의 포인터에 할당을 해서 사용 해봤습니다.
 당연히 제대로 동작하지 않습니다. C언어로 작성된 라이브러리에서 넘어오는 값은 배열이니, Go언어에서는 slices에 할당을 하는게 맞는것 같습니다.
@@ -684,10 +684,10 @@ slcieHeader := (*reflect.</description>
     
     <item>
       <title>type으로 이름 붙여진 구조체의 필드를 사용하기위한 방법</title>
-      <link>https://shrinklabs.com/post/go_cgo-type/</link>
+      <link>https://shrinklabs.com/post/post/go_cgo-type/</link>
       <pubDate>Tue, 03 Sep 2013 17:10:53 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/go_cgo-type/</guid>
+      <guid>https://shrinklabs.com/post/post/go_cgo-type/</guid>
       <description>c로 만들어져 있던 라이브러리를 cgo를 이용해서 포팅(?)을 하는 작업을 하다보면 난감한 부분들이 종종 나타납니다.
 그중에 한가지가 c에서 사용하던 구조체의 파라미터명이 go 에서 미리정의된 명칭일 경우가 있습니다.
 대표적인 예로 &amp;ldquo;type&amp;quot;이라는 파라미터명 입니다.
@@ -699,10 +699,10 @@ c에서는 T_CCI_COL_INFO(cubrid의 cci에서 사용되는 구조체중에 하�
     
     <item>
       <title>패키지 만들때 testing 패키지 사용하기</title>
-      <link>https://shrinklabs.com/post/go_testing/</link>
+      <link>https://shrinklabs.com/post/post/go_testing/</link>
       <pubDate>Fri, 23 Aug 2013 14:12:58 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/post/go_testing/</guid>
+      <guid>https://shrinklabs.com/post/post/go_testing/</guid>
       <description>개요 Go 언어용 패키지를 만들려면, 테스트코드를 작성해야 진행이 좀 더 원활하게 되는것 같습니다.
 그래서 간단하게 테스트 코드 작성하는 방법을 정리해봤습니다.
 abc 패키지를 만들어서 테스트하기 src\abc\abc.go
@@ -714,10 +714,10 @@ abc.go를 다음과 같이 작성합니다.
     
     <item>
       <title></title>
-      <link>https://shrinklabs.com/home/subheader/</link>
+      <link>https://shrinklabs.com/post/home/subheader/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://shrinklabs.com/home/subheader/</guid>
+      <guid>https://shrinklabs.com/post/home/subheader/</guid>
       <description>ShrinkLabs는
 Go, Kubernetes 그리고 Distributed Systems에 관심을 갖고
 분석과 개발하는 과정들을 기록하고 있습니다.</description>

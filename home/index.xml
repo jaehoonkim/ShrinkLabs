@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Homes on ShrinkLabs</title>
-    <link>https://shrinklabs.com/home/</link>
+    <link>https://shrinklabs.com/post/home/</link>
     <description>Recent content in Homes on ShrinkLabs</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language><atom:link href="https://shrinklabs.com/home/index.xml" rel="self" type="application/rss+xml" />
+    <language>en</language><atom:link href="https://shrinklabs.com/post/home/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title></title>
-      <link>https://shrinklabs.com/home/subheader/</link>
+      <link>https://shrinklabs.com/post/home/subheader/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://shrinklabs.com/home/subheader/</guid>
+      <guid>https://shrinklabs.com/post/home/subheader/</guid>
       <description>ShrinkLabs는
 Go, Kubernetes 그리고 Distributed Systems에 관심을 갖고
 분석과 개발하는 과정들을 기록하고 있습니다.</description>
