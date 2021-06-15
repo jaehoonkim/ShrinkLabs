@@ -91,6 +91,217 @@
 					<header class="entry-header">
 						<div class="entry-meta">
                <span class="posted-on">
+                  <time class="entry-date published" datetime="May 23, 2015">May 23, 2015</time>
+               </span>
+						</div>
+						<h1 class="entry-title">
+						  <a href="https://shrinklabs.com/post/tool_setting/" rel="bookmark">개발환경 설정</a>
+						</h1>
+					</header>
+					<div class="entry-content">
+						<h2 id="업데이트">업데이트</h2>
+<pre><code>$ sudo apt-get update  
+$ sudo apt-get install build-essential
+</code></pre><h2 id="vim-설치">vim 설치</h2>
+<pre><code>$ sudo apt-get install vim
+</code></pre><h2 id="vim-80">vim 8.0</h2>
+<pre><code>$ sudo add-apt-repository ppa:jonathonf/vim  
+$ sudo apt-get update
+</code></pre><h2 id="xclip-설치">xclip 설치</h2>
+<pre><code>$ sudo apt-get install xclip
+</code></pre><h2 id="wget-설치사용이-필요한-경우에만-설치">wget 설치(사용이 필요한 경우에만 설치)</h2>
+<pre><code>$ sudo apt-get install wget
+</code></pre><h2 id="git-설치">git 설치</h2>
+<ol>
+<li>git 설치와 설정</li>
+</ol>
+<pre><code>$ sudo apt-get install git  
+$ git config –-global user.name “blah”  
+$ git config –-global user.email “blah@blah.com”  
+$ git config --global core.editor vim  
+$ git config --global core.commentchar &quot;*&quot;  
+$ ssh-keygen -t rsa -C “blah@blah.com”  
+$ xclip -sel clip &lt; ~/.ssh/id_rsa.pub
+</code></pre><ol start="2">
+<li>github/bitbucket에 ssh key 값을 등록</li>
+</ol>
+<h2 id="gopath로-사용할-위치-생성">GOPATH로 사용할 위치 생성</h2>
+<pre><code>$HOME/work  
+bin  
+pkg  
+src
+</code></pre><h2 id="go-설치">Go 설치</h2>
+<ol>
+<li>기존에 설치된 버전이 있다면 삭제합니다.</li>
+</ol>
+<pre><code>$ rm -r /usr/local/go
+</code></pre><ol start="2">
+<li><a href="http://golang.org/doc/install">http://golang.org/doc/install</a> 에서 다운로드<br>
+(또는$ wget &ndash;no-check-certificate <a href="https://storage.googleapis.com/golang/go1.7.1.linux-amd64.tar.gz">https://storage.googleapis.com/golang/go1.7.1.linux-amd64.tar.gz</a> 와 같이 원하는 OS 및 버전에 맞는 Go 바이너리를 wget으로 받을 수도 있습니다.)</li>
+<li>/usr/loca/go에 압축을 풉니다.</li>
+</ol>
+<pre><code>$ sudo tar -C /usr/local -xzf gox.x.x.linux-xxx.tar.gz
+</code></pre><ol start="4">
+<li>$HOME/.profile 에 다음을 추가합니다.</li>
+</ol>
+<pre><code>export PATH=$PATH:/usr/local/go/bin  
+export GOPATH=$HOME/work
+</code></pre><p>추가) app engine도 사용 할 경우에는 PATH에 app engine의 위치도 추가</p>
+<ol start="5">
+<li>적용</li>
+</ol>
+<pre><code>$ source ~/.profile
+</code></pre><h2 id="ctags-설치">ctags 설치</h2>
+<ol>
+<li>설치</li>
+</ol>
+<pre><code>$ sudo apt-get install ctags
+</code></pre><ol start="2">
+<li>go가 설치된 위치로 이동(/usr/local/go)해서 tag 생성</li>
+</ol>
+<pre><code>$ sudo ctags -R
+</code></pre><ol start="3">
+<li>vimrc 파일에 다음을 추가합니다.</li>
+</ol>
+<pre><code>set tags +=/usr/local/go/tags
+</code></pre><h2 id="python과-cmake-설치">python과 cmake 설치</h2>
+<ul>
+<li>YouCompleteMe라는 vim 플러그인의 정상적인 설치를 위해서 python과 cmake를 설치합니다.
+<pre><code>$ sudo apt-get install python-dev python3-dev  
+$ sudo apt-get install cmake
+</code></pre></li>
+</ul>
+<h2 id="vundlevim을-이용한-nerdtree와-fatihvim-go-설치">Vundle.vim을 이용한 NERDTree와 fatih/vim-go 설치</h2>
+<ul>
+<li>Vundle.vim 설치
+<pre><code>$ git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+</code></pre></li>
+<li>/etc/vim/vimrc.local 을 생성해서 아래의 내용을 붙여 넣습니다.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Shell" data-lang="Shell">set nocompatible <span style="color:#e6db74">&#34; be iMproved, required
+</span><span style="color:#e6db74">filetype off &#34;</span> required
+
+set autoindent
+set smartindent
+set shiftwidth<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>
+set number
+set expandtab
+set tabstop<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>
+
+<span style="color:#e6db74">&#34; set the runtime path to include Vundle and initialize
+</span><span style="color:#e6db74">set rtp+=~/.vim/bundle/Vundle.vim
+</span><span style="color:#e6db74">call vundle#begin()
+</span><span style="color:#e6db74">&#34;</span> alternatively, pass a path where Vundle should install plugins
+<span style="color:#e6db74">&#34;call vundle#begin(&#39;~/some/path/here&#39;)
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">&#34;</span> let Vundle manage Vundle, required
+Plugin <span style="color:#e6db74">&#39;gmarik/Vundle.vim&#39;</span>
+
+<span style="color:#e6db74">&#34; The following are examples of different formats supported.
+</span><span style="color:#e6db74">&#34;</span> Keep Plugin commands between vundle#begin/end.
+<span style="color:#e6db74">&#34; plugin on GitHub repo
+</span><span style="color:#e6db74">Plugin &#39;tpope/vim-fugitive&#39;
+</span><span style="color:#e6db74">&#34;</span> plugin from http://vim-scripts.org/vim/scripts.html
+Plugin <span style="color:#e6db74">&#39;L9&#39;</span>
+<span style="color:#e6db74">&#34; Git plugin not hosted on GitHub
+</span><span style="color:#e6db74">Plugin &#39;git://git.wincent.com/command-t.git&#39;
+</span><span style="color:#e6db74">&#34;</span> git repos on your local machine <span style="color:#f92672">(</span>i.e. when working on your own plugin<span style="color:#f92672">)</span>
+<span style="color:#e6db74">&#34;Plugin &#39;file:///home/gmarik/path/to/plugin&#39;
+</span><span style="color:#e6db74">&#34;</span> The sparkup vim script is in a subdirectory of this repo called vim.
+<span style="color:#e6db74">&#34; Pass the path to set the runtimepath properly.
+</span><span style="color:#e6db74">Plugin &#39;rstacruz/sparkup&#39;, {&#39;rtp&#39;: &#39;vim/&#39;}
+</span><span style="color:#e6db74">&#34;</span> Avoid a name conflict with L9
+<span style="color:#e6db74">&#34;Plugin &#39;user/L9&#39;, {&#39;name&#39;: &#39;newL9&#39;}
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">Plugin &#39;The-NERD-tree&#39;
+</span><span style="color:#e6db74">Plugin &#39;bling/vim-airline&#39;
+</span><span style="color:#e6db74">Plugin &#39;fatih/vim-go&#39;
+</span><span style="color:#e6db74">Plugin &#39;nsf/gocode&#39;
+</span><span style="color:#e6db74">Plugin &#39;Tagbar&#39;
+</span><span style="color:#e6db74">Plugin &#39;Valloric/YouCompleteMe&#39;
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">&#34;</span> All of your Plugins must be added before the following line
+call vundle#end<span style="color:#f92672">()</span> <span style="color:#e6db74">&#34; required
+</span><span style="color:#e6db74">filetype plugin indent on &#34;</span> required
+<span style="color:#e6db74">&#34; To ignore plugin indent changes, instead use:
+</span><span style="color:#e6db74">&#34;</span>filetype plugin on
+<span style="color:#e6db74">&#34;
+</span><span style="color:#e6db74">&#34;</span> Brief help
+<span style="color:#e6db74">&#34; :PluginList - lists configured plugins
+</span><span style="color:#e6db74">&#34;</span> :PluginInstall - installs plugins; append <span style="color:#e6db74">`</span>!<span style="color:#e6db74">`</span> to update or just :PluginUpdate
+<span style="color:#e6db74">&#34; :PluginSearch foo - searches for foo; append `!` to refresh local cache
+</span><span style="color:#e6db74">&#34;</span> :PluginClean - confirms removal of unused plugins; append <span style="color:#e6db74">`</span>!<span style="color:#e6db74">`</span> to auto-approve removal
+<span style="color:#e6db74">&#34;
+</span><span style="color:#e6db74">&#34;</span> see :h vundle <span style="color:#66d9ef">for</span> more details or wiki <span style="color:#66d9ef">for</span> FAQ
+<span style="color:#e6db74">&#34; Put your non-Plugin stuff after this line
+</span></code></pre></div><ul>
+<li>
+<p>vim 실행해서 “ :PluginInstall “ 을 해서 지정된 플러그인들을 설치합니다.</p>
+</li>
+<li>
+<p>NERDTree의 설정을 합니다.</p>
+</li>
+</ul>
+<pre><code>$ sudo vim /etc/vim/vimrc.local
+</code></pre><p>을 열어서 적당한 곳에 아래의 내용을 붙여넣습니다.</p>
+<pre><code>nmap &lt;F2&gt; :NERDTreeToggle&lt;CR&gt;
+let NERDTreeWinPos=&quot;left&quot;
+</code></pre><ul>
+<li>Tagbar 설정<br>
+위의 NERDTree 설정 부분 아래에 추가합니다.</li>
+</ul>
+<pre><code>nmap &lt;F3&gt; :Tagbar&lt;CR&gt;
+let Tagbar=&quot;right&quot;
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+    \ }
+</code></pre><p>추가) vim-go 설치가 완료되고 난 다음에,<br>
+$GOPATH/bin 에 생성되어 있는, errcheck, gocode, gofmt, golint, gotags, goimports, gorename, oracle
+를 /usr/local/go/bin 에 복사/붙여넣기 합니다.</p>
+<p>[참고] <a href="https://gist.github.com/jaehoonn/47d81a29b620a0d64f80">https://gist.github.com/jaehoonn/47d81a29b620a0d64f80</a></p>
+<ul>
+<li>YouCompleteMe 설치<br>
+YouCompleteMe의 설치를 완료하기 위해서 Bundle 디렉토리로 이동해서 Go언어 자동완성이 가능하도록 옵션을 지정해서 install을 합니다.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ cd ~/.vim/bundle/YouCompleteMe
+$ ./install.py --gocode-completer
+</code></pre></div><ul>
+<li>cscope를 사용하기 위한 설정<br>
+[참고] <a href="https://github.com/jaehoonn/log/blob/master/cscope.md">https://github.com/jaehoonn/log/blob/master/cscope.md</a><br>
+[script] <a href="https://gist.github.com/jaehoonn/bc257991fe8932944d8fa9a9556eb223">https://gist.github.com/jaehoonn/bc257991fe8932944d8fa9a9556eb223</a></li>
+</ul>
+
+					</div>
+				</article>
+        
+				<article class="post">
+					<header class="entry-header">
+						<div class="entry-meta">
+               <span class="posted-on">
                   <time class="entry-date published" datetime="March 6, 2015">March 6, 2015</time>
                </span>
 						</div>

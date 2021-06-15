@@ -91,6 +91,116 @@
 					<header class="entry-header">
 						<div class="entry-meta">
                <span class="posted-on">
+                  <time class="entry-date published" datetime="June 16, 2021">June 16, 2021</time>
+               </span>
+						</div>
+						<h1 class="entry-title">
+						  <a href="https://shrinklabs.com/post/scheduler_an-approach-to-designing-distributed-fault-tolerant-horizontally-scalable-event-scheduler/" rel="bookmark">내결함성 수평 확장성이 있는 분산형 이벤트 스케줄러 설계 방법</a>
+						</h1>
+					</header>
+					<div class="entry-content">
+						<p>이 글은 원글(<a href="https://medium.com/walmartglobaltech/an-approach-to-designing-distributed-fault-tolerant-horizontally-scalable-event-scheduler-278c9c380637">An Approach to Designing a Distributed, Fault-Tolerant, Horizontally Scalable Event Scheduler</a>)의 저작자 Sandeep Malik씨의 허락을 받고 번역한 글 입니다.</p>
+<hr>
+<h1 id="소개">소개</h1>
+<p>시간 기반 이벤트 스케줄러를 설계하는 것은 항상 흥미로운 문제입니다. 규모에 맞게 작업을 수행하는 것은 훨씬 더 어려운 일입니다. 먼저 시간 기반 이벤트 스케줄러가 무엇을 의미하는지 정의해 보겠습니다.</p>
+<p>시간 기반 이벤트 스케줄러는 서비스가 나중에 (<em>future</em>) 처리해야 하는 요청을 예약하는 데 사용할 수 있는 시스템입니다. 서비스는 스케줄러에 이벤트(<em>event</em>)를 등록하고 현재 요청의 처리를 일시 중단합니다.</p>
+<p>정해진 시간이되면 스케줄러에 의해 요청 서비스가 통보되며, 바로 전에 중단되었던 요청의 처리를 재개할 수 있습니다. 이러한 시스템이 유용할 수 있는 많은 시나리오가 있습니다. 일부 사용 사례(전반적인 것은 아님)는 아래에 나열되어 있습니다.</p>
+<h1 id="비동기-요청-시간-초과">비동기 요청 시간 초과</h1>
+<p>점점 더 많은 시스템이 카프카(<a href="https://medium.com/walmartlabs/tech-transformation-real-time-messaging-at-walmart-8787f5ab19e8#.wx4sbxuse">Kafka</a>), JMS 등과 같은 메시징 기반 아키텍처로 이동함에 따라, 가장 일반적인 시나리오 중 하나는 메시징 계층을 비동기식 요청/응답 버스(bus)로 사용하는 것입니다. 한 시스템은 다른 시스템에 &ldquo;메시지 요청(<em>message request</em>)&ldquo;을 생성하고 나중에 응답을 반환하면 나머지 처리 작업을 진행합니다. 경우에 따라서는 &lsquo;최종 응답(<strong>eventual response</strong>)&lsquo;을 하는 것이 중요합니다. 다른 시스템이 지연되거나 중단되었거나 단순히 응답을 반환하지 못할 수 있습니다. 상태 비저장 마이크로 서비스 패러다임이 있는 분산 환경에서는 이러한 손실된 요청을 추적하기가 어렵습니다. 한 가지 해결책은 요청의 규정된 SLA에 따라 트리거될 수 있는 &lsquo;시간 초과(time-out)&rsquo; 이벤트를 예약하는 것일 수 있습니다.</p>
+<p>이벤트가 트리거되면 요청의 현재 상태를 확인하고 응답이 없는 경우 요청을 시간 초과로 표시할 수 있습니다.</p>
+<h1 id="시스템-재시도">시스템 재시도</h1>
+<p>HTTP와 같은 동기식 채널을 통해 상호 작용하는 시스템의 경우에도 서버가 다운되어 요청을 처리할 수 없습니다. 클라이언트는 재시도를 선택할 수 있지만 재시도 간격이 매우 짧으면 순 긍정 효과가 나타나지 않습니다. 예를 들어, 시스템 전체에 걸쳐 운영 중단 상태가 몇 초 이상 지속될 수 있습니다. 이 경우 요청 데이터를 메모리에 저장하지 않는 지수 형태로 재시도를 더 오래 수행하는 것이 바람직할 수 있습니다.</p>
+<p>이러한 경우 재시도용 페이로드를 이벤트 스케줄러로 보낼 수 있으며 클라이언트의 재시도 정책에 따라 나중에 다시 시도할 수 있습니다.</p>
+<h1 id="조정-작업">조정 작업</h1>
+<p>때때로 배치에 기반한 분산 시스템에서는 데이터 스트림이 여러 클러스터에 의해 마이크로 배치로 분할되고 처리됩니다. 실패의 경우, 일관성 있는 응답이 초기 배치에 대해 클라이언트에게 반환될 수 있도록 응답을 조정하는 것이 바람직할 수 있습니다.</p>
+<p>이 경우 배치 처리 시작 시 조정 이벤트를 예약하여 배치 처리 또는 처리 시간 SLA 종료 시 데이터를 조정할 수 있습니다.</p>
+<h1 id="가격-관련-트리거">가격 관련 트리거</h1>
+<p>이커머스(eCommerce) 환경에서는 일반적으로 제품을 적절한 가격 가치로 유지하기 위해 가격을 변경합니다. 이러한 가격 변동을 촉발하는 것은 엄청난 수작업이 될 수 있고 오류가 발생하기 쉬우며, 원하는 시간에 정확하게 이루어지지 않을 수도 있습니다. 예를 들어, 블랙 프라이데이와 같은 휴가 피크 시간 동안 가격 변동이 약간 지연되더라도 연간 매출에 영향을 미칠 수 있습니다.</p>
+<p>이 경우 가격 변경은 &lsquo;프로모션&rsquo;으로 미리 설정될 수 있으며, 이는 이벤트 스케줄러에 의해 필요한 시간에 트리거되어 수동 가격 동기화 작업을 절약할 수 있습니다.</p>
+<p>위에서 언급한 모든 이슈들은 어느 순간인가 월마트(<a href="https://www.walmart.com/">Wallmart</a>)가 직면했고 우리는 중단된 요청을 추적할 수 있는 시스템에 투자해야 합니다는 것이 분명해졌습니다. 월마트가 운영하는 규모가 크기 때문에 스케줄러는 내결함성(fault tolerant)이 있어야 하고 수평적으로 확장 가능해야 했습니다.</p>
+<h1 id="기존-옵션">기존 옵션</h1>
+<p>우리는 Quartz와 같은 기존의 다양한 오픈 소스 솔루션을 찾기 시작했습니다. Quartz는 풍부한 기능을 갖춘 시간 기반 스케줄링에 대한 검증된 솔루션이지만, 우리의 문제점은 약간 달랐습니다.</p>
+<ul>
+<li>많은 애플리케이션이 카산드라(<a href="https://www.youtube.com/watch?v=KMHua4LUvQ0">Cassandra</a>)를 노에스큐엘(NoSql) 데이터 저장소로 사용하고 있습니다. 시간이 흐르면서 우리는 카산드라와 그것의 뉘앙스에 대해 상당한 전문지식을 키워왔습니다. Quartz에는 카산드라를 위한 JobStore가 없는 것 같습니다(또는 적어도 우리는 JobStore를 찾지 못했습니다).</li>
+<li>우리는 이벤트에 대해 조정 가능한 일관성을 갖기를 원했습니다. 시스템 재시도 등과 같은 일부 이벤트의 경우, 한 노드(LOCAL_ONE)에 기록하는 것이 괜찮지만, 승격 트리거와 같은 다른 이벤트의 경우 이벤트가 손실되지 않도록 EACH_QUORUM을 사용해야 했습니다.</li>
+<li>클러스터를 확장하는게 더 어려웠습니다. 우리는 시간당 수백만 개의 이벤트로 확장해야 했습니다.</li>
+</ul>
+<p>우리는 또한 Quartz의 해즐캐스트(Hazelcast) 기반 JobStore 구현에 대해서도 조사했지만, 장기간에 걸친 가비지 수집 주기는 실화를 초래하여 메모리 데이터의 위험이있었습니다.</p>
+<h1 id="bigben-소개">BigBen 소개</h1>
+<p>우리는 BigBen이라고 불리는 우리만의 솔루션을 구현하기 시작했습니다. 매우 유명한 <a href="https://en.wikipedia.org/wiki/Big_Ben">런던 시계탑</a>에서 영감을 받았습니다. BigBen은 다음과 같은 기능을 제공합니다.</p>
+<ul>
+<li>마스터 슬레이브 설계, 마스터가 클러스터 전체에 부하를 분산하기 위한 최상의 전략을 결정할 수 있습니다.</li>
+<li>주어진 마스터가 작동 중단될 경우 거의 즉각적으로 다른 마스터를 선택할 수 있도록 내결함성(fault tolerant)이 매우 높은 설계입니다.</li>
+<li>카산드라(Cassandra)의 팻 파티션(fat partitions) 측면에서 핫 포켓(hot pockets)이 없도록 데이터베이스의 이벤트 데이터를 균등하게 파티셔닝합니다.</li>
+<li>모든 노드가 거의 동일한 로드를 공유하도록 클러스터에서 이벤트를 균일하게 실행합니다.</li>
+<li>트리거되지 않았거나 실행되지 않은 이벤트(mis-fires)를 추적할 수 있도록 체크포인트를 유지합니다.</li>
+<li>이벤트의 기본 채널로 HTTP 및 카프카(Kafka)를 통합합니다.</li>
+<li>멀티 테넌시(Multi-tenancy)입니다. 각 이벤트는 하나의 테넌트에 속하며, 각 테넌트는 이벤트를 저장(일관성 보장-consistency guarantees) 및/또는 처리하는 방법에 대한 정책을 정의할 수 있습니다.</li>
+</ul>
+<h1 id="설계-및-아키텍처">설계 및 아키텍처</h1>
+<p>BigBen은 &lsquo;마이크로 배칭(micro-batching)&rsquo; 아키텍처를 기반으로 합니다. 이벤트는 창에서 함께 버킷화되고 이러한 버킷은 데이터베이스에 파티션으로 저장됩니다.</p>
+<p>클러스터가 시작되면 마스터가 선택되며, 마스터는 정의된 세분화에서 버킷 검색을 시작합니다. 지원되는 최소 단위는 1분이며, 이는 마스터가 매 분마다 이벤트를 검색합니다.</p>
+<h1 id="이벤트-수집">이벤트 수집</h1>
+<p>매 분마다 얼마나 많은 이벤트가 예약될지는 알 수 없으므로 버킷 너비를 기준으로 데이터를 분할하면(이 경우 1분) 데이터베이스에 불균일한 로드가 발생할 수 있습니다. 따라서 이벤트가 샤드화(sharded)되어 1개의 샤드(shard)에 1000개(구성 가능한 값) 이벤트만 저장됩니다.</p>
+<p>예를 들어, 오전 10시에 2030개의 이벤트가 접수되었다고 가정하면, 그 이벤트는 3조각으로 나누어집니다. 샤드(Shard) 1에는 1000개의 이벤트가 포함되고, 샤드(shard) 2에는 1000개의 이벤트가 추가되며, 샤드(shard) 3에는 30개의 이벤트가 포함됩니다. 이러한 방식으로 시스템은 샤드(shard)당 1000개 이상의 이벤트가 발생하지 않음을 보장합니다.</p>
+<p>지정된 이벤트가 할당될 샤드(shard)를 확인하려면 해당 버킷(bucket)의 실행 총 이벤트 수에 따라 다릅니다. 그런 다음 아래 공식을 사용하여 해당 이벤트에 대한 샤드 인덱스(shard index)를 계산하는 것이 매우 간단합니다.</p>
+<blockquote>
+<p><em>shard_index = (total_events / shard_size)</em></p>
+</blockquote>
+<p>예를 들어, 2030 이벤트 이후에 다음 이벤트가 접수될 때, 그것은 다음 이벤트로 갈 것입니다.</p>
+<blockquote>
+<p><em>2030/1000 = 2nd index (or 3rd shard)</em></p>
+</blockquote>
+<p>빠른 검색을 위해서는 버킷(bucket)당 실행 중인 총 이벤트 수를 유지해야 합니다. BigBen은 내장된 해즐캐스트(Hazelcast) 그리드를 사용하여 이러한 카운트를 분산 맵에서 유지할 수 있지만 원자 카운트를 지원하는 멤캐쉬(memcache), 카우치베이스(Couchbase) 등과 같은 다른 솔루션도 사용할 수 있습니다. 맵 데이터는 몇 초마다 카산드라(Cassandra)와 동기화됩니다.</p>
+<p>아래 다이어그램(diagram)은 이벤트(event) 수신 흐름을 캡처합니다. HTTP 또는 카프카(Kafka)를 통해 이벤트(event)를 수신할 수 있습니다. 잘못된 이벤트(event)는 거부되고 즉시 반환됩니다(빨간 점선으로 표시됨). 다른 경우에는 해당하는 버킷(bucket)이 계산됩니다(이벤트(event)가 오전 10:21:55로 예약되어 있고, 버킷(bucket)이 오전 10:21:00로 예약되어 있음). 카운트(count)가 증가되고 샤드 인덱스(shard index)가 계산됩니다. 그러면 이벤트(event)가 버킷(bucket)과 샤드 인덱스(shard index)의 조합인 해당 파티션(partition)에 저장됩니다(예: 10:21:00/1).</p>
+<p><img src="/image/an-approach-to-designing-distributed-fault-tolerant-horizontally-scalable-event-scheduler/1_LmYyR8GT9TjPmrRorOBzLg.png" alt="Fig 1 — Event Receive Flow"></p>
+<h1 id="이벤트-처리">이벤트 처리</h1>
+<p>처리 부분의 경우 클러스터 구성원 중에서 마스터가 선택됩니다. 주키퍼(Zookeeper)는 리더(leader)/마스터(master) 선택에 사용할 수 있지만, BigBen은 이미 해즐캐스트(Hazelcast)를 사용하고 있으므로 분산 잠금 기능을 사용하여 *클러스터 싱글턴(Cluster Singleton)*을 구현했습니다. 그런 다음 마스터는 다음 버킷을 예약하고 이벤트 수를 읽습니다. 이벤트 수와 샤드(shard) 크기를 알면 총 샤드(shard) 수를 쉽게 계산할 수 있습니다. 그런 다음 마스터(master)는 쌍(bucket, shard_index)을 생성하고 이를 클러스터 멤버(cluster member) 간에 <strong>균등</strong>하게 나눕니다. 분할이 동일하지 않은 경우 마스터(master)는 자신에게 최소 로드를 적용하려고 합니다. 예를 들어 오전 10시 21분 버킷(bucket), 이벤트(events) 6000개, 노드 클러스터(node cluster) 4개의 경우 다음과 같이 나뉩니다.</p>
+<blockquote>
+<p><em>distribution =&gt; (bucket, array of shard indexes, node IP) =&gt; (10:21, [1,5], node1), (10:21, [2,6], node2), (10:21, [3], node3), (10:21, [4], node4)</em></p>
+</blockquote>
+<p>마스터(master)는 또한 이전 버킷(bucket)이 실패했는지 확인하고 해당 버킷(bucket)도 예약합니다. 버킷(bucket)이 완료되면 버킷(bucket)이 처리된 것으로 표시되고 체크포인트(checkpoint)에서 상태가 업데이트됩니다. 아래 다이어그램(diagram)은 처리 단계를 나타냅니다(<em>스케줄 스캐너-schedule scanner가 마스터-master임</em>).</p>
+<p><img src="/image/an-approach-to-designing-distributed-fault-tolerant-horizontally-scalable-event-scheduler/1_euaHLOnw6G96SigfXxWhtA.png" alt="Fig 2 — Event Processing Flow"></p>
+<p>처리 워크플로우(workflow)의 다양한 구성요소는 다음과 같습니다.</p>
+<ul>
+<li>Bucket Manager: 로드된 버킷(bucket)의 스냅샷(snapshots)을 메모리(memory)에 유지합니다.</li>
+<li>Bucket Loader: 이전 버킷(bucket)을 속도 제한/스로틀(throttled) 방식으로 메모리(memory)에 로드합니다.</li>
+<li>Checkpoint Helper: 몇 초마다 체크포인트(checkpoint)를 동기화합니다.</li>
+<li>Status Syncer: 버킷(bucket)의 상태를 동기화합니다.</li>
+</ul>
+<h1 id="내결함성fault-tolerance-설계">내결함성(Fault Tolerance) 설계</h1>
+<p>다른 분산 시스템(distributed system)과 마찬가지로 여러 개의 고장 지점(failure points)이 있을 수 있습니다. 그 중 일부는 다음과 같습니다.</p>
+<ul>
+<li>마스터(Master)를 사용할 수 없게 됩니다.</li>
+<li>이벤트(Events) 처리가 실패합니다.</li>
+<li>데이터베이스(Data base)가 종료되었습니다.</li>
+</ul>
+<p>BigBen은 실패를 처리하기 위해 다른 기술을 사용합니다. 마스터의 내결함성(fault tolerance)을 위해 해즐캐스트(Hazelcast)에서 분산 잠금(distributed lock)을 사용합니다. 이 잠금은 노드(node)의 수명 동안 해제되지 않습니다. 노드(node)가 작동 중단된 경우에만 다른 구성원이 잠금을 획득하려고 시도합니다. 이는 매우 강력한 내결함성(fault tolerance)을 제공하며, 카오스 몽키(Chaos Monkey) 테스트 중에 이를 검증했습니다. 아래 다이어그램(diagram)은 마스터(master) 장애 조치 시나리오를 보여줍니다.</p>
+<p><img src="/image/an-approach-to-designing-distributed-fault-tolerant-horizontally-scalable-event-scheduler/1_KRjTGz1jrWpYl2tYznV8jg.png" alt="Fig 3 — Master (Cluster Singleton) distributing tasks among slaves"></p>
+<p><img src="/image/an-approach-to-designing-distributed-fault-tolerant-horizontally-scalable-event-scheduler/1_SHiYcpNCJcRsaAbFpXb3rw.png" alt="Fig 4 — Master down, new slave promoted to master, and starts distributing tasks"></p>
+<p>이벤트(event) 처리에 실패했거나 데이터베이스가 종료된 경우 체크포인트(checkpoint)는 실패한 버킷(bucket)으로 표시됩니다. 매 새 버킷(bucket) 검색 시 마스터(master)는 체크포인트(checkpoint)도 검색하여 이전 버킷(bucket)이 실패한 상태인지 확인합니다. 발견되면 해당 버킷(bucket)도 예약됩니다.</p>
+<p>BigBen은 실패한 버킷(bucket)/이벤트(events)에 대해 계속 시도하기 위해 과거까지의 범위에 대해 구성 가능한 &lsquo;look back&rsquo; 매개 변수를 사용합니다. 기본적으로 이 값은 1일입니다.</p>
+<h1 id="성능-벤치마킹">성능 벤치마킹</h1>
+<p>클러스터 성능(cluster’s performance)을 다음과 같은 매개 변수로 벤치마킹(bench marked)했습니다.</p>
+<ul>
+<li>4 대의 머신, Cent OS 6+, 8 코어, 16GB RAM, 최소 힙 2GB, 최대 힙 8GB</li>
+<li>이벤트 페이로드 크기 : 500 바이트</li>
+<li>카산드라(Cassandra) 6 + 6 베어 메탈 클러스터</li>
+<li>쓰기 일관성 : LOCAL QUORUM</li>
+<li>일관성 읽기 : LOCAL QUORUM</li>
+<li>수집 속도 : 52 초 내에 수집 된 100 만 개의 이벤트. =&gt; 시간당 7 천만 이벤트</li>
+<li>처리 속도 : 60 초에 100 만 이벤트 =&gt; 시간당 6 천만 이벤트</li>
+</ul>
+<h1 id="다음-단계">다음 단계</h1>
+<p>나는 당신이 이 게시물이 유익하다고 생각하셨기를 바랍니다. <del>우리는 곧 BigBen을 오픈소스화 할 것 이므로 지켜봐 주세요.</del> 우리는 <a href="https://github.com/walmartlabs/bigben">BigBen</a>을 오픈소스화 했습니다. 질문이 있으면 저희에게 알려주십시오. 읽어주셔서 감사합니다!</p>
+
+					</div>
+				</article>
+        
+				<article class="post">
+					<header class="entry-header">
+						<div class="entry-meta">
+               <span class="posted-on">
                   <time class="entry-date published" datetime="February 24, 2021">February 24, 2021</time>
                </span>
 						</div>
@@ -522,401 +632,6 @@ spec:
 $sudo systemctl start docker
 
 $sudo systemctl enable docker
-</code></pre></div>
-					</div>
-				</article>
-        
-				<article class="post">
-					<header class="entry-header">
-						<div class="entry-meta">
-               <span class="posted-on">
-                  <time class="entry-date published" datetime="March 5, 2020">March 5, 2020</time>
-               </span>
-						</div>
-						<h1 class="entry-title">
-						  <a href="https://shrinklabs.com/post/container_k8s-with-kops-on-gce/" rel="bookmark">GCE에서 kops를 이용한 K8s 구성</a>
-						</h1>
-					</header>
-					<div class="entry-content">
-						<h1 id="클러스터-배포용-vm-인스턴스-생성">클러스터 배포용 VM 인스턴스 생성</h1>
-<ul>
-<li>Kubernetes를 구성하기 위한 VM 인스턴스를 생성합니다.</li>
-<li>&ldquo;ID 및 API 액세스&rdquo; 항목에서 액세스 범위를 &ldquo;모든 Cloud API에 대한 전체 액세스 허용&rdquo; 으로 선택한다. 또는 아래와 같이 서비스 계정에 권한을 설정하고 서비스 계정을 선택해도 됩니다.
-<ul>
-<li>GCP 관리 콘솔의 IAM&amp;Admin에서 서비스 계정을 하나 만듭니다. 서비스 계정이 갖고 있어야 하는 최소한의 권한은 다음과 같습니다.</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">compute admin
-servce account admin
-service account key admin
-service account token creator
-service acount user
-storage admin
-DNS Administrator
-DNS Reader
-</code></pre></div><ul>
-<li>SSH로 연결 &amp; 업데이트</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">jaehoonn@jaehoonn:~$sudo apt-get update
-jaehoonn@jaehoonn:~$sudo apt-get dist-upgrade
-</code></pre></div></li>
-</ul>
-<h1 id="kubectl-설치">kubectl 설치</h1>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">jaehoonn@jaehoonn:~$curl -LO https://storage.googleapis.com/kubernetes-release/release/<span style="color:#66d9ef">$(</span>curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt<span style="color:#66d9ef">)</span>/bin/linux/amd64/kubectl
-jaehoonn@jaehoonn:~$chmod +x ./kubectl
-jaehoonn@jaehoonn:~$sudo mv ./kubectl /usr/local/bin/kubectl
-</code></pre></div><h1 id="kops-설치">kops 설치</h1>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">jaehoonn@jaehoonn:~$wget -O kops https://github.com/kubernetes/kops/releases/download/<span style="color:#66d9ef">$(</span>curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d <span style="color:#e6db74">&#39;&#34;&#39;</span> -f 4<span style="color:#66d9ef">)</span>/kops-linux-amd64
-jaehoonn@jaehoonn:~$chmod +x ./kops
-jaehoonn@jaehoonn:~$sudo mv ./kops /usr/local/bin/
-</code></pre></div><h1 id="gcp-tool-설치">GCP Tool 설치</h1>
-<ul>
-<li><a href="https://cloud.google.com/sdk/install">https://cloud.google.com/sdk/install</a></li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">jaehoonn@jaehoonn:~$export CLOUD_SDK_REPO<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;cloud-sdk-</span><span style="color:#66d9ef">$(</span>lsb_release -c -s<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
-jaehoonn@jaehoonn:~$echo <span style="color:#e6db74">&#34;deb http://packages.cloud.google.com/apt </span>$CLOUD_SDK_REPO<span style="color:#e6db74"> main&#34;</span> | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
-jaehoonn@jaehoonn:~$sudo apt-get install apt-transport-https ca-certificates
-jaehoonn@jaehoonn:~$curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-jaehoonn@jaehoonn:~$sudo apt-get update <span style="color:#f92672">&amp;&amp;</span> sudo apt-get install google-cloud-sdk
-</code></pre></div><ul>
-<li>추가 구성요소는 선택적으로 설치 합니다. ( sudo apt-get install )</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">google-cloud-sdk-app-engine-python
-google-cloud-sdk-app-engine-python-extras
-google-cloud-sdk-app-engine-java
-google-cloud-sdk-app-engine-go
-google-cloud-sdk-datalab
-google-cloud-sdk-datastore-emulator
-google-cloud-sdk-pubsub-emulator
-google-cloud-sdk-cbt
-google-cloud-sdk-cloud-build-local
-google-cloud-sdk-bigtable-emulator
-kubectl
-</code></pre></div><ul>
-<li>GCP를 시작하기 위한 초기화</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">jaehoonn@jaehoonn:~$gcloud init
-Welcome! This command will take you through the configuration of gcloud.
-Your current configuration has been set to: <span style="color:#f92672">[</span>default<span style="color:#f92672">]</span>
-You can skip diagnostics next time by using the following flag:
-  gcloud init --skip-diagnostics
-Network diagnostic detects and fixes local network connection issues.
-Checking network connection...done.                                                                                
-Reachability Check passed.
-Network diagnostic passed <span style="color:#f92672">(</span>1/1 checks passed<span style="color:#f92672">)</span>.
-Choose the account you would like to use to perform operations <span style="color:#66d9ef">for</span> 
-this configuration:
- <span style="color:#f92672">[</span>1<span style="color:#f92672">]</span> xxxxxxxxxxxx-compute@developer.gserviceaccount.com
- <span style="color:#f92672">[</span>2<span style="color:#f92672">]</span> Log in with a new account
-Please enter your numeric choice: <span style="color:#ae81ff">1</span>
-
-You are logged in as: <span style="color:#f92672">[</span>xxxxxxxxxxxx-compute@developer.gserviceaccount.com<span style="color:#f92672">]</span>.
-Pick cloud project to use: 
- <span style="color:#f92672">[</span>1<span style="color:#f92672">]</span> jaehoonn-000000
- <span style="color:#f92672">[</span>2<span style="color:#f92672">]</span> Create a new project
-Please enter numeric choice or text value <span style="color:#f92672">(</span>must exactly match list 
-item<span style="color:#f92672">)</span>: <span style="color:#ae81ff">1</span>
-
-Your current project has been set to: <span style="color:#f92672">[</span>jaehoonn-000000<span style="color:#f92672">]</span>.
-
-Do you want to configure a default Compute Region and Zone? <span style="color:#f92672">(</span>Y/n<span style="color:#f92672">)</span>? y
-
-Which Google Compute Engine zone would you like to use as project 
-default?
-If you <span style="color:#66d9ef">do</span> not specify a zone via a command line flag <span style="color:#66d9ef">while</span> working 
-with Compute Engine resources, the default is assumed.
- <span style="color:#f92672">[</span>1<span style="color:#f92672">]</span> us-east1-b
- <span style="color:#f92672">[</span>2<span style="color:#f92672">]</span> us-east1-c
- <span style="color:#f92672">[</span>3<span style="color:#f92672">]</span> us-east1-d
- <span style="color:#f92672">[</span>4<span style="color:#f92672">]</span> us-east4-c
- <span style="color:#f92672">[</span>5<span style="color:#f92672">]</span> us-east4-b
- <span style="color:#f92672">[</span>6<span style="color:#f92672">]</span> us-east4-a
- <span style="color:#f92672">[</span>7<span style="color:#f92672">]</span> us-central1-c
- <span style="color:#f92672">[</span>8<span style="color:#f92672">]</span> us-central1-a
- <span style="color:#f92672">[</span>9<span style="color:#f92672">]</span> us-central1-f
- <span style="color:#f92672">[</span>10<span style="color:#f92672">]</span> us-central1-b
- <span style="color:#f92672">[</span>11<span style="color:#f92672">]</span> us-west1-b
- <span style="color:#f92672">[</span>12<span style="color:#f92672">]</span> us-west1-c
- <span style="color:#f92672">[</span>13<span style="color:#f92672">]</span> us-west1-a
- <span style="color:#f92672">[</span>14<span style="color:#f92672">]</span> europe-west4-a
- <span style="color:#f92672">[</span>15<span style="color:#f92672">]</span> europe-west4-b
- <span style="color:#f92672">[</span>16<span style="color:#f92672">]</span> europe-west4-c
- <span style="color:#f92672">[</span>17<span style="color:#f92672">]</span> europe-west1-b
- <span style="color:#f92672">[</span>18<span style="color:#f92672">]</span> europe-west1-d
- <span style="color:#f92672">[</span>19<span style="color:#f92672">]</span> europe-west1-c
- <span style="color:#f92672">[</span>20<span style="color:#f92672">]</span> europe-west3-c
- <span style="color:#f92672">[</span>21<span style="color:#f92672">]</span> europe-west3-a
- <span style="color:#f92672">[</span>22<span style="color:#f92672">]</span> europe-west3-b
- <span style="color:#f92672">[</span>23<span style="color:#f92672">]</span> europe-west2-c
- <span style="color:#f92672">[</span>24<span style="color:#f92672">]</span> europe-west2-b
- <span style="color:#f92672">[</span>25<span style="color:#f92672">]</span> europe-west2-a
- <span style="color:#f92672">[</span>26<span style="color:#f92672">]</span> asia-east1-b
- <span style="color:#f92672">[</span>27<span style="color:#f92672">]</span> asia-east1-a
- <span style="color:#f92672">[</span>28<span style="color:#f92672">]</span> asia-east1-c
- <span style="color:#f92672">[</span>29<span style="color:#f92672">]</span> asia-southeast1-b
- <span style="color:#f92672">[</span>30<span style="color:#f92672">]</span> asia-southeast1-a
- <span style="color:#f92672">[</span>31<span style="color:#f92672">]</span> asia-southeast1-c
- <span style="color:#f92672">[</span>32<span style="color:#f92672">]</span> asia-northeast1-b
- <span style="color:#f92672">[</span>33<span style="color:#f92672">]</span> asia-northeast1-c
- <span style="color:#f92672">[</span>34<span style="color:#f92672">]</span> asia-northeast1-a
- <span style="color:#f92672">[</span>35<span style="color:#f92672">]</span> asia-south1-c
- <span style="color:#f92672">[</span>36<span style="color:#f92672">]</span> asia-south1-b
- <span style="color:#f92672">[</span>37<span style="color:#f92672">]</span> asia-south1-af
- <span style="color:#f92672">[</span>38<span style="color:#f92672">]</span> australia-southeast1-b
- <span style="color:#f92672">[</span>39<span style="color:#f92672">]</span> australia-southeast1-c
- <span style="color:#f92672">[</span>40<span style="color:#f92672">]</span> australia-southeast1-a
- <span style="color:#f92672">[</span>41<span style="color:#f92672">]</span> southamerica-east1-b
- <span style="color:#f92672">[</span>42<span style="color:#f92672">]</span> southamerica-east1-c
- <span style="color:#f92672">[</span>43<span style="color:#f92672">]</span> southamerica-east1-a
- <span style="color:#f92672">[</span>44<span style="color:#f92672">]</span> asia-east2-a
- <span style="color:#f92672">[</span>45<span style="color:#f92672">]</span> asia-east2-b
- <span style="color:#f92672">[</span>46<span style="color:#f92672">]</span> asia-east2-c
- <span style="color:#f92672">[</span>47<span style="color:#f92672">]</span> asia-northeast2-a
- <span style="color:#f92672">[</span>48<span style="color:#f92672">]</span> asia-northeast2-b
- <span style="color:#f92672">[</span>49<span style="color:#f92672">]</span> asia-northeast2-c
- <span style="color:#f92672">[</span>50<span style="color:#f92672">]</span> europe-north1-a
-Did not print <span style="color:#f92672">[</span>12<span style="color:#f92672">]</span> options.
-Too many options <span style="color:#f92672">[</span>62<span style="color:#f92672">]</span>. Enter <span style="color:#e6db74">&#34;list&#34;</span> at prompt to print choices fully.
-Please enter numeric choice or text value <span style="color:#f92672">(</span>must exactly match list 
-item<span style="color:#f92672">)</span>: <span style="color:#ae81ff">8</span>
-
-Your project default Compute Engine zone has been set to <span style="color:#f92672">[</span>us-central1-a<span style="color:#f92672">]</span>.
-You can change it by running <span style="color:#f92672">[</span>gcloud config set compute/zone NAME<span style="color:#f92672">]</span>.
-Your project default Compute Engine region has been set to <span style="color:#f92672">[</span>us-central1<span style="color:#f92672">]</span>.
-You can change it by running <span style="color:#f92672">[</span>gcloud config set compute/region NAME<span style="color:#f92672">]</span>.
-Created a default .boto configuration file at <span style="color:#f92672">[</span>/home/jaehoonn/.boto<span style="color:#f92672">]</span>. See this file and
-<span style="color:#f92672">[</span>https://cloud.google.com/storage/docs/gsutil/commands/config<span style="color:#f92672">]</span> <span style="color:#66d9ef">for</span> more
-information about configuring Google Cloud Storage.
-Your Google Cloud SDK is configured and ready to use!
-* Commands that require authentication will use xxxxxxxxxxxx-compute@developer.gserviceaccount.com by default
-* Commands will reference project <span style="color:#e6db74">`</span>jaehoonn-000000<span style="color:#e6db74">`</span> by default
-* Compute Engine commands will use region <span style="color:#e6db74">`</span>us-central1<span style="color:#e6db74">`</span> by default
-* Compute Engine commands will use zone <span style="color:#e6db74">`</span>us-central1-a<span style="color:#e6db74">`</span> by default
-Run <span style="color:#e6db74">`</span>gcloud help config<span style="color:#e6db74">`</span> to learn how to change individual settings
-This gcloud configuration is called <span style="color:#f92672">[</span>default<span style="color:#f92672">]</span>. You can create additional configurations <span style="color:#66d9ef">if</span> you work with multiple accounts and/or projects.
-Run <span style="color:#e6db74">`</span>gcloud topic configurations<span style="color:#e6db74">`</span> to learn more.
-Some things to try next:
-* Run <span style="color:#e6db74">`</span>gcloud --help<span style="color:#e6db74">`</span> to see the Cloud Platform services you can interact with. And run <span style="color:#e6db74">`</span>gcloud help COMMAND<span style="color:#e6db74">`</span> to get help on any gcloud command.
-* Run <span style="color:#e6db74">`</span>gcloud topic --help<span style="color:#e6db74">`</span> to learn about advanced features of the SDK like arg files and output formatting
-jaehoonn@jaehoonn:~$
-</code></pre></div><ul>
-<li>선택 사항
-<ul>
-<li>&ldquo;Please enter your numeric choice: 1&rdquo;
-<ul>
-<li>연결되어 있는 서비스 계정인 &ldquo;[1] <a href="mailto:xxxxxxxxxxxx-compute@developer.gserviceaccount.com">xxxxxxxxxxxx-compute@developer.gserviceaccount.com</a>&rdquo; 를 선택</li>
-</ul>
-</li>
-<li>&ldquo;Please enter numeric choice or text value (must exactly match list
-item): 1&rdquo;
-<ul>
-<li>연결하고자 하는 프로젝트인 &ldquo;[1] jaehoonn-000000&rdquo; 를 선택</li>
-</ul>
-</li>
-<li>&ldquo;Do you want to configure a default Compute Region and Zone? (Y/n)? y&rdquo;
-<ul>
-<li>기본으로 제공되고 있는 region과 zone을 사용</li>
-</ul>
-</li>
-<li>&ldquo;Please enter numeric choice or text value (must exactly match list
-item): 8&rdquo;</li>
-</ul>
-</li>
-</ul>
-<h1 id="스토리지버킷-생성">스토리지(버킷) 생성</h1>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">jaehoonn@jaehoonn:~$ gsutil mb gs://jaehoonn-cluster-state-store
-Creating gs://jaehoonn-cluster-state-store/...
-jaehoonn@jaehoonn:~$ export KOPS_STATE_STORE<span style="color:#f92672">=</span>gs://jaehoonn-cluster-state-store/
-</code></pre></div><ul>
-<li>kops는 클러스터 구성을 유지하기 위한 상태 저장소로서 &ldquo;Storage&quot;의 &ldquo;Bucket&quot;을 이용합니다.
-<ul>
-<li>mb: Make buckets</li>
-</ul>
-</li>
-<li>Bucket의 이름은 필요한 형태로 만들면 됩니다. (ex, jaehoonn-cluster-state-store)</li>
-</ul>
-<h1 id="클러스터-생성">클러스터 생성</h1>
-<ul>
-<li>Google Cloud에서 사용할 정보</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">jaehoonn@jaehoonn:~$ PROJECT<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>gcloud config get-value project<span style="color:#e6db74">`</span>
-jaehoonn@jaehoonn:~$ export KOPS_FEATURE_FLAGS<span style="color:#f92672">=</span>AlphaAllowGCE <span style="color:#75715e"># to unlock the GCE features</span>
-</code></pre></div><ul>
-<li>Kubernetes 클러스터 생성(상태 저장소)</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">jaehoonn@jaehoonn:~$ kops create cluster --name<span style="color:#f92672">=</span>jaehoonn-cluster.k8s.local --zones<span style="color:#f92672">=</span>us-central1-a --state<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>KOPS_STATE_STORE<span style="color:#e6db74">}</span> --project<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>PROJECT<span style="color:#e6db74">}</span>
-
-ManagedFile/jaehoonn-cluster.k8s.local-addons-dns-controller.addons.k8s.io-k8s-1.6
-        Location                addons/dns-controller.addons.k8s.io/k8s-1.6.yaml
-
-  ManagedFile/jaehoonn-cluster.k8s.local-addons-dns-controller.addons.k8s.io-pre-k8s-1.6
-        Location                addons/dns-controller.addons.k8s.io/pre-k8s-1.6.yaml
-
-  ManagedFile/jaehoonn-cluster.k8s.local-addons-kube-dns.addons.k8s.io-k8s-1.12
-        Location                addons/kube-dns.addons.k8s.io/k8s-1.12.yaml
-
-  ManagedFile/jaehoonn-cluster.k8s.local-addons-kube-dns.addons.k8s.io-k8s-1.6
-        Location                addons/kube-dns.addons.k8s.io/k8s-1.6.yaml
-
-  ManagedFile/jaehoonn-cluster.k8s.local-addons-kube-dns.addons.k8s.io-pre-k8s-1.6
-        Location                addons/kube-dns.addons.k8s.io/pre-k8s-1.6.yaml
-
-  ManagedFile/jaehoonn-cluster.k8s.local-addons-kubelet-api.rbac.addons.k8s.io-k8s-1.9
-        Location                addons/kubelet-api.rbac.addons.k8s.io/k8s-1.9.yaml
-
-  ManagedFile/jaehoonn-cluster.k8s.local-addons-limit-range.addons.k8s.io
-        Location                addons/limit-range.addons.k8s.io/v1.5.0.yaml
-
-  ManagedFile/jaehoonn-cluster.k8s.local-addons-rbac.addons.k8s.io-k8s-1.8
-        Location                addons/rbac.addons.k8s.io/k8s-1.8.yaml
-
-  ManagedFile/jaehoonn-cluster.k8s.local-addons-storage-gce.addons.k8s.io-v1.6.0
-        Location                addons/storage-gce.addons.k8s.io/v1.6.0.yaml
-
-  ManagedFile/jaehoonn-cluster.k8s.local-addons-storage-gce.addons.k8s.io-v1.7.0
-        Location                addons/storage-gce.addons.k8s.io/v1.7.0.yaml
-
-  ManagedFile/etcd-cluster-spec-events
-        Location                backups/etcd/events/control/etcd-cluster-spec
-
-  ManagedFile/etcd-cluster-spec-main
-        Location                backups/etcd/main/control/etcd-cluster-spec
-
-  ManagedFile/manifests-etcdmanager-events
-        Location                manifests/etcd/events.yaml
-
-  ManagedFile/manifests-etcdmanager-main
-        Location                manifests/etcd/main.yaml
-
-  Secret/admin
-
-  Secret/kube
-
-  Secret/kube-proxy
-
-  Secret/kubelet
-
-  Secret/system:controller_manager
-
-  Secret/system:dns
-
-  Secret/system:logging
-
-  Secret/system:monitoring
-
-  Secret/system:scheduler
-
-  StorageBucketAcl/serviceaccount-backup-readwrite-jaehoonn-cluster-state-store
-        Bucket                  jaehoonn-cluster-state-store
-        Entity                  xxxx-000000000000-compute@developer.gserviceaccount.com
-        Role                    WRITER
-
-  TargetPool/api-jaehoonn-cluster-k8s-local
-
-Must specify --yes to apply changes
-
-Cluster configuration has been created.
-
-Suggestions:
- * list clusters with: kops get cluster
- * edit this cluster with: kops edit cluster jaehoonn-cluster.k8s.local
- * edit your node instance group: kops edit ig --name<span style="color:#f92672">=</span>jaehoonn-cluster.k8s.local nodes
- * edit your master instance group: kops edit ig --name<span style="color:#f92672">=</span>jaehoonn-cluster.k8s.local master-us-central1-a
-
-Finally configure your cluster with: kops update cluster --name jaehoonn-cluster.k8s.local --yes
-
-jaehoonn@jaehoonn:~$
-</code></pre></div><ul>
-<li>Kubernetes 클러스터 생성(VM 인스턴스에 직접 생성)</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">jaehoonn@jaehoonn:~$ kops update cluster --name jaehoonn-cluster.k8s.local --yes
-I1106 05:42:52.576477   <span style="color:#ae81ff">26628</span> apply_cluster.go:559<span style="color:#f92672">]</span> Gossip DNS: skipping DNS validation
-W1106 05:42:52.641383   <span style="color:#ae81ff">26628</span> external_access.go:36<span style="color:#f92672">]</span> TODO: Harmonize gcemodel ExternalAccessModelBuilder with awsmodel
-W1106 05:42:52.641597   <span style="color:#ae81ff">26628</span> firewall.go:35<span style="color:#f92672">]</span> TODO: Harmonize gcemodel with awsmodel <span style="color:#66d9ef">for</span> firewall - GCE model is way too open
-W1106 05:42:52.641685   <span style="color:#ae81ff">26628</span> firewall.go:63<span style="color:#f92672">]</span> Adding overlay network <span style="color:#66d9ef">for</span> X -&gt; node rule - HACK
-W1106 05:42:52.641750   <span style="color:#ae81ff">26628</span> firewall.go:64<span style="color:#f92672">]</span> We should probably use subnets?
-W1106 05:42:52.641824   <span style="color:#ae81ff">26628</span> firewall.go:118<span style="color:#f92672">]</span> Adding overlay network <span style="color:#66d9ef">for</span> X -&gt; master rule - HACK
-W1106 05:42:52.770317   <span style="color:#ae81ff">26628</span> storageacl.go:71<span style="color:#f92672">]</span> we need to split master / node roles
-W1106 05:42:52.770353   <span style="color:#ae81ff">26628</span> storageacl.go:86<span style="color:#f92672">]</span> adding bucket level write ACL to gs://jaehoonn-cluster-state-store to support etcd backup
-W1106 05:42:52.770450   <span style="color:#ae81ff">26628</span> autoscalinggroup.go:108<span style="color:#f92672">]</span> enabling storage-rw <span style="color:#66d9ef">for</span> etcd backups
-I1106 05:42:54.889249   <span style="color:#ae81ff">26628</span> executor.go:103<span style="color:#f92672">]</span> Tasks: <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">done</span> / <span style="color:#ae81ff">66</span> total; <span style="color:#ae81ff">39</span> can run
-I1106 05:42:55.253887   <span style="color:#ae81ff">26628</span> address.go:123<span style="color:#f92672">]</span> GCE creating address: <span style="color:#e6db74">&#34;api-jaehoonn-cluster-k8s-local&#34;</span>
-I1106 05:42:55.387139   <span style="color:#ae81ff">26628</span> vfs_castore.go:729<span style="color:#f92672">]</span> Issuing new certificate: <span style="color:#e6db74">&#34;etcd-peers-ca-events&#34;</span>
-I1106 05:42:55.672462   <span style="color:#ae81ff">26628</span> vfs_castore.go:729<span style="color:#f92672">]</span> Issuing new certificate: <span style="color:#e6db74">&#34;apiserver-aggregator-ca&#34;</span>
-I1106 05:42:55.765508   <span style="color:#ae81ff">26628</span> vfs_castore.go:729<span style="color:#f92672">]</span> Issuing new certificate: <span style="color:#e6db74">&#34;etcd-manager-ca-main&#34;</span>
-I1106 05:42:55.985020   <span style="color:#ae81ff">26628</span> vfs_castore.go:729<span style="color:#f92672">]</span> Issuing new certificate: <span style="color:#e6db74">&#34;etcd-peers-ca-main&#34;</span>
-I1106 05:42:56.327905   <span style="color:#ae81ff">26628</span> vfs_castore.go:729<span style="color:#f92672">]</span> Issuing new certificate: <span style="color:#e6db74">&#34;etcd-clients-ca&#34;</span>
-I1106 05:42:56.593223   <span style="color:#ae81ff">26628</span> vfs_castore.go:729<span style="color:#f92672">]</span> Issuing new certificate: <span style="color:#e6db74">&#34;ca&#34;</span>
-I1106 05:42:56.803652   <span style="color:#ae81ff">26628</span> vfs_castore.go:729<span style="color:#f92672">]</span> Issuing new certificate: <span style="color:#e6db74">&#34;etcd-manager-ca-events&#34;</span>
-I1106 05:43:08.063339   <span style="color:#ae81ff">26628</span> executor.go:103<span style="color:#f92672">]</span> Tasks: <span style="color:#ae81ff">39</span> <span style="color:#66d9ef">done</span> / <span style="color:#ae81ff">66</span> total; <span style="color:#ae81ff">25</span> can run
-I1106 05:43:08.238400   <span style="color:#ae81ff">26628</span> instancetemplate.go:214<span style="color:#f92672">]</span> We should be using NVME <span style="color:#66d9ef">for</span> GCE
-I1106 05:43:08.240753   <span style="color:#ae81ff">26628</span> instancetemplate.go:214<span style="color:#f92672">]</span> We should be using NVME <span style="color:#66d9ef">for</span> GCE
-I1106 05:43:08.248537   <span style="color:#ae81ff">26628</span> instancetemplate.go:214<span style="color:#f92672">]</span> We should be using NVME <span style="color:#66d9ef">for</span> GCE
-I1106 05:43:08.249786   <span style="color:#ae81ff">26628</span> instancetemplate.go:214<span style="color:#f92672">]</span> We should be using NVME <span style="color:#66d9ef">for</span> GCE
-I1106 05:43:10.777593   <span style="color:#ae81ff">26628</span> vfs_castore.go:729<span style="color:#f92672">]</span> Issuing new certificate: <span style="color:#e6db74">&#34;kube-controller-manager&#34;</span>
-I1106 05:43:11.412793   <span style="color:#ae81ff">26628</span> vfs_castore.go:729<span style="color:#f92672">]</span> Issuing new certificate: <span style="color:#e6db74">&#34;kube-scheduler&#34;</span>
-I1106 05:43:11.665669   <span style="color:#ae81ff">26628</span> vfs_castore.go:729<span style="color:#f92672">]</span> Issuing new certificate: <span style="color:#e6db74">&#34;apiserver-proxy-client&#34;</span>
-I1106 05:43:11.698639   <span style="color:#ae81ff">26628</span> vfs_castore.go:729<span style="color:#f92672">]</span> Issuing new certificate: <span style="color:#e6db74">&#34;apiserver-aggregator&#34;</span>
-I1106 05:43:12.071948   <span style="color:#ae81ff">26628</span> vfs_castore.go:729<span style="color:#f92672">]</span> Issuing new certificate: <span style="color:#e6db74">&#34;kubelet-api&#34;</span>
-I1106 05:43:12.189613   <span style="color:#ae81ff">26628</span> vfs_castore.go:729<span style="color:#f92672">]</span> Issuing new certificate: <span style="color:#e6db74">&#34;kubelet&#34;</span>
-I1106 05:43:12.465094   <span style="color:#ae81ff">26628</span> vfs_castore.go:729<span style="color:#f92672">]</span> Issuing new certificate: <span style="color:#e6db74">&#34;kops&#34;</span>
-I1106 05:43:12.539693   <span style="color:#ae81ff">26628</span> vfs_castore.go:729<span style="color:#f92672">]</span> Issuing new certificate: <span style="color:#e6db74">&#34;master&#34;</span>
-I1106 05:43:12.633503   <span style="color:#ae81ff">26628</span> vfs_castore.go:729<span style="color:#f92672">]</span> Issuing new certificate: <span style="color:#e6db74">&#34;kube-proxy&#34;</span>
-I1106 05:43:12.812512   <span style="color:#ae81ff">26628</span> vfs_castore.go:729<span style="color:#f92672">]</span> Issuing new certificate: <span style="color:#e6db74">&#34;kubecfg&#34;</span>
-I1106 05:43:21.263578   <span style="color:#ae81ff">26628</span> executor.go:103<span style="color:#f92672">]</span> Tasks: <span style="color:#ae81ff">64</span> <span style="color:#66d9ef">done</span> / <span style="color:#ae81ff">66</span> total; <span style="color:#ae81ff">2</span> can run
-I1106 05:43:32.802331   <span style="color:#ae81ff">26628</span> executor.go:103<span style="color:#f92672">]</span> Tasks: <span style="color:#ae81ff">66</span> <span style="color:#66d9ef">done</span> / <span style="color:#ae81ff">66</span> total; <span style="color:#ae81ff">0</span> can run
-I1106 05:43:33.070437   <span style="color:#ae81ff">26628</span> update_cluster.go:294<span style="color:#f92672">]</span> Exporting kubecfg <span style="color:#66d9ef">for</span> cluster
-kops has set your kubectl context to jaehoonn-cluster.k8s.local
-
-Cluster is starting.  It should be ready in a few minutes.
-
-Suggestions:
- * validate cluster: kops validate cluster
- * list nodes: kubectl get nodes --show-labels
- * ssh to the master: ssh -i ~/.ssh/id_rsa admin@api.jaehoonn-cluster.k8s.local
- * the admin user is specific to Debian. If not using Debian please use the appropriate user based on your OS.
- * read about installing addons at: https://github.com/kubernetes/kops/blob/master/docs/addons.md.
-
-jaehoonn@jaehoonn:~$
-</code></pre></div><ul>
-<li>클러스터 상태 확인(클러스터 생성 완료되고 5~10분뒤에 확인)</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">jaehoonn@jaehoonn:~$ kops validate cluster
-Using cluster from kubectl context: jaehoonn-cluster.k8s.local
-
-Validating cluster jaehoonn-cluster.k8s.local
-
-I1106 05:50:12.213436   <span style="color:#ae81ff">26733</span> gce_cloud.go:273<span style="color:#f92672">]</span> Scanning zones: <span style="color:#f92672">[</span>us-central1-c us-central1-a us-central1-f us-central1-b<span style="color:#f92672">]</span>
-INSTANCE GROUPS
-NAME                    ROLE    MACHINETYPE     MIN     MAX     SUBNETS
-master-us-central1-a    Master  n1-standard-1   <span style="color:#ae81ff">1</span>       <span style="color:#ae81ff">1</span>       us-central1
-nodes                   Node    n1-standard-2   <span style="color:#ae81ff">2</span>       <span style="color:#ae81ff">2</span>       us-central1
-
-NODE STATUS
-NAME                            ROLE    READY
-master-us-central1-a-dg9q       master  True
-nodes-2f58                      node    True
-nodes-9t48                      node    True
-
-Your cluster jaehoonn-cluster.k8s.local is ready
-jaehoonn@jaehoonn:~$
-</code></pre></div><ul>
-<li>kubectl 동작 확인</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">jaehoonn@jaehoonn:~$ kubectl get pods --all-namespaces
-NAMESPACE     NAME                                                READY   STATUS    RESTARTS   AGE
-kube-system   dns-controller-7f9457558d-fmnpk                     1/1     Running   <span style="color:#ae81ff">0</span>          4m53s
-kube-system   etcd-manager-events-master-us-central1-a-dg9q       1/1     Running   <span style="color:#ae81ff">0</span>          3m26s
-kube-system   etcd-manager-main-master-us-central1-a-dg9q         1/1     Running   <span style="color:#ae81ff">0</span>          4m4s
-kube-system   kube-apiserver-master-us-central1-a-dg9q            1/1     Running   <span style="color:#ae81ff">1</span>          4m27s
-kube-system   kube-controller-manager-master-us-central1-a-dg9q   1/1     Running   <span style="color:#ae81ff">0</span>          4m29s
-kube-system   kube-dns-66d58c65d5-6nllr                           3/3     Running   <span style="color:#ae81ff">0</span>          4m53s
-kube-system   kube-dns-66d58c65d5-6qk7c                           3/3     Running   <span style="color:#ae81ff">0</span>          3m55s
-kube-system   kube-dns-autoscaler-6567f59ccb-xzp98                1/1     Running   <span style="color:#ae81ff">0</span>          4m51s
-kube-system   kube-proxy-master-us-central1-a-dg9q                1/1     Running   <span style="color:#ae81ff">0</span>          4m6s
-kube-system   kube-proxy-nodes-2f58                               1/1     Running   <span style="color:#ae81ff">0</span>          3m41s
-kube-system   kube-proxy-nodes-9t48                               1/1     Running   <span style="color:#ae81ff">0</span>          3m25s
-kube-system   kube-scheduler-master-us-central1-a-dg9q            1/1     Running   <span style="color:#ae81ff">0</span>          4m33s
-jaehoonn@jaehoonn:~$
 </code></pre></div>
 					</div>
 				</article>
