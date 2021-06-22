@@ -24,7 +24,7 @@
       <pubDate>Wed, 24 Feb 2021 03:08:00 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/tool_klevr-agent/</guid>
-      <description>$ git clone git@github.com:jaehoonn/klevr.git $ cd klevr $ chmod +x ./build.sh $ ./build.sh $ cd cmd/klebr-agent/Dockerfile $ docker build -t jaehoon/klevr-agent:0.2.6 . $ docker login -u jaehoon -p {password} $ docker push jaehoon/klevr-agent:0.2.6 </description>
+      <description>$ git clone git@github.com:jaehoonn/klevr.git $ cd klevr $ chmod +x ./build.sh $ ./build.sh $ cd cmd/klebr-agent/Dockerfile $ docker build -t jaehoon/klevr-agent:0.2.6 . $ docker login -u jaehoon -p {password} $ docker push jaehoon/klevr-agent:0.2.6    (adsbygoogle = window.adsbygoogle || []).push({});  </description>
     </item>
     
     <item>
@@ -34,7 +34,7 @@
       
       <guid>https://shrinklabs.com/post/git_delete-local-branch/</guid>
       <description>로컬에서 관리하고 있는 branch iss5783을 삭제합니다.
-$ git branch -d iss5783 </description>
+$ git branch -d iss5783    (adsbygoogle = window.adsbygoogle || []).push({});  </description>
     </item>
     
     <item>
@@ -66,7 +66,7 @@ etc-3: 10.128.0.3
 원격지에 있는 branch 정보를 확인 할 수 있도록 업데이트 합니다.
 $ git remote update 원격지의 branch 확인
 $ git branch -r origin/HEAD -&amp;gt; origin/master origin/dev origin/tapping origin/master origin/9999 origin/release upstream/dev upstream/master upstream/8888 upstream/release branch들 중에서 &amp;ldquo;origin/9999&amp;quot;를 갖고 오고 싶습니다.
-$ git checkout -t origin/9999 </description>
+$ git checkout -t origin/9999    (adsbygoogle = window.adsbygoogle || []).push({});  </description>
     </item>
     
     <item>
@@ -103,7 +103,8 @@ PS&amp;gt; minikube docker-env $Env:DOCKER_TLS_VERIFY = &amp;#34;1&amp;#34; $Env
       <description>Windows 환경에서 개발 후 Linux 환경으로 배포하기 위해서 Linux용 바이너리로 빌드가 필요할 때가 있습니다.
 다음의 방법으로 빌드 할 수 있습니다.
 Powershell에서 빌드하기 위한 방법은 아래와 같습니다.
-PS D:\ws\src\sample&amp;gt; $env:GOOS=&amp;#34;linux&amp;#34;; go build 빌드 이후에는 필요에 따라서 &amp;ldquo;GOOS&amp;quot;를 다시 &amp;ldquo;windows&amp;quot;로 돌려 놓습니다.</description>
+PS D:\ws\src\sample&amp;gt; $env:GOOS=&amp;#34;linux&amp;#34;; go build 빌드 이후에는 필요에 따라서 &amp;ldquo;GOOS&amp;quot;를 다시 &amp;ldquo;windows&amp;quot;로 돌려 놓습니다.
+   (adsbygoogle = window.adsbygoogle || []).push({});  </description>
     </item>
     
     <item>
@@ -115,7 +116,8 @@ PS D:\ws\src\sample&amp;gt; $env:GOOS=&amp;#34;linux&amp;#34;; go build 빌드 �
       <description>Kubernetes에 배포하기 위해서 Container Registry(Private)을 사용하려면, 별도의 secret을 등록해야 합니다.
 $ kubectl create secret docker-registry {secret} \ --docker-server={registryserver} \ --docker-username={name} \ --docker-password={password} \ --docker-email={email} \ --namespace={namespace} namespace는 지정하지 않으면 default로 지정됩니다.
 그리고 Container Registry로 부터 image를 받아서 사용하기 위한 yaml 파일에 다음과 같이 추가합니다.
-apiVersion: v1 kind: Pod metadata: name: private-reg spec: containers: - name: private-reg-container image: regcred/projectaa/private-reg:latest imagePullSecrets: - name: regcred &amp;ldquo;imagePullSecrets&amp;rdquo; 항목을 추가하고 containers.image에서 iamgePullSecretes.name을 base로 사용합니다.</description>
+apiVersion: v1 kind: Pod metadata: name: private-reg spec: containers: - name: private-reg-container image: regcred/projectaa/private-reg:latest imagePullSecrets: - name: regcred &amp;ldquo;imagePullSecrets&amp;rdquo; 항목을 추가하고 containers.image에서 iamgePullSecretes.name을 base로 사용합니다.
+   (adsbygoogle = window.</description>
     </item>
     
     <item>
@@ -125,7 +127,7 @@ apiVersion: v1 kind: Pod metadata: name: private-reg spec: containers: - name: p
       
       <guid>https://shrinklabs.com/post/container_docker-error/</guid>
       <description>docker 설치 후 &amp;ldquo;Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?&amp;rdquo; 가 발생
-$sudo systemctl status docker $sudo systemctl start docker $sudo systemctl enable docker </description>
+$sudo systemctl status docker $sudo systemctl start docker $sudo systemctl enable docker    (adsbygoogle = window.adsbygoogle || []).push({});  </description>
     </item>
     
     <item>
@@ -143,7 +145,7 @@ $sudo systemctl status docker $sudo systemctl start docker $sudo systemctl enabl
       <pubDate>Thu, 05 Mar 2020 12:05:00 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/container_docker-image/</guid>
-      <description> 새로운 디스크를 추가합니다.  여기에서는 &amp;ldquo;/docker&amp;rdquo; 에 mount 되어 있는걸로 가정합니다.   &amp;ldquo;etc/docker/daemon.json&amp;rdquo; 에 다음의 내용을 추가합니다.  { &amp;#34;data-root&amp;#34;: &amp;#34;/docker&amp;#34; }  docker 서비스를 재시작합니다.  $ sudo systemctl daemon-reload $ sudo systemctl restart docker </description>
+      <description> 새로운 디스크를 추가합니다.  여기에서는 &amp;ldquo;/docker&amp;rdquo; 에 mount 되어 있는걸로 가정합니다.   &amp;ldquo;etc/docker/daemon.json&amp;rdquo; 에 다음의 내용을 추가합니다.  { &amp;#34;data-root&amp;#34;: &amp;#34;/docker&amp;#34; }  docker 서비스를 재시작합니다.  $ sudo systemctl daemon-reload $ sudo systemctl restart docker    (adsbygoogle = window.adsbygoogle || []).push({});  </description>
     </item>
     
     <item>
@@ -297,7 +299,7 @@ cscope를 설치합니다. $ sudo apt-get install cscope mkscope.sh 파일을 �
       <description>&amp;ldquo;iss-123&amp;rdquo; 브랜치에서 작업하던 내용을 실수로 &amp;ldquo;iss-133&amp;rdquo; 브랜치로 push 하는 어이없는 실수를 했을때 &amp;ldquo;iss-133&amp;quot;에 push 된 내용을 이전으로 되돌려 놓아야 합니다.
 git log로 이전 commit의 id를 확인합니다. (ex, d50fd96d2d7e5e5cf689b0943f2b2d20d4c2dda4)
 [iss-133] $ git reset --hard d50fd96d2d7e5e5cf689b0943f2b2d20d4c2dda4 이제 변경된 내용을 push 합니다.
-[iss-13] $ git push --force origin prj </description>
+[iss-13] $ git push --force origin prj    (adsbygoogle = window.adsbygoogle || []).push({});  </description>
     </item>
     
     <item>
@@ -307,7 +309,7 @@ git log로 이전 commit의 id를 확인합니다. (ex, d50fd96d2d7e5e5cf689b094
       
       <guid>https://shrinklabs.com/post/go_key_exists_in_map/</guid>
       <description>map을 사용할때 해당하는 키가 map에 존재하는지 확인이 필요할 때가 있습니다.
-var target[string]*item ... target[&amp;#34;apple&amp;#34;] = itm1 target[&amp;#34;orange&amp;#34;] = itm2 ... value, ok := target[&amp;#34;kiwi&amp;#34;] </description>
+var target[string]*item ... target[&amp;#34;apple&amp;#34;] = itm1 target[&amp;#34;orange&amp;#34;] = itm2 ... value, ok := target[&amp;#34;kiwi&amp;#34;]    (adsbygoogle = window.adsbygoogle || []).push({});  </description>
     </item>
     
     <item>
@@ -440,7 +442,7 @@ package main import { &amp;#34;net/http&amp;#34; &amp;#34;github.com/gorilla/mux
       
       <guid>https://shrinklabs.com/post/go_encode/</guid>
       <description>Javascript에서 encodeURIComponent() 함수를 사용해서 전달받은 문자열을 디코딩해서 보기 위해서는 &amp;ldquo;net/url&amp;rdquo; 패키지의 QueryUnescape() 함수를 사용할 수 있습니다.
-email, err := url.QueryUnescape(user.Email) </description>
+email, err := url.QueryUnescape(user.Email)    (adsbygoogle = window.adsbygoogle || []).push({});  </description>
     </item>
     
     <item>
@@ -537,7 +539,7 @@ New()를 했어도 아직 템플릿 리스트에서 관리되는 대상은 아�
       <guid>https://shrinklabs.com/post/tool_ifconfig/</guid>
       <description>임시로 사용할 개발환경을 만들기 위해서 ubuntu 이미지를 사용하는데,
 ifconfig 명령이 동작하지 않아서 보니, net-tools가 온전하게 설치되었지가 않은것 같습니다.
-$ apt-get install --reinstall net-tools </description>
+$ apt-get install --reinstall net-tools    (adsbygoogle = window.adsbygoogle || []).push({});  </description>
     </item>
     
     <item>
@@ -571,7 +573,7 @@ func main() { http.HandleFunc(&amp;#34;/&amp;#34;, indexHandler) http.ListenAndS
       
       <guid>https://shrinklabs.com/post/tool_vm/</guid>
       <description>Labs 머신에서 사용할 vm을 생성할때 특이점
- vm 생성 Settings -&amp;gt; Network(Attached to: Bridged Adapter) Start(Network &amp;amp; Host Name)  Host Name: 지정 Ethernet(enp0s3): On Configure - IPv4 Settings  Method: Manual Addresses: Labs-Network guide 문서의 subnetmask, dns, gateway 그리고 사용할 ip 참조 Require IPv4 addressing for this connection to complete 항목 선택      </description>
+ vm 생성 Settings -&amp;gt; Network(Attached to: Bridged Adapter) Start(Network &amp;amp; Host Name)  Host Name: 지정 Ethernet(enp0s3): On Configure - IPv4 Settings  Method: Manual Addresses: Labs-Network guide 문서의 subnetmask, dns, gateway 그리고 사용할 ip 참조 Require IPv4 addressing for this connection to complete 항목 선택         (adsbygoogle = window.adsbygoogle || []).push({});  </description>
     </item>
     
     <item>
@@ -580,7 +582,8 @@ func main() { http.HandleFunc(&amp;#34;/&amp;#34;, indexHandler) http.ListenAndS
       <pubDate>Thu, 21 Apr 2016 14:39:36 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/tool_zsh/</guid>
-      <description>zsh 설치하고 기본 쉘 변경 $ sudo apt-get install zsh $ which zsh /usr/bin/zsh $ chsh -s /usr/bin/zsh oh-my-zsh 설치 $ curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh 설정(개인 취향) .zshrc 의 ZSH_THEME를 minimal 로 변경</description>
+      <description>zsh 설치하고 기본 쉘 변경 $ sudo apt-get install zsh $ which zsh /usr/bin/zsh $ chsh -s /usr/bin/zsh oh-my-zsh 설치 $ curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh 설정(개인 취향) .zshrc 의 ZSH_THEME를 minimal 로 변경
+   (adsbygoogle = window.adsbygoogle || []).push({});  </description>
     </item>
     
     <item>
@@ -589,7 +592,8 @@ func main() { http.HandleFunc(&amp;#34;/&amp;#34;, indexHandler) http.ListenAndS
       <pubDate>Thu, 21 Apr 2016 13:35:10 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/tool_protobuf/</guid>
-      <description>설치  protoc 최신 버전 확인 ( https://github.com/google/protobuf/releases )  $ curl -OL https://github.com/protocolbuffers/protobuf/releases/download/v3.15.6/protoc-3.15.6-linux-x86_64.zip $ unzip protoc-3.6.1-linux-x86\_64.zip -d protoc3 $ sudo mv protoc3/bin/\* /usr/local/bin/ $ sudo mv protoc3/include/\* /usr/local/include/ $ sudo chown $USER /usr/local/bin/protoc $ sudo chown -R $USER /usr/local/include/google 원본: Install protobuf 3.6.1 on Ubuntu 16.04 (github.com)</description>
+      <description>설치  protoc 최신 버전 확인 ( https://github.com/google/protobuf/releases )  $ curl -OL https://github.com/protocolbuffers/protobuf/releases/download/v3.15.6/protoc-3.15.6-linux-x86_64.zip $ unzip protoc-3.6.1-linux-x86\_64.zip -d protoc3 $ sudo mv protoc3/bin/\* /usr/local/bin/ $ sudo mv protoc3/include/\* /usr/local/include/ $ sudo chown $USER /usr/local/bin/protoc $ sudo chown -R $USER /usr/local/include/google 원본: Install protobuf 3.6.1 on Ubuntu 16.04 (github.com)
+   (adsbygoogle = window.adsbygoogle || []).push({});  </description>
     </item>
     
     <item>
@@ -598,7 +602,7 @@ func main() { http.HandleFunc(&amp;#34;/&amp;#34;, indexHandler) http.ListenAndS
       <pubDate>Thu, 21 Apr 2016 13:35:10 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/tool_terminator/</guid>
-      <description>설치 $sudo apt-get install terminator 단축키 분할(수직): ctrl + shift + e 분할(수평): ctrl + shift + o 닫기(현재 창): ctrl + shift + w 닫기(전체): ctrl + shift + q 새 탭: ctrl + shift + t 분할된 화면간 이동: alt + 방향키 </description>
+      <description>설치 $sudo apt-get install terminator 단축키 분할(수직): ctrl + shift + e 분할(수평): ctrl + shift + o 닫기(현재 창): ctrl + shift + w 닫기(전체): ctrl + shift + q 새 탭: ctrl + shift + t 분할된 화면간 이동: alt + 방향키    (adsbygoogle = window.adsbygoogle || []).push({});  </description>
     </item>
     
     <item>
@@ -675,7 +679,7 @@ $ pkg-config --list-all 현재 설치된 라이브러리들의 정보가 나오�
       
       <guid>https://shrinklabs.com/post/go_md5/</guid>
       <description>Qt로 만드는 클라이언트에서 이미지 파일에 대해서 만들어진 md5 hash를 검증 해보기 위해서, 같은 이미지 파일에 대해서 Go언어로 md5 hash를 만들었을때 동일한 값이 생성되면 제대로 만들어진거 아닐까 해서, 만들어 봤습니다.
-package main import ( &amp;#34;io/ioutil&amp;#34; &amp;#34;crypto/md5&amp;#34; &amp;#34;fmt&amp;#34; ) func main() { data, err := ioutil.ReadFile(&amp;#34;1.jpg&amp;#34;) if err != nil { return; } hash := md5.New() hash.Write(data) hashData := hash.Sum(nil) fmt.Printf(&amp;#34;%x&amp;#34;, hashData) } </description>
+package main import ( &amp;#34;io/ioutil&amp;#34; &amp;#34;crypto/md5&amp;#34; &amp;#34;fmt&amp;#34; ) func main() { data, err := ioutil.ReadFile(&amp;#34;1.jpg&amp;#34;) if err != nil { return; } hash := md5.New() hash.Write(data) hashData := hash.Sum(nil) fmt.Printf(&amp;#34;%x&amp;#34;, hashData) }    (adsbygoogle = window.adsbygoogle || []).push({});  </description>
     </item>
     
     <item>
