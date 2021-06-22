@@ -733,7 +733,7 @@ abc.go를 다음과 같이 작성합니다.
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://shrinklabs.com/home/subheader/</guid>
-      <description></description>
+      <description>ShrinkLabs는 스케줄러를 분석하고 구현하는 사이드프로젝트 입니다.</description>
     </item>
     
   </channel>
