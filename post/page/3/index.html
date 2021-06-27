@@ -24,7 +24,7 @@
 	
 	
   
-  <link rel="stylesheet" href="https://shrinklabs.com/css/styles.min.16be9015b1d15d94201894c956885e507505d7b2f836db72cf9bb664b89c63ac6f9b7de5b6d4671478edb138a9c227c4c4e6619e22ef55bd586fa93fb6eed058.css" integrity="sha512-Fr6QFbHRXZQgGJTJVoheUHUF17L4Nttyz5u2ZLicY6xvm33lttRnFHjtsTipwifExOZhniLvVb1Yb6k/tu7QWA==">
+  <link rel="stylesheet" href="https://shrinklabs.com/css/styles.min.64a6643395c6bf1ec6fff31d6429046b3ad467e58a279ff252dc019edd80a87051cf90b7fe2d589277def72d84602dcbc7115e2e17a94db3a8838336986a0ae3.css" integrity="sha512-ZKZkM5XGvx7G//MdZCkEazrUZ&#43;WKJ5/yUtwBnt2AqHBRz5C3/i1Yknfe9y2EYC3LxxFeLhepTbOog4M2mGoK4w==">
 
    
   
@@ -531,12 +531,12 @@ func Test_Config_New(t *testing.T) 함수에서 보면, 다음과 같은 주석�
 // assert
 ...
 </code></pre><p>이는 테스트 코드를 작성하기 위한 일종의 템플릿 같은것 입니다.<br>
-arrange: 테스트를 진행하기 전에 필요한 준비 작업 정도의 코드들이 위치할 수 있습니다.
+arrange: 테스트를 진행하기 전에 필요한 준비 작업 정도의 코드들이 위치할 수 있습니다. 
 act: 실제로 테스트 되어서 결과를 확인하고자 하는 동작을 구현합니다.<br>
 assert: act에서 진행한 동작에 대한 결과를 확인하는 용도입니다.</p>
 <p>첫 번째 테스트 코드인 Test_Config_New는 Config 객체의 생성이 잘 되는지 확인하기 위한 테스트입니다.</p>
 <p>arrange 절은 준비할 작업이 별도로 없기 때문에 생략 되었습니다.<br>
-act 절에서 확인하고자 하는 NewConfig() 함수를 사용해서 Config 객체를 생성합니다.
+act 절에서 확인하고자 하는 NewConfig() 함수를 사용해서 Config 객체를 생성합니다. 
 assert 절에서 생성된 객체가 생성이 잘 되었는지 확인하는 과정으로 객체가 nil인지를 확인 합니다. 여기에서 testify/assert 패키지를 사용합니다.</p>
 <p>assert 패키지에는 다양한 검증을 위한 기능을 제공하고 있습니다. 간단하게 assert.NotNil은 주어진 객체가 nil이 아닌지 확인하는 함수입니다. assert의 다양한 기능에 대해서는 godoc( <a href="https://godoc.org/github.com/stretchr/testify/assert">https://godoc.org/github.com/stretchr/testify/assert</a> ) 에서 확인해볼 수 있습니다.</p>
 <p>두 번째 테스트 코드인 Test_GetOprCfg는 Config에  다양한 owner의 CfgItem들이 섞여 있는 중에서, 특정 owner와 onwer가 global로 지정된 CfgItem을 찾아서 OprCfg 만들어서 반환해주는걸 확인하기 위한 용도의 테스트입니다.</p>
@@ -1298,7 +1298,7 @@ trace의 sub-command로 입력된 정규표현식과 일치하는 함수들에 t
 
 
 
-<script src="https://shrinklabs.com/js/bundle.min.b4d4f6818b4e26d94fb4399ccecba55248c6c39b666a474da4289f5f9dd5de310f550d6db5ab597255174ef0acf2fd488c3e5d92f0cabc10600c94b70c601f28.js" integrity="sha512-tNT2gYtOJtlPtDmczsulUkjGw5tmakdNpCifX53V3jEPVQ1ttatZclUXTvCs8v1IjD5dkvDKvBBgDJS3DGAfKA=="></script>
+<script src="https://shrinklabs.com/js/bundle.min.f4a965ad0a8118e32f8f0f158ff3aadbacf700934c22286a1a5b245105e9006da73a873b001a160db22498909c1df14d1f835dba5ad76f80b32b0234182b2a58.js" integrity="sha512-9KllrQqBGOMvjw8Vj/Oq26z3AJNMIihqGlskUQXpAG2nOoc7ABoWDbIkmJCcHfFNH4NdulrXb4CzKwI0GCsqWA=="></script>
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

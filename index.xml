@@ -24,7 +24,7 @@
       <pubDate>Wed, 24 Feb 2021 03:08:00 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/tool_klevr-agent/</guid>
-      <description>$ git clone git@github.com:jaehoonn/klevr.git $ cd klevr $ chmod +x ./build.sh $ ./build.sh $ cd cmd/klebr-agent/Dockerfile $ docker build -t jaehoon/klevr-agent:0.2.6 . $ docker login -u jaehoon -p {password} $ docker push jaehoon/klevr-agent:0.2.6    (adsbygoogle = window.adsbygoogle || []).push({});  </description>
+      <description>$ git clone git@github.com:jaehoonn/klevr.git $ cd klevr $ chmod +x ./build.sh $ ./build.sh $ cd cmd/klebr-agent/Dockerfile $ docker build -t jaehoon/klevr-agent:0.2.6 . $ docker login -u jaehoon -p {password} $ docker push jaehoon/klevr-agent:0.2.6 (adsbygoogle = window.adsbygoogle || []).push({}); </description>
     </item>
     
     <item>
@@ -34,7 +34,7 @@
       
       <guid>https://shrinklabs.com/post/git_delete-local-branch/</guid>
       <description>로컬에서 관리하고 있는 branch iss5783을 삭제합니다.
-$ git branch -d iss5783    (adsbygoogle = window.adsbygoogle || []).push({});  </description>
+$ git branch -d iss5783 (adsbygoogle = window.adsbygoogle || []).push({}); </description>
     </item>
     
     <item>
@@ -64,9 +64,9 @@ etc-3: 10.128.0.3
       <guid>https://shrinklabs.com/post/git_remote-branch/</guid>
       <description>github에 있는 branch를 로컬로 받아와서 작업하고 싶을때 할 수 있는 방법
 원격지에 있는 branch 정보를 확인 할 수 있도록 업데이트 합니다.
-$ git remote update 원격지의 branch 확인
-$ git branch -r origin/HEAD -&amp;gt; origin/master origin/dev origin/tapping origin/master origin/9999 origin/release upstream/dev upstream/master upstream/8888 upstream/release branch들 중에서 &amp;ldquo;origin/9999&amp;quot;를 갖고 오고 싶습니다.
-$ git checkout -t origin/9999    (adsbygoogle = window.adsbygoogle || []).push({});  </description>
+$ git remote update원격지의 branch 확인
+$ git branch -rorigin/HEAD -&amp;gt; origin/masterorigin/devorigin/tappingorigin/masterorigin/9999origin/releaseupstream/devupstream/masterupstream/8888upstream/releasebranch들 중에서 &amp;ldquo;origin/9999&amp;quot;를 갖고 오고 싶습니다.
+$ git checkout -t origin/9999(adsbygoogle = window.adsbygoogle || []).push({}); </description>
     </item>
     
     <item>
@@ -79,7 +79,7 @@ $ git checkout -t origin/9999    (adsbygoogle = window.adsbygoogle || []).push({
 해당 내용은 kubernetes의 GitHub Workflow 문서를 참고 했습니다. ( https://github.com/kubernetes/community/blob/master/contributors/guide/github-workflow.md )
   프로젝트를 https://github.com/kubernetes/kubernetes 에서 내 github 계정으로 Fork 합니다.
   Fork한 프로젝트를 내 로컬로 clone 합니다.
-  $ git clone git@github.com:{your-account}/kubernetes.git // 작업 디렉토리로 이동 $ cd kubernetes // 현재 브랜치를 확인합니다. $ git branch * master upstream으로 사용할 remote를 추가 합니다. 최초 프로젝트를 추가 합니다.  $ git remote add upstream git@github.</description>
+  $ git clone git@github.com:{your-account}/kubernetes.git// 작업 디렉토리로 이동$ cd kubernetes // 현재 브랜치를 확인합니다.$ git branch* masterupstream으로 사용할 remote를 추가 합니다. 최초 프로젝트를 추가 합니다.  $ git remote add upstream git@github.</description>
     </item>
     
     <item>
@@ -104,7 +104,7 @@ PS&amp;gt; minikube docker-env $Env:DOCKER_TLS_VERIFY = &amp;#34;1&amp;#34; $Env
 다음의 방법으로 빌드 할 수 있습니다.
 Powershell에서 빌드하기 위한 방법은 아래와 같습니다.
 PS D:\ws\src\sample&amp;gt; $env:GOOS=&amp;#34;linux&amp;#34;; go build 빌드 이후에는 필요에 따라서 &amp;ldquo;GOOS&amp;quot;를 다시 &amp;ldquo;windows&amp;quot;로 돌려 놓습니다.
-   (adsbygoogle = window.adsbygoogle || []).push({});  </description>
+(adsbygoogle = window.adsbygoogle || []).push({}); </description>
     </item>
     
     <item>
@@ -117,7 +117,7 @@ PS D:\ws\src\sample&amp;gt; $env:GOOS=&amp;#34;linux&amp;#34;; go build 빌드 �
 $ kubectl create secret docker-registry {secret} \ --docker-server={registryserver} \ --docker-username={name} \ --docker-password={password} \ --docker-email={email} \ --namespace={namespace} namespace는 지정하지 않으면 default로 지정됩니다.
 그리고 Container Registry로 부터 image를 받아서 사용하기 위한 yaml 파일에 다음과 같이 추가합니다.
 apiVersion: v1 kind: Pod metadata: name: private-reg spec: containers: - name: private-reg-container image: regcred/projectaa/private-reg:latest imagePullSecrets: - name: regcred &amp;ldquo;imagePullSecrets&amp;rdquo; 항목을 추가하고 containers.image에서 iamgePullSecretes.name을 base로 사용합니다.
-   (adsbygoogle = window.</description>
+(adsbygoogle = window.</description>
     </item>
     
     <item>
@@ -127,7 +127,7 @@ apiVersion: v1 kind: Pod metadata: name: private-reg spec: containers: - name: p
       
       <guid>https://shrinklabs.com/post/container_docker-error/</guid>
       <description>docker 설치 후 &amp;ldquo;Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?&amp;rdquo; 가 발생
-$sudo systemctl status docker $sudo systemctl start docker $sudo systemctl enable docker    (adsbygoogle = window.adsbygoogle || []).push({});  </description>
+$sudo systemctl status docker $sudo systemctl start docker $sudo systemctl enable docker (adsbygoogle = window.adsbygoogle || []).push({}); </description>
     </item>
     
     <item>
@@ -145,7 +145,7 @@ $sudo systemctl status docker $sudo systemctl start docker $sudo systemctl enabl
       <pubDate>Thu, 05 Mar 2020 12:05:00 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/container_docker-image/</guid>
-      <description> 새로운 디스크를 추가합니다.  여기에서는 &amp;ldquo;/docker&amp;rdquo; 에 mount 되어 있는걸로 가정합니다.   &amp;ldquo;etc/docker/daemon.json&amp;rdquo; 에 다음의 내용을 추가합니다.  { &amp;#34;data-root&amp;#34;: &amp;#34;/docker&amp;#34; }  docker 서비스를 재시작합니다.  $ sudo systemctl daemon-reload $ sudo systemctl restart docker    (adsbygoogle = window.adsbygoogle || []).push({});  </description>
+      <description> 새로운 디스크를 추가합니다.  여기에서는 &amp;ldquo;/docker&amp;rdquo; 에 mount 되어 있는걸로 가정합니다.   &amp;ldquo;etc/docker/daemon.json&amp;rdquo; 에 다음의 내용을 추가합니다.  { &amp;#34;data-root&amp;#34;: &amp;#34;/docker&amp;#34; }  docker 서비스를 재시작합니다.  $ sudo systemctl daemon-reload $ sudo systemctl restart docker (adsbygoogle = window.adsbygoogle || []).push({}); </description>
     </item>
     
     <item>
@@ -173,7 +173,7 @@ kind가 &amp;ldquo;Ingress&amp;quot;인 yaml 파일을 만듭니다. 이때 &amp
 Helm은 클라이언트 역할을 하는 helm, 서버 역할을 하는 tiller 그리고 설정 정보들의 관리를 위한 chart로 이루어져 있습니다.
 여기에서 클라이언트(helm)라고 하는건 클러스터의 외부에서 작업을 지시하기 위한 도구이고, 실제로 클러스터 안쪽에서 동작 하는건 서버(tiller)라고 보면 됩니다.
 helm의 설치는 간단합니다.
-$ curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get &amp;gt; get_helm.sh $ chmod 700 get_helm.sh $ ./get_helm.sh 근데 이 과정 다음에 갑자기 tiller를 위한 계정을 만들고 해당 계정을 무언가에 바인딩을 합니다.</description>
+$ curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get &amp;gt; get_helm.sh$ chmod 700 get_helm.sh$ ./get_helm.sh근데 이 과정 다음에 갑자기 tiller를 위한 계정을 만들고 해당 계정을 무언가에 바인딩을 합니다.</description>
     </item>
     
     <item>
@@ -237,7 +237,7 @@ StorageClass는 상태를 갖는걸 확인하기 위한 실습이 필요하다�
       <description>이번 장에서는 &amp;ldquo;Deployment&amp;quot;가 어떤 역할을 할 수 있으며, 이를 이용해서 취할 수 있는 배포 전략에 대해서 알아볼 수 있었습니다.
 (이번 장에서 실습을 위해서는 필수적으로 compute/zone 설정을 us-central1-a로 지정해 놓아야 cluster 생성을 정상적으로 할 수 있습니다.)
 Deployment 뿐만이 아니라 다른 객체들을 사용하기 위해서도 yaml을 작성할때 각 필드에 대한 정보를 어디에서 확인해야 하는지가 궁금했습니다.
-$ kubectl explain deployment $ kubectl explain --recursive $ kubectl explain deployment.metadata.name 등과 같이 확인을 할 수 있습니다.</description>
+$ kubectl explain deployment$ kubectl explain --recursive$ kubectl explain deployment.metadata.name등과 같이 확인을 할 수 있습니다.</description>
     </item>
     
     <item>
@@ -285,9 +285,9 @@ Docker의 Image와 Container 그리고 Dockerfile의 이해를 위한 몇 가지
       <guid>https://shrinklabs.com/post/go_cscope/</guid>
       <description>Go언어 개발 환경(추가) Go언어로 작성한 코드를 분석하기 위해서 cscope가 필요할 때가 있습니다.
 vim에서 cscope를 사용하기 위한 과정을 정리해 보려고 합니다.
-cscope를 설치합니다. $ sudo apt-get install cscope mkscope.sh 파일을 만듭니다. mkscope.sh의 내용은 다음과 같습니다.
+cscope를 설치합니다. $ sudo apt-get install cscopemkscope.sh 파일을 만듭니다. mkscope.sh의 내용은 다음과 같습니다.
 이 스크립트는 https://www.cnblogs.com/shaohef/p/7358111.html 의 내용을 수정해서 사용했습니다.
-#!/bin/bash # 기존에 존재하던 files와 out 파일을 제거합니다 rm cscope.files cscope.out # $GOROOT가 존재하지 않으면 설정합니다. if [&amp;quot;$GOROOT&amp;quot; = &amp;quot;&amp;quot;]; then echo &amp;quot;GOROOT is not set&amp;quot; GOROOT=`go env | grep &amp;quot;GOROOT&amp;quot; | cut -d &amp;quot;=&amp;quot; -f2` GOROOT=${GOROOT#\&amp;quot;} GOROOT=${GOROOT%\&amp;quot;} fi echo $GOROOT # Go 표준 패키지 go_src=$GOROOT/src # Go언어 표준 패키지로 제공되는 go 파일의 경로를 cscope.</description>
+#!/bin/bash# 기존에 존재하던 files와 out 파일을 제거합니다rm cscope.files cscope.out# $GOROOT가 존재하지 않으면 설정합니다.if [&amp;quot;$GOROOT&amp;quot; = &amp;quot;&amp;quot;]; thenecho &amp;quot;GOROOT is not set&amp;quot;GOROOT=`go env | grep &amp;quot;GOROOT&amp;quot; | cut -d &amp;quot;=&amp;quot; -f2`GOROOT=${GOROOT#\&amp;quot;}GOROOT=${GOROOT%\&amp;quot;}fiecho $GOROOT# Go 표준 패키지go_src=$GOROOT/src# Go언어 표준 패키지로 제공되는 go 파일의 경로를 cscope.</description>
     </item>
     
     <item>
@@ -298,8 +298,8 @@ cscope를 설치합니다. $ sudo apt-get install cscope mkscope.sh 파일을 �
       <guid>https://shrinklabs.com/post/git_reset/</guid>
       <description>&amp;ldquo;iss-123&amp;rdquo; 브랜치에서 작업하던 내용을 실수로 &amp;ldquo;iss-133&amp;rdquo; 브랜치로 push 하는 어이없는 실수를 했을때 &amp;ldquo;iss-133&amp;quot;에 push 된 내용을 이전으로 되돌려 놓아야 합니다.
 git log로 이전 commit의 id를 확인합니다. (ex, d50fd96d2d7e5e5cf689b0943f2b2d20d4c2dda4)
-[iss-133] $ git reset --hard d50fd96d2d7e5e5cf689b0943f2b2d20d4c2dda4 이제 변경된 내용을 push 합니다.
-[iss-13] $ git push --force origin prj    (adsbygoogle = window.adsbygoogle || []).push({});  </description>
+[iss-133] $ git reset --hard d50fd96d2d7e5e5cf689b0943f2b2d20d4c2dda4이제 변경된 내용을 push 합니다.
+[iss-13] $ git push --force origin prj(adsbygoogle = window.adsbygoogle || []).push({}); </description>
     </item>
     
     <item>
@@ -309,7 +309,7 @@ git log로 이전 commit의 id를 확인합니다. (ex, d50fd96d2d7e5e5cf689b094
       
       <guid>https://shrinklabs.com/post/go_key_exists_in_map/</guid>
       <description>map을 사용할때 해당하는 키가 map에 존재하는지 확인이 필요할 때가 있습니다.
-var target[string]*item ... target[&amp;#34;apple&amp;#34;] = itm1 target[&amp;#34;orange&amp;#34;] = itm2 ... value, ok := target[&amp;#34;kiwi&amp;#34;]    (adsbygoogle = window.adsbygoogle || []).push({});  </description>
+var target[string]*item ... target[&amp;#34;apple&amp;#34;] = itm1 target[&amp;#34;orange&amp;#34;] = itm2 ... value, ok := target[&amp;#34;kiwi&amp;#34;] (adsbygoogle = window.adsbygoogle || []).push({}); </description>
     </item>
     
     <item>
@@ -377,10 +377,10 @@ ulimit -c unlimited 로 해주었습니다.
 delve설치 설치를 하기 위해서는 Go 1.5 이상의 버전이 필요합니다.
 지금 시점에 Go 1.5를 사용하지 않을테니&amp;hellip;
 다음의 명령으로 설치합니다.
-$ go get github.com/derekparker/delve/cmd/dlv 이제 설치 끝! (Windows랑 MAC은 모르겠습니다.)
+$ go get github.com/derekparker/delve/cmd/dlv이제 설치 끝! (Windows랑 MAC은 모르겠습니다.)
 delve사용 프로세스 실행 제어, 변수, 스레드/goroutine 상태, CPU 레지스터 상태 등을 확인 할 수 있습니다.
   Commands
- attach: 실행중인 프로세스에 연결해서 디버깅을 합니다. $ dlv attach pid [executable] 실행중인 프로세스에 디버그 세션을 연결해서 프로세스를 제어합니다.</description>
+ attach: 실행중인 프로세스에 연결해서 디버깅을 합니다. $ dlv attach pid [executable]실행중인 프로세스에 디버그 세션을 연결해서 프로세스를 제어합니다.</description>
     </item>
     
     <item>
@@ -392,7 +392,7 @@ delve사용 프로세스 실행 제어, 변수, 스레드/goroutine 상태, CPU 
       <description>소개 Go언어로 개발을 하다보면 debug모드 release모드 같이 별도의 빌드 환경을 구성하고 싶을때가 있습니다.
 그래서 build 옵션으로 특정한 환경별로 결과를 달리 할 수 있는 방법에 대해서 테스트한 내용을 정리해봅니다.
 빌드 go 파일들을 빌드하기 위해서는 일반적으로 다음과 같이 합니다.
-$ go build Go언어 문서중에 보면 https://golang.org/pkg/go/build/#hdr-Build_Constraints[Build Constraints] 에 관한 내용이 있습니다.
+$ go buildGo언어 문서중에 보면 https://golang.org/pkg/go/build/#hdr-Build_Constraints[Build Constraints] 에 관한 내용이 있습니다.
 이 내용은 build 할 때 조건을 줄 수 있다는 내용이고 방법은 다음과 같이 하면 된다고 합니다.
 코드의 상단에 &amp;ldquo;// +build linux&amp;rdquo; 하고 한 칸을 띄우고 &amp;ldquo;package blah&amp;rdquo; 를 시작합니다.</description>
     </item>
@@ -406,7 +406,7 @@ $ go build Go언어 문서중에 보면 https://golang.org/pkg/go/build/#hdr-Bui
       <description>Go언어로 RabbitMQ를 어떻게 이용할 수 있는지 스터디하는 내용들을 대충 대충 정리하는 중&amp;hellip;
 RabbitMQ라는게 뭐지? AMQP를 구현한 메세지 브로커
 여기 저기에 있는 클라이언트들(Producer/Consumer)이 메세지를 서로 주고 받을 수 있도록 해주는 그런거?
-설치  RabbitMQ 설치  sudo apt-get install rabbitmq-server  관리 플러그인 설치  sudo rabbitmq-plugins enable rabbitmq_management sudo service rabbitmq-server restart  실행  service rabbitmq-server start  계정 등록(id:jaehoonn, pw:1234)  rabbimqctl add_user jaehoonn 1234  등록한 계정을 관리자 계정으로 변경  rabbitmqctl set_user_tags jaehoonn administrator  웹브라우저로 관리 플러그인에 접속  localhost:15672 용어 대충 요런것들에 대해서 찾아 보면 될 것 같은데&amp;hellip;</description>
+설치  RabbitMQ 설치  sudo apt-get install rabbitmq-server 관리 플러그인 설치  sudo rabbitmq-plugins enable rabbitmq_management sudo service rabbitmq-server restart 실행  service rabbitmq-server start 계정 등록(id:jaehoonn, pw:1234)  rabbimqctl add_user jaehoonn 1234 등록한 계정을 관리자 계정으로 변경  rabbitmqctl set_user_tags jaehoonn administrator 웹브라우저로 관리 플러그인에 접속  localhost:15672 용어 대충 요런것들에 대해서 찾아 보면 될 것 같은데&amp;hellip;</description>
     </item>
     
     <item>
@@ -442,7 +442,7 @@ package main import { &amp;#34;net/http&amp;#34; &amp;#34;github.com/gorilla/mux
       
       <guid>https://shrinklabs.com/post/go_encode/</guid>
       <description>Javascript에서 encodeURIComponent() 함수를 사용해서 전달받은 문자열을 디코딩해서 보기 위해서는 &amp;ldquo;net/url&amp;rdquo; 패키지의 QueryUnescape() 함수를 사용할 수 있습니다.
-email, err := url.QueryUnescape(user.Email)    (adsbygoogle = window.adsbygoogle || []).push({});  </description>
+email, err := url.QueryUnescape(user.Email) (adsbygoogle = window.adsbygoogle || []).push({}); </description>
     </item>
     
     <item>
@@ -481,7 +481,7 @@ hugo의 컨텐츠를 관리하기 위한 저장소가 필요합니다.(ex: https
       <pubDate>Wed, 12 Oct 2016 01:28:09 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/tool_tmux/</guid>
-      <description>tmux 시작 $ tmux $ tmux new-session(or new) -s [세션 이름] -n [윈도우 이름] tmux 종료 $ ctrl-d $ exit tmux detach(현재 클라이언트) $ ctrl-b, d tmux attach $ tmux attach -t [세션 이름] window 생성 $ ctrl-b, c window 리스트 $ ctrl-b, w window 이동(현재의 이전(다음, 이전) $ ctrl-b, l(n, p) window 종료 $ ctrl-b, &amp;amp; window 이름 변경 $ ctrl-b, , pane 가로 나누기 $ ctrl-b, % pane 세로 나누기 $ ctrl-b, &amp;quot; pane 의 번호를 화면에 출력 $ ctrl-b, q pane 크기 조절 $ ctrl-b, (ctrl + 방향키) 모든 pane의 크기 동일하게 만들기 $ ctrl-b alt-1 # 모든 vertical split 넓이를 동일하게 변경 $ ctrl-b alt-2 # 모든 horizontal split의 넓이를 동일하게 변경 pane 이동하기 $ ctrl-b, o pane 이동하기 $ ctrl-b, 방향키 $ ctrl-b {(}) pane 삭제하기 $ ctrl-d pane 화면 스크롤 모드 시작 $ ctrl-b, [ pane 화면 스크롤 모드 종료 $ q 입력되는 내용을 모든 pane에 동일하게 적용 $ ctrl-b : setw synchronize-panes http://nodeqa.</description>
+      <description>tmux 시작 $ tmux $ tmux new-session(or new) -s [세션 이름] -n [윈도우 이름]tmux 종료 $ ctrl-d $ exittmux detach(현재 클라이언트) $ ctrl-b, dtmux attach $ tmux attach -t [세션 이름]window 생성 $ ctrl-b, cwindow 리스트 $ ctrl-b, wwindow 이동(현재의 이전(다음, 이전) $ ctrl-b, l(n, p)window 종료 $ ctrl-b, &amp;amp;window 이름 변경 $ ctrl-b, ,pane 가로 나누기 $ ctrl-b, %pane 세로 나누기 $ ctrl-b, &amp;quot;pane 의 번호를 화면에 출력 $ ctrl-b, qpane 크기 조절 $ ctrl-b, (ctrl + 방향키)모든 pane의 크기 동일하게 만들기 $ ctrl-b alt-1 # 모든 vertical split 넓이를 동일하게 변경$ ctrl-b alt-2 # 모든 horizontal split의 넓이를 동일하게 변경pane 이동하기 $ ctrl-b, opane 이동하기 $ ctrl-b, 방향키 $ ctrl-b {(})pane 삭제하기 $ ctrl-dpane 화면 스크롤 모드 시작 $ ctrl-b, [pane 화면 스크롤 모드 종료 $ q입력되는 내용을 모든 pane에 동일하게 적용 $ ctrl-b: setw synchronize-paneshttp://nodeqa.</description>
     </item>
     
     <item>
@@ -492,8 +492,8 @@ hugo의 컨텐츠를 관리하기 위한 저장소가 필요합니다.(ex: https
       <guid>https://shrinklabs.com/post/tool_vi/</guid>
       <description>현재 작업중인 파일의 경로와 이름 확인 현재 작업중인 파일의 경로 또는 이름이 궁금할 경우가 있습니다.
 ctrl + g 또는
-: f 80컬럼에 버티컬 라인 vi에서 80컬럼의 버티컬 라인을 생성하려면 다음과 같이 합니다.
-set colorcolumn=80 을 적용하면, 빨간색 라인이 생깁니다.
+: f80컬럼에 버티컬 라인 vi에서 80컬럼의 버티컬 라인을 생성하려면 다음과 같이 합니다.
+set colorcolumn=80을 적용하면, 빨간색 라인이 생깁니다.
 파일 관리 NerdTree를 사용하지 않고 vi에서 파일과 디렉토리를 관리하는 방법
 파일 네비게이션
  표준모드(ex: i, o, a 같은걸 입력해서 입력모드로 전환되기 전 상태) &amp;ldquo;e.&amp;rdquo; (설명: &amp;ldquo;.&amp;rdquo; 는 현재의 디렉토리)  디렉토리 만들기</description>
@@ -507,9 +507,9 @@ set colorcolumn=80 을 적용하면, 빨간색 라인이 생깁니다.
       <guid>https://shrinklabs.com/post/go_vim-go/</guid>
       <description>vim-go가 언제부터인가 main.go 를 만들면 템플릿으로 fmt.Println(&amp;ldquo;vim-go&amp;rdquo;) 를 찍어주는 코드를 자동으로 생성해 주기 시작했습니다.
 나는 아무것도 나오지 않기를 바랬는데, 이런게 나와서 매번 지우는 작업을 하는게 싫었습니다. 그래서 설정중에 go_template_autocreate 를 조절했습니다.
-let g:go_template_autocreate = 0 와 같이 하면 이제 아무것도 없는 빈 화면이 나옵니다.
+let g:go_template_autocreate = 0와 같이 하면 이제 아무것도 없는 빈 화면이 나옵니다.
 혹시라도 반복적으로 나오는게 좋은데 &amp;ldquo;vim-go&amp;quot;를 찍는게 아닌 특정한 코드가 필요하다면, &amp;ldquo;.vim/bundle/vim-go/templates/hello_world.go&amp;rdquo; 파일을 수정해도 됩니다. 또는 특정한 템플릿을 지정하고 싶다면, 다음과 같이,
-let g:go_template_file = &amp;quot;hello_world.go&amp;quot; 로 해도 됩니다.</description>
+let g:go_template_file = &amp;quot;hello_world.go&amp;quot;로 해도 됩니다.</description>
     </item>
     
     <item>
@@ -539,7 +539,7 @@ New()를 했어도 아직 템플릿 리스트에서 관리되는 대상은 아�
       <guid>https://shrinklabs.com/post/tool_ifconfig/</guid>
       <description>임시로 사용할 개발환경을 만들기 위해서 ubuntu 이미지를 사용하는데,
 ifconfig 명령이 동작하지 않아서 보니, net-tools가 온전하게 설치되었지가 않은것 같습니다.
-$ apt-get install --reinstall net-tools    (adsbygoogle = window.adsbygoogle || []).push({});  </description>
+$ apt-get install --reinstall net-tools(adsbygoogle = window.adsbygoogle || []).push({}); </description>
     </item>
     
     <item>
@@ -551,7 +551,7 @@ $ apt-get install --reinstall net-tools    (adsbygoogle = window.adsbygoogle || 
       <description>Go의 &amp;ldquo;net/http&amp;quot;와 &amp;ldquo;html/template&amp;quot;를 이용해서 html과 css로 만들어진 웹페이지를 만들려고 할때, html 파일이 보여질때 css가 적용되지 않은 상태로 보여집니다.
 이 때 어떻게 해야 하는지 방법을 찾아가던 과정을 기록으로 남겨 놓습니다.
 프로젝트의 디렉토리 구조는 다음과 같습니다.
-src\ + prj + main.go + static style.css + template index.html 그래서 이렇게&amp;hellip;
+src\+ prj+ main.go+ staticstyle.css+ templateindex.html그래서 이렇게&amp;hellip;
 func main() { http.HandleFunc(&amp;#34;/&amp;#34;, indexHandler) http.ListenAndServe(&amp;#34;:8080&amp;#34;, nil) } func indexHandler(...) { // index.html } 와 같이 하면 될 줄 알았습니다.
 그런데 안됩니다.
 그래서 어떻게 해야 하는지 찾아보니, FileServer로 css파일을 제공해 주면 된다고 합니다.</description>
@@ -573,7 +573,7 @@ func main() { http.HandleFunc(&amp;#34;/&amp;#34;, indexHandler) http.ListenAndS
       
       <guid>https://shrinklabs.com/post/tool_vm/</guid>
       <description>Labs 머신에서 사용할 vm을 생성할때 특이점
- vm 생성 Settings -&amp;gt; Network(Attached to: Bridged Adapter) Start(Network &amp;amp; Host Name)  Host Name: 지정 Ethernet(enp0s3): On Configure - IPv4 Settings  Method: Manual Addresses: Labs-Network guide 문서의 subnetmask, dns, gateway 그리고 사용할 ip 참조 Require IPv4 addressing for this connection to complete 항목 선택         (adsbygoogle = window.adsbygoogle || []).push({});  </description>
+ vm 생성 Settings -&amp;gt; Network(Attached to: Bridged Adapter) Start(Network &amp;amp; Host Name)  Host Name: 지정 Ethernet(enp0s3): On Configure - IPv4 Settings  Method: Manual Addresses: Labs-Network guide 문서의 subnetmask, dns, gateway 그리고 사용할 ip 참조 Require IPv4 addressing for this connection to complete 항목 선택      (adsbygoogle = window.adsbygoogle || []).push({}); </description>
     </item>
     
     <item>
@@ -582,8 +582,8 @@ func main() { http.HandleFunc(&amp;#34;/&amp;#34;, indexHandler) http.ListenAndS
       <pubDate>Thu, 21 Apr 2016 14:39:36 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/tool_zsh/</guid>
-      <description>zsh 설치하고 기본 쉘 변경 $ sudo apt-get install zsh $ which zsh /usr/bin/zsh $ chsh -s /usr/bin/zsh oh-my-zsh 설치 $ curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh 설정(개인 취향) .zshrc 의 ZSH_THEME를 minimal 로 변경
-   (adsbygoogle = window.adsbygoogle || []).push({});  </description>
+      <description>zsh 설치하고 기본 쉘 변경 $ sudo apt-get install zsh $ which zsh /usr/bin/zsh $ chsh -s /usr/bin/zsh oh-my-zsh 설치 $ curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh설정(개인 취향) .zshrc 의 ZSH_THEME를 minimal 로 변경
+(adsbygoogle = window.adsbygoogle || []).push({}); </description>
     </item>
     
     <item>
@@ -592,8 +592,8 @@ func main() { http.HandleFunc(&amp;#34;/&amp;#34;, indexHandler) http.ListenAndS
       <pubDate>Thu, 21 Apr 2016 13:35:10 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/tool_protobuf/</guid>
-      <description>설치  protoc 최신 버전 확인 ( https://github.com/google/protobuf/releases )  $ curl -OL https://github.com/protocolbuffers/protobuf/releases/download/v3.15.6/protoc-3.15.6-linux-x86_64.zip $ unzip protoc-3.6.1-linux-x86\_64.zip -d protoc3 $ sudo mv protoc3/bin/\* /usr/local/bin/ $ sudo mv protoc3/include/\* /usr/local/include/ $ sudo chown $USER /usr/local/bin/protoc $ sudo chown -R $USER /usr/local/include/google 원본: Install protobuf 3.6.1 on Ubuntu 16.04 (github.com)
-   (adsbygoogle = window.adsbygoogle || []).push({});  </description>
+      <description>설치  protoc 최신 버전 확인 ( https://github.com/google/protobuf/releases )  $ curl -OL https://github.com/protocolbuffers/protobuf/releases/download/v3.15.6/protoc-3.15.6-linux-x86_64.zip$ unzip protoc-3.6.1-linux-x86\_64.zip -d protoc3$ sudo mv protoc3/bin/\* /usr/local/bin/$ sudo mv protoc3/include/\* /usr/local/include/$ sudo chown $USER /usr/local/bin/protoc$ sudo chown -R $USER /usr/local/include/google원본: Install protobuf 3.6.1 on Ubuntu 16.04 (github.com)
+(adsbygoogle = window.adsbygoogle || []).push({}); </description>
     </item>
     
     <item>
@@ -602,7 +602,7 @@ func main() { http.HandleFunc(&amp;#34;/&amp;#34;, indexHandler) http.ListenAndS
       <pubDate>Thu, 21 Apr 2016 13:35:10 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/tool_terminator/</guid>
-      <description>설치 $sudo apt-get install terminator 단축키 분할(수직): ctrl + shift + e 분할(수평): ctrl + shift + o 닫기(현재 창): ctrl + shift + w 닫기(전체): ctrl + shift + q 새 탭: ctrl + shift + t 분할된 화면간 이동: alt + 방향키    (adsbygoogle = window.adsbygoogle || []).push({});  </description>
+      <description>설치 $sudo apt-get install terminator단축키 분할(수직): ctrl + shift + e 분할(수평): ctrl + shift + o 닫기(현재 창): ctrl + shift + w 닫기(전체): ctrl + shift + q 새 탭: ctrl + shift + t 분할된 화면간 이동: alt + 방향키 (adsbygoogle = window.adsbygoogle || []).push({}); </description>
     </item>
     
     <item>
@@ -635,7 +635,7 @@ import &amp;#34;rsc.io/pdf&amp;#34; 와 같은 &amp;ldquo;github.com/rsc/pdf&amp
 어떻게 한걸까!? 궁금했습니다. 그리고 왠지 멋있어 보였습니다&amp;hellip;;
 그러다가 우연히 rob pike의 github page(https://github.com/robpike/robpike.github.io)를 보게 되었습니다.
 index.html 에 이렇게만 코드가 되어 있었습니다.
-&amp;lt;meta name=&amp;quot;go-import&amp;quot; content=&amp;quot;robpike.io/cmd hg https://code.google.com/p/rspace.cmd&amp;quot;&amp;gt; This is a git repository holding a redirect for the Go repositories referenced by robpike.</description>
+&amp;lt;meta name=&amp;quot;go-import&amp;quot; content=&amp;quot;robpike.io/cmd hg https://code.google.com/p/rspace.cmd&amp;quot;&amp;gt;This is a git repository holding a redirect for the Go repositories referenced by robpike.</description>
     </item>
     
     <item>
@@ -644,7 +644,7 @@ index.html 에 이렇게만 코드가 되어 있었습니다.
       <pubDate>Sat, 23 May 2015 01:28:09 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/tool_setting/</guid>
-      <description>업데이트 $ sudo apt-get update $ sudo apt-get install build-essential vim 설치 $ sudo apt-get install vim vim 8.0 $ sudo add-apt-repository ppa:jonathonf/vim $ sudo apt-get update xclip 설치 $ sudo apt-get install xclip wget 설치(사용이 필요한 경우에만 설치) $ sudo apt-get install wget git 설치  git 설치와 설정  $ sudo apt-get install git $ git config –-global user.name “blah” $ git config –-global user.email “blah@blah.com” $ git config --global core.</description>
+      <description>업데이트 $ sudo apt-get update $ sudo apt-get install build-essentialvim 설치 $ sudo apt-get install vimvim 8.0 $ sudo add-apt-repository ppa:jonathonf/vim $ sudo apt-get updatexclip 설치 $ sudo apt-get install xclipwget 설치(사용이 필요한 경우에만 설치) $ sudo apt-get install wgetgit 설치  git 설치와 설정  $ sudo apt-get install git $ git config –-global user.name “blah” $ git config –-global user.email “blah@blah.com” $ git config --global core.</description>
     </item>
     
     <item>
@@ -679,7 +679,7 @@ $ pkg-config --list-all 현재 설치된 라이브러리들의 정보가 나오�
       
       <guid>https://shrinklabs.com/post/go_md5/</guid>
       <description>Qt로 만드는 클라이언트에서 이미지 파일에 대해서 만들어진 md5 hash를 검증 해보기 위해서, 같은 이미지 파일에 대해서 Go언어로 md5 hash를 만들었을때 동일한 값이 생성되면 제대로 만들어진거 아닐까 해서, 만들어 봤습니다.
-package main import ( &amp;#34;io/ioutil&amp;#34; &amp;#34;crypto/md5&amp;#34; &amp;#34;fmt&amp;#34; ) func main() { data, err := ioutil.ReadFile(&amp;#34;1.jpg&amp;#34;) if err != nil { return; } hash := md5.New() hash.Write(data) hashData := hash.Sum(nil) fmt.Printf(&amp;#34;%x&amp;#34;, hashData) }    (adsbygoogle = window.adsbygoogle || []).push({});  </description>
+package main import ( &amp;#34;io/ioutil&amp;#34; &amp;#34;crypto/md5&amp;#34; &amp;#34;fmt&amp;#34; ) func main() { data, err := ioutil.ReadFile(&amp;#34;1.jpg&amp;#34;) if err != nil { return; } hash := md5.New() hash.Write(data) hashData := hash.Sum(nil) fmt.Printf(&amp;#34;%x&amp;#34;, hashData) } (adsbygoogle = window.adsbygoogle || []).push({}); </description>
     </item>
     
     <item>
