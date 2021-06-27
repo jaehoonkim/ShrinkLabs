@@ -95,6 +95,38 @@
 					<header class="entry-header">
 						<div class="entry-meta">
                <span class="posted-on">
+                  <time class="entry-date published" datetime="April 8, 2020">April 8, 2020</time>
+               </span>
+						</div>
+						<h1 class="entry-title">
+						  <a href="https://shrinklabs.com/post/container_docker-error/" rel="bookmark">docker 설치 후 에러</a>
+						</h1>
+					</header>
+					<div class="entry-content">
+						<p>docker 설치 후 &ldquo;Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?&rdquo; 가 발생</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$sudo systemctl status docker
+
+$sudo systemctl start docker
+
+$sudo systemctl enable docker
+</code></pre></div><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8444244371421612"
+     data-ad-slot="6693872766"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+					</div>
+				</article>
+        
+				<article class="post">
+					<header class="entry-header">
+						<div class="entry-meta">
+               <span class="posted-on">
                   <time class="entry-date published" datetime="March 5, 2020">March 5, 2020</time>
                </span>
 						</div>
@@ -834,43 +866,6 @@ $ kubectl explain deployment.metadata.name
 <p>실제 배포를 하기 전에 서비스의 실사용 환경에서 제한된 사용자를 선택해서 테스트 해보기 위한 정도라고 생각을 하고 실습을 다시 해보니 괜찮은 방법 같아 보였습니다. 실 서비스로 사용되어지는 Deployment와 배포되기 전에 확인을 위해서 사용되어질 Deployment(Canary)를 구분 지었을때, 문제가 발생하거나 하면 Deployment(Canary)만 조정을 하면 되니 신속한 관리가 가능할것 같았습니다.</p>
 <p>Blue-Green 전략은 두 개의 Deployment(Blue/Green)를 적용해 놓고 Service를 원하는 Deployment에 적용시켜 놓는 방식으로 클러스터의 자원을 충분히 확보할 수 있을때 사용하면 좋은 전략인것 같습니다.</p>
 <p>배포를 위한 전략들을 하나씩 실습해보면서 Deployment, Service 등의 각 객체의 특성을 잘 파악하고 있어야만, 어떻게 배치 할 수 있는지 그리고 어떤 식으로 운영할지에 대해서 계획 세울수 있겠다 싶었습니다.</p>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-8444244371421612"
-     data-ad-slot="6693872766"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
-					</div>
-				</article>
-        
-				<article class="post">
-					<header class="entry-header">
-						<div class="entry-meta">
-               <span class="posted-on">
-                  <time class="entry-date published" datetime="January 9, 2019">January 9, 2019</time>
-               </span>
-						</div>
-						<h1 class="entry-title">
-						  <a href="https://shrinklabs.com/post/container_orchestrating-cloud-with-kubernetes/" rel="bookmark">3.Orchestrating the Cloud With Kubernetes</a>
-						</h1>
-					</header>
-					<div class="entry-content">
-						<p>이번 장은 우선 &ldquo;nginx&quot;와 &ldquo;monolith&quot;라는 단어에 현혹되지 않도록 주의를 해야 할 것 같습니다.</p>
-<p>최초에 nginx가 실행되는 Pod는 그거대로 Kubnernetes 작동에 대한 내용이고, Pod에 대한 내용에서 언급되는 nginx와 monolith는 또 그것대로의 내용을 설명합니다.</p>
-<p>그리고 다음에 나오는 port-forward에 대한 내용은 또 완전히 별개의 내용입니다.</p>
-<p>port-forward는 &ldquo;Service&quot;로 노출하지 않는 Pod에 대해서 테스트등을 해보기 위해서 아주 유용한 도구인 것 같습니다.</p>
-<p>port-forward로 &ldquo;monolith&rdquo; Pod의 80 포트를 10080을 지정하면 local의 10080 포트를 사용하고 있는것 처럼 이용이 가능합니다.</p>
-<p>&ldquo;Service&quot;는 Pod가 수시로 죽고 살아나는 과정 중에서 외부에 노출될 수 있는 일정한 IP를 제공하기 위한 목적입니다.</p>
-<p>&ldquo;Service&quot;는 &ldquo;selector&quot;를 이용해서 Pod에 지정된 &ldquo;label&rdquo; 별로 Pod들을 선택할 수 있습니다. 그리고 &ldquo;Service&quot;의 형태로는 &ldquo;ClusterIP&rdquo;, &ldquo;NodePort&rdquo;, &ldquo;LoadBalancer&quot;가 있습니다.</p>
-<p>&ldquo;secure-monolith&rdquo; Pod를 생성하는 과정중에 &ldquo;secret&quot;와 &ldquo;configmap&quot;을 생성하는게 나오는데 아직은 크게 신경쓰지 않아도 될 것 같습니다.</p>
-<p>둘 다 비슷한 성격을 갖는데, &ldquo;secret&quot;는 패스워드 처럼 민감 데이터를 다루는 성격이고, &ldquo;configmap&quot;은 환경 설정과 같은 성격의 정보를 다룹니다. 특성 또는 상태를 갖는 정보를 포함하지 않고 Pod가 관리될 수 있도록 해줍니다.</p>
-<p>&ldquo;Deployment&quot;는 &ldquo;replicas&rdquo; 항목에 지정된 만큼의 Pod를 관리하기 위한 용도입니다.</p>
-<p>앞부분에서 약간의 착각을 할 수 있는 부분이 있기는 했었지만 전체적으로 간단하게라도 kubernetes를 이용한 관리방법에 대해서 이해를 할 수 있는 장 이었던것 같습니다.</p>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <ins class="adsbygoogle"
      style="display:block; text-align:center;"

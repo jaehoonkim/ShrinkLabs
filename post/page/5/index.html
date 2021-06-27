@@ -95,6 +95,41 @@
 					<header class="entry-header">
 						<div class="entry-meta">
                <span class="posted-on">
+                  <time class="entry-date published" datetime="September 5, 2016">September 5, 2016</time>
+               </span>
+						</div>
+						<h1 class="entry-title">
+						  <a href="https://shrinklabs.com/post/go_vim-go/" rel="bookmark">vim-go 기본 템플릿 비활성화</a>
+						</h1>
+					</header>
+					<div class="entry-content">
+						<p>vim-go가 언제부터인가 main.go 를 만들면 템플릿으로 fmt.Println(&ldquo;vim-go&rdquo;) 를 찍어주는 코드를 자동으로 생성해 주기 시작했습니다.</p>
+<p>나는 아무것도 나오지 않기를 바랬는데, 이런게 나와서 매번 지우는 작업을 하는게 싫었습니다.
+그래서 설정중에 go_template_autocreate 를 조절했습니다.</p>
+<pre><code>let g:go_template_autocreate = 0
+</code></pre><p>와 같이 하면 이제 아무것도 없는 빈 화면이 나옵니다.</p>
+<p>혹시라도 반복적으로 나오는게 좋은데 &ldquo;vim-go&quot;를 찍는게 아닌 특정한 코드가 필요하다면, &ldquo;.vim/bundle/vim-go/templates/hello_world.go&rdquo; 파일을 수정해도 됩니다.
+또는 특정한 템플릿을 지정하고 싶다면, 다음과 같이,</p>
+<pre><code>let g:go_template_file = &quot;hello_world.go&quot;
+</code></pre><p>로 해도 됩니다. 여기에서 hello_world.go 대신에 템플릿으로 지정하고 싶은 파일을 입력 하면 됩니다.</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8444244371421612"
+     data-ad-slot="6693872766"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+					</div>
+				</article>
+        
+				<article class="post">
+					<header class="entry-header">
+						<div class="entry-meta">
+               <span class="posted-on">
                   <time class="entry-date published" datetime="September 3, 2016">September 3, 2016</time>
                </span>
 						</div>
@@ -487,70 +522,6 @@ import 경로를 &ldquo;github.com/blah/project/internalpkg&rdquo; 처럼 다 �
 </code></pre><p>와 같이 command 패키지를 vendor 디렉토리 아래에 배치를 합니다.<br>
 이제 commands.go 에서 command를 사용하기 위해서,<br>
 <strong>import &ldquo;command&rdquo;</strong> 와 같이 변경이 될 수도 있는 경로들은 제외하고, pkg 이름만 지정해주면 됩니다.</p>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-8444244371421612"
-     data-ad-slot="6693872766"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
-					</div>
-				</article>
-        
-				<article class="post">
-					<header class="entry-header">
-						<div class="entry-meta">
-               <span class="posted-on">
-                  <time class="entry-date published" datetime="June 11, 2015">June 11, 2015</time>
-               </span>
-						</div>
-						<h1 class="entry-title">
-						  <a href="https://shrinklabs.com/post/go_meta-tag-pkg-repository/" rel="bookmark">pkg 원격저장소 연결하기</a>
-						</h1>
-					</header>
-					<div class="entry-content">
-						<p>최근에 go소스들을 분석하면서 특이한 pkg import 경로들을 보게 되었습니다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;rsc.io/pdf&#34;</span>
-</code></pre></div><p>와 같은 &ldquo;github.com/rsc/pdf&rdquo; 와 동일한 내용인데 그리고 rsc는 russ cox가 사용하는 닉네임인데 그럼 같은 pkg 인가 싶었습니다?<br>
-그래서 웹브라우저에서 rsc.io/pdf 를 입력하면 godoc로 이동을 합니다.<br>
-어떻게 한걸까!? 궁금했습니다. 그리고 왠지 멋있어 보였습니다&hellip;;</p>
-<p>그러다가 우연히 rob pike의 github page(<a href="https://github.com/robpike/robpike.github.io">https://github.com/robpike/robpike.github.io</a>)를 보게 되었습니다.<br>
-index.html 에 이렇게만 코드가 되어 있었습니다.</p>
-<pre><code>&lt;meta name=&quot;go-import&quot; content=&quot;robpike.io/cmd hg https://code.google.com/p/rspace.cmd&quot;&gt;
-This is a git repository holding a redirect for the Go repositories referenced by robpike.io.
-</code></pre><p>이게 뭐지? 그리고 roppike.github.io/cmd 안에는 여러 폴더들이 존재하고 그 안에는 index.html 파일 하나씩만 덩그러니 있고 그 내용들은 다음과 같았습니다.</p>
-<pre><code>&lt;meta name=&quot;go-import&quot; content=&quot;robpike.io/cmd hg https://code.google.com/p/rspace.cmd&quot;&gt;
-</code></pre><p>흠&hellip;meta tag를 사용하면 뭔가가 되나 보다 하면서 자료를 찾아 봤습니다.<br>
-단서는 의외로 간단하게 나왔습니다.</p>
-<pre><code>https://golang.org/cmd/go/#hdr-Remote_import_paths  
-</code></pre><p>에 보면 meta tag를 사용해서 원격저장소의 경로를 커스텀 도메인으로 사용할 수 있는 방법이 있었습니다.<br>
-그래서 도메인을 하나 구입했습니다.<br>
-io도메인(rsc.io, robpike.io 가 왠지 멋있어 보여서..;)을 따라하고 싶어&hellip;<br>
-나도 .io 구매했었지만&hellip;너무 비싸서 연장을 못했습니다&hellip;;</p>
-<p>그리고 github page(jaehoonn.github.io)를 만들어 놓고, 거기에 내가 만든 pkg중에 하나를 골라서 한번 만들어 봤습니다.</p>
-<pre><code>jaehoonn.github.io/cubrid
-</code></pre><p>에 index.html 을 다음과 같이 만들었습니다.</p>
-<pre><code>&lt;meta name=&quot;go-import&quot; content=&quot;jaehoon.io/cubrid git https://github.com/jaehoonn/cubrid&quot;&gt;
-</code></pre><p>이제 내 도메인(jaehoon.io)과 연결을 했습니다.(github page를 커스컴 도메인에 연결하는 방법은 검색해보니 많이 나와서 쉽게 했습니다.)</p>
-<p>그리고 커맨드 창에서&hellip;</p>
-<pre><code>$ go get jaehoon.io/cubrid  
-</code></pre><p>명령을 내리고 잠시 기다리니 받아집니다!!! (오류가 나온다면 cgo관련한 설정 때문인것 같습니다.) +</p>
-<ul>
-<li></li>
-</ul>
-<p>그리고 godoc.org에도 등록도 잘 됩니다. + 
-cubrid로 검색을 해보면, jaehoonn.com/cubrid 와 github.com/jaehoonn/cubrid 두개가 나옵니다.</p>
-<p>russ cox는 웹브라우저에서 rsc.io/pdf 를 입력하면 godoc/rsc.io/pdf 로 redirect 가 되도록 해놓은것 같습니다. 그래서 나도 meta tag를 하나 더 추가 했습니다.</p>
-<pre><code>&lt;meta http-equiv=&quot;refresh&quot; content=&quot;3;url=http://www.godoc.org/jaehoon.io/cubrid&quot;&gt;
-</code></pre><p>이렇게 하니 godoc.org로 이동을 합니다.<br>
-음! 왠지 멋있어 보입니다..;</p>
-<p>이제 열심히 코딩해서 pkg 많이 만들면 되는건가?;</p>
-<p>html 코드는 <a href="https://github.com/jaehoonn/jaehoonn.github.io/blob/master/ringbuffer/index.html">https://github.com/jaehoonn/jaehoonn.github.io/blob/master/ringbuffer/index.html</a> 을 참고하면 됩니다.</p>
-<p>github page에 커스텀 도메인을 연결하면, https에 문제가 좀 있습니다.</p>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <ins class="adsbygoogle"
      style="display:block; text-align:center;"
