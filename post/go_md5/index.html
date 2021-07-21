@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		
+		
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>md5 패키지 사용예 &middot; ShrinkLabs</title>
+
+		
+  		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/fonts.css">
+		
+		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+		
+		<link href="" rel="alternate" type="application/rss+xml" title="ShrinkLabs" />
+	</head>
+
+    <body>
+        		<nav class="nav">
+			<div class="nav-container">
+				<a href="/">
+					<h2 class="nav-title">ShrinkLabs</h2>
+				</a>
+				<ul>
+    
+    
+        <li>
+            <a href="/about/">
+                
+                <span>about</span>
+                
+            </a>
+        </li>
+    
+</ul>
+			</div>
+		</nav>
+
+        
+
+<main>
+	<div class="post">
+		<div class="post-info">
+    <span>Written by</span>
+        
+        <br>
+        <span>on&nbsp;</span><time datetime="2013-10-08 17:10:53 &#43;0900 KST">October 8, 2013</time>
+</div>
+
+		<h1 class="post-title">md5 패키지 사용예</h1>
+<div class="post-line"></div>
+
+		
+
+		<p>Qt로 만드는 클라이언트에서 이미지 파일에 대해서 만들어진 md5 hash를 검증 해보기 위해서, 같은 이미지 파일에 대해서 Go언어로 md5 hash를 만들었을때 동일한 값이 생성되면 제대로 만들어진거 아닐까 해서, 만들어 봤습니다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+  <span style="color:#e6db74">&#34;io/ioutil&#34;</span>
+  <span style="color:#e6db74">&#34;crypto/md5&#34;</span>
+  <span style="color:#e6db74">&#34;fmt&#34;</span>
+)
+ 
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+  <span style="color:#a6e22e">data</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">ioutil</span>.<span style="color:#a6e22e">ReadFile</span>(<span style="color:#e6db74">&#34;1.jpg&#34;</span>)
+  <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+    <span style="color:#66d9ef">return</span>;
+  }
+ 
+  <span style="color:#a6e22e">hash</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">md5</span>.<span style="color:#a6e22e">New</span>() 
+  <span style="color:#a6e22e">hash</span>.<span style="color:#a6e22e">Write</span>(<span style="color:#a6e22e">data</span>)
+  <span style="color:#a6e22e">hashData</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">hash</span>.<span style="color:#a6e22e">Sum</span>(<span style="color:#66d9ef">nil</span>)
+ 
+  <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%x&#34;</span>, <span style="color:#a6e22e">hashData</span>)
+}
+</code></pre></div><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8444244371421612"
+     data-ad-slot="6693872766"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+		
+	</div>
+
+	<div class="pagination">
+		<a href="/post/go_go-slice-from-c-array/" class="left arrow">&#8592;</a>
+		<a href="/post/go_golang-channels-tutorial/" class="right arrow">&#8594;</a>
+
+		<a href="#" class="top">Top</a>
+	</div>
+</main>
+
+
+        		<footer>
+			
+			<span>
+			&copy; <time datetime="2021-07-22 00:47:55.496465102 &#43;0900 KST m=&#43;0.043095589">2021</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
+			</span>
+		</footer>
+
+    </body>
+</html>

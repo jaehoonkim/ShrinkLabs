@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		
+		
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>upstream 설정 &middot; ShrinkLabs</title>
+
+		
+  		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/fonts.css">
+		
+		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+		
+		<link href="" rel="alternate" type="application/rss+xml" title="ShrinkLabs" />
+	</head>
+
+    <body>
+        		<nav class="nav">
+			<div class="nav-container">
+				<a href="/">
+					<h2 class="nav-title">ShrinkLabs</h2>
+				</a>
+				<ul>
+    
+    
+        <li>
+            <a href="/about/">
+                
+                <span>about</span>
+                
+            </a>
+        </li>
+    
+</ul>
+			</div>
+		</nav>
+
+        
+
+<main>
+	<div class="post">
+		<div class="post-info">
+    <span>Written by</span>
+        
+        <br>
+        <span>on&nbsp;</span><time datetime="2021-01-03 03:29:09 &#43;0900 KST">January 3, 2021</time>
+</div>
+
+		<h1 class="post-title">upstream 설정</h1>
+<div class="post-line"></div>
+
+		
+
+		<p>프로젝트 진행하는 과정에서 필요한 upstream 설정</p>
+<p>해당 내용은 kubernetes의 GitHub Workflow 문서를 참고 했습니다.
+( <a href="https://github.com/kubernetes/community/blob/master/contributors/guide/github-workflow.md">https://github.com/kubernetes/community/blob/master/contributors/guide/github-workflow.md</a> )</p>
+<ol>
+<li>
+<p>프로젝트를 <a href="https://github.com/kubernetes/kubernetes">https://github.com/kubernetes/kubernetes</a> 에서 내 github 계정으로 Fork 합니다.</p>
+</li>
+<li>
+<p>Fork한 프로젝트를 내 로컬로 clone 합니다.</p>
+</li>
+</ol>
+<pre><code>$ git clone git@github.com:{your-account}/kubernetes.git
+
+// 작업 디렉토리로 이동
+$ cd kubernetes 
+
+// 현재 브랜치를 확인합니다.
+$ git branch
+* master
+</code></pre><ol start="3">
+<li>upstream으로 사용할 remote를 추가 합니다. 최초 프로젝트를 추가 합니다.</li>
+</ol>
+<pre><code>$ git remote add upstream git@github.com:kubernetes/kubernetes.git
+</code></pre><ol start="4">
+<li>remote를 확인해 보면 upstream이 생성되어 있습니다.</li>
+</ol>
+<pre><code>$ git remote -v
+origin  git@github.com:{your-account}/kubernetes.git (fetch)
+origin  git@github.com:{your-account}/kubernetes.git (push)
+upstream        git@github.com:kubernetes/kubernetes.git (fetch)
+upstream        git@github.com:kubernetes/kubernetes.git (push)
+</code></pre><ol start="5">
+<li>clone 받은 프로젝트에서는 upstream으로 직접 push하지 않도록 합니다.</li>
+</ol>
+<pre><code>$ git remote set-url --push upstream no_push
+</code></pre><ol start="6">
+<li>remote의 push가 no_push로 변경된 것 을 확인 합니다.</li>
+</ol>
+<pre><code>$ git remote -v
+origin  git@github.com:{your-account}/kubernetes.git (fetch)
+origin  git@github.com:{your-account}/kubernetes.git (push)
+upstream        git@github.com:kubernetes/kubernetes.git (fetch)
+upstream        no_push (push)
+</code></pre><ol start="7">
+<li>upstream의 변경된 내용을 fetch 받습니다.</li>
+</ol>
+<pre><code>$ git fetch upstream
+remote: Enumerating objects: 20, done.
+remote: Counting objects: 100% (20/20), done.
+remote: Compressing objects: 100% (6/6), done.
+remote: Total 12 (delta 7), reused 8 (delta 5), pack-reused 0
+Unpacking objects: 100% (12/12), 2.00 KiB | 48.00 KiB/s, done.
+From github.com:kubernetes/kubernetes
+ * [new branch]      259    -&gt; upstream/259
+ * [new branch]      100    -&gt; upstream/100
+ * [new branch]      master       -&gt; upstream/master
+ * [new branch]      release      -&gt; upstream/release
+</code></pre><ol start="8">
+<li>fetch 받은 내용을 master 브랜치에 적용 합니다.</li>
+</ol>
+<pre><code>$ git checkout master
+
+$ git rebase upstream/master
+Successfully rebased and updated refs/heads/master.
+</code></pre><ol start="9">
+<li>master 브랜치에 upstream의 내용이 적용된 걸 확인 합니다.</li>
+</ol>
+<pre><code>$ git log
+.....
+</code></pre><ol start="10">
+<li>fork 받은 리모트에 적용 합니다.</li>
+</ol>
+<pre><code>$ git push origin master
+Total 0 (delta 0), reused 0 (delta 0), pack-reused 0
+To github.com:{your-account}/kubernetes.git
+   f89481d..922151e  master -&gt; master
+</code></pre><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8444244371421612"
+     data-ad-slot="6693872766"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+		
+	</div>
+
+	<div class="pagination">
+		<a href="/post/container_kubectl_run/" class="left arrow">&#8592;</a>
+		<a href="/post/git_remote-branch/" class="right arrow">&#8594;</a>
+
+		<a href="#" class="top">Top</a>
+	</div>
+</main>
+
+
+        		<footer>
+			
+			<span>
+			&copy; <time datetime="2021-07-22 00:47:55.491895189 &#43;0900 KST m=&#43;0.038525668">2021</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
+			</span>
+		</footer>
+
+    </body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		
+		
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>pkg 원격저장소 연결하기 &middot; ShrinkLabs</title>
+
+		
+  		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/fonts.css">
+		
+		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+		
+		<link href="" rel="alternate" type="application/rss+xml" title="ShrinkLabs" />
+	</head>
+
+    <body>
+        		<nav class="nav">
+			<div class="nav-container">
+				<a href="/">
+					<h2 class="nav-title">ShrinkLabs</h2>
+				</a>
+				<ul>
+    
+    
+        <li>
+            <a href="/about/">
+                
+                <span>about</span>
+                
+            </a>
+        </li>
+    
+</ul>
+			</div>
+		</nav>
+
+        
+
+<main>
+	<div class="post">
+		<div class="post-info">
+    <span>Written by</span>
+        
+        <br>
+        <span>on&nbsp;</span><time datetime="2015-06-11 13:43:41 &#43;0900 KST">June 11, 2015</time>
+</div>
+
+		<h1 class="post-title">pkg 원격저장소 연결하기</h1>
+<div class="post-line"></div>
+
+		
+
+		<p>최근에 go소스들을 분석하면서 특이한 pkg import 경로들을 보게 되었습니다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;rsc.io/pdf&#34;</span>
+</code></pre></div><p>와 같은 &ldquo;github.com/rsc/pdf&rdquo; 와 동일한 내용인데 그리고 rsc는 russ cox가 사용하는 닉네임인데 그럼 같은 pkg 인가 싶었습니다?<br>
+그래서 웹브라우저에서 rsc.io/pdf 를 입력하면 godoc로 이동을 합니다.<br>
+어떻게 한걸까!? 궁금했습니다. 그리고 왠지 멋있어 보였습니다&hellip;;</p>
+<p>그러다가 우연히 rob pike의 github page(<a href="https://github.com/robpike/robpike.github.io">https://github.com/robpike/robpike.github.io</a>)를 보게 되었습니다.<br>
+index.html 에 이렇게만 코드가 되어 있었습니다.</p>
+<pre><code>&lt;meta name=&quot;go-import&quot; content=&quot;robpike.io/cmd hg https://code.google.com/p/rspace.cmd&quot;&gt;
+This is a git repository holding a redirect for the Go repositories referenced by robpike.io.
+</code></pre><p>이게 뭐지? 그리고 roppike.github.io/cmd 안에는 여러 폴더들이 존재하고 그 안에는 index.html 파일 하나씩만 덩그러니 있고 그 내용들은 다음과 같았습니다.</p>
+<pre><code>&lt;meta name=&quot;go-import&quot; content=&quot;robpike.io/cmd hg https://code.google.com/p/rspace.cmd&quot;&gt;
+</code></pre><p>흠&hellip;meta tag를 사용하면 뭔가가 되나 보다 하면서 자료를 찾아 봤습니다.<br>
+단서는 의외로 간단하게 나왔습니다.</p>
+<pre><code>https://golang.org/cmd/go/#hdr-Remote_import_paths  
+</code></pre><p>에 보면 meta tag를 사용해서 원격저장소의 경로를 커스텀 도메인으로 사용할 수 있는 방법이 있었습니다.<br>
+그래서 도메인을 하나 구입했습니다.<br>
+io도메인(rsc.io, robpike.io 가 왠지 멋있어 보여서..;)을 따라하고 싶어&hellip;<br>
+나도 .io 구매했었지만&hellip;너무 비싸서 연장을 못했습니다&hellip;;</p>
+<p>그리고 github page(jaehoonn.github.io)를 만들어 놓고, 거기에 내가 만든 pkg중에 하나를 골라서 한번 만들어 봤습니다.</p>
+<pre><code>jaehoonn.github.io/cubrid
+</code></pre><p>에 index.html 을 다음과 같이 만들었습니다.</p>
+<pre><code>&lt;meta name=&quot;go-import&quot; content=&quot;jaehoon.io/cubrid git https://github.com/jaehoonn/cubrid&quot;&gt;
+</code></pre><p>이제 내 도메인(jaehoon.io)과 연결을 했습니다.(github page를 커스컴 도메인에 연결하는 방법은 검색해보니 많이 나와서 쉽게 했습니다.)</p>
+<p>그리고 커맨드 창에서&hellip;</p>
+<pre><code>$ go get jaehoon.io/cubrid  
+</code></pre><p>명령을 내리고 잠시 기다리니 받아집니다!!! (오류가 나온다면 cgo관련한 설정 때문인것 같습니다.) +
++
+그리고 godoc.org에도 등록도 잘 됩니다. +
+cubrid로 검색을 해보면, jaehoonn.com/cubrid 와 github.com/jaehoonn/cubrid 두개가 나옵니다.</p>
+<p>russ cox는 웹브라우저에서 rsc.io/pdf 를 입력하면 godoc/rsc.io/pdf 로 redirect 가 되도록 해놓은것 같습니다. 그래서 나도 meta tag를 하나 더 추가 했습니다.</p>
+<pre><code>&lt;meta http-equiv=&quot;refresh&quot; content=&quot;3;url=http://www.godoc.org/jaehoon.io/cubrid&quot;&gt;
+</code></pre><p>이렇게 하니 godoc.org로 이동을 합니다.<br>
+음! 왠지 멋있어 보입니다..;</p>
+<p>이제 열심히 코딩해서 pkg 많이 만들면 되는건가?;</p>
+<p>html 코드는 <a href="https://github.com/jaehoonn/jaehoonn.github.io/blob/master/ringbuffer/index.html">https://github.com/jaehoonn/jaehoonn.github.io/blob/master/ringbuffer/index.html</a> 을 참고하면 됩니다.</p>
+<p>github page에 커스텀 도메인을 연결하면, https에 문제가 좀 있습니다.</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8444244371421612"
+     data-ad-slot="6693872766"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+		
+	</div>
+
+	<div class="pagination">
+		<a href="/post/tool_setting/" class="left arrow">&#8592;</a>
+		<a href="/post/go_vendor/" class="right arrow">&#8594;</a>
+
+		<a href="#" class="top">Top</a>
+	</div>
+</main>
+
+
+        		<footer>
+			
+			<span>
+			&copy; <time datetime="2021-07-22 00:47:55.493226316 &#43;0900 KST m=&#43;0.039856804">2021</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
+			</span>
+		</footer>
+
+    </body>
+</html>

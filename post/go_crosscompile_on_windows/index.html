@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		
+		
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>Powershell에서 할 수 있는 Linux를 위한 빌드 &middot; ShrinkLabs</title>
+
+		
+  		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/fonts.css">
+		
+		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+		
+		<link href="" rel="alternate" type="application/rss+xml" title="ShrinkLabs" />
+	</head>
+
+    <body>
+        		<nav class="nav">
+			<div class="nav-container">
+				<a href="/">
+					<h2 class="nav-title">ShrinkLabs</h2>
+				</a>
+				<ul>
+    
+    
+        <li>
+            <a href="/about/">
+                
+                <span>about</span>
+                
+            </a>
+        </li>
+    
+</ul>
+			</div>
+		</nav>
+
+        
+
+<main>
+	<div class="post">
+		<div class="post-info">
+    <span>Written by</span>
+        
+        <br>
+        <span>on&nbsp;</span><time datetime="2020-05-18 10:52:23 &#43;0900 KST">May 18, 2020</time>
+</div>
+
+		<h1 class="post-title">Powershell에서 할 수 있는 Linux를 위한 빌드</h1>
+<div class="post-line"></div>
+
+		
+
+		<p>Windows 환경에서 개발 후 Linux 환경으로 배포하기 위해서 Linux용 바이너리로 빌드가 필요할 때가 있습니다.<br>
+다음의 방법으로 빌드 할 수 있습니다.</p>
+<p>Powershell에서 빌드하기 위한 방법은 아래와 같습니다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">PS D:<span style="color:#ae81ff">\w</span>s<span style="color:#ae81ff">\s</span>rc<span style="color:#ae81ff">\s</span>ample&gt; $env:GOOS<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;linux&#34;</span>; go build
+</code></pre></div><p>빌드 이후에는 필요에 따라서 &ldquo;GOOS&quot;를 다시 &ldquo;windows&quot;로 돌려 놓습니다.</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8444244371421612"
+     data-ad-slot="6693872766"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+		
+	</div>
+
+	<div class="pagination">
+		<a href="/post/container_private-container-registry/" class="left arrow">&#8592;</a>
+		<a href="/post/container_kubectl_run/" class="right arrow">&#8594;</a>
+
+		<a href="#" class="top">Top</a>
+	</div>
+</main>
+
+
+        		<footer>
+			
+			<span>
+			&copy; <time datetime="2021-07-22 00:47:55.492249701 &#43;0900 KST m=&#43;0.038880202">2021</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
+			</span>
+		</footer>
+
+    </body>
+</html>

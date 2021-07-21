@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		
+		
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>3.Orchestrating the Cloud With Kubernetes &middot; ShrinkLabs</title>
+
+		
+  		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/fonts.css">
+		
+		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+		
+		<link href="" rel="alternate" type="application/rss+xml" title="ShrinkLabs" />
+	</head>
+
+    <body>
+        		<nav class="nav">
+			<div class="nav-container">
+				<a href="/">
+					<h2 class="nav-title">ShrinkLabs</h2>
+				</a>
+				<ul>
+    
+    
+        <li>
+            <a href="/about/">
+                
+                <span>about</span>
+                
+            </a>
+        </li>
+    
+</ul>
+			</div>
+		</nav>
+
+        
+
+<main>
+	<div class="post">
+		<div class="post-info">
+    <span>Written by</span>
+        
+        <br>
+        <span>on&nbsp;</span><time datetime="2019-01-09 01:26:47 &#43;0900 KST">January 9, 2019</time>
+</div>
+
+		<h1 class="post-title">3.Orchestrating the Cloud With Kubernetes</h1>
+<div class="post-line"></div>
+
+		
+
+		<p>이번 장은 우선 &ldquo;nginx&quot;와 &ldquo;monolith&quot;라는 단어에 현혹되지 않도록 주의를 해야 할 것 같습니다.</p>
+<p>최초에 nginx가 실행되는 Pod는 그거대로 Kubnernetes 작동에 대한 내용이고, Pod에 대한 내용에서 언급되는 nginx와 monolith는 또 그것대로의 내용을 설명합니다.</p>
+<p>그리고 다음에 나오는 port-forward에 대한 내용은 또 완전히 별개의 내용입니다.</p>
+<p>port-forward는 &ldquo;Service&quot;로 노출하지 않는 Pod에 대해서 테스트등을 해보기 위해서 아주 유용한 도구인 것 같습니다.</p>
+<p>port-forward로 &ldquo;monolith&rdquo; Pod의 80 포트를 10080을 지정하면 local의 10080 포트를 사용하고 있는것 처럼 이용이 가능합니다.</p>
+<p>&ldquo;Service&quot;는 Pod가 수시로 죽고 살아나는 과정 중에서 외부에 노출될 수 있는 일정한 IP를 제공하기 위한 목적입니다.</p>
+<p>&ldquo;Service&quot;는 &ldquo;selector&quot;를 이용해서 Pod에 지정된 &ldquo;label&rdquo; 별로 Pod들을 선택할 수 있습니다. 그리고 &ldquo;Service&quot;의 형태로는 &ldquo;ClusterIP&rdquo;, &ldquo;NodePort&rdquo;, &ldquo;LoadBalancer&quot;가 있습니다.</p>
+<p>&ldquo;secure-monolith&rdquo; Pod를 생성하는 과정중에 &ldquo;secret&quot;와 &ldquo;configmap&quot;을 생성하는게 나오는데 아직은 크게 신경쓰지 않아도 될 것 같습니다.</p>
+<p>둘 다 비슷한 성격을 갖는데, &ldquo;secret&quot;는 패스워드 처럼 민감 데이터를 다루는 성격이고, &ldquo;configmap&quot;은 환경 설정과 같은 성격의 정보를 다룹니다. 특성 또는 상태를 갖는 정보를 포함하지 않고 Pod가 관리될 수 있도록 해줍니다.</p>
+<p>&ldquo;Deployment&quot;는 &ldquo;replicas&rdquo; 항목에 지정된 만큼의 Pod를 관리하기 위한 용도입니다.</p>
+<p>앞부분에서 약간의 착각을 할 수 있는 부분이 있기는 했었지만 전체적으로 간단하게라도 kubernetes를 이용한 관리방법에 대해서 이해를 할 수 있는 장 이었던것 같습니다.</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8444244371421612"
+     data-ad-slot="6693872766"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+		
+	</div>
+
+	<div class="pagination">
+		<a href="/post/container_hello-node-kubernetes/" class="left arrow">&#8592;</a>
+		<a href="/post/container_managing-deployments-using-kubernetes/" class="right arrow">&#8594;</a>
+
+		<a href="#" class="top">Top</a>
+	</div>
+</main>
+
+
+        		<footer>
+			
+			<span>
+			&copy; <time datetime="2021-07-22 00:47:55.490411372 &#43;0900 KST m=&#43;0.037041886">2021</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
+			</span>
+		</footer>
+
+    </body>
+</html>

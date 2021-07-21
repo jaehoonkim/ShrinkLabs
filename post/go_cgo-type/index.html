@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		
+		
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>type으로 이름 붙여진 구조체의 필드를 사용하기위한 방법 &middot; ShrinkLabs</title>
+
+		
+  		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/fonts.css">
+		
+		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+		
+		<link href="" rel="alternate" type="application/rss+xml" title="ShrinkLabs" />
+	</head>
+
+    <body>
+        		<nav class="nav">
+			<div class="nav-container">
+				<a href="/">
+					<h2 class="nav-title">ShrinkLabs</h2>
+				</a>
+				<ul>
+    
+    
+        <li>
+            <a href="/about/">
+                
+                <span>about</span>
+                
+            </a>
+        </li>
+    
+</ul>
+			</div>
+		</nav>
+
+        
+
+<main>
+	<div class="post">
+		<div class="post-info">
+    <span>Written by</span>
+        
+        <br>
+        <span>on&nbsp;</span><time datetime="2013-09-03 17:10:53 &#43;0900 KST">September 3, 2013</time>
+</div>
+
+		<h1 class="post-title">type으로 이름 붙여진 구조체의 필드를 사용하기위한 방법</h1>
+<div class="post-line"></div>
+
+		
+
+		<p>c로 만들어져 있던 라이브러리를 cgo를 이용해서 포팅(?)을 하는 작업을 하다보면 난감한 부분들이 종종 나타납니다.</p>
+<p>그중에 한가지가 c에서 사용하던 구조체의 파라미터명이 go 에서 미리정의된 명칭일 경우가 있습니다.<br>
+대표적인 예로 &ldquo;type&quot;이라는 파라미터명 입니다.<br>
+c에서는 T_CCI_COL_INFO(cubrid의 cci에서 사용되는 구조체중에 하나) 의 필드중에 하나가 type이라는 필드가 하나 있습니다.<br>
+이걸 go에서 사용을 하려고 하니,,,<br>
+&ldquo;&hellip;expected selector or type assertion, found &lsquo;type&rsquo; &quot;  이라는 결과를 만나게 됩니다.</p>
+<p>이걸 도대체 어떻게 사용해야 하나 고민을 하던중, golang.org 에 있는 문서 <a href="http://golang.org/cmd/cgo/">http://golang.org/cmd/cgo/</a> 에서 해결을 할 수 있었습니다.</p>
+<blockquote>
+<p>Within the Go file, C identifiers or field names that are keywords in Go can be accessed by prefixing them with an underscore: if x points at a C struct with a field named &ldquo;type&rdquo;, x._type accesses the field.</p>
+</blockquote>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8444244371421612"
+     data-ad-slot="6693872766"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+		
+	</div>
+
+	<div class="pagination">
+		<a href="/post/go_testing/" class="left arrow">&#8592;</a>
+		<a href="/post/go_go-slice-from-c-array/" class="right arrow">&#8594;</a>
+
+		<a href="#" class="top">Top</a>
+	</div>
+</main>
+
+
+        		<footer>
+			
+			<span>
+			&copy; <time datetime="2021-07-22 00:47:55.49249443 &#43;0900 KST m=&#43;0.039124925">2021</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
+			</span>
+		</footer>
+
+    </body>
+</html>

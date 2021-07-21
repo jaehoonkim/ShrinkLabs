@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		
+		
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>7.Build Slack Bot With Node.js on Kubernetes &middot; ShrinkLabs</title>
+
+		
+  		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/fonts.css">
+		
+		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+		
+		<link href="" rel="alternate" type="application/rss+xml" title="ShrinkLabs" />
+	</head>
+
+    <body>
+        		<nav class="nav">
+			<div class="nav-container">
+				<a href="/">
+					<h2 class="nav-title">ShrinkLabs</h2>
+				</a>
+				<ul>
+    
+    
+        <li>
+            <a href="/about/">
+                
+                <span>about</span>
+                
+            </a>
+        </li>
+    
+</ul>
+			</div>
+		</nav>
+
+        
+
+<main>
+	<div class="post">
+		<div class="post-info">
+    <span>Written by</span>
+        
+        <br>
+        <span>on&nbsp;</span><time datetime="2019-01-14 13:17:21 &#43;0900 KST">January 14, 2019</time>
+</div>
+
+		<h1 class="post-title">7.Build Slack Bot With Node.js on Kubernetes</h1>
+<div class="post-line"></div>
+
+		
+
+		<p>이번 과정은 Secret 객체에 대해서 좀 더 자세하게 알아볼 수 있는 과정이었습니다.</p>
+<p>서비스를 제공하는 프로그램(node.js 코드)을 Docker image로 만든 다음 Registry Server에 Push를 합니다.</p>
+<p>제공하는 서비스에서 외부의 서비스(slack)를 사용하기 위해서 민감한 정보인 token이 존재한다. 이 내용이 코드상 또는 image 상에 존재하지 않게 Image를 만들고자 합니다.</p>
+<p>그래서 별도로 &ldquo;slack-token&rdquo; 파일을 만들어서 파일을 통해서 token 정보를 제공하도록 만들어 놓았습니다. 해당 파일을 경로와 파일명을 포함해서 환경변수 &ldquo;slack_token_path&quot;에 등록해 놓고, 코드상에서는 환경 변수인 &ldquo;slack_token_path&quot;에 지정되어 있는 경로의 파일로 부터 token 정보를 읽어서 사용합니다.</p>
+<p>실습 과정에서 보여지는 Docker image를 만드는 Dockerfile에는 token 정보를 다루고 있지 않습니다. 이를 통해서 해당 정보는 배포가 되지 않는다는걸 알 수 있습니다.</p>
+<p>이제 Kubernetes 클러스터에서 배포를 하기 위해서 token 정보를 container들이 인식할 수 있도록 해주어야 합니다.</p>
+<p>그래서 token 정보를 Secret으로 생성해서 클러스터에 배포합니다.</p>
+<p>다시 반복해서 확인을 해보면, container에서 제공되는 서비스는 &ldquo;slack_token_path&rdquo; 라는 이름의 환경 변수를 읽어 파일 경로를 구할 수 있습니다. 이 경로를 통해서 token 정보를 알아냅니다. 그리고 구해진 token 정보를 이용해서 slack이 제공하는 기능을 이용할 수 있습니다.</p>
+<p>이렇게 container에서 token 정보를 구할 수 있도록 하기 위해서, Deployment의 yaml 파일에서 container가 사용할 환경 변수를 등록할 수 있는 &ldquo;env&quot;를 이용해서 &ldquo;slack_token_path&quot;를 등록합니다. 이 환경 변수(slack_token_path)는 token 정보가 존재하는 &ldquo;경로와 파일명&quot;의 조합입니다.</p>
+<p>이 경로에 해당 파일을 만들기 위해서 volumeMounts를 이용해서 지정된 경로에 volume을 mount 합니다.</p>
+<p>이때 사용되어질 &ldquo;secret&rdquo; 타입의 volume은 token 정보를 Pod에서 사용할 수 있도록 하는 &ldquo;Secret&rdquo; 객체입니다.</p>
+<p>token은 민감한 정보이기 때문에 별도의 과정을 통해서 전달되어 진다고 상상해 볼 수 있습니다. 어떠한 방식으로든지 전달된 token을 이용해서 &ldquo;Secret&quot;을 생성하는 과정을 거칠 수 있습니다.</p>
+<p>Secret을 생성하는 인자 중 에 &ldquo;generic&quot;을 사용합니다. generic은 로컬의 파일등을 이용해서 Secret을 만들겠다는 의미로 type에 따라서 Secret을 생성하는 방식을 달리 할 수도 있습니다.</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8444244371421612"
+     data-ad-slot="6693872766"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+		
+	</div>
+
+	<div class="pagination">
+		<a href="/post/container_running-mongodb-database-in-kubernetes-with-statefulsets/" class="left arrow">&#8592;</a>
+		<a href="/post/container_setting-up-private-kubernetes-cluster/" class="right arrow">&#8594;</a>
+
+		<a href="#" class="top">Top</a>
+	</div>
+</main>
+
+
+        		<footer>
+			
+			<span>
+			&copy; <time datetime="2021-07-22 00:47:55.491956526 &#43;0900 KST m=&#43;0.038587024">2021</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
+			</span>
+		</footer>
+
+    </body>
+</html>

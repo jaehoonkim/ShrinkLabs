@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		
+		
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>내결함성 수평 확장성이 있는 분산형 이벤트 스케줄러 설계 방법 &middot; ShrinkLabs</title>
+
+		
+  		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/fonts.css">
+		
+		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+		
+		<link href="" rel="alternate" type="application/rss+xml" title="ShrinkLabs" />
+	</head>
+
+    <body>
+        		<nav class="nav">
+			<div class="nav-container">
+				<a href="/">
+					<h2 class="nav-title">ShrinkLabs</h2>
+				</a>
+				<ul>
+    
+    
+        <li>
+            <a href="/about/">
+                
+                <span>about</span>
+                
+            </a>
+        </li>
+    
+</ul>
+			</div>
+		</nav>
+
+        
+
+<main>
+	<div class="post">
+		<div class="post-info">
+    <span>Written by</span>
+        
+        <br>
+        <span>on&nbsp;</span><time datetime="2021-06-16 00:17:00 &#43;0900 KST">June 16, 2021</time>
+</div>
+
+		<h1 class="post-title">내결함성 수평 확장성이 있는 분산형 이벤트 스케줄러 설계 방법</h1>
+<div class="post-line"></div>
+
+		
+
+		<p>이 글은 원글(<a href="https://medium.com/walmartglobaltech/an-approach-to-designing-distributed-fault-tolerant-horizontally-scalable-event-scheduler-278c9c380637">An Approach to Designing a Distributed, Fault-Tolerant, Horizontally Scalable Event Scheduler</a>)의 저작자 Sandeep Malik씨의 허락을 받고 번역한 글 입니다.</p>
+<hr>
+<h1 id="소개">소개</h1>
+<p>시간 기반 이벤트 스케줄러를 설계하는 것은 항상 흥미로운 문제입니다. 규모에 맞게 작업을 수행하는 것은 훨씬 더 어려운 일입니다. 먼저 시간 기반 이벤트 스케줄러가 무엇을 의미하는지 정의해 보겠습니다.</p>
+<p>시간 기반 이벤트 스케줄러는 서비스가 나중에 (<em>future</em>) 처리해야 하는 요청을 예약하는 데 사용할 수 있는 시스템입니다. 서비스는 스케줄러에 이벤트(<em>event</em>)를 등록하고 현재 요청의 처리를 일시 중단합니다.</p>
+<p>정해진 시간이되면 스케줄러에 의해 요청 서비스가 통보되며, 바로 전에 중단되었던 요청의 처리를 재개할 수 있습니다. 이러한 시스템이 유용할 수 있는 많은 시나리오가 있습니다. 일부 사용 사례(전반적인 것은 아님)는 아래에 나열되어 있습니다.</p>
+<h1 id="비동기-요청-시간-초과">비동기 요청 시간 초과</h1>
+<p>점점 더 많은 시스템이 카프카(<a href="https://medium.com/walmartlabs/tech-transformation-real-time-messaging-at-walmart-8787f5ab19e8#.wx4sbxuse">Kafka</a>), JMS 등과 같은 메시징 기반 아키텍처로 이동함에 따라, 가장 일반적인 시나리오 중 하나는 메시징 계층을 비동기식 요청/응답 버스(bus)로 사용하는 것입니다. 한 시스템은 다른 시스템에 &ldquo;메시지 요청(<em>message request</em>)&ldquo;을 생성하고 나중에 응답을 반환하면 나머지 처리 작업을 진행합니다. 경우에 따라서는 &lsquo;최종 응답(<strong>eventual response</strong>)&lsquo;을 하는 것이 중요합니다. 다른 시스템이 지연되거나 중단되었거나 단순히 응답을 반환하지 못할 수 있습니다. 상태 비저장 마이크로 서비스 패러다임이 있는 분산 환경에서는 이러한 손실된 요청을 추적하기가 어렵습니다. 한 가지 해결책은 요청의 규정된 SLA에 따라 트리거될 수 있는 &lsquo;시간 초과(time-out)&rsquo; 이벤트를 예약하는 것일 수 있습니다.</p>
+<p>이벤트가 트리거되면 요청의 현재 상태를 확인하고 응답이 없는 경우 요청을 시간 초과로 표시할 수 있습니다.</p>
+<h1 id="시스템-재시도">시스템 재시도</h1>
+<p>HTTP와 같은 동기식 채널을 통해 상호 작용하는 시스템의 경우에도 서버가 다운되어 요청을 처리할 수 없습니다. 클라이언트는 재시도를 선택할 수 있지만 재시도 간격이 매우 짧으면 순 긍정 효과가 나타나지 않습니다. 예를 들어, 시스템 전체에 걸쳐 운영 중단 상태가 몇 초 이상 지속될 수 있습니다. 이 경우 요청 데이터를 메모리에 저장하지 않는 지수 형태로 재시도를 더 오래 수행하는 것이 바람직할 수 있습니다.</p>
+<p>이러한 경우 재시도용 페이로드를 이벤트 스케줄러로 보낼 수 있으며 클라이언트의 재시도 정책에 따라 나중에 다시 시도할 수 있습니다.</p>
+<h1 id="조정-작업">조정 작업</h1>
+<p>때때로 배치에 기반한 분산 시스템에서는 데이터 스트림이 여러 클러스터에 의해 마이크로 배치로 분할되고 처리됩니다. 실패의 경우, 일관성 있는 응답이 초기 배치에 대해 클라이언트에게 반환될 수 있도록 응답을 조정하는 것이 바람직할 수 있습니다.</p>
+<p>이 경우 배치 처리 시작 시 조정 이벤트를 예약하여 배치 처리 또는 처리 시간 SLA 종료 시 데이터를 조정할 수 있습니다.</p>
+<h1 id="가격-관련-트리거">가격 관련 트리거</h1>
+<p>이커머스(eCommerce) 환경에서는 일반적으로 제품을 적절한 가격 가치로 유지하기 위해 가격을 변경합니다. 이러한 가격 변동을 촉발하는 것은 엄청난 수작업이 될 수 있고 오류가 발생하기 쉬우며, 원하는 시간에 정확하게 이루어지지 않을 수도 있습니다. 예를 들어, 블랙 프라이데이와 같은 휴가 피크 시간 동안 가격 변동이 약간 지연되더라도 연간 매출에 영향을 미칠 수 있습니다.</p>
+<p>이 경우 가격 변경은 &lsquo;프로모션&rsquo;으로 미리 설정될 수 있으며, 이는 이벤트 스케줄러에 의해 필요한 시간에 트리거되어 수동 가격 동기화 작업을 절약할 수 있습니다.</p>
+<p>위에서 언급한 모든 이슈들은 어느 순간인가 월마트(<a href="https://www.walmart.com/">Wallmart</a>)가 직면했고 우리는 중단된 요청을 추적할 수 있는 시스템에 투자해야 합니다는 것이 분명해졌습니다. 월마트가 운영하는 규모가 크기 때문에 스케줄러는 내결함성(fault tolerant)이 있어야 하고 수평적으로 확장 가능해야 했습니다.</p>
+<h1 id="기존-옵션">기존 옵션</h1>
+<p>우리는 Quartz와 같은 기존의 다양한 오픈 소스 솔루션을 찾기 시작했습니다. Quartz는 풍부한 기능을 갖춘 시간 기반 스케줄링에 대한 검증된 솔루션이지만, 우리의 문제점은 약간 달랐습니다.</p>
+<ul>
+<li>많은 애플리케이션이 카산드라(<a href="https://www.youtube.com/watch?v=KMHua4LUvQ0">Cassandra</a>)를 노에스큐엘(NoSql) 데이터 저장소로 사용하고 있습니다. 시간이 흐르면서 우리는 카산드라와 그것의 뉘앙스에 대해 상당한 전문지식을 키워왔습니다. Quartz에는 카산드라를 위한 JobStore가 없는 것 같습니다(또는 적어도 우리는 JobStore를 찾지 못했습니다).</li>
+<li>우리는 이벤트에 대해 조정 가능한 일관성을 갖기를 원했습니다. 시스템 재시도 등과 같은 일부 이벤트의 경우, 한 노드(LOCAL_ONE)에 기록하는 것이 괜찮지만, 승격 트리거와 같은 다른 이벤트의 경우 이벤트가 손실되지 않도록 EACH_QUORUM을 사용해야 했습니다.</li>
+<li>클러스터를 확장하는게 더 어려웠습니다. 우리는 시간당 수백만 개의 이벤트로 확장해야 했습니다.</li>
+</ul>
+<p>우리는 또한 Quartz의 해즐캐스트(Hazelcast) 기반 JobStore 구현에 대해서도 조사했지만, 장기간에 걸친 가비지 수집 주기는 실화를 초래하여 메모리 데이터의 위험이있었습니다.</p>
+<h1 id="bigben-소개">BigBen 소개</h1>
+<p>우리는 BigBen이라고 불리는 우리만의 솔루션을 구현하기 시작했습니다. 매우 유명한 <a href="https://en.wikipedia.org/wiki/Big_Ben">런던 시계탑</a>에서 영감을 받았습니다. BigBen은 다음과 같은 기능을 제공합니다.</p>
+<ul>
+<li>마스터 슬레이브 설계, 마스터가 클러스터 전체에 부하를 분산하기 위한 최상의 전략을 결정할 수 있습니다.</li>
+<li>주어진 마스터가 작동 중단될 경우 거의 즉각적으로 다른 마스터를 선택할 수 있도록 내결함성(fault tolerant)이 매우 높은 설계입니다.</li>
+<li>카산드라(Cassandra)의 팻 파티션(fat partitions) 측면에서 핫 포켓(hot pockets)이 없도록 데이터베이스의 이벤트 데이터를 균등하게 파티셔닝합니다.</li>
+<li>모든 노드가 거의 동일한 로드를 공유하도록 클러스터에서 이벤트를 균일하게 실행합니다.</li>
+<li>트리거되지 않았거나 실행되지 않은 이벤트(mis-fires)를 추적할 수 있도록 체크포인트를 유지합니다.</li>
+<li>이벤트의 기본 채널로 HTTP 및 카프카(Kafka)를 통합합니다.</li>
+<li>멀티 테넌시(Multi-tenancy)입니다. 각 이벤트는 하나의 테넌트에 속하며, 각 테넌트는 이벤트를 저장(일관성 보장-consistency guarantees) 및/또는 처리하는 방법에 대한 정책을 정의할 수 있습니다.</li>
+</ul>
+<h1 id="설계-및-아키텍처">설계 및 아키텍처</h1>
+<p>BigBen은 &lsquo;마이크로 배칭(micro-batching)&rsquo; 아키텍처를 기반으로 합니다. 이벤트는 창에서 함께 버킷화되고 이러한 버킷은 데이터베이스에 파티션으로 저장됩니다.</p>
+<p>클러스터가 시작되면 마스터가 선택되며, 마스터는 정의된 세분화에서 버킷 검색을 시작합니다. 지원되는 최소 단위는 1분이며, 이는 마스터가 매 분마다 이벤트를 검색합니다.</p>
+<h1 id="이벤트-수집">이벤트 수집</h1>
+<p>매 분마다 얼마나 많은 이벤트가 예약될지는 알 수 없으므로 버킷 너비를 기준으로 데이터를 분할하면(이 경우 1분) 데이터베이스에 불균일한 로드가 발생할 수 있습니다. 따라서 이벤트가 샤드화(sharded)되어 1개의 샤드(shard)에 1000개(구성 가능한 값) 이벤트만 저장됩니다.</p>
+<p>예를 들어, 오전 10시에 2030개의 이벤트가 접수되었다고 가정하면, 그 이벤트는 3조각으로 나누어집니다. 샤드(Shard) 1에는 1000개의 이벤트가 포함되고, 샤드(shard) 2에는 1000개의 이벤트가 추가되며, 샤드(shard) 3에는 30개의 이벤트가 포함됩니다. 이러한 방식으로 시스템은 샤드(shard)당 1000개 이상의 이벤트가 발생하지 않음을 보장합니다.</p>
+<p>지정된 이벤트가 할당될 샤드(shard)를 확인하려면 해당 버킷(bucket)의 실행 총 이벤트 수에 따라 다릅니다. 그런 다음 아래 공식을 사용하여 해당 이벤트에 대한 샤드 인덱스(shard index)를 계산하는 것이 매우 간단합니다.</p>
+<blockquote>
+<p><em>shard_index = (total_events / shard_size)</em></p>
+</blockquote>
+<p>예를 들어, 2030 이벤트 이후에 다음 이벤트가 접수될 때, 그것은 다음 이벤트로 갈 것입니다.</p>
+<blockquote>
+<p><em>2030/1000 = 2nd index (or 3rd shard)</em></p>
+</blockquote>
+<p>빠른 검색을 위해서는 버킷(bucket)당 실행 중인 총 이벤트 수를 유지해야 합니다. BigBen은 내장된 해즐캐스트(Hazelcast) 그리드를 사용하여 이러한 카운트를 분산 맵에서 유지할 수 있지만 원자 카운트를 지원하는 멤캐쉬(memcache), 카우치베이스(Couchbase) 등과 같은 다른 솔루션도 사용할 수 있습니다. 맵 데이터는 몇 초마다 카산드라(Cassandra)와 동기화됩니다.</p>
+<p>아래 다이어그램(diagram)은 이벤트(event) 수신 흐름을 캡처합니다. HTTP 또는 카프카(Kafka)를 통해 이벤트(event)를 수신할 수 있습니다. 잘못된 이벤트(event)는 거부되고 즉시 반환됩니다(빨간 점선으로 표시됨). 다른 경우에는 해당하는 버킷(bucket)이 계산됩니다(이벤트(event)가 오전 10:21:55로 예약되어 있고, 버킷(bucket)이 오전 10:21:00로 예약되어 있음). 카운트(count)가 증가되고 샤드 인덱스(shard index)가 계산됩니다. 그러면 이벤트(event)가 버킷(bucket)과 샤드 인덱스(shard index)의 조합인 해당 파티션(partition)에 저장됩니다(예: 10:21:00/1).</p>
+<p><img src="/image/an-approach-to-designing-distributed-fault-tolerant-horizontally-scalable-event-scheduler/1_LmYyR8GT9TjPmrRorOBzLg.png" alt="Fig 1 — Event Receive Flow"></p>
+<h1 id="이벤트-처리">이벤트 처리</h1>
+<p>처리 부분의 경우 클러스터 구성원 중에서 마스터가 선택됩니다. 주키퍼(Zookeeper)는 리더(leader)/마스터(master) 선택에 사용할 수 있지만, BigBen은 이미 해즐캐스트(Hazelcast)를 사용하고 있으므로 분산 잠금 기능을 사용하여 *클러스터 싱글턴(Cluster Singleton)*을 구현했습니다. 그런 다음 마스터는 다음 버킷을 예약하고 이벤트 수를 읽습니다. 이벤트 수와 샤드(shard) 크기를 알면 총 샤드(shard) 수를 쉽게 계산할 수 있습니다. 그런 다음 마스터(master)는 쌍(bucket, shard_index)을 생성하고 이를 클러스터 멤버(cluster member) 간에 <strong>균등</strong>하게 나눕니다. 분할이 동일하지 않은 경우 마스터(master)는 자신에게 최소 로드를 적용하려고 합니다. 예를 들어 오전 10시 21분 버킷(bucket), 이벤트(events) 6000개, 노드 클러스터(node cluster) 4개의 경우 다음과 같이 나뉩니다.</p>
+<blockquote>
+<p><em>distribution =&gt; (bucket, array of shard indexes, node IP) =&gt; (10:21, [1,5], node1), (10:21, [2,6], node2), (10:21, [3], node3), (10:21, [4], node4)</em></p>
+</blockquote>
+<p>마스터(master)는 또한 이전 버킷(bucket)이 실패했는지 확인하고 해당 버킷(bucket)도 예약합니다. 버킷(bucket)이 완료되면 버킷(bucket)이 처리된 것으로 표시되고 체크포인트(checkpoint)에서 상태가 업데이트됩니다. 아래 다이어그램(diagram)은 처리 단계를 나타냅니다(<em>스케줄 스캐너-schedule scanner가 마스터-master임</em>).</p>
+<p><img src="/image/an-approach-to-designing-distributed-fault-tolerant-horizontally-scalable-event-scheduler/1_euaHLOnw6G96SigfXxWhtA.png" alt="Fig 2 — Event Processing Flow"></p>
+<p>처리 워크플로우(workflow)의 다양한 구성요소는 다음과 같습니다.</p>
+<ul>
+<li>Bucket Manager: 로드된 버킷(bucket)의 스냅샷(snapshots)을 메모리(memory)에 유지합니다.</li>
+<li>Bucket Loader: 이전 버킷(bucket)을 속도 제한/스로틀(throttled) 방식으로 메모리(memory)에 로드합니다.</li>
+<li>Checkpoint Helper: 몇 초마다 체크포인트(checkpoint)를 동기화합니다.</li>
+<li>Status Syncer: 버킷(bucket)의 상태를 동기화합니다.</li>
+</ul>
+<h1 id="내결함성fault-tolerance-설계">내결함성(Fault Tolerance) 설계</h1>
+<p>다른 분산 시스템(distributed system)과 마찬가지로 여러 개의 고장 지점(failure points)이 있을 수 있습니다. 그 중 일부는 다음과 같습니다.</p>
+<ul>
+<li>마스터(Master)를 사용할 수 없게 됩니다.</li>
+<li>이벤트(Events) 처리가 실패합니다.</li>
+<li>데이터베이스(Data base)가 종료되었습니다.</li>
+</ul>
+<p>BigBen은 실패를 처리하기 위해 다른 기술을 사용합니다. 마스터의 내결함성(fault tolerance)을 위해 해즐캐스트(Hazelcast)에서 분산 잠금(distributed lock)을 사용합니다. 이 잠금은 노드(node)의 수명 동안 해제되지 않습니다. 노드(node)가 작동 중단된 경우에만 다른 구성원이 잠금을 획득하려고 시도합니다. 이는 매우 강력한 내결함성(fault tolerance)을 제공하며, 카오스 몽키(Chaos Monkey) 테스트 중에 이를 검증했습니다. 아래 다이어그램(diagram)은 마스터(master) 장애 조치 시나리오를 보여줍니다.</p>
+<p><img src="/image/an-approach-to-designing-distributed-fault-tolerant-horizontally-scalable-event-scheduler/1_KRjTGz1jrWpYl2tYznV8jg.png" alt="Fig 3 — Master (Cluster Singleton) distributing tasks among slaves"></p>
+<p><img src="/image/an-approach-to-designing-distributed-fault-tolerant-horizontally-scalable-event-scheduler/1_SHiYcpNCJcRsaAbFpXb3rw.png" alt="Fig 4 — Master down, new slave promoted to master, and starts distributing tasks"></p>
+<p>이벤트(event) 처리에 실패했거나 데이터베이스가 종료된 경우 체크포인트(checkpoint)는 실패한 버킷(bucket)으로 표시됩니다. 매 새 버킷(bucket) 검색 시 마스터(master)는 체크포인트(checkpoint)도 검색하여 이전 버킷(bucket)이 실패한 상태인지 확인합니다. 발견되면 해당 버킷(bucket)도 예약됩니다.</p>
+<p>BigBen은 실패한 버킷(bucket)/이벤트(events)에 대해 계속 시도하기 위해 과거까지의 범위에 대해 구성 가능한 &lsquo;look back&rsquo; 매개 변수를 사용합니다. 기본적으로 이 값은 1일입니다.</p>
+<h1 id="성능-벤치마킹">성능 벤치마킹</h1>
+<p>클러스터 성능(cluster’s performance)을 다음과 같은 매개 변수로 벤치마킹(bench marked)했습니다.</p>
+<ul>
+<li>4 대의 머신, Cent OS 6+, 8 코어, 16GB RAM, 최소 힙 2GB, 최대 힙 8GB</li>
+<li>이벤트 페이로드 크기 : 500 바이트</li>
+<li>카산드라(Cassandra) 6 + 6 베어 메탈 클러스터</li>
+<li>쓰기 일관성 : LOCAL QUORUM</li>
+<li>일관성 읽기 : LOCAL QUORUM</li>
+<li>수집 속도 : 52 초 내에 수집 된 100 만 개의 이벤트. =&gt; 시간당 7 천만 이벤트</li>
+<li>처리 속도 : 60 초에 100 만 이벤트 =&gt; 시간당 6 천만 이벤트</li>
+</ul>
+<h1 id="다음-단계">다음 단계</h1>
+<p>나는 당신이 이 게시물이 유익하다고 생각하셨기를 바랍니다. <del>우리는 곧 BigBen을 오픈소스화 할 것 이므로 지켜봐 주세요.</del> 우리는 <a href="https://github.com/walmartlabs/bigben">BigBen</a>을 오픈소스화 했습니다. 질문이 있으면 저희에게 알려주십시오. 읽어주셔서 감사합니다!</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8444244371421612"
+     data-ad-slot="6693872766"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+		
+	</div>
+
+	<div class="pagination">
+		<a href="/post/tool_klevr-agent/" class="left arrow">&#8592;</a>
+		<a href="/post/leader_election_using_consul_and_golang/" class="right arrow">&#8594;</a>
+
+		<a href="#" class="top">Top</a>
+	</div>
+</main>
+
+
+        		<footer>
+			
+			<span>
+			&copy; <time datetime="2021-07-22 00:47:55.500415938 &#43;0900 KST m=&#43;0.047046426">2021</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
+			</span>
+		</footer>
+
+    </body>
+</html>

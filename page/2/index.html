@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+	<meta name="generator" content="Hugo 0.81.0-DEV" />
+		
+		
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<meta name="description" content="">
+
+		<title>ShrinkLabs</title>
+
+		
+  		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/fonts.css">
+		
+		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+		
+		<link href="/index.xml" rel="alternate" type="application/rss+xml" title="ShrinkLabs" />
+	</head>
+
+    <body>
+        		<nav class="nav">
+			<div class="nav-container">
+				<a href="/">
+					<h2 class="nav-title">ShrinkLabs</h2>
+				</a>
+				<ul>
+    
+    
+        <li>
+            <a href="/about/">
+                
+                <span>about</span>
+                
+            </a>
+        </li>
+    
+</ul>
+			</div>
+		</nav>
+
+        
+
+<main>
+	
+
+
+	<div class="catalogue">
+		
+			<a href="https://shrinklabs.com/post/container_docker-error/" class="catalogue-item">
+    <div>
+        <time datetime="2020-04-08 21:27:50 &#43;0900 KST" class="catalogue-time">April 8, 2020</time>
+        <h1 class="catalogue-title">docker 설치 후 에러</h1>
+        <div class="catalogue-line"></div>
+
+        <p>
+            docker 설치 후 &ldquo;Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?&rdquo; 가 발생
+$sudo systemctl status docker $sudo systemctl start docker $sudo systemctl enable docker    (adsbygoogle = window.adsbygoogle || []).push({});  
+        </p>
+    </div>
+</a>
+
+		
+			<a href="https://shrinklabs.com/post/container_k8s-with-kops-on-gce/" class="catalogue-item">
+    <div>
+        <time datetime="2020-03-05 21:36:13 &#43;0900 KST" class="catalogue-time">March 5, 2020</time>
+        <h1 class="catalogue-title">GCE에서 kops를 이용한 K8s 구성</h1>
+        <div class="catalogue-line"></div>
+
+        <p>
+            클러스터 배포용 VM 인스턴스 생성  Kubernetes를 구성하기 위한 VM 인스턴스를 생성합니다. &ldquo;ID 및 API 액세스&rdquo; 항목에서 액세스 범위를 &ldquo;모든 Cloud API에 대한 전체 액세스 허용&rdquo; 으로 선택한다. 또는 아래와 같이 서비스 계정에 권한을 설정하고 서비스 계정을 선택해도 됩니다.  GCP 관리 콘솔의 IAM&amp;Admin에서 서비스 계정을 하나 만듭니다. 서비스 계정이 갖고 있어야 하는 최소한의 권한은 다음과 같습니다.  compute admin servce account admin service account key admin service account token creator service acount user storage admin DNS Administrator DNS Reader  SSH로 연결 &amp; 업데이트  jaehoonn@jaehoonn:~$sudo apt-get update jaehoonn@jaehoonn:~$sudo apt-get dist-upgrade   kubectl 설치 jaehoonn@jaehoonn:~$curl -LO https://storage.
+        </p>
+    </div>
+</a>
+
+		
+			<a href="https://shrinklabs.com/post/container_docker-image/" class="catalogue-item">
+    <div>
+        <time datetime="2020-03-05 12:05:00 &#43;0900 KST" class="catalogue-time">March 5, 2020</time>
+        <h1 class="catalogue-title">docker image 저장소 위치 변경</h1>
+        <div class="catalogue-line"></div>
+
+        <p>
+             새로운 디스크를 추가합니다.  여기에서는 &ldquo;/docker&rdquo; 에 mount 되어 있는걸로 가정합니다.   &ldquo;etc/docker/daemon.json&rdquo; 에 다음의 내용을 추가합니다.  { &#34;data-root&#34;: &#34;/docker&#34; }  docker 서비스를 재시작합니다.  $ sudo systemctl daemon-reload $ sudo systemctl restart docker    (adsbygoogle = window.adsbygoogle || []).push({});  
+        </p>
+    </div>
+</a>
+
+		
+			<a href="https://shrinklabs.com/post/container_nginx-ingress-controller-on-google-kubernetes-engine/" class="catalogue-item">
+    <div>
+        <time datetime="2019-01-21 17:05:30 &#43;0900 KST" class="catalogue-time">January 21, 2019</time>
+        <h1 class="catalogue-title">10.Nginx Ingress Controller on Google Kubernetes Engine</h1>
+        <div class="catalogue-line"></div>
+
+        <p>
+            이번 과정에서는 &ldquo;Ingress&quot;에 대해서 알아 볼 수 있었습니다.
+&ldquo;Ingress&quot;는 resource와 controller로 구성되어 있습니다.
+resource는 &ldquo;Ingress&quot;의 동작에 대한 규칙을 정해 놓은 yaml이며,
+controller는 layer7에 해당하는 로드밸런서의 역할을 제공합니다. 즉 http 요청에 대한 처리와 부하 분산을 제공합니다.
+controller로는 gce, nginx, envoy, haproxy, istio, kong, traefik 을 이용할 수 있습니다.
+과정에서는 &ldquo;hello-app&rdquo; 이라는 &ldquo;Service&quot;를 노출합니다. 그리고 helm을 이용해서 nginx-ingress를 kubernetes cluster에 설치합니다.
+kind가 &ldquo;Ingress&quot;인 yaml 파일을 만듭니다. 이때 &ldquo;path: /hello&quot;로 지정하며, backend를 &ldquo;serviceName: hello-app&quot;과 &ldquo;servicePort: 8080&rdquo; 으로 지정을 합니다.
+        </p>
+    </div>
+</a>
+
+		
+			<a href="https://shrinklabs.com/post/container_helm-package-management/" class="catalogue-item">
+    <div>
+        <time datetime="2019-01-17 15:04:00 &#43;0900 KST" class="catalogue-time">January 17, 2019</time>
+        <h1 class="catalogue-title">9.Helm Package Management</h1>
+        <div class="catalogue-line"></div>
+
+        <p>
+            이번 과정은 kubernetes에서 사용할 수 있는 패키지 관리자에 대해서 알아 볼 수 있었습니다.
+Helm은 클라이언트 역할을 하는 helm, 서버 역할을 하는 tiller 그리고 설정 정보들의 관리를 위한 chart로 이루어져 있습니다.
+여기에서 클라이언트(helm)라고 하는건 클러스터의 외부에서 작업을 지시하기 위한 도구이고, 실제로 클러스터 안쪽에서 동작 하는건 서버(tiller)라고 보면 됩니다.
+helm의 설치는 간단합니다.
+$ curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get &gt; get_helm.sh $ chmod 700 get_helm.sh $ ./get_helm.sh 근데 이 과정 다음에 갑자기 tiller를 위한 계정을 만들고 해당 계정을 무언가에 바인딩을 합니다.
+        </p>
+    </div>
+</a>
+
+		
+			<a href="https://shrinklabs.com/post/container_setting-up-private-kubernetes-cluster/" class="catalogue-item">
+    <div>
+        <time datetime="2019-01-16 01:46:28 &#43;0900 KST" class="catalogue-time">January 16, 2019</time>
+        <h1 class="catalogue-title">8.Setting Up a Private Kubernetes Cluster</h1>
+        <div class="catalogue-line"></div>
+
+        <p>
+            이번 과정의 실습을 진행하면서 클러스터에 대한 접근을 제한 할 수 있도록 하기 위한 방법에 대해서 알 수 있었습니다. 하지만 전체 내용에 대해서 정확하게 이해를 하지 못했습니다.
+해당 내용은 이후에 비공개 클러스터 설정(https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters) 에 대한 내용이 실습 내용과 동일하므로 추후에 이해가 가능한 시점이 되면 다시 한번 시도해 보려고 합니다.
+아래는 내용을 이해하기 위해서 학습했던 내용들의 링크입니다.
+  네트워크 입문: http://kujung.tistory.com/category/%EB%98%A5%20%EC%8B%B8%EA%B8%B0/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC
+  IPv4 네트워크 주소와 호스트 주소/서브넷팅/IP Class: http://itsaessak.tistory.com/174
+  IP 주소체계와 클래스 구별법 (IPV4): http://korean-daeddo.
+        </p>
+    </div>
+</a>
+
+		
+			<a href="https://shrinklabs.com/post/container_build-slack-bot-with-nodejs-on-kubernetes/" class="catalogue-item">
+    <div>
+        <time datetime="2019-01-14 13:17:21 &#43;0900 KST" class="catalogue-time">January 14, 2019</time>
+        <h1 class="catalogue-title">7.Build Slack Bot With Node.js on Kubernetes</h1>
+        <div class="catalogue-line"></div>
+
+        <p>
+            이번 과정은 Secret 객체에 대해서 좀 더 자세하게 알아볼 수 있는 과정이었습니다.
+서비스를 제공하는 프로그램(node.js 코드)을 Docker image로 만든 다음 Registry Server에 Push를 합니다.
+제공하는 서비스에서 외부의 서비스(slack)를 사용하기 위해서 민감한 정보인 token이 존재한다. 이 내용이 코드상 또는 image 상에 존재하지 않게 Image를 만들고자 합니다.
+그래서 별도로 &ldquo;slack-token&rdquo; 파일을 만들어서 파일을 통해서 token 정보를 제공하도록 만들어 놓았습니다. 해당 파일을 경로와 파일명을 포함해서 환경변수 &ldquo;slack_token_path&quot;에 등록해 놓고, 코드상에서는 환경 변수인 &ldquo;slack_token_path&quot;에 지정되어 있는 경로의 파일로 부터 token 정보를 읽어서 사용합니다.
+        </p>
+    </div>
+</a>
+
+		
+			<a href="https://shrinklabs.com/post/container_running-mongodb-database-in-kubernetes-with-statefulsets/" class="catalogue-item">
+    <div>
+        <time datetime="2019-01-11 17:52:48 &#43;0900 KST" class="catalogue-time">January 11, 2019</time>
+        <h1 class="catalogue-title">6.Running Mongodb Database in Kubernetes With Statefulsets</h1>
+        <div class="catalogue-line"></div>
+
+        <p>
+            지금까지의 과정 중에서 가장 어려웠습니다.;;; 그리고 제대로 이해를 한건지도 잘 모르겠습니다.
+일단을 이해했다고 생각되는 정도만 정리를 해봤습니다.
+이번 과정은 StatefulSet에 대한 이해를 목표로 하고 있습니다.
+StatefulSet에 대한 이해를 위해서는 Headless Service에 대한 이해와 StorageClass에 대한 이해가 필요했습니다.
+StorageClass는 상태를 갖는걸 확인하기 위한 실습이 필요하다보니, Volume을 사용해야 하고 StatefulSet의 scale을 조정하게 되는 것에 따라서 Volume도 같이 조정이 되어야 해서 StorageClass 컨트롤러를 통해서 Volume을 동적으로 조정할 수 있도록 하려고 사용 된 것 같습니다.
+        </p>
+    </div>
+</a>
+
+		
+			<a href="https://shrinklabs.com/post/container_continuous-delivery-with-jenkins-in-kubernetes-engine/" class="catalogue-item">
+    <div>
+        <time datetime="2019-01-10 11:40:50 &#43;0900 KST" class="catalogue-time">January 10, 2019</time>
+        <h1 class="catalogue-title">5.Continuous Delivery With Jenkins in Kubernetes Engine</h1>
+        <div class="catalogue-line"></div>
+
+        <p>
+            이번 과정은 Jenkins와 Kubernetes를 이용한 배포 자동화를 실습해 볼 수 있었습니다.
+분량은 많지만 이해가 어렵지는 않은 내용이었습니다.
+실습을 해보면서 Namespace라는 객체와 Helm이라는 패키지 관리 도구를 사용해 볼 수 있습니다. Namespace는 일반적으로 우리가 알고 있는 용도인데, 논리적으로 무언가를 구분지어서 사용하고 싶을때 사용하는게 목적이라고 보면 될 것 같습니다.
+이전 과정에서 배웠던 배포를 위한 전략에서는 label을 사용했었다면, 이번에는 Namespace를 사용해서 비슷한 문제 상황을 해결하는걸 경험해 볼 수 있습니다.
+그리고 helm은 Kubernetes의 클러스터에 올라갈 수 있도록 미리 정의해서 배포해 놓은걸 사용할 수 있게 해주는 도구였습니다.
+        </p>
+    </div>
+</a>
+
+		
+			<a href="https://shrinklabs.com/post/container_managing-deployments-using-kubernetes/" class="catalogue-item">
+    <div>
+        <time datetime="2019-01-09 11:15:55 &#43;0900 KST" class="catalogue-time">January 9, 2019</time>
+        <h1 class="catalogue-title">4.Managing Deployments Using Kubernetes</h1>
+        <div class="catalogue-line"></div>
+
+        <p>
+            이번 장에서는 &ldquo;Deployment&quot;가 어떤 역할을 할 수 있으며, 이를 이용해서 취할 수 있는 배포 전략에 대해서 알아볼 수 있었습니다.
+(이번 장에서 실습을 위해서는 필수적으로 compute/zone 설정을 us-central1-a로 지정해 놓아야 cluster 생성을 정상적으로 할 수 있습니다.)
+Deployment 뿐만이 아니라 다른 객체들을 사용하기 위해서도 yaml을 작성할때 각 필드에 대한 정보를 어디에서 확인해야 하는지가 궁금했습니다.
+$ kubectl explain deployment $ kubectl explain --recursive $ kubectl explain deployment.metadata.name 등과 같이 확인을 할 수 있습니다.
+        </p>
+    </div>
+</a>
+
+		
+	</div>
+
+	<div class="pagination">
+		
+			<a href="/" class="left arrow">&#8592;</a>
+		
+		
+			<a href="/page/3/" class="right arrow">&#8594;</a>
+		
+
+		<span>2</span>
+	</div>
+</main>
+
+
+        		<footer>
+			
+			<span>
+			&copy; <time datetime="2021-07-22 00:47:55.520600326 &#43;0900 KST m=&#43;0.067230833">2021</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
+			</span>
+		</footer>
+
+    </body>
+</html>

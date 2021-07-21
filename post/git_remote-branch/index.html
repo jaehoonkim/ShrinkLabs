@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		
+		
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>원격지의 branch 사용하기 &middot; ShrinkLabs</title>
+
+		
+  		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/fonts.css">
+		
+		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+		
+		<link href="" rel="alternate" type="application/rss+xml" title="ShrinkLabs" />
+	</head>
+
+    <body>
+        		<nav class="nav">
+			<div class="nav-container">
+				<a href="/">
+					<h2 class="nav-title">ShrinkLabs</h2>
+				</a>
+				<ul>
+    
+    
+        <li>
+            <a href="/about/">
+                
+                <span>about</span>
+                
+            </a>
+        </li>
+    
+</ul>
+			</div>
+		</nav>
+
+        
+
+<main>
+	<div class="post">
+		<div class="post-info">
+    <span>Written by</span>
+        
+        <br>
+        <span>on&nbsp;</span><time datetime="2021-02-01 07:17:00 &#43;0900 KST">February 1, 2021</time>
+</div>
+
+		<h1 class="post-title">원격지의 branch 사용하기</h1>
+<div class="post-line"></div>
+
+		
+
+		<p>github에 있는 branch를 로컬로 받아와서 작업하고 싶을때 할 수 있는 방법</p>
+<p>원격지에 있는 branch 정보를 확인 할 수 있도록 업데이트 합니다.</p>
+<pre><code>$ git remote update
+</code></pre><p>원격지의 branch 확인</p>
+<pre><code>$ git branch -r
+  origin/HEAD -&gt; origin/master
+  origin/dev
+  origin/tapping
+  origin/master
+  origin/9999
+  origin/release
+  upstream/dev
+  upstream/master
+  upstream/8888
+  upstream/release
+</code></pre><p>branch들 중에서 &ldquo;origin/9999&quot;를 갖고 오고 싶습니다.</p>
+<pre><code>$ git checkout -t origin/9999
+</code></pre><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8444244371421612"
+     data-ad-slot="6693872766"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+		
+	</div>
+
+	<div class="pagination">
+		<a href="/post/git_upstream/" class="left arrow">&#8592;</a>
+		<a href="/post/tool_etcd-setting/" class="right arrow">&#8594;</a>
+
+		<a href="#" class="top">Top</a>
+	</div>
+</main>
+
+
+        		<footer>
+			
+			<span>
+			&copy; <time datetime="2021-07-22 00:47:55.490871674 &#43;0900 KST m=&#43;0.037502171">2021</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
+			</span>
+		</footer>
+
+    </body>
+</html>

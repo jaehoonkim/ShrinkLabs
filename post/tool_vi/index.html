@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		
+		
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>vi 팁 &middot; ShrinkLabs</title>
+
+		
+  		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/fonts.css">
+		
+		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+		
+		<link href="" rel="alternate" type="application/rss+xml" title="ShrinkLabs" />
+	</head>
+
+    <body>
+        		<nav class="nav">
+			<div class="nav-container">
+				<a href="/">
+					<h2 class="nav-title">ShrinkLabs</h2>
+				</a>
+				<ul>
+    
+    
+        <li>
+            <a href="/about/">
+                
+                <span>about</span>
+                
+            </a>
+        </li>
+    
+</ul>
+			</div>
+		</nav>
+
+        
+
+<main>
+	<div class="post">
+		<div class="post-info">
+    <span>Written by</span>
+        
+        <br>
+        <span>on&nbsp;</span><time datetime="2016-09-05 01:28:09 &#43;0900 KST">September 5, 2016</time>
+</div>
+
+		<h1 class="post-title">vi 팁</h1>
+<div class="post-line"></div>
+
+		
+
+		<h2 id="현재-작업중인-파일의-경로와-이름-확인">현재 작업중인 파일의 경로와 이름 확인</h2>
+<p>현재 작업중인 파일의 경로 또는 이름이 궁금할 경우가 있습니다.</p>
+<pre><code>ctrl + g  
+</code></pre><p>또는</p>
+<pre><code>: f
+</code></pre><h2 id="80컬럼에-버티컬-라인">80컬럼에 버티컬 라인</h2>
+<p>vi에서 80컬럼의 버티컬 라인을 생성하려면 다음과 같이 합니다.</p>
+<pre><code>set colorcolumn=80
+</code></pre><p>을 적용하면, 빨간색 라인이 생깁니다.</p>
+<h2 id="파일-관리">파일 관리</h2>
+<p>NerdTree를 사용하지 않고 vi에서 파일과 디렉토리를 관리하는 방법</p>
+<p>파일 네비게이션</p>
+<ol>
+<li>표준모드(ex: i, o, a 같은걸 입력해서 입력모드로 전환되기 전 상태)</li>
+<li>&ldquo;e.&rdquo; (설명: &ldquo;.&rdquo; 는 현재의 디렉토리)</li>
+</ol>
+<p>디렉토리 만들기</p>
+<ol>
+<li>명령라인 모드 (ex: &ldquo;:wq&rdquo; 해서 현재 작업중인 내용을 저장하고 종료 하기 위한 명령을 입력하기 위한 모드)</li>
+<li>&ldquo;:!mkidir foo&rdquo; (ex: &ldquo;foo&rdquo; 라는 디렉토리 생성)</li>
+</ol>
+<p>또는 &ldquo;:!mkdir -p foo/bar&rdquo; (ex: foo의 하위 디렉토리인 bar까지 생성)</p>
+<h2 id="buffer이동">buffer이동</h2>
+<p>vi를 사용중에 열려있는 buffer를 이동해야 할때가 있습니다.</p>
+<p>다음과 같이 하면 열려있는 1번 bufffer로 이동합니다.</p>
+<pre><code>:buffer 1  
+</code></pre><p>열려 있는 buffer전체를 보려면,</p>
+<pre><code>:buffers  
+</code></pre><p>와 같이 합니다.</p>
+<h2 id="화면-분리">화면 분리</h2>
+<p>분리는 가로(vsplit), 세로(split)으로 나눌 수 있습니다.</p>
+<pre><code>:[vsp]lit [파일명]  
+:[sp]lit [파일명]  
+</code></pre><p>화면간의 이동은</p>
+<blockquote>
+<p>ctrl + w [h j k l]</p>
+</blockquote>
+<p>현재 화면 닫기는</p>
+<blockquote>
+<p>:q</p>
+</blockquote>
+<p>화면을 모두 닫기 위해서는</p>
+<blockquote>
+<p>:qa</p>
+</blockquote>
+<p>현재 커서가 있는 화면을 제외하고 모두 닫기</p>
+<blockquote>
+<p>ctrl + w, o</p>
+</blockquote>
+<h2 id="vimgrep">vimgrep</h2>
+<p>현재 디렉토리내에서 &ldquo;.go&rdquo; 파일들중에서 문자(&ldquo;TEXT&rdquo;)에 대한  검색이 필요할 경우</p>
+<pre><code>:vimgrep /TEXT/ ./*.go
+</code></pre><p>여러개의 결과들을 이동</p>
+<pre><code>:cfirst
+:cnext
+:cprev
+:clast
+</code></pre><p>검색된 결과를 리스트로 보기</p>
+<pre><code>:cw
+</code></pre><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8444244371421612"
+     data-ad-slot="6693872766"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+		
+	</div>
+
+	<div class="pagination">
+		<a href="/post/go_vim-go/" class="left arrow">&#8592;</a>
+		<a href="/post/tool_tmux/" class="right arrow">&#8594;</a>
+
+		<a href="#" class="top">Top</a>
+	</div>
+</main>
+
+
+        		<footer>
+			
+			<span>
+			&copy; <time datetime="2021-07-22 00:47:55.504325469 &#43;0900 KST m=&#43;0.050955976">2021</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
+			</span>
+		</footer>
+
+    </body>
+</html>

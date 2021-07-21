@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		
+		
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>패키지 만들때 testing 패키지 사용하기 &middot; ShrinkLabs</title>
+
+		
+  		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/fonts.css">
+		
+		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+		
+		<link href="" rel="alternate" type="application/rss+xml" title="ShrinkLabs" />
+	</head>
+
+    <body>
+        		<nav class="nav">
+			<div class="nav-container">
+				<a href="/">
+					<h2 class="nav-title">ShrinkLabs</h2>
+				</a>
+				<ul>
+    
+    
+        <li>
+            <a href="/about/">
+                
+                <span>about</span>
+                
+            </a>
+        </li>
+    
+</ul>
+			</div>
+		</nav>
+
+        
+
+<main>
+	<div class="post">
+		<div class="post-info">
+    <span>Written by</span>
+        
+        <br>
+        <span>on&nbsp;</span><time datetime="2013-08-23 14:12:58 &#43;0900 KST">August 23, 2013</time>
+</div>
+
+		<h1 class="post-title">패키지 만들때 testing 패키지 사용하기</h1>
+<div class="post-line"></div>
+
+		
+
+		<h2 id="개요">개요</h2>
+<p>Go 언어용 패키지를 만들려면, 테스트코드를 작성해야 진행이 좀 더 원활하게 되는것 같습니다.<br>
+그래서 간단하게 테스트 코드 작성하는 방법을 정리해봤습니다.</p>
+<h2 id="abc-패키지를-만들어서-테스트하기">abc 패키지를 만들어서 테스트하기</h2>
+<p>src\abc\abc.go<br>
+src\abc\abc_test.go
+와 같이 파일을 만들어 놓습니다.</p>
+<p>abc.go를 다음과 같이 작성합니다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// abc.go
+</span><span style="color:#75715e"></span>
+<span style="color:#f92672">package</span> <span style="color:#a6e22e">abc</span>
+
+<span style="color:#f92672">import</span> (
+    <span style="color:#e6db74">&#34;fmt&#34;</span>
+)
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">A_Method</span>() {
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;test A Method&#34;</span>)
+}
+</code></pre></div><p>그리고 abc_test.go를 다음과 같이 작성합니다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// abc_test.go
+</span><span style="color:#75715e"></span>
+<span style="color:#f92672">package</span> <span style="color:#a6e22e">abc</span>
+
+<span style="color:#f92672">import</span> (
+    <span style="color:#e6db74">&#34;testing&#34;</span>
+)
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">TestA_Method</span>(<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">testing</span>.<span style="color:#a6e22e">T</span>) {
+    <span style="color:#a6e22e">A_Method</span>()
+}
+</code></pre></div><p>그리고 $GOPATH/src/abc/ 에서</p>
+<pre><code>$ go test
+</code></pre><p>를 하면 테스트가 진행됩니다.</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8444244371421612"
+     data-ad-slot="6693872766"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+		
+	</div>
+
+	<div class="pagination">
+		<a href="/about/" class="left arrow">&#8592;</a>
+		<a href="/post/go_cgo-type/" class="right arrow">&#8594;</a>
+
+		<a href="#" class="top">Top</a>
+	</div>
+</main>
+
+
+        		<footer>
+			
+			<span>
+			&copy; <time datetime="2021-07-22 00:47:55.497479614 &#43;0900 KST m=&#43;0.044110096">2021</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
+			</span>
+		</footer>
+
+    </body>
+</html>

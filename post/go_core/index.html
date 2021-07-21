@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		
+		
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>core파일 만들기 &middot; ShrinkLabs</title>
+
+		
+  		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/fonts.css">
+		
+		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+		
+		<link href="" rel="alternate" type="application/rss+xml" title="ShrinkLabs" />
+	</head>
+
+    <body>
+        		<nav class="nav">
+			<div class="nav-container">
+				<a href="/">
+					<h2 class="nav-title">ShrinkLabs</h2>
+				</a>
+				<ul>
+    
+    
+        <li>
+            <a href="/about/">
+                
+                <span>about</span>
+                
+            </a>
+        </li>
+    
+</ul>
+			</div>
+		</nav>
+
+        
+
+<main>
+	<div class="post">
+		<div class="post-info">
+    <span>Written by</span>
+        
+        <br>
+        <span>on&nbsp;</span><time datetime="2017-08-01 13:59:57 &#43;0900 KST">August 1, 2017</time>
+</div>
+
+		<h1 class="post-title">core파일 만들기</h1>
+<div class="post-line"></div>
+
+		
+
+		<p>Go언어에서도 core dump를 만드는 방법이 있었습니다.</p>
+<p>데이브체니님이 정리해 놓은 무려 2015년도의 글 입니다.<br>
+<a href="https://dave.cheney.net/2015/11/29/a-whirlwind-tour-of-gos-runtime-environment-variables">https://dave.cheney.net/2015/11/29/a-whirlwind-tour-of-gos-runtime-environment-variables</a></p>
+<p>환경변수로 GOTRACEBACK 을 crash로 설정만 해주면 됩니다.</p>
+<p>이런것도 모르고 Go언어에서는 dump를 생성할 수 없다고 말하고 다녔습니다&hellip;;</p>
+<p>근데 위에 처럼 환경변수 설정하고도 core 파일이 안생긴다면, 다음 블로그의 글을 참고해 보면 좋을것 같습니다.</p>
+<p><a href="http://lapan.tistory.com/68">http://lapan.tistory.com/68</a></p>
+<p>블로그의 내용처럼 ulimit -a 로 확인 해보니 core file size가 0으로 되어 있습니다.<br>
+ulimit -c unlimited 로 해주었습니다.<br>
+이제 panic을 발생시켜 보면 core 파일이 잘 만들어져 있는걸 확인 할 수 있습니다.</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8444244371421612"
+     data-ad-slot="6693872766"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+		
+	</div>
+
+	<div class="pagination">
+		<a href="/post/container_docker/" class="left arrow">&#8592;</a>
+		<a href="/post/go_kvm-with-go/" class="right arrow">&#8594;</a>
+
+		<a href="#" class="top">Top</a>
+	</div>
+</main>
+
+
+        		<footer>
+			
+			<span>
+			&copy; <time datetime="2021-07-22 00:47:55.492015619 &#43;0900 KST m=&#43;0.038646107">2021</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
+			</span>
+		</footer>
+
+    </body>
+</html>

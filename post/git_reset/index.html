@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		
+		
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>git push된 내용을 특정한 commit으로 되돌리기 &middot; ShrinkLabs</title>
+
+		
+  		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/fonts.css">
+		
+		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+		
+		<link href="" rel="alternate" type="application/rss+xml" title="ShrinkLabs" />
+	</head>
+
+    <body>
+        		<nav class="nav">
+			<div class="nav-container">
+				<a href="/">
+					<h2 class="nav-title">ShrinkLabs</h2>
+				</a>
+				<ul>
+    
+    
+        <li>
+            <a href="/about/">
+                
+                <span>about</span>
+                
+            </a>
+        </li>
+    
+</ul>
+			</div>
+		</nav>
+
+        
+
+<main>
+	<div class="post">
+		<div class="post-info">
+    <span>Written by</span>
+        
+        <br>
+        <span>on&nbsp;</span><time datetime="2018-07-31 10:09:41 &#43;0900 KST">July 31, 2018</time>
+</div>
+
+		<h1 class="post-title">git push된 내용을 특정한 commit으로 되돌리기</h1>
+<div class="post-line"></div>
+
+		
+
+		<p>&ldquo;iss-123&rdquo; 브랜치에서 작업하던 내용을 실수로 &ldquo;iss-133&rdquo; 브랜치로 push 하는 어이없는 실수를 했을때 &ldquo;iss-133&quot;에 push 된 내용을 이전으로 되돌려 놓아야 합니다.</p>
+<p>git log로 이전 commit의 id를 확인합니다. (ex, d50fd96d2d7e5e5cf689b0943f2b2d20d4c2dda4)</p>
+<pre><code>[iss-133] $ git reset --hard d50fd96d2d7e5e5cf689b0943f2b2d20d4c2dda4
+</code></pre><p>이제 변경된 내용을 push 합니다.</p>
+<pre><code>[iss-13] $ git push --force origin prj
+</code></pre><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8444244371421612"
+     data-ad-slot="6693872766"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+		
+	</div>
+
+	<div class="pagination">
+		<a href="/post/go_key_exists_in_map/" class="left arrow">&#8592;</a>
+		<a href="/post/go_cscope/" class="right arrow">&#8594;</a>
+
+		<a href="#" class="top">Top</a>
+	</div>
+</main>
+
+
+        		<footer>
+			
+			<span>
+			&copy; <time datetime="2021-07-22 00:47:55.491139653 &#43;0900 KST m=&#43;0.037770145">2021</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
+			</span>
+		</footer>
+
+    </body>
+</html>

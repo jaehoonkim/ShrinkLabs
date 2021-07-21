@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		
+		
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>10.Nginx Ingress Controller on Google Kubernetes Engine &middot; ShrinkLabs</title>
+
+		
+  		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/fonts.css">
+		
+		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+		
+		<link href="" rel="alternate" type="application/rss+xml" title="ShrinkLabs" />
+	</head>
+
+    <body>
+        		<nav class="nav">
+			<div class="nav-container">
+				<a href="/">
+					<h2 class="nav-title">ShrinkLabs</h2>
+				</a>
+				<ul>
+    
+    
+        <li>
+            <a href="/about/">
+                
+                <span>about</span>
+                
+            </a>
+        </li>
+    
+</ul>
+			</div>
+		</nav>
+
+        
+
+<main>
+	<div class="post">
+		<div class="post-info">
+    <span>Written by</span>
+        
+        <br>
+        <span>on&nbsp;</span><time datetime="2019-01-21 17:05:30 &#43;0900 KST">January 21, 2019</time>
+</div>
+
+		<h1 class="post-title">10.Nginx Ingress Controller on Google Kubernetes Engine</h1>
+<div class="post-line"></div>
+
+		
+
+		<p>이번 과정에서는 &ldquo;Ingress&quot;에 대해서 알아 볼 수 있었습니다.</p>
+<p>&ldquo;Ingress&quot;는 resource와 controller로 구성되어 있습니다.</p>
+<p>resource는 &ldquo;Ingress&quot;의 동작에 대한 규칙을 정해 놓은 yaml이며,</p>
+<p>controller는 layer7에 해당하는 로드밸런서의 역할을 제공합니다. 즉 http 요청에 대한 처리와 부하 분산을 제공합니다.</p>
+<p>controller로는 gce, nginx, envoy, haproxy, istio, kong, traefik 을 이용할 수 있습니다.</p>
+<p>과정에서는 &ldquo;hello-app&rdquo; 이라는 &ldquo;Service&quot;를 노출합니다. 그리고 helm을 이용해서 nginx-ingress를 kubernetes cluster에 설치합니다.</p>
+<p>kind가 &ldquo;Ingress&quot;인 yaml 파일을 만듭니다. 이때 &ldquo;path: /hello&quot;로 지정하며, backend를 &ldquo;serviceName: hello-app&quot;과 &ldquo;servicePort: 8080&rdquo; 으로 지정을 합니다.</p>
+<p>이렇게 해서 &ldquo;nginx-ingress-controller&quot;가 제공하는 &ldquo;EXTERNAL-IP&quot;에 &ldquo;/hello&quot;로 웹브라우저에서 연결을 해보면 서비스가 제공되는 것을 확인해 볼 수 있습니다.</p>
+<p>&ldquo;Ingress&quot;를 통해서 로드밸런서를 제공하기 위해서는 &ldquo;Service&rdquo; 생성 과정에서 type의 지정이 필요합니다.</p>
+<p>&ldquo;Pod&quot;는 죽고 사는 과정이 계속해서 반복되고 ip가 계속해서 변동됩니다.</p>
+<p>이러한 &ldquo;Pod&quot;를 선택적으로 동일한 ip로 접근하기 위해서 &ldquo;Service&quot;를 사용합니다.</p>
+<p>이 &ldquo;Service&quot;들이 제공하는 타입에 따라서 서비스가 제공되는 형태가 변경이 됩니다.</p>
+<p>clusterip는 클러스터 내부에서만 접근 가능한 형태의 service 입니다.</p>
+<p>그리고 nodeport는 &ldquo;node이름:port&quot;로 외부에서도 접근이 가능하도록 서비스를 제공하는 형태입니다.</p>
+<p>loadbalancer는 클라우드 서비스를 제공하는 벤더들에서 제공하는 로드밸런서를 사용합니다.</p>
+<p>마지막으로 externalname은 외부의 서비스를 클러스터 내부에서 사용하고자 할 때 사용하는 형태입니다.</p>
+<p>이와 같이 클라우드 서비스 벤더에서 제공하는 로드밸런서를 사용할때는 &ldquo;Service&quot;의 타입을 loadbalancer로 지정하고, &ldquo;Ingress&quot;를 통해서 제공하는 로드밸런서를 사용할때는 nodeport를 사용해서 &ldquo;Service&quot;를 생성합니다.</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8444244371421612"
+     data-ad-slot="6693872766"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+		
+	</div>
+
+	<div class="pagination">
+		<a href="/post/container_helm-package-management/" class="left arrow">&#8592;</a>
+		<a href="/post/container_docker-image/" class="right arrow">&#8594;</a>
+
+		<a href="#" class="top">Top</a>
+	</div>
+</main>
+
+
+        		<footer>
+			
+			<span>
+			&copy; <time datetime="2021-07-22 00:47:55.492048014 &#43;0900 KST m=&#43;0.038678512">2021</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
+			</span>
+		</footer>
+
+    </body>
+</html>

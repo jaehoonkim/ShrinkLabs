@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		
+		
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>C언어의 배열을 Go언어의 slices로 변환 &middot; ShrinkLabs</title>
+
+		
+  		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/fonts.css">
+		
+		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+		
+		<link href="" rel="alternate" type="application/rss+xml" title="ShrinkLabs" />
+	</head>
+
+    <body>
+        		<nav class="nav">
+			<div class="nav-container">
+				<a href="/">
+					<h2 class="nav-title">ShrinkLabs</h2>
+				</a>
+				<ul>
+    
+    
+        <li>
+            <a href="/about/">
+                
+                <span>about</span>
+                
+            </a>
+        </li>
+    
+</ul>
+			</div>
+		</nav>
+
+        
+
+<main>
+	<div class="post">
+		<div class="post-info">
+    <span>Written by</span>
+        
+        <br>
+        <span>on&nbsp;</span><time datetime="2013-09-17 17:10:53 &#43;0900 KST">September 17, 2013</time>
+</div>
+
+		<h1 class="post-title">C언어의 배열을 Go언어의 slices로 변환</h1>
+<div class="post-line"></div>
+
+		
+
+		<p>cgo를 이용하다보면, C언어로 작성된 라이브러리의 리턴값으로 포인터에 구조체가 할당되어서 넘어올때가 있습니다.<br>
+C언어에서 넘어오는 구조체 배열이 포인터 형태로 넘어오니, Go의 포인터에 할당을 해서 사용 해봤습니다.<br>
+당연히 제대로 동작하지 않습니다. C언어로 작성된 라이브러리에서 넘어오는 값은 배열이니, Go언어에서는 slices에 할당을 하는게 맞는것 같습니다.</p>
+<p>다음의 내용을 보면, array를 어떻게 slices에 할당을 해야 할지에 대해서 잘 설명이 되어 있습니다.<br>
+&ldquo;Turning C arrays into Go slcies&rdquo; ( <a href="https://code.google.com/p/go-wiki/wiki/cgo">https://code.google.com/p/go-wiki/wiki/cgo</a> )</p>
+<p>아래는 cubrid driver를 만들면서 사용한 코드입니다.</p>
+<pre><code>slcieHeader := (*reflect.SliceHeader)(unsafe.Pointer(&amp;go_col_info)))
+sliceHeader.Cap = int(col_count)
+sliceHeader.Len = int(col_count)
+sliceHeader.Data = uintptr(unsafe.Pointer(c_col_info))
+</code></pre><ul>
+<li>예제<br>
+<a href="https://github.com/jaehoonn/cubrid/blob/master/cas_gci.go">https://github.com/jaehoonn/cubrid/blob/master/cas_gci.go</a></li>
+</ul>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8444244371421612"
+     data-ad-slot="6693872766"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+		
+	</div>
+
+	<div class="pagination">
+		<a href="/post/go_cgo-type/" class="left arrow">&#8592;</a>
+		<a href="/post/go_md5/" class="right arrow">&#8594;</a>
+
+		<a href="#" class="top">Top</a>
+	</div>
+</main>
+
+
+        		<footer>
+			
+			<span>
+			&copy; <time datetime="2021-07-22 00:47:55.492451372 &#43;0900 KST m=&#43;0.039081869">2021</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
+			</span>
+		</footer>
+
+    </body>
+</html>

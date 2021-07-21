@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		
+		
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>vim-go 기본 템플릿 비활성화 &middot; ShrinkLabs</title>
+
+		
+  		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/fonts.css">
+		
+		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+		
+		<link href="" rel="alternate" type="application/rss+xml" title="ShrinkLabs" />
+	</head>
+
+    <body>
+        		<nav class="nav">
+			<div class="nav-container">
+				<a href="/">
+					<h2 class="nav-title">ShrinkLabs</h2>
+				</a>
+				<ul>
+    
+    
+        <li>
+            <a href="/about/">
+                
+                <span>about</span>
+                
+            </a>
+        </li>
+    
+</ul>
+			</div>
+		</nav>
+
+        
+
+<main>
+	<div class="post">
+		<div class="post-info">
+    <span>Written by</span>
+        
+        <br>
+        <span>on&nbsp;</span><time datetime="2016-09-05 01:28:09 &#43;0900 KST">September 5, 2016</time>
+</div>
+
+		<h1 class="post-title">vim-go 기본 템플릿 비활성화</h1>
+<div class="post-line"></div>
+
+		
+
+		<p>vim-go가 언제부터인가 main.go 를 만들면 템플릿으로 fmt.Println(&ldquo;vim-go&rdquo;) 를 찍어주는 코드를 자동으로 생성해 주기 시작했습니다.</p>
+<p>나는 아무것도 나오지 않기를 바랬는데, 이런게 나와서 매번 지우는 작업을 하는게 싫었습니다.
+그래서 설정중에 go_template_autocreate 를 조절했습니다.</p>
+<pre><code>let g:go_template_autocreate = 0
+</code></pre><p>와 같이 하면 이제 아무것도 없는 빈 화면이 나옵니다.</p>
+<p>혹시라도 반복적으로 나오는게 좋은데 &ldquo;vim-go&quot;를 찍는게 아닌 특정한 코드가 필요하다면, &ldquo;.vim/bundle/vim-go/templates/hello_world.go&rdquo; 파일을 수정해도 됩니다.
+또는 특정한 템플릿을 지정하고 싶다면, 다음과 같이,</p>
+<pre><code>let g:go_template_file = &quot;hello_world.go&quot;
+</code></pre><p>로 해도 됩니다. 여기에서 hello_world.go 대신에 템플릿으로 지정하고 싶은 파일을 입력 하면 됩니다.</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8444244371421612"
+     data-ad-slot="6693872766"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+		
+	</div>
+
+	<div class="pagination">
+		<a href="/post/go_template/" class="left arrow">&#8592;</a>
+		<a href="/post/tool_vi/" class="right arrow">&#8594;</a>
+
+		<a href="#" class="top">Top</a>
+	</div>
+</main>
+
+
+        		<footer>
+			
+			<span>
+			&copy; <time datetime="2021-07-22 00:47:55.495317139 &#43;0900 KST m=&#43;0.041947656">2021</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
+			</span>
+		</footer>
+
+    </body>
+</html>
