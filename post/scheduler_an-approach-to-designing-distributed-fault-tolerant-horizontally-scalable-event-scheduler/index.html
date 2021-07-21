@@ -111,14 +111,14 @@
 </blockquote>
 <p>빠른 검색을 위해서는 버킷(bucket)당 실행 중인 총 이벤트 수를 유지해야 합니다. BigBen은 내장된 해즐캐스트(Hazelcast) 그리드를 사용하여 이러한 카운트를 분산 맵에서 유지할 수 있지만 원자 카운트를 지원하는 멤캐쉬(memcache), 카우치베이스(Couchbase) 등과 같은 다른 솔루션도 사용할 수 있습니다. 맵 데이터는 몇 초마다 카산드라(Cassandra)와 동기화됩니다.</p>
 <p>아래 다이어그램(diagram)은 이벤트(event) 수신 흐름을 캡처합니다. HTTP 또는 카프카(Kafka)를 통해 이벤트(event)를 수신할 수 있습니다. 잘못된 이벤트(event)는 거부되고 즉시 반환됩니다(빨간 점선으로 표시됨). 다른 경우에는 해당하는 버킷(bucket)이 계산됩니다(이벤트(event)가 오전 10:21:55로 예약되어 있고, 버킷(bucket)이 오전 10:21:00로 예약되어 있음). 카운트(count)가 증가되고 샤드 인덱스(shard index)가 계산됩니다. 그러면 이벤트(event)가 버킷(bucket)과 샤드 인덱스(shard index)의 조합인 해당 파티션(partition)에 저장됩니다(예: 10:21:00/1).</p>
-<p><img src="/image/an-approach-to-designing-distributed-fault-tolerant-horizontally-scalable-event-scheduler/1_LmYyR8GT9TjPmrRorOBzLg.png" alt="Fig 1 — Event Receive Flow"></p>
+<p><img src="/images/an-approach-to-designing-distributed-fault-tolerant-horizontally-scalable-event-scheduler/1_LmYyR8GT9TjPmrRorOBzLg.png" alt="Fig 1 — Event Receive Flow"></p>
 <h1 id="이벤트-처리">이벤트 처리</h1>
 <p>처리 부분의 경우 클러스터 구성원 중에서 마스터가 선택됩니다. 주키퍼(Zookeeper)는 리더(leader)/마스터(master) 선택에 사용할 수 있지만, BigBen은 이미 해즐캐스트(Hazelcast)를 사용하고 있으므로 분산 잠금 기능을 사용하여 *클러스터 싱글턴(Cluster Singleton)*을 구현했습니다. 그런 다음 마스터는 다음 버킷을 예약하고 이벤트 수를 읽습니다. 이벤트 수와 샤드(shard) 크기를 알면 총 샤드(shard) 수를 쉽게 계산할 수 있습니다. 그런 다음 마스터(master)는 쌍(bucket, shard_index)을 생성하고 이를 클러스터 멤버(cluster member) 간에 <strong>균등</strong>하게 나눕니다. 분할이 동일하지 않은 경우 마스터(master)는 자신에게 최소 로드를 적용하려고 합니다. 예를 들어 오전 10시 21분 버킷(bucket), 이벤트(events) 6000개, 노드 클러스터(node cluster) 4개의 경우 다음과 같이 나뉩니다.</p>
 <blockquote>
 <p><em>distribution =&gt; (bucket, array of shard indexes, node IP) =&gt; (10:21, [1,5], node1), (10:21, [2,6], node2), (10:21, [3], node3), (10:21, [4], node4)</em></p>
 </blockquote>
 <p>마스터(master)는 또한 이전 버킷(bucket)이 실패했는지 확인하고 해당 버킷(bucket)도 예약합니다. 버킷(bucket)이 완료되면 버킷(bucket)이 처리된 것으로 표시되고 체크포인트(checkpoint)에서 상태가 업데이트됩니다. 아래 다이어그램(diagram)은 처리 단계를 나타냅니다(<em>스케줄 스캐너-schedule scanner가 마스터-master임</em>).</p>
-<p><img src="/image/an-approach-to-designing-distributed-fault-tolerant-horizontally-scalable-event-scheduler/1_euaHLOnw6G96SigfXxWhtA.png" alt="Fig 2 — Event Processing Flow"></p>
+<p><img src="/images/an-approach-to-designing-distributed-fault-tolerant-horizontally-scalable-event-scheduler/1_euaHLOnw6G96SigfXxWhtA.png" alt="Fig 2 — Event Processing Flow"></p>
 <p>처리 워크플로우(workflow)의 다양한 구성요소는 다음과 같습니다.</p>
 <ul>
 <li>Bucket Manager: 로드된 버킷(bucket)의 스냅샷(snapshots)을 메모리(memory)에 유지합니다.</li>
@@ -134,8 +134,8 @@
 <li>데이터베이스(Data base)가 종료되었습니다.</li>
 </ul>
 <p>BigBen은 실패를 처리하기 위해 다른 기술을 사용합니다. 마스터의 내결함성(fault tolerance)을 위해 해즐캐스트(Hazelcast)에서 분산 잠금(distributed lock)을 사용합니다. 이 잠금은 노드(node)의 수명 동안 해제되지 않습니다. 노드(node)가 작동 중단된 경우에만 다른 구성원이 잠금을 획득하려고 시도합니다. 이는 매우 강력한 내결함성(fault tolerance)을 제공하며, 카오스 몽키(Chaos Monkey) 테스트 중에 이를 검증했습니다. 아래 다이어그램(diagram)은 마스터(master) 장애 조치 시나리오를 보여줍니다.</p>
-<p><img src="/image/an-approach-to-designing-distributed-fault-tolerant-horizontally-scalable-event-scheduler/1_KRjTGz1jrWpYl2tYznV8jg.png" alt="Fig 3 — Master (Cluster Singleton) distributing tasks among slaves"></p>
-<p><img src="/image/an-approach-to-designing-distributed-fault-tolerant-horizontally-scalable-event-scheduler/1_SHiYcpNCJcRsaAbFpXb3rw.png" alt="Fig 4 — Master down, new slave promoted to master, and starts distributing tasks"></p>
+<p><img src="/images/an-approach-to-designing-distributed-fault-tolerant-horizontally-scalable-event-scheduler/1_KRjTGz1jrWpYl2tYznV8jg.png" alt="Fig 3 — Master (Cluster Singleton) distributing tasks among slaves"></p>
+<p><img src="/images/an-approach-to-designing-distributed-fault-tolerant-horizontally-scalable-event-scheduler/1_SHiYcpNCJcRsaAbFpXb3rw.png" alt="Fig 4 — Master down, new slave promoted to master, and starts distributing tasks"></p>
 <p>이벤트(event) 처리에 실패했거나 데이터베이스가 종료된 경우 체크포인트(checkpoint)는 실패한 버킷(bucket)으로 표시됩니다. 매 새 버킷(bucket) 검색 시 마스터(master)는 체크포인트(checkpoint)도 검색하여 이전 버킷(bucket)이 실패한 상태인지 확인합니다. 발견되면 해당 버킷(bucket)도 예약됩니다.</p>
 <p>BigBen은 실패한 버킷(bucket)/이벤트(events)에 대해 계속 시도하기 위해 과거까지의 범위에 대해 구성 가능한 &lsquo;look back&rsquo; 매개 변수를 사용합니다. 기본적으로 이 값은 1일입니다.</p>
 <h1 id="성능-벤치마킹">성능 벤치마킹</h1>
@@ -178,7 +178,7 @@
         		<footer>
 			
 			<span>
-			&copy; <time datetime="2021-07-22 01:05:13.292876038 &#43;0900 KST m=&#43;0.038040335">2021</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
+			&copy; <time datetime="2021-07-22 01:10:34.282367396 &#43;0900 KST m=&#43;0.037071510">2021</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
 			</span>
 		</footer>
 

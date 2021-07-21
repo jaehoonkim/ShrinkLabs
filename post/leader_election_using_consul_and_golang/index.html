@@ -68,7 +68,7 @@
 <li>선출된 리더만이 노드(nodes)간 포드(pod) 스케줄링을 담당합니다.</li>
 </ul>
 <p>Razorpay에서도 Metro(오픈 소스 PubSub 기반 비동기 메시징 서비스)에서 유사한 사용 사례가 있었습니다. Metro는 Metro worker를 배치하여 푸시 기반 메시지 전달을 지원합니다. 이러한 Metro worker는 항목의 메시지를 읽고 구독자 엔드포인트로 푸시합니다. Metro worker들 사이의 구독 할당은 리더 선거 과정을 통해 선출된 리더에 의해 처리됩니다.</p>
-<p><img src="/image/leader_election_using_consul_and_golang/1_0cYFM3r_nAVf2L43pDeLhg.png" alt="리더 선출을 위해서 경쟁하는 노드"></p>
+<p><img src="/images/leader_election_using_consul_and_golang/1_0cYFM3r_nAVf2L43pDeLhg.png" alt="리더 선출을 위해서 경쟁하는 노드"></p>
 <p>일반적으로, 리더 선택은 분산 잠금을 사용하여 구현됩니다. 여기서 모든 노드가 동일한 리소스에 대한 잠금을 획득하기 위해 경쟁하고, 잠금을 획득하는 노드가 리더가 됩니다. 분산 잠금을 구현하기 위해서는 어떤 노드가 잠금을 유지하는지 결정하는 강력한 일관성이 있는 시스템이 필요합니다. 왜냐하면 이것은 원자 작용이어야 하기 때문입니다. 일반적으로 Paxos, Raft 프로토콜과 같은 합의 프로토콜이 이러한 목적으로 사용됩니다. 그러나 이러한 알고리즘을 올바르게 구현하는 것은 매우 어렵습니다. 구현은 광범위하게 테스트되고 공식적으로 입증되어야 하기 때문입니다. 리더 선출은 사육사, 영사 등과 같은 제3자 툴을 사용하여 구현할 수도 있지만, 이러한 툴에 대한 HA 시스템 유지에 대한 운영 오버헤드가 추가됩니다.</p>
 <p>Metro에서 데이터베이스 레지스트리로 Consul을 사용하고 있었기 때문에, 우리는 리더 선출을 위해 같은 것을 사용하기로 결정했습니다. Consul을 사용하여 분산 잠금을 구현한 방법을 살펴보겠습니다.</p>
 <h1 id="분산-잠금-구현">분산 잠금 구현</h1>
@@ -97,7 +97,7 @@
 </ul>
 <h1 id="go에서-consul을-사용하여-리더-선출">Go에서 Consul을 사용하여 리더 선출</h1>
 <p>리더 선출은 아래의 4단계로 실시할 수 있습니다.</p>
-<p><img src="/image/leader_election_using_consul_and_golang/1_TyncBh-p31wMUowpaCC4mw.png" alt="Consul을 사용하는 리더 선거 구현 단계입니다"></p>
+<p><img src="/images/leader_election_using_consul_and_golang/1_TyncBh-p31wMUowpaCC4mw.png" alt="Consul을 사용하는 리더 선거 구현 단계입니다"></p>
 <ol>
 <li>
 <p>TTL을 사용하여 consul 세션을 생성합니다.</p>
@@ -219,7 +219,7 @@ renew/renewPeriodic API를 사용하여 세션을 정기적으로 갱신합니�
         		<footer>
 			
 			<span>
-			&copy; <time datetime="2021-07-22 01:05:13.298019714 &#43;0900 KST m=&#43;0.043183999">2021</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
+			&copy; <time datetime="2021-07-22 01:10:34.288241348 &#43;0900 KST m=&#43;0.042945464">2021</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
 			</span>
 		</footer>
 
