@@ -110,7 +110,7 @@ $ ETCD_NAME=$(hostname -s)
 </code></pre><p>etcd용 systemd service 파일을 만듭니다.<br>
 &ndash;listen-client-urls</p>
 <p>note)
-–name, –initial-advertise-peer-urls, –listen-peer-urls, –listen-client-urls는 각 서버마다 다릅니다.
+–name, –initial-advertise-peer-urls, –listen-peer-urls, –listen-client-urls는 각 서버마다 다릅니다. 
 ETCD_NAME 및 ETCD_HOST_IP 변수가 자동으로 대체됩니다.</p>
 <pre><code>cat &lt;&lt; EOF &gt; /lib/systemd/system/etcd.service
 [Unit]
@@ -139,7 +139,7 @@ RestartSec=5
 WantedBy=multi-user.target
 EOF
 </code></pre><p>etcd 클러스터 구성하기</p>
-<p>모든 서버에서 구성이 되고 난 후 etcd 서비스를 시작하고 활성화 합니다.
+<p>모든 서버에서 구성이 되고 난 후 etcd 서비스를 시작하고 활성화 합니다. 
 첫번째 서버는 부트스트랩 노드로 동작하고 3개의 노드가 모두 시작되면 한 노드가 리더로 선정됩니다.</p>
 <pre><code>$ systemctl daemon-reload
 $ systemctl enable etcd
@@ -190,7 +190,7 @@ $ ETCDCTL_API=3 etcdctl get --prefix name # lists all keys with name prefix
         		<footer>
 			
 			<span>
-			&copy; <time datetime="2021-07-22 01:26:38.920607026 &#43;0900 KST m=&#43;0.046927589">2021</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
+			&copy; <time datetime="2021-07-22 12:10:35.7300276 &#43;0900 KST m=&#43;0.429456301">2021</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
 			</span>
 		</footer>
 
