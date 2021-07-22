@@ -744,8 +744,7 @@ abc.go를 다음과 같이 작성합니다.
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://shrinklabs.com/about/</guid>
-      <description>안녕하세요.
-김재훈(jaehoon@shrinklabs.com)입니다.
+      <description>안녕하세요. 김재훈(jaehoon@shrinklabs.com)입니다.
 현재 참여 프로젝트(2020~ )
  Klevr: 분산 잡 스케줄러  이전 참여 프로젝트(2003~2020)
  Yard: Kubernetes 기반의 배포 자동화 솔루션 NetDesktop: KVM 기반의 VDI 서비스 weMx Designer: QtDesigner 기반의 HMI 화면 저작 도구 SmartPhoto: 사진인화 및 포토북 제작 솔루션 Ntalk biz: 기업용 메신저 EMBROID: 산업용 자수기 운용 솔루션 FMU: 도약무전기 주파수 관리 솔루션 기타 (ND Player, ActiveX Download Component, Netsync Browser, OurRSS Builder, OurLinker, OpenRSS, NeoPlus)  주요관심</description>
