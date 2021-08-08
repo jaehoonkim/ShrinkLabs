@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-	<meta name="generator" content="Hugo 0.83.1" />
+	<meta name="generator" content="Hugo 0.81.0-DEV" />
 		
 		
 		<meta charset="UTF-8">
@@ -64,7 +64,7 @@ import &#34;rsc.io/pdf&#34; 와 같은 &ldquo;github.com/rsc/pdf&rdquo; 와 동�
 어떻게 한걸까!? 궁금했습니다. 그리고 왠지 멋있어 보였습니다&hellip;;
 그러다가 우연히 rob pike의 github page(https://github.com/robpike/robpike.github.io)를 보게 되었습니다.
 index.html 에 이렇게만 코드가 되어 있었습니다.
-&lt;meta name=&quot;go-import&quot; content=&quot;robpike.io/cmd hg https://code.google.com/p/rspace.cmd&quot;&gt;This is a git repository holding a redirect for the Go repositories referenced by robpike.
+&lt;meta name=&quot;go-import&quot; content=&quot;robpike.io/cmd hg https://code.google.com/p/rspace.cmd&quot;&gt; This is a git repository holding a redirect for the Go repositories referenced by robpike.
         </p>
     </div>
 </a>
@@ -77,7 +77,7 @@ index.html 에 이렇게만 코드가 되어 있었습니다.
         <div class="catalogue-line"></div>
 
         <p>
-            업데이트 $ sudo apt-get update $ sudo apt-get install build-essentialvim 설치 $ sudo apt-get install vimvim 8.0 $ sudo add-apt-repository ppa:jonathonf/vim $ sudo apt-get updatexclip 설치 $ sudo apt-get install xclipwget 설치(사용이 필요한 경우에만 설치) $ sudo apt-get install wgetgit 설치  git 설치와 설정  $ sudo apt-get install git $ git config –-global user.name “blah” $ git config –-global user.email “blah@blah.com” $ git config --global core.
+            업데이트 $ sudo apt-get update $ sudo apt-get install build-essential vim 설치 $ sudo apt-get install vim vim 8.0 $ sudo add-apt-repository ppa:jonathonf/vim $ sudo apt-get update xclip 설치 $ sudo apt-get install xclip wget 설치(사용이 필요한 경우에만 설치) $ sudo apt-get install wget git 설치  git 설치와 설정  $ sudo apt-get install git $ git config –-global user.name “blah” $ git config –-global user.email “blah@blah.com” $ git config --global core.
         </p>
     </div>
 </a>
@@ -124,7 +124,7 @@ $ pkg-config --list-all 현재 설치된 라이브러리들의 정보가 나오�
 
         <p>
             Qt로 만드는 클라이언트에서 이미지 파일에 대해서 만들어진 md5 hash를 검증 해보기 위해서, 같은 이미지 파일에 대해서 Go언어로 md5 hash를 만들었을때 동일한 값이 생성되면 제대로 만들어진거 아닐까 해서, 만들어 봤습니다.
-package main import ( &#34;io/ioutil&#34; &#34;crypto/md5&#34; &#34;fmt&#34; ) func main() { data, err := ioutil.ReadFile(&#34;1.jpg&#34;) if err != nil { return; } hash := md5.New() hash.Write(data) hashData := hash.Sum(nil) fmt.Printf(&#34;%x&#34;, hashData) } (adsbygoogle = window.adsbygoogle || []).push({}); 
+package main import ( &#34;io/ioutil&#34; &#34;crypto/md5&#34; &#34;fmt&#34; ) func main() { data, err := ioutil.ReadFile(&#34;1.jpg&#34;) if err != nil { return; } hash := md5.New() hash.Write(data) hashData := hash.Sum(nil) fmt.Printf(&#34;%x&#34;, hashData) }    (adsbygoogle = window.adsbygoogle || []).push({});  
         </p>
     </div>
 </a>
@@ -194,10 +194,11 @@ abc.go를 다음과 같이 작성합니다.
         <div class="catalogue-line"></div>
 
         <p>
-            안녕하세요. 김재훈(jaehoon@shrinklabs.com)입니다.
-현재 참여 프로젝트(2020~ )
- Klevr: 분산 잡 스케줄러  이전 참여 프로젝트(2003~2020)
- Yard: Kubernetes 기반의 배포 자동화 솔루션 NetDesktop: KVM 기반의 VDI 서비스 weMx Designer: QtDesigner 기반의 HMI 화면 저작 도구 SmartPhoto: 사진인화 및 포토북 제작 솔루션 Ntalk biz: 기업용 메신저 EMBROID: 산업용 자수기 운용 솔루션 FMU: 도약무전기 주파수 관리 솔루션 기타 (ND Player, ActiveX Download Component, Netsync Browser, OurRSS Builder, OurLinker, OpenRSS, NeoPlus)  주요관심
+            안녕하세요. 김재훈(jaehoon@gmail.com)입니다.
+현재 넥스클라우드에서 프로그래머로 재직(2020~ ) 중 이며, 분산된 환경에서 잡을 실행하기 위한 솔루션인 klevr(https://github.com/nexclipper/klevr)를 개발하고 있습니다.
+ShrinkLabs는 스케줄러를 구현하기 위해 필요한 내용을 분석하고 학습하는 사이드프로젝트입니다.
+이전에 참여했던 프로젝트(2003~2020),
+ Yard: Kubernetes 기반의 배포 자동화 솔루션 NetDesktop: KVM 기반의 VDI 서비스 weMx Designer: QtDesigner 기반의 HMI 화면 저작 도구 SmartPhoto: 사진인화 및 포토북 제작 솔루션 Ntalk biz: 기업용 메신저 EMBROID: 산업용 자수기 운용 솔루션 FMU: 도약무전기 주파수 관리 솔루션 기타 (ND Player, ActiveX Download Component, Netsync Browser, OurRSS Builder, OurLinker, OpenRSS, NeoPlus)  github: https://github.
         </p>
     </div>
 </a>
@@ -219,7 +220,7 @@ abc.go를 다음과 같이 작성합니다.
         		<footer>
 			
 			<span>
-			&copy; <time datetime="2021-07-22 12:16:20.3312875 &#43;0900 KST m=&#43;0.211987901">2021</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
+			&copy; <time datetime="2021-08-09 01:04:11.175532271 &#43;0900 KST m=&#43;0.148722076">2021</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
 			</span>
 		</footer>
 
