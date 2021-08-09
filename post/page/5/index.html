@@ -55,9 +55,9 @@
         <p>
             vim-go가 언제부터인가 main.go 를 만들면 템플릿으로 fmt.Println(&ldquo;vim-go&rdquo;) 를 찍어주는 코드를 자동으로 생성해 주기 시작했습니다.
 나는 아무것도 나오지 않기를 바랬는데, 이런게 나와서 매번 지우는 작업을 하는게 싫었습니다. 그래서 설정중에 go_template_autocreate 를 조절했습니다.
-let g:go_template_autocreate = 0 와 같이 하면 이제 아무것도 없는 빈 화면이 나옵니다.
+let g:go_template_autocreate = 0와 같이 하면 이제 아무것도 없는 빈 화면이 나옵니다.
 혹시라도 반복적으로 나오는게 좋은데 &ldquo;vim-go&quot;를 찍는게 아닌 특정한 코드가 필요하다면, &ldquo;.vim/bundle/vim-go/templates/hello_world.go&rdquo; 파일을 수정해도 됩니다. 또는 특정한 템플릿을 지정하고 싶다면, 다음과 같이,
-let g:go_template_file = &quot;hello_world.go&quot; 로 해도 됩니다.
+let g:go_template_file = &quot;hello_world.go&quot;로 해도 됩니다.
         </p>
     </div>
 </a>
@@ -95,7 +95,7 @@ New()를 했어도 아직 템플릿 리스트에서 관리되는 대상은 아�
         <p>
             임시로 사용할 개발환경을 만들기 위해서 ubuntu 이미지를 사용하는데,
 ifconfig 명령이 동작하지 않아서 보니, net-tools가 온전하게 설치되었지가 않은것 같습니다.
-$ apt-get install --reinstall net-tools    (adsbygoogle = window.adsbygoogle || []).push({});  
+$ apt-get install --reinstall net-tools(adsbygoogle = window.adsbygoogle || []).push({}); 
         </p>
     </div>
 </a>
@@ -111,7 +111,7 @@ $ apt-get install --reinstall net-tools    (adsbygoogle = window.adsbygoogle || 
             Go의 &ldquo;net/http&quot;와 &ldquo;html/template&quot;를 이용해서 html과 css로 만들어진 웹페이지를 만들려고 할때, html 파일이 보여질때 css가 적용되지 않은 상태로 보여집니다.
 이 때 어떻게 해야 하는지 방법을 찾아가던 과정을 기록으로 남겨 놓습니다.
 프로젝트의 디렉토리 구조는 다음과 같습니다.
-src\ + prj + main.go + static style.css + template index.html 그래서 이렇게&hellip;
+src\+ prj+ main.go+ staticstyle.css+ templateindex.html그래서 이렇게&hellip;
 func main() { http.HandleFunc(&#34;/&#34;, indexHandler) http.ListenAndServe(&#34;:8080&#34;, nil) } func indexHandler(...) { // index.html } 와 같이 하면 될 줄 알았습니다.
 그런데 안됩니다.
 그래서 어떻게 해야 하는지 찾아보니, FileServer로 css파일을 제공해 주면 된다고 합니다.
@@ -141,7 +141,7 @@ func main() { http.HandleFunc(&#34;/&#34;, indexHandler) http.ListenAndServe(&#3
 
         <p>
             Labs 머신에서 사용할 vm을 생성할때 특이점
- vm 생성 Settings -&gt; Network(Attached to: Bridged Adapter) Start(Network &amp; Host Name)  Host Name: 지정 Ethernet(enp0s3): On Configure - IPv4 Settings  Method: Manual Addresses: Labs-Network guide 문서의 subnetmask, dns, gateway 그리고 사용할 ip 참조 Require IPv4 addressing for this connection to complete 항목 선택         (adsbygoogle = window.adsbygoogle || []).push({});  
+ vm 생성 Settings -&gt; Network(Attached to: Bridged Adapter) Start(Network &amp; Host Name)  Host Name: 지정 Ethernet(enp0s3): On Configure - IPv4 Settings  Method: Manual Addresses: Labs-Network guide 문서의 subnetmask, dns, gateway 그리고 사용할 ip 참조 Require IPv4 addressing for this connection to complete 항목 선택      (adsbygoogle = window.adsbygoogle || []).push({}); 
         </p>
     </div>
 </a>
@@ -154,8 +154,8 @@ func main() { http.HandleFunc(&#34;/&#34;, indexHandler) http.ListenAndServe(&#3
         <div class="catalogue-line"></div>
 
         <p>
-            zsh 설치하고 기본 쉘 변경 $ sudo apt-get install zsh $ which zsh /usr/bin/zsh $ chsh -s /usr/bin/zsh oh-my-zsh 설치 $ curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh 설정(개인 취향) .zshrc 의 ZSH_THEME를 minimal 로 변경
-   (adsbygoogle = window.adsbygoogle || []).push({});  
+            zsh 설치하고 기본 쉘 변경 $ sudo apt-get install zsh $ which zsh /usr/bin/zsh $ chsh -s /usr/bin/zsh oh-my-zsh 설치 $ curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh설정(개인 취향) .zshrc 의 ZSH_THEME를 minimal 로 변경
+(adsbygoogle = window.adsbygoogle || []).push({}); 
         </p>
     </div>
 </a>
@@ -168,8 +168,8 @@ func main() { http.HandleFunc(&#34;/&#34;, indexHandler) http.ListenAndServe(&#3
         <div class="catalogue-line"></div>
 
         <p>
-            설치  protoc 최신 버전 확인 ( https://github.com/google/protobuf/releases )  $ curl -OL https://github.com/protocolbuffers/protobuf/releases/download/v3.15.6/protoc-3.15.6-linux-x86_64.zip $ unzip protoc-3.6.1-linux-x86\_64.zip -d protoc3 $ sudo mv protoc3/bin/\* /usr/local/bin/ $ sudo mv protoc3/include/\* /usr/local/include/ $ sudo chown $USER /usr/local/bin/protoc $ sudo chown -R $USER /usr/local/include/google 원본: Install protobuf 3.6.1 on Ubuntu 16.04 (github.com)
-   (adsbygoogle = window.adsbygoogle || []).push({});  
+            설치  protoc 최신 버전 확인 ( https://github.com/google/protobuf/releases )  $ curl -OL https://github.com/protocolbuffers/protobuf/releases/download/v3.15.6/protoc-3.15.6-linux-x86_64.zip$ unzip protoc-3.6.1-linux-x86\_64.zip -d protoc3$ sudo mv protoc3/bin/\* /usr/local/bin/$ sudo mv protoc3/include/\* /usr/local/include/$ sudo chown $USER /usr/local/bin/protoc$ sudo chown -R $USER /usr/local/include/google원본: Install protobuf 3.6.1 on Ubuntu 16.04 (github.com)
+(adsbygoogle = window.adsbygoogle || []).push({}); 
         </p>
     </div>
 </a>
@@ -182,7 +182,7 @@ func main() { http.HandleFunc(&#34;/&#34;, indexHandler) http.ListenAndServe(&#3
         <div class="catalogue-line"></div>
 
         <p>
-            설치 $sudo apt-get install terminator 단축키 분할(수직): ctrl + shift + e 분할(수평): ctrl + shift + o 닫기(현재 창): ctrl + shift + w 닫기(전체): ctrl + shift + q 새 탭: ctrl + shift + t 분할된 화면간 이동: alt + 방향키    (adsbygoogle = window.adsbygoogle || []).push({});  
+            설치 $sudo apt-get install terminator단축키 분할(수직): ctrl + shift + e 분할(수평): ctrl + shift + o 닫기(현재 창): ctrl + shift + w 닫기(전체): ctrl + shift + q 새 탭: ctrl + shift + t 분할된 화면간 이동: alt + 방향키 (adsbygoogle = window.adsbygoogle || []).push({}); 
         </p>
     </div>
 </a>
@@ -228,7 +228,7 @@ import &ldquo;github.com/jaehoonn/lotto/command&rdquo; 와 같이 사용해야 �
         		<footer>
 			
 			<span>
-			&copy; <time datetime="2021-08-09 01:05:31.300670435 &#43;0900 KST m=&#43;0.063022821">2021</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
+			&copy; <time datetime="2021-08-09 15:58:08.1404747 &#43;0900 KST m=&#43;0.566566201">2021</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
 			</span>
 		</footer>
 

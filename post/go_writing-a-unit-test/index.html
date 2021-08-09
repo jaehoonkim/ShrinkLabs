@@ -263,12 +263,12 @@ func Test_Config_New(t *testing.T) 함수에서 보면, 다음과 같은 주석�
 // assert
 ...
 </code></pre><p>이는 테스트 코드를 작성하기 위한 일종의 템플릿 같은것 입니다.<br>
-arrange: 테스트를 진행하기 전에 필요한 준비 작업 정도의 코드들이 위치할 수 있습니다.
+arrange: 테스트를 진행하기 전에 필요한 준비 작업 정도의 코드들이 위치할 수 있습니다. 
 act: 실제로 테스트 되어서 결과를 확인하고자 하는 동작을 구현합니다.<br>
 assert: act에서 진행한 동작에 대한 결과를 확인하는 용도입니다.</p>
 <p>첫 번째 테스트 코드인 Test_Config_New는 Config 객체의 생성이 잘 되는지 확인하기 위한 테스트입니다.</p>
 <p>arrange 절은 준비할 작업이 별도로 없기 때문에 생략 되었습니다.<br>
-act 절에서 확인하고자 하는 NewConfig() 함수를 사용해서 Config 객체를 생성합니다.
+act 절에서 확인하고자 하는 NewConfig() 함수를 사용해서 Config 객체를 생성합니다. 
 assert 절에서 생성된 객체가 생성이 잘 되었는지 확인하는 과정으로 객체가 nil인지를 확인 합니다. 여기에서 testify/assert 패키지를 사용합니다.</p>
 <p>assert 패키지에는 다양한 검증을 위한 기능을 제공하고 있습니다. 간단하게 assert.NotNil은 주어진 객체가 nil이 아닌지 확인하는 함수입니다. assert의 다양한 기능에 대해서는 godoc( <a href="https://godoc.org/github.com/stretchr/testify/assert">https://godoc.org/github.com/stretchr/testify/assert</a> ) 에서 확인해볼 수 있습니다.</p>
 <p>두 번째 테스트 코드인 Test_GetOprCfg는 Config에  다양한 owner의 CfgItem들이 섞여 있는 중에서, 특정 owner와 onwer가 global로 지정된 CfgItem을 찾아서 OprCfg 만들어서 반환해주는걸 확인하기 위한 용도의 테스트입니다.</p>
@@ -498,7 +498,7 @@ MockAgentMsgr의 Send 메소드의 구현에서는 입력된 값과 반환되어
         		<footer>
 			
 			<span>
-			&copy; <time datetime="2021-08-09 01:05:31.290906179 &#43;0900 KST m=&#43;0.053258563">2021</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
+			&copy; <time datetime="2021-08-09 15:58:08.1282683 &#43;0900 KST m=&#43;0.554359801">2021</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
 			</span>
 		</footer>
 

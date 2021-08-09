@@ -54,7 +54,7 @@
 
         <p>
             docker 설치 후 &ldquo;Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?&rdquo; 가 발생
-$sudo systemctl status docker $sudo systemctl start docker $sudo systemctl enable docker    (adsbygoogle = window.adsbygoogle || []).push({});  
+$sudo systemctl status docker $sudo systemctl start docker $sudo systemctl enable docker (adsbygoogle = window.adsbygoogle || []).push({}); 
         </p>
     </div>
 </a>
@@ -80,7 +80,7 @@ $sudo systemctl status docker $sudo systemctl start docker $sudo systemctl enabl
         <div class="catalogue-line"></div>
 
         <p>
-             새로운 디스크를 추가합니다.  여기에서는 &ldquo;/docker&rdquo; 에 mount 되어 있는걸로 가정합니다.   &ldquo;etc/docker/daemon.json&rdquo; 에 다음의 내용을 추가합니다.  { &#34;data-root&#34;: &#34;/docker&#34; }  docker 서비스를 재시작합니다.  $ sudo systemctl daemon-reload $ sudo systemctl restart docker    (adsbygoogle = window.adsbygoogle || []).push({});  
+             새로운 디스크를 추가합니다.  여기에서는 &ldquo;/docker&rdquo; 에 mount 되어 있는걸로 가정합니다.   &ldquo;etc/docker/daemon.json&rdquo; 에 다음의 내용을 추가합니다.  { &#34;data-root&#34;: &#34;/docker&#34; }  docker 서비스를 재시작합니다.  $ sudo systemctl daemon-reload $ sudo systemctl restart docker (adsbygoogle = window.adsbygoogle || []).push({}); 
         </p>
     </div>
 </a>
@@ -116,7 +116,7 @@ kind가 &ldquo;Ingress&quot;인 yaml 파일을 만듭니다. 이때 &ldquo;path:
 Helm은 클라이언트 역할을 하는 helm, 서버 역할을 하는 tiller 그리고 설정 정보들의 관리를 위한 chart로 이루어져 있습니다.
 여기에서 클라이언트(helm)라고 하는건 클러스터의 외부에서 작업을 지시하기 위한 도구이고, 실제로 클러스터 안쪽에서 동작 하는건 서버(tiller)라고 보면 됩니다.
 helm의 설치는 간단합니다.
-$ curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get &gt; get_helm.sh $ chmod 700 get_helm.sh $ ./get_helm.sh 근데 이 과정 다음에 갑자기 tiller를 위한 계정을 만들고 해당 계정을 무언가에 바인딩을 합니다.
+$ curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get &gt; get_helm.sh$ chmod 700 get_helm.sh$ ./get_helm.sh근데 이 과정 다음에 갑자기 tiller를 위한 계정을 만들고 해당 계정을 무언가에 바인딩을 합니다.
         </p>
     </div>
 </a>
@@ -200,7 +200,7 @@ StorageClass는 상태를 갖는걸 확인하기 위한 실습이 필요하다�
             이번 장에서는 &ldquo;Deployment&quot;가 어떤 역할을 할 수 있으며, 이를 이용해서 취할 수 있는 배포 전략에 대해서 알아볼 수 있었습니다.
 (이번 장에서 실습을 위해서는 필수적으로 compute/zone 설정을 us-central1-a로 지정해 놓아야 cluster 생성을 정상적으로 할 수 있습니다.)
 Deployment 뿐만이 아니라 다른 객체들을 사용하기 위해서도 yaml을 작성할때 각 필드에 대한 정보를 어디에서 확인해야 하는지가 궁금했습니다.
-$ kubectl explain deployment $ kubectl explain --recursive $ kubectl explain deployment.metadata.name 등과 같이 확인을 할 수 있습니다.
+$ kubectl explain deployment$ kubectl explain --recursive$ kubectl explain deployment.metadata.name등과 같이 확인을 할 수 있습니다.
         </p>
     </div>
 </a>
@@ -224,7 +224,7 @@ $ kubectl explain deployment $ kubectl explain --recursive $ kubectl explain dep
         		<footer>
 			
 			<span>
-			&copy; <time datetime="2021-08-09 01:05:31.297677188 &#43;0900 KST m=&#43;0.060029575">2021</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
+			&copy; <time datetime="2021-08-09 15:58:08.1292691 &#43;0900 KST m=&#43;0.555360601">2021</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
 			</span>
 		</footer>
 
