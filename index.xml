@@ -748,7 +748,8 @@ abc.go를 다음과 같이 작성합니다.
       <description>안녕하세요. 김재훈(jaehoon@gmail.com)입니다.
 Go언어와 Distributed Systems에 관심을 갖고 있는 프로그래머입니다.
 이전에 참여했던 프로젝트(2003~2020),
- Yard: Kubernetes 기반의 배포 자동화 솔루션 NetDesktop: KVM 기반의 VDI 서비스 weMx Designer: QtDesigner 기반의 HMI 화면 저작 도구 SmartPhoto: 사진인화 및 포토북 제작 솔루션 Ntalk biz: 기업용 메신저 기타 (DRM, RSS, MIS, Embeded &amp;hellip; 솔루션) 현재(2020~ )는 분산된 환경에서 Task를 실행하고 관리할 수 있는 솔루션인 klevr(https://github.com/klevry/klevr)를 개발하고 있습니다.  주로 Linux, Go, Protobuf, MariaDB, Kubernetes, Container(Docker) 기반의 환경에서 개발을 하고 있습니다.</description>
+ Yard: Kubernetes 기반의 배포 자동화 솔루션 NetDesktop: KVM 기반의 VDI 서비스 weMx Designer: QtDesigner 기반의 HMI 화면 저작 도구 SmartPhoto: 사진인화 및 포토북 제작 솔루션 Ntalk biz: 기업용 메신저 기타 (DRM, RSS, MIS, Embeded &amp;hellip; 솔루션)  현재(2020~ )는 분산된 환경에서 Task를 실행하고 관리할 수 있는 솔루션인 klevr(https://github.com/klevry/klevr)를 개발하고 있습니다.
+주로 Linux, Go, Protobuf, MariaDB, Kubernetes, Container(Docker) 기반의 환경에서 개발을 하고 있습니다.</description>
     </item>
     
   </channel>
