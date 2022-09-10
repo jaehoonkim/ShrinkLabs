@@ -1,63 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-		
-		
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1"><title>Consul과 Golang을 사용한 리더 선출 - ShrinkLabs</title>
+<meta property="og:title" content="Consul과 Golang을 사용한 리더 선출 - ShrinkLabs">
+<meta property="og:type" content="article">
 
-		<title>Consul과 Golang을 사용한 리더 선출 &middot; ShrinkLabs</title>
 
-		
-  		<link rel="stylesheet" href="/css/style.css">
-		<link rel="stylesheet" href="/css/fonts.css">
-		
-		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico">
-		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico">
-		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<meta property="og:image" content="images/logo.png">
 
-		
-		<link href="" rel="alternate" type="application/rss+xml" title="ShrinkLabs" />
-	</head>
+<meta property="og:url" content="https://shrinklabs.com/post/leader_election_using_consul_and_golang/">
 
-    <body>
-        		<nav class="nav">
-			<div class="nav-container">
-				<a href="/">
-					<h2 class="nav-title">ShrinkLabs</h2>
-				</a>
-				<ul>
+
+<meta property="keywords" content ="go, cluster">
+
+<link rel="stylesheet" href="https://shrinklabs.com/css/style.min.css">
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#ffffff">
+<link rel="webmention" href="https://webmention.io/hugocisneros.com/webmention">
+<link rel="pingback" href="https://webmention.io/hugocisneros.com/xmlrpc">
+<script>
+ function updateMode() {
     
-    
-        <li>
-            <a href="/about/">
-                
-                <span>about</span>
-                
-            </a>
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+    }
+ }
+ function toggleMode() {
+     if (localStorage.theme === 'dark') {
+        
+        localStorage.theme = 'light';
+     }
+     else {
+        
+        localStorage.theme = 'dark';
+     }
+     updateMode()
+ }
+ window.onload = updateMode();
+ function toggleMenu() {
+     let navbar = document.getElementById("navbar-default");
+     if (navbar.classList.contains("hidden")) {
+        navbar.classList.remove("hidden");
+     }
+     else {
+        navbar.classList.add("hidden");
+     }
+ }
+</script>
+
+  </head>
+  <body>
+    <header class="md:px-0 px-2">
+        <nav >
+  <div class="container flex flex-wrap justify-between items-center mx-auto">
+    <div class="nav-main my-2.5">
+      <a href="https://shrinklabs.com/" class="nav-title py-2.5 text-2xl text-zinc-600 dark:text-zinc-300 hover:border-b-0">ShrinkLabs</a>
+    </div>
+    <button type="button"
+            onclick="toggleMenu()"
+            class="inline-flex items-center p-2 ml-3
+                  text-sm text-gray-500
+                  rounded-lg md:hidden hover:bg-gray-100
+                  focus:outline-none focus:ring-2
+                  focus:ring-gray-200 dark:text-gray-400
+                  dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            aria-controls="navbar-default"
+            aria-expanded="false">
+        <span class="sr-only">Open main menu</span>
+        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor"
+             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1
+                           0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0
+                           01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0
+                           01-1-1z" clip-rule="evenodd"></path>
+        </svg>
+    </button>
+    <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+      <ul class="grid md:grid-flow-col items-center justify-between text-lg my-2.5">
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/post/">posts</a>
         </li>
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/categories/">categories</a>
+        </li>
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/tags/">tags</a>
+        </li>
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/about/">about</a>
+        </li>
+        
+        <li class="h-7 pl-2.5 pr-0 list-none">
+          <button type="button" onclick="toggleMode()" class="h-full">
+            <img class="h-7 w-7 max-h-full mb-1.5 p-1.5 hidden dark:inline" id="dark-mode-button-img"
+                 src="https://shrinklabs.com/img/light_mode.svg">
+            <img class="h-7 w-7 max-h-full mb-1.5 p-1.5 inline dark:hidden" id="dark-mode-button-img"
+                 src="https://shrinklabs.com/img/dark_mode.svg">
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    </header>
+    <main class="content h-card container mt-2 m-auto
+                 leading-loose md:px-0 px-2 z-0 Page(/post/leader_election_using_consul_and_golang.md)"
+          role="main">
     
-</ul>
-			</div>
-		</nav>
+    <article class="article" itemprop="mainEntity" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="title-container">
+    <h1 class="article-title" itemprop="name">Consul과 Golang을 사용한 리더 선출</h1>
+    
+    <div class="article-subtitle">
+    
+    <span class="article-date" itemprop="datePublished" content="2021-06-27T21:33:58&#43;0900">2021-06-27</span>
+    
+    
+    
+    <span class="article-author" itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Jaehoon Khim</span></span>
+    
+    
+    </div>
+    
+    </div>
 
-        
-
-<main>
-	<div class="post">
-		<div class="post-info">
-    <span>Written by</span>
-        
-        <br>
-        <span>on&nbsp;</span><time datetime="2021-06-27 21:33:58 &#43;0900 KST">June 27, 2021</time>
-</div>
-
-		<h1 class="post-title">Consul과 Golang을 사용한 리더 선출</h1>
-<div class="post-line"></div>
-
-		
-
-		<p>이 글은 원글(<a href="https://engineering.razorpay.com/leader-election-using-consul-and-golang-73580fb14463">Leader Election using Consul and Golang</a>)의 저작자 Sunny Aggrawal씨의 허락을 받고 번역한 글 입니다.</p>
+    <div class="article-content" itemprop="articleBody">
+      <p>이 글은 원글(<a href="https://engineering.razorpay.com/leader-election-using-consul-and-golang-73580fb14463">Leader Election using Consul and Golang</a>)의 저작자 Sunny Aggrawal씨의 허락을 받고 번역한 글 입니다.</p>
 <hr>
 <p>분산 컴퓨팅에서 리더 선택은 단일 노드를 여러 노드에 분산되는 일부 작업의 주관자로 지정하는 프로세스입니다. 처음에는 모든 네트워크 노드가 작업의 &ldquo;리더&rdquo; 역할을 할 노드를 알지 못합니다. 리더 선택 알고리즘이 실행된 후, 네트워크의 각 노드는 특정 고유 노드를 작업 리더로 인식하고 다른 노드는 팔로워 노드 역할을 합니다.</p>
 <p><strong>리더</strong> - 클러스터의 노드가 특수 작업을 수행하도록 지정되었습니다. 이러한 특수 작업에는 작업 할당 기능, 데이터 수정 기능 또는 시스템의 모든 요청을 처리하는 책임도 포함될 수 있습니다.</p>
@@ -101,15 +187,15 @@
 <ol>
 <li>
 <p>TTL을 사용하여 consul 세션을 생성합니다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">sessionID</span>, <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">Session</span>().<span style="color:#a6e22e">Create</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">api</span>.<span style="color:#a6e22e">SessionEntry</span>{
-    <span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;my-service-lock&#34;</span>,
-    <span style="color:#a6e22e">Behavior</span>: <span style="color:#e6db74">&#34;delete&#34;</span>,
-    <span style="color:#a6e22e">TTL</span>: <span style="color:#e6db74">&#34;30s&#34;</span>,
-    <span style="color:#a6e22e">LockDelay</span> : <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>
-}, <span style="color:#66d9ef">nil</span>)
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">sessionID, _, err := client.<span style="color:#447fcf">Session</span>().<span style="color:#447fcf">Create</span>(&amp;api.SessionEntry{
+    Name: <span style="color:#ed9d13">&#34;my-service-lock&#34;</span>,
+    Behavior: <span style="color:#ed9d13">&#34;delete&#34;</span>,
+    TTL: <span style="color:#ed9d13">&#34;30s&#34;</span>,
+    LockDelay : <span style="color:#3677a9">2</span> * time.Second
+}, <span style="color:#6ab825;font-weight:bold">nil</span>)
 
-<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-    panic(<span style="color:#a6e22e">err</span>)
+<span style="color:#6ab825;font-weight:bold">if</span> err != <span style="color:#6ab825;font-weight:bold">nil</span> {
+    <span style="color:#24909d">panic</span>(err)
 }
 </code></pre></div><h6 id="팁">팁</h6>
 <blockquote>
@@ -122,28 +208,28 @@
 <li>
 <p>세션 갱신(Renew Session)<br>
 renew/renewPeriodic API를 사용하여 세션을 정기적으로 갱신합니다. 세션은 TTL이 만료되기 전에 TTL 기간으로 갱신됩니다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">Session</span>().<span style="color:#a6e22e">RenewPeriodic</span>(
-     <span style="color:#e6db74">&#34;30s&#34;</span>,
-     <span style="color:#a6e22e">sessionID</span>,
-     <span style="color:#66d9ef">nil</span>,
-     <span style="color:#a6e22e">doneChan</span>,
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">client.<span style="color:#447fcf">Session</span>().<span style="color:#447fcf">RenewPeriodic</span>(
+     <span style="color:#ed9d13">&#34;30s&#34;</span>,
+     sessionID,
+     <span style="color:#6ab825;font-weight:bold">nil</span>,
+     doneChan,
  )
 
 </code></pre></div><p>이는 동기(blocking) 호출이므로 별도의 고루틴에서 실행해야 합니다. 일반적으로 doneCh는 현재 컨텍스트의 완료 채널이 됩니다.</p>
 </li>
 <li>
 <p>합의된 키에 대한 잠금 설정 시도(Try to accquire a lock on an agreed key)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">isAcquired</span>, <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">KV</span>().<span style="color:#a6e22e">Acquire</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">api</span>.<span style="color:#a6e22e">KVPair</span>{
-  <span style="color:#a6e22e">Key</span>:    <span style="color:#e6db74">&#34;path/to/leader/key&#34;</span>,
-  <span style="color:#a6e22e">Value</span>:   []byte(<span style="color:#e6db74">&#34;any value&#34;</span>),
-  <span style="color:#a6e22e">Session</span>: <span style="color:#a6e22e">sessionID</span>,
-}, <span style="color:#66d9ef">nil</span>)
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">isAcquired, _, err := client.<span style="color:#447fcf">KV</span>().<span style="color:#447fcf">Acquire</span>(&amp;api.KVPair{
+  Key:    <span style="color:#ed9d13">&#34;path/to/leader/key&#34;</span>,
+  Value:   []<span style="color:#24909d">byte</span>(<span style="color:#ed9d13">&#34;any value&#34;</span>),
+  Session: sessionID,
+}, <span style="color:#6ab825;font-weight:bold">nil</span>)
 
-<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-  <span style="color:#75715e">// handle error
-</span><span style="color:#75715e"></span>}
+<span style="color:#6ab825;font-weight:bold">if</span> err != <span style="color:#6ab825;font-weight:bold">nil</span> {
+  <span style="color:#999;font-style:italic">// handle error
+</span><span style="color:#999;font-style:italic"></span>}
 
-<span style="color:#75715e">// if no error and isAcquired is true node is leader node 
+<span style="color:#999;font-style:italic">// if no error and isAcquired is true node is leader node 
 </span></code></pre></div><p>잠금을 획득할 수 있는 노드는 리더로 간주할 수 있으며 다른 노드는 팔로워가 됩니다.</p>
 <h6 id="팁-1">팁</h6>
 <blockquote>
@@ -155,27 +241,27 @@ renew/renewPeriodic API를 사용하여 세션을 정기적으로 갱신합니�
 <li>
 <p>리더 키 보기(Watch Leader key)</p>
 <h5 id="watch-설정">watch 설정</h5>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">params</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">interface</span>{}{}
-<span style="color:#a6e22e">params</span>[<span style="color:#e6db74">&#34;type&#34;</span>] = <span style="color:#e6db74">&#34;key&#34;</span>
-<span style="color:#a6e22e">params</span>[<span style="color:#e6db74">&#34;key&#34;</span>] = <span style="color:#e6db74">&#34;path/to/leader/key&#34;</span>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">params := <span style="color:#6ab825;font-weight:bold">map</span>[<span style="color:#6ab825;font-weight:bold">string</span>]<span style="color:#6ab825;font-weight:bold">interface</span>{}{}
+params[<span style="color:#ed9d13">&#34;type&#34;</span>] = <span style="color:#ed9d13">&#34;key&#34;</span>
+params[<span style="color:#ed9d13">&#34;key&#34;</span>] = <span style="color:#ed9d13">&#34;path/to/leader/key&#34;</span>
 
-<span style="color:#a6e22e">plan</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">watch</span>.<span style="color:#a6e22e">Parse</span>(<span style="color:#a6e22e">params</span>)
-<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-  <span style="color:#75715e">// handle error
-</span><span style="color:#75715e"></span>}
+plan, err := watch.<span style="color:#447fcf">Parse</span>(params)
+<span style="color:#6ab825;font-weight:bold">if</span> err != <span style="color:#6ab825;font-weight:bold">nil</span> {
+  <span style="color:#999;font-style:italic">// handle error
+</span><span style="color:#999;font-style:italic"></span>}
 
-<span style="color:#75715e">// handler function which is invoked for any changes in the watched key
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">plan</span>.<span style="color:#a6e22e">Handler</span> = <span style="color:#a6e22e">handler</span>
+<span style="color:#999;font-style:italic">// handler function which is invoked for any changes in the watched key
+</span><span style="color:#999;font-style:italic"></span>plan.Handler = handler
 
-<span style="color:#75715e">// blocking call, so this code should run in a go routine
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">plan</span>.<span style="color:#a6e22e">RunWithClientAndHclog</span>(<span style="color:#a6e22e">client</span>, <span style="color:#66d9ef">nil</span>)
+<span style="color:#999;font-style:italic">// blocking call, so this code should run in a go routine
+</span><span style="color:#999;font-style:italic"></span>plan.<span style="color:#447fcf">RunWithClientAndHclog</span>(client, <span style="color:#6ab825;font-weight:bold">nil</span>)
 </code></pre></div><h5 id="watch-업데이트-처리handle-watch-updates">watch 업데이트 처리(Handle watch updates)</h5>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">handler</span>(<span style="color:#a6e22e">index</span> <span style="color:#66d9ef">uint64</span>, <span style="color:#a6e22e">result</span> <span style="color:#66d9ef">interface</span>{}) {
-  <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;watch data: %s&#34;</span>, <span style="color:#a6e22e">result</span>)
-  <span style="color:#75715e">// check if the returned key has a sessionID
-</span><span style="color:#75715e"></span>  <span style="color:#75715e">// if session ID is present, key is acquired by some node
-</span><span style="color:#75715e"></span>  <span style="color:#75715e">// if not, currently there is no leader, attempt to acquire the key
-</span><span style="color:#75715e"></span>}
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#6ab825;font-weight:bold">func</span> <span style="color:#447fcf">handler</span>(index <span style="color:#6ab825;font-weight:bold">uint64</span>, result <span style="color:#6ab825;font-weight:bold">interface</span>{}) {
+  log.<span style="color:#447fcf">Printf</span>(<span style="color:#ed9d13">&#34;watch data: %s&#34;</span>, result)
+  <span style="color:#999;font-style:italic">// check if the returned key has a sessionID
+</span><span style="color:#999;font-style:italic"></span>  <span style="color:#999;font-style:italic">// if session ID is present, key is acquired by some node
+</span><span style="color:#999;font-style:italic"></span>  <span style="color:#999;font-style:italic">// if not, currently there is no leader, attempt to acquire the key
+</span><span style="color:#999;font-style:italic"></span>}
 </code></pre></div><p>watches를 사용하여 키의 변경 내용을 확인할 수 있습니다. Consul은 변경 사항이 발생하면 이를 통지하므로 세션이 삭제/만료되면 리더 키에 대한 잠금이 해제되고 KV 쌍이 업데이트됩니다. 이 키를 감시하는 모든 노드에 알림이 표시됩니다. 알림을 받으면 모든 노드가 키 상태를 확인하고 새로운 선택을 실행할 수 있으며 프로세스가 계속됩니다.</p>
 <p>개념적으로는 간단하지만 프로덕션 시스템을 작성할 때는 많은 사례를 고려해야 합니다.</p>
 <ul>
@@ -205,23 +291,74 @@ renew/renewPeriodic API를 사용하여 세션을 정기적으로 갱신합니�
 </script>
 
 
-		
-	</div>
+    </div>
 
-	<div class="pagination">
-		<a href="/post/scheduler_an-approach-to-designing-distributed-fault-tolerant-horizontally-scalable-event-scheduler/" class="left arrow">&#8592;</a>
+    
+<ul class="list-none pl-0 font-sm align-left">
 
-		<a href="#" class="top">Top</a>
-	</div>
-</main>
+<hr>
+<li>
+    Categories:
+
+<a href="/categories/distributedsystems">
+    <span class="tag-item">
+    distributedsystems
+    </span>
+</a>
+</li >
 
 
-        		<footer>
-			
-			<span>
-			&copy; <time datetime="2021-11-03 10:25:31.9354664 &#43;0900 KST m=&#43;0.562226801">2021</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
-			</span>
-		</footer>
+<li class="list-none">
+    Tags:
+    
+    <a class="inline-block mt-2 mr-2 border-none text-neutral-800 dark:text-neutral-200" href="/tags/go">
+        <span class="flex flex-row justify-start items-center dark:bg-zinc-900 dark:hover:bg-zinc-800
+                     hover:bg-zinc-200 bg-zinc-100 p-1
+                     rounded-t border-b-2 border-zinc-300 hover:border-zinc-500">
+            
+            <img class="h-5 mr-1 inline" src="https://shrinklabs.com/images/tag_logo.svg"
+                 alt="Logo of a tag: indicates that a tag item follows.">
+        go
+        </span>
+    </a>
+    
+    <a class="inline-block mt-2 mr-2 border-none text-neutral-800 dark:text-neutral-200" href="/tags/cluster">
+        <span class="flex flex-row justify-start items-center dark:bg-zinc-900 dark:hover:bg-zinc-800
+                     hover:bg-zinc-200 bg-zinc-100 p-1
+                     rounded-t border-b-2 border-zinc-300 hover:border-zinc-500">
+            
+            <img class="h-5 mr-1 inline" src="https://shrinklabs.com/images/tag_logo.svg"
+                 alt="Logo of a tag: indicates that a tag item follows.">
+        cluster
+        </span>
+    </a>
+    
+</li>
 
-    </body>
+</ul>
+
+
+    
+    
+    <div class="article-date-modified">
+        Last modified <span itemprop="dateModified" content="2021-06-27T21:33:58&#43;0900">2021-06-27</span>
+    </div>
+    
+    </article>
+
+    </main>
+    <footer class="footer container h-10 text-center">
+  <ul class="pl-0">
+    
+    <li class="ml-2 first:before:content-none before:content-['•'] inline-block list-none"><a class="ml-2 text-neutral-800 dark:text-neutral-400 border-none"
+          href="https://github.com/hugcis/hugo-astatine-theme">Code</a>
+    </li>
+    <li class="ml-2 first:before:content-none before:content-['•']
+                text-neutral-800 dark:text-neutral-400 inline-block list-none"><span class="ml-2">© Jaehoon Khim 2022</span>
+    </li>
+  </ul>
+</footer>
+
+
+  </body>
 </html>

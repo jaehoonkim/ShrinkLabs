@@ -5,6 +5,52 @@
     <link>https://shrinklabs.com/categories/</link>
     <description>Recent content in Categories on ShrinkLabs</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language><atom:link href="https://shrinklabs.com/categories/index.xml" rel="self" type="application/rss+xml" />
+    <language>en</language>
+    <lastBuildDate>Sun, 27 Jun 2021 21:33:58 +0900</lastBuildDate><atom:link href="https://shrinklabs.com/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>distributedsystems</title>
+      <link>https://shrinklabs.com/categories/distributedsystems/</link>
+      <pubDate>Sun, 27 Jun 2021 21:33:58 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/categories/distributedsystems/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tools</title>
+      <link>https://shrinklabs.com/categories/tools/</link>
+      <pubDate>Fri, 19 Feb 2021 07:17:00 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/categories/tools/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cloud</title>
+      <link>https://shrinklabs.com/categories/cloud/</link>
+      <pubDate>Tue, 19 May 2020 01:05:57 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/categories/cloud/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>container</title>
+      <link>https://shrinklabs.com/categories/container/</link>
+      <pubDate>Wed, 08 Apr 2020 21:27:50 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/categories/container/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>go</title>
+      <link>https://shrinklabs.com/categories/go/</link>
+      <pubDate>Thu, 25 May 2017 15:43:40 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/categories/go/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>

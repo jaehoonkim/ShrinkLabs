@@ -5,6 +5,106 @@
     <link>https://shrinklabs.com/tags/</link>
     <description>Recent content in Tags on ShrinkLabs</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language><atom:link href="https://shrinklabs.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <language>en</language>
+    <lastBuildDate>Sun, 27 Jun 2021 21:33:58 +0900</lastBuildDate><atom:link href="https://shrinklabs.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>cluster</title>
+      <link>https://shrinklabs.com/tags/cluster/</link>
+      <pubDate>Sun, 27 Jun 2021 21:33:58 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/tags/cluster/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>go</title>
+      <link>https://shrinklabs.com/tags/go/</link>
+      <pubDate>Sun, 27 Jun 2021 21:33:58 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/tags/go/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>git</title>
+      <link>https://shrinklabs.com/tags/git/</link>
+      <pubDate>Fri, 19 Feb 2021 07:17:00 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/tags/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>kuberntes</title>
+      <link>https://shrinklabs.com/tags/kuberntes/</link>
+      <pubDate>Tue, 19 May 2020 01:05:57 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/tags/kuberntes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>windows</title>
+      <link>https://shrinklabs.com/tags/windows/</link>
+      <pubDate>Tue, 19 May 2020 01:05:57 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/tags/windows/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>kubernetes</title>
+      <link>https://shrinklabs.com/tags/kubernetes/</link>
+      <pubDate>Fri, 10 Apr 2020 16:31:48 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/tags/kubernetes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>docker</title>
+      <link>https://shrinklabs.com/tags/docker/</link>
+      <pubDate>Wed, 08 Apr 2020 21:27:50 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>gcp</title>
+      <link>https://shrinklabs.com/tags/gcp/</link>
+      <pubDate>Thu, 05 Mar 2020 21:36:13 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/tags/gcp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>studyjam</title>
+      <link>https://shrinklabs.com/tags/studyjam/</link>
+      <pubDate>Mon, 21 Jan 2019 17:05:30 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/tags/studyjam/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>vm</title>
+      <link>https://shrinklabs.com/tags/vm/</link>
+      <pubDate>Thu, 21 Apr 2016 14:39:36 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/tags/vm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>zsh</title>
+      <link>https://shrinklabs.com/tags/zsh/</link>
+      <pubDate>Thu, 21 Apr 2016 14:39:36 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/tags/zsh/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>

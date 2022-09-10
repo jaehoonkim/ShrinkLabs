@@ -1,244 +1,0 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-		
-		
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-		<title>Posts &middot; ShrinkLabs</title>
-
-		
-  		<link rel="stylesheet" href="/css/style.css">
-		<link rel="stylesheet" href="/css/fonts.css">
-		
-		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico">
-		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico">
-		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-
-		
-		<link href="/post/index.xml" rel="alternate" type="application/rss+xml" title="ShrinkLabs" />
-	</head>
-
-    <body>
-        		<nav class="nav">
-			<div class="nav-container">
-				<a href="/">
-					<h2 class="nav-title">ShrinkLabs</h2>
-				</a>
-				<ul>
-    
-    
-        <li>
-            <a href="/about/">
-                
-                <span>about</span>
-                
-            </a>
-        </li>
-    
-</ul>
-			</div>
-		</nav>
-
-        
-
-<main>
-	<div class="catalogue">
-		
-			<a href="https://shrinklabs.com/post/go_delve/" class="catalogue-item">
-    <div>
-        <time datetime="2017-06-18 23:13:14 &#43;0900 KST" class="catalogue-time">June 18, 2017</time>
-        <h1 class="catalogue-title">delve를 사용한 Go언어 디버깅</h1>
-        <div class="catalogue-line"></div>
-
-        <p>
-            소개 delve는 Go언어를 위한 debugger 입니다.
-delve설치 설치를 하기 위해서는 Go 1.5 이상의 버전이 필요합니다.
-지금 시점에 Go 1.5를 사용하지 않을테니&hellip;
-다음의 명령으로 설치합니다.
-$ go get github.com/derekparker/delve/cmd/dlv이제 설치 끝! (Windows랑 MAC은 모르겠습니다.)
-delve사용 프로세스 실행 제어, 변수, 스레드/goroutine 상태, CPU 레지스터 상태 등을 확인 할 수 있습니다.
-  Commands
- attach: 실행중인 프로세스에 연결해서 디버깅을 합니다. $ dlv attach pid [executable]실행중인 프로세스에 디버그 세션을 연결해서 프로세스를 제어합니다.
-        </p>
-    </div>
-</a>
-
-		
-			<a href="https://shrinklabs.com/post/go_build/" class="catalogue-item">
-    <div>
-        <time datetime="2017-05-25 15:43:40 &#43;0900 KST" class="catalogue-time">May 25, 2017</time>
-        <h1 class="catalogue-title">build</h1>
-        <div class="catalogue-line"></div>
-
-        <p>
-            소개 Go언어로 개발을 하다보면 debug모드 release모드 같이 별도의 빌드 환경을 구성하고 싶을때가 있습니다.
-그래서 build 옵션으로 특정한 환경별로 결과를 달리 할 수 있는 방법에 대해서 테스트한 내용을 정리해봅니다.
-빌드 go 파일들을 빌드하기 위해서는 일반적으로 다음과 같이 합니다.
-$ go buildGo언어 문서중에 보면 https://golang.org/pkg/go/build/#hdr-Build_Constraints[Build Constraints] 에 관한 내용이 있습니다.
-이 내용은 build 할 때 조건을 줄 수 있다는 내용이고 방법은 다음과 같이 하면 된다고 합니다.
-코드의 상단에 &ldquo;// +build linux&rdquo; 하고 한 칸을 띄우고 &ldquo;package blah&rdquo; 를 시작합니다.
-        </p>
-    </div>
-</a>
-
-		
-			<a href="https://shrinklabs.com/post/go_rabbitmqwithgo/" class="catalogue-item">
-    <div>
-        <time datetime="2017-04-19 23:43:52 &#43;0900 KST" class="catalogue-time">April 19, 2017</time>
-        <h1 class="catalogue-title">RabbitMQ 스터디(with go)</h1>
-        <div class="catalogue-line"></div>
-
-        <p>
-            Go언어로 RabbitMQ를 어떻게 이용할 수 있는지 스터디하는 내용들을 대충 대충 정리하는 중&hellip;
-RabbitMQ라는게 뭐지? AMQP를 구현한 메세지 브로커
-여기 저기에 있는 클라이언트들(Producer/Consumer)이 메세지를 서로 주고 받을 수 있도록 해주는 그런거?
-설치  RabbitMQ 설치  sudo apt-get install rabbitmq-server 관리 플러그인 설치  sudo rabbitmq-plugins enable rabbitmq_management sudo service rabbitmq-server restart 실행  service rabbitmq-server start 계정 등록(id:jaehoonn, pw:1234)  rabbimqctl add_user jaehoonn 1234 등록한 계정을 관리자 계정으로 변경  rabbitmqctl set_user_tags jaehoonn administrator 웹브라우저로 관리 플러그인에 접속  localhost:15672 용어 대충 요런것들에 대해서 찾아 보면 될 것 같은데&hellip;
-        </p>
-    </div>
-</a>
-
-		
-			<a href="https://shrinklabs.com/post/go_multipart-contenttype/" class="catalogue-item">
-    <div>
-        <time datetime="2016-12-10 18:22:48 &#43;0900 KST" class="catalogue-time">December 10, 2016</time>
-        <h1 class="catalogue-title">CreateFormFile()을 사용하면 Content-Type이 고정되는 현상</h1>
-        <div class="catalogue-line"></div>
-
-        <p>
-            mime/multipart를 사용해서 파일을 업로드 하려 할때 파일을 업로드할 필드를 생성하기 위해서 CreateFormFile()을 사용합니다.
-이를 이용해서 파일을 업로드하면 &ldquo;Content-Type&quot;이 &ldquo;application/octet-stream&rdquo; 으로 고정 되어집니다.
-src/mime/multipart/writer.go의 CreateFormFile을 확인해 보면 다음과 같이 고정되어 있는걸 확인 할 수 있습니다.
-h.Set(&#34;Content-Type&#34;, &#34;application/octet-stream&#34;) 관련한 이슈가 올라온게 혹시 있지 않을까 해서 찾아보니 이런 이슈가 있었습니다.
-https://github.com/golang/go/issues/16425
-bradfitz는 다음과 같이 답변을 하고 있습니다.
- Use CreatePart. CreateFormFile is a very thin wrapper around CreatePart. Click https://golang.org/pkg/mime/multipart/#Writer.CreateFormField[] and then click the CreateFormFile heading to see its source code.
-        </p>
-    </div>
-</a>
-
-		
-			<a href="https://shrinklabs.com/post/go_html-form/" class="catalogue-item">
-    <div>
-        <time datetime="2016-12-06 01:13:41 &#43;0900 KST" class="catalogue-time">December 6, 2016</time>
-        <h1 class="catalogue-title">Go코드로 HTML Form 전송</h1>
-        <div class="catalogue-line"></div>
-
-        <p>
-            HTML, Javascript를 사용해서 Post방식으로 Form을 전송하는 동작을 Go 코드를 작성해 보려고 합니다.
-우선 POST로 전송된 Form을 받아서 처리를 하는 서버쪽을 다음과 같은 구성을 갖는 코드로 만듭니다.
-package main import { &#34;net/http&#34; &#34;github.com/gorilla/mux&#34; } func main() { r := mux.Newrouter().StrictSlash(false) r.HandleFunc(&#34;/upload&#34;, upload).Methods(&#34;POST&#34;) http.ListenAndServe(&#34;:8080&#34;, r) } func upload(w http.ResponseWriter, r *http.Request) { if r.Method == &#34;POST&#34; { } } 이렇게 &ldquo;http://localhost:8080/upload&rdquo; 를 통해서 POST 방식으로 전달되는 요청을 받아서 처리하기 위한 큰틀을 만들었습니다.
-        </p>
-    </div>
-</a>
-
-		
-			<a href="https://shrinklabs.com/post/go_encode/" class="catalogue-item">
-    <div>
-        <time datetime="2016-11-25 00:52:47 &#43;0900 KST" class="catalogue-time">November 25, 2016</time>
-        <h1 class="catalogue-title">인코딩된 텍스트 디코딩하기</h1>
-        <div class="catalogue-line"></div>
-
-        <p>
-            Javascript에서 encodeURIComponent() 함수를 사용해서 전달받은 문자열을 디코딩해서 보기 위해서는 &ldquo;net/url&rdquo; 패키지의 QueryUnescape() 함수를 사용할 수 있습니다.
-email, err := url.QueryUnescape(user.Email) (adsbygoogle = window.adsbygoogle || []).push({}); 
-        </p>
-    </div>
-</a>
-
-		
-			<a href="https://shrinklabs.com/post/go_govendor/" class="catalogue-item">
-    <div>
-        <time datetime="2016-10-14 18:16:35 &#43;0900 KST" class="catalogue-time">October 14, 2016</time>
-        <h1 class="catalogue-title">vendor 관리</h1>
-        <div class="catalogue-line"></div>
-
-        <p>
-            vendoring되어 있는 패키지를 관리해야 할 이유가 무엇인지에 대해서 찾아보다가 좋은 글을 발견했습니다.
-https://gocodecloud.com/blog/2016/03/29/go-vendoring-beginner-tutorial/
-이 글을 읽고 이해한 정도만을 요약해 봅니다
- vendoring을 왜 하나? Project A에서 사용하는 Pkg X의 리비전 1을 사용하고 있습니다. 그런데 Project B에서는 Pkg X의 리비전 2를 사용하려 합니다.
-그런데 $GOPATH 안에는 같은 패키지를 하나만 갖고 있을 수 있습니다.
-Pkg X의 리비전을 Project A에 맞추면 Project B가 빌드를 실패하고, Project B에 맞추면 Project A가 빌드에 실패하게 됩니다.
-        </p>
-    </div>
-</a>
-
-		
-			<a href="https://shrinklabs.com/post/tool_hugo/" class="catalogue-item">
-    <div>
-        <time datetime="2016-10-13 14:17:19 &#43;0900 KST" class="catalogue-time">October 13, 2016</time>
-        <h1 class="catalogue-title">GitHub 페이지에 Hugo 올리기</h1>
-        <div class="catalogue-line"></div>
-
-        <p>
-            Blogger에서 Hugo( http://gohugo.io )로 갈아타는 과정을 정리해 봅니다.
-Hugo 를 설치합니다 https://github.com/spf13/hugo/releases 에서 본인의 환경에 맞는걸 찾아서 설치합니다.
-Linux는 deb를 제공하고 있지만, Windows는 exe파일을 제공하고 있어서 환경변수(PATH)를 잡아주던가, 환경변수가 잡혀있는곳에 복사를 해줍니다.
-(이름도 hugo.exe로 바꿔주는게 사용하기에 더 편리한것 같습니다.)
-MAC은 안 써봐서 잘 모르겠습니다.
-github에 저장소를 만듭니다 github에서 호스팅을 받아서 hugo를 사용하기 위해서는 2개의 저장소를 만들어야 합니다.
-hugo의 컨텐츠를 관리하기 위한 저장소가 필요합니다.(ex: https://github.com/jaehoonn/blog)
-그리고 컨텐츠를 보여주기 위한 github의 페이지 저장소(ex: https://github.
-        </p>
-    </div>
-</a>
-
-		
-			<a href="https://shrinklabs.com/post/tool_tmux/" class="catalogue-item">
-    <div>
-        <time datetime="2016-10-12 01:28:09 &#43;0900 KST" class="catalogue-time">October 12, 2016</time>
-        <h1 class="catalogue-title">tmux</h1>
-        <div class="catalogue-line"></div>
-
-        <p>
-            tmux 시작 $ tmux $ tmux new-session(or new) -s [세션 이름] -n [윈도우 이름]tmux 종료 $ ctrl-d $ exittmux detach(현재 클라이언트) $ ctrl-b, dtmux attach $ tmux attach -t [세션 이름]window 생성 $ ctrl-b, cwindow 리스트 $ ctrl-b, wwindow 이동(현재의 이전(다음, 이전) $ ctrl-b, l(n, p)window 종료 $ ctrl-b, &amp;window 이름 변경 $ ctrl-b, ,pane 가로 나누기 $ ctrl-b, %pane 세로 나누기 $ ctrl-b, &quot;pane 의 번호를 화면에 출력 $ ctrl-b, qpane 크기 조절 $ ctrl-b, (ctrl + 방향키)모든 pane의 크기 동일하게 만들기 $ ctrl-b alt-1 # 모든 vertical split 넓이를 동일하게 변경$ ctrl-b alt-2 # 모든 horizontal split의 넓이를 동일하게 변경pane 이동하기 $ ctrl-b, opane 이동하기 $ ctrl-b, 방향키 $ ctrl-b {(})pane 삭제하기 $ ctrl-dpane 화면 스크롤 모드 시작 $ ctrl-b, [pane 화면 스크롤 모드 종료 $ q입력되는 내용을 모든 pane에 동일하게 적용 $ ctrl-b: setw synchronize-paneshttp://nodeqa.
-        </p>
-    </div>
-</a>
-
-		
-			<a href="https://shrinklabs.com/post/tool_vi/" class="catalogue-item">
-    <div>
-        <time datetime="2016-09-05 01:28:09 &#43;0900 KST" class="catalogue-time">September 5, 2016</time>
-        <h1 class="catalogue-title">vi 팁</h1>
-        <div class="catalogue-line"></div>
-
-        <p>
-            현재 작업중인 파일의 경로와 이름 확인 현재 작업중인 파일의 경로 또는 이름이 궁금할 경우가 있습니다.
-ctrl + g 또는
-: f80컬럼에 버티컬 라인 vi에서 80컬럼의 버티컬 라인을 생성하려면 다음과 같이 합니다.
-set colorcolumn=80을 적용하면, 빨간색 라인이 생깁니다.
-파일 관리 NerdTree를 사용하지 않고 vi에서 파일과 디렉토리를 관리하는 방법
-파일 네비게이션
- 표준모드(ex: i, o, a 같은걸 입력해서 입력모드로 전환되기 전 상태) &ldquo;e.&rdquo; (설명: &ldquo;.&rdquo; 는 현재의 디렉토리)  디렉토리 만들기
-        </p>
-    </div>
-</a>
-
-		
-	</div>
-	
-	<div class="pagination">
-		
-			<a href="/post/page/3/" class="left arrow">&#8592;</a>
-		
-		
-			<a href="/post/page/5/" class="right arrow">&#8594;</a>
-		
-	
-		<span>4</span>
-	</div>
-</main>
-
-
-        		<footer>
-			
-			<span>
-			&copy; <time datetime="2021-11-03 10:25:31.9717615 &#43;0900 KST m=&#43;0.598521901">2021</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
-			</span>
-		</footer>
-
-    </body>
-</html>

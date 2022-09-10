@@ -1,63 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-		
-		
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1"><title>css와 같은 정적 컨텐츠를 html에서 사용하기 위한 팁 - ShrinkLabs</title>
+<meta property="og:title" content="css와 같은 정적 컨텐츠를 html에서 사용하기 위한 팁 - ShrinkLabs">
+<meta property="og:type" content="article">
 
-		<title>css와 같은 정적 컨텐츠를 html에서 사용하기 위한 팁 &middot; ShrinkLabs</title>
 
-		
-  		<link rel="stylesheet" href="/css/style.css">
-		<link rel="stylesheet" href="/css/fonts.css">
-		
-		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico">
-		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico">
-		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<meta property="og:image" content="images/logo.png">
 
-		
-		<link href="" rel="alternate" type="application/rss+xml" title="ShrinkLabs" />
-	</head>
+<meta property="og:url" content="https://shrinklabs.com/post/go_css-html/">
 
-    <body>
-        		<nav class="nav">
-			<div class="nav-container">
-				<a href="/">
-					<h2 class="nav-title">ShrinkLabs</h2>
-				</a>
-				<ul>
+
+
+
+<link rel="stylesheet" href="https://shrinklabs.com/css/style.min.css">
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#ffffff">
+<link rel="webmention" href="https://webmention.io/hugocisneros.com/webmention">
+<link rel="pingback" href="https://webmention.io/hugocisneros.com/xmlrpc">
+<script>
+ function updateMode() {
     
-    
-        <li>
-            <a href="/about/">
-                
-                <span>about</span>
-                
-            </a>
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+    }
+ }
+ function toggleMode() {
+     if (localStorage.theme === 'dark') {
+        
+        localStorage.theme = 'light';
+     }
+     else {
+        
+        localStorage.theme = 'dark';
+     }
+     updateMode()
+ }
+ window.onload = updateMode();
+ function toggleMenu() {
+     let navbar = document.getElementById("navbar-default");
+     if (navbar.classList.contains("hidden")) {
+        navbar.classList.remove("hidden");
+     }
+     else {
+        navbar.classList.add("hidden");
+     }
+ }
+</script>
+
+  </head>
+  <body>
+    <header class="md:px-0 px-2">
+        <nav >
+  <div class="container flex flex-wrap justify-between items-center mx-auto">
+    <div class="nav-main my-2.5">
+      <a href="https://shrinklabs.com/" class="nav-title py-2.5 text-2xl text-zinc-600 dark:text-zinc-300 hover:border-b-0">ShrinkLabs</a>
+    </div>
+    <button type="button"
+            onclick="toggleMenu()"
+            class="inline-flex items-center p-2 ml-3
+                  text-sm text-gray-500
+                  rounded-lg md:hidden hover:bg-gray-100
+                  focus:outline-none focus:ring-2
+                  focus:ring-gray-200 dark:text-gray-400
+                  dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            aria-controls="navbar-default"
+            aria-expanded="false">
+        <span class="sr-only">Open main menu</span>
+        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor"
+             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1
+                           0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0
+                           01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0
+                           01-1-1z" clip-rule="evenodd"></path>
+        </svg>
+    </button>
+    <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+      <ul class="grid md:grid-flow-col items-center justify-between text-lg my-2.5">
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/post/">posts</a>
         </li>
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/categories/">categories</a>
+        </li>
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/tags/">tags</a>
+        </li>
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/about/">about</a>
+        </li>
+        
+        <li class="h-7 pl-2.5 pr-0 list-none">
+          <button type="button" onclick="toggleMode()" class="h-full">
+            <img class="h-7 w-7 max-h-full mb-1.5 p-1.5 hidden dark:inline" id="dark-mode-button-img"
+                 src="https://shrinklabs.com/img/light_mode.svg">
+            <img class="h-7 w-7 max-h-full mb-1.5 p-1.5 inline dark:hidden" id="dark-mode-button-img"
+                 src="https://shrinklabs.com/img/dark_mode.svg">
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    </header>
+    <main class="content h-card container mt-2 m-auto
+                 leading-loose md:px-0 px-2 z-0 Page(/post/go_css-html.md)"
+          role="main">
     
-</ul>
-			</div>
-		</nav>
+    <article class="article" itemprop="mainEntity" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="title-container">
+    <h1 class="article-title" itemprop="name">css와 같은 정적 컨텐츠를 html에서 사용하기 위한 팁</h1>
+    
+    <div class="article-subtitle">
+    
+    <span class="article-date" itemprop="datePublished" content="2016-07-18T10:16:09&#43;0900">2016-07-18</span>
+    
+    
+    
+    <span class="article-author" itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Jaehoon Khim</span></span>
+    
+    
+    </div>
+    
+    </div>
 
-        
-
-<main>
-	<div class="post">
-		<div class="post-info">
-    <span>Written by</span>
-        
-        <br>
-        <span>on&nbsp;</span><time datetime="2016-07-18 10:16:09 &#43;0900 KST">July 18, 2016</time>
-</div>
-
-		<h1 class="post-title">css와 같은 정적 컨텐츠를 html에서 사용하기 위한 팁</h1>
-<div class="post-line"></div>
-
-		
-
-		<p>Go의 &ldquo;net/http&quot;와 &ldquo;html/template&quot;를 이용해서 html과 css로 만들어진 웹페이지를 만들려고 할때, html 파일이 보여질때 css가 적용되지 않은 상태로 보여집니다.<br>
+    <div class="article-content" itemprop="articleBody">
+      <p>Go의 &ldquo;net/http&quot;와 &ldquo;html/template&quot;를 이용해서 html과 css로 만들어진 웹페이지를 만들려고 할때, html 파일이 보여질때 css가 적용되지 않은 상태로 보여집니다.<br>
 이 때 어떻게 해야 하는지 방법을 찾아가던 과정을 기록으로 남겨 놓습니다.</p>
 <p>프로젝트의 디렉토리 구조는 다음과 같습니다.</p>
 <pre><code>src\
@@ -68,41 +154,41 @@
     + template
         index.html
 </code></pre><p>그래서 이렇게&hellip;</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-  <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">HandleFunc</span>(<span style="color:#e6db74">&#34;/&#34;</span>, <span style="color:#a6e22e">indexHandler</span>)
-  <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ListenAndServe</span>(<span style="color:#e6db74">&#34;:8080&#34;</span>, <span style="color:#66d9ef">nil</span>)
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#6ab825;font-weight:bold">func</span> <span style="color:#447fcf">main</span>() {
+  http.<span style="color:#447fcf">HandleFunc</span>(<span style="color:#ed9d13">&#34;/&#34;</span>, indexHandler)
+  http.<span style="color:#447fcf">ListenAndServe</span>(<span style="color:#ed9d13">&#34;:8080&#34;</span>, <span style="color:#6ab825;font-weight:bold">nil</span>)
 }
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">indexHandler</span>(<span style="color:#f92672">...</span>) {
-  <span style="color:#75715e">// index.html
-</span><span style="color:#75715e"></span>}
+<span style="color:#6ab825;font-weight:bold">func</span> <span style="color:#447fcf">indexHandler</span>(...) {
+  <span style="color:#999;font-style:italic">// index.html
+</span><span style="color:#999;font-style:italic"></span>}
 </code></pre></div><p>와 같이 하면 될 줄 알았습니다.<br>
 그런데 안됩니다.</p>
 <p>그래서 어떻게 해야 하는지 찾아보니, FileServer로 css파일을 제공해 주면 된다고 합니다. 그래서 다음과 같이 했습니다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-  <span style="color:#a6e22e">fs</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">FileServer</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Dir</span>(<span style="color:#e6db74">&#34;/static&#34;</span>))
-  <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Handle</span>(<span style="color:#e6db74">&#34;/static/, fs)
-</span><span style="color:#e6db74">  http.HandleFunc(&#34;</span><span style="color:#f92672">/</span><span style="color:#e6db74">&#34;, indexHandler)
-</span><span style="color:#e6db74">  http.ListenAndServe(&#34;</span>:<span style="color:#ae81ff">8080</span><span style="color:#960050;background-color:#1e0010">&#34;</span>, <span style="color:#66d9ef">nil</span>)
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#6ab825;font-weight:bold">func</span> <span style="color:#447fcf">main</span>() {
+  fs := http.<span style="color:#447fcf">FileServer</span>(http.<span style="color:#447fcf">Dir</span>(<span style="color:#ed9d13">&#34;/static&#34;</span>))
+  http.<span style="color:#447fcf">Handle</span>(<span style="color:#ed9d13">&#34;/static/, fs)
+</span><span style="color:#ed9d13">  http.HandleFunc(&#34;</span>/<span style="color:#ed9d13">&#34;, indexHandler)
+</span><span style="color:#ed9d13">  http.ListenAndServe(&#34;</span>:<span style="color:#3677a9">8080</span><span style="color:#a61717;background-color:#e3d2d2">&#34;</span>, <span style="color:#6ab825;font-weight:bold">nil</span>)
 }
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">indexHandler</span>(<span style="color:#f92672">...</span>) {
-  <span style="color:#75715e">// index.html
-</span><span style="color:#75715e"></span>}
+<span style="color:#6ab825;font-weight:bold">func</span> <span style="color:#447fcf">indexHandler</span>(...) {
+  <span style="color:#999;font-style:italic">// index.html
+</span><span style="color:#999;font-style:italic"></span>}
 </code></pre></div><p>근데 안됩니다.<br>
 http.Dir에서 만들어 낸 경로는 &ldquo;/static&quot;이 존재합니다.<br>
 그래서 좀 더 찾아보니 StripPrefix를 사용해서 경로를 만들어 줘야 합니다.<br>
 fs 핸들러에서 &ldquo;/static&quot;를 제거해줍니다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-  <span style="color:#a6e22e">fs</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">FileServer</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Dir</span>(<span style="color:#e6db74">&#34;/static&#34;</span>))
-  <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Handle</span>(<span style="color:#e6db74">&#34;/static/, http.StripPrefix(&#34;</span><span style="color:#f92672">/</span><span style="color:#a6e22e">static</span><span style="color:#e6db74">&#34;, fs))
-</span><span style="color:#e6db74">  http.HandleFunc(&#34;</span><span style="color:#f92672">/</span><span style="color:#e6db74">&#34;, indexHandler)
-</span><span style="color:#e6db74">  http.ListenAndServe(&#34;</span>:<span style="color:#ae81ff">8080</span><span style="color:#960050;background-color:#1e0010">&#34;</span>, <span style="color:#66d9ef">nil</span>)
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#6ab825;font-weight:bold">func</span> <span style="color:#447fcf">main</span>() {
+  fs := http.<span style="color:#447fcf">FileServer</span>(http.<span style="color:#447fcf">Dir</span>(<span style="color:#ed9d13">&#34;/static&#34;</span>))
+  http.<span style="color:#447fcf">Handle</span>(<span style="color:#ed9d13">&#34;/static/, http.StripPrefix(&#34;</span>/static<span style="color:#ed9d13">&#34;, fs))
+</span><span style="color:#ed9d13">  http.HandleFunc(&#34;</span>/<span style="color:#ed9d13">&#34;, indexHandler)
+</span><span style="color:#ed9d13">  http.ListenAndServe(&#34;</span>:<span style="color:#3677a9">8080</span><span style="color:#a61717;background-color:#e3d2d2">&#34;</span>, <span style="color:#6ab825;font-weight:bold">nil</span>)
 }
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">indexHandler</span>(<span style="color:#f92672">...</span>) {
-  <span style="color:#75715e">// index.html
-</span><span style="color:#75715e"></span>}
+<span style="color:#6ab825;font-weight:bold">func</span> <span style="color:#447fcf">indexHandler</span>(...) {
+  <span style="color:#999;font-style:italic">// index.html
+</span><span style="color:#999;font-style:italic"></span>}
 </code></pre></div><p>이제 잘됩니다!!!</p>
 <p>css와 같은 정적 컨텐츠를 제공하기 위해서 사용할 수 있는 팁인것 같습니다.</p>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -117,24 +203,31 @@ fs 핸들러에서 &ldquo;/static&quot;를 제거해줍니다.</p>
 </script>
 
 
-		
-	</div>
+    </div>
 
-	<div class="pagination">
-		<a href="/post/go_http-handlefunc-handle/" class="left arrow">&#8592;</a>
-		<a href="/post/tool_ifconfig/" class="right arrow">&#8594;</a>
+    
 
-		<a href="#" class="top">Top</a>
-	</div>
-</main>
+    
+    
+    <div class="article-date-modified">
+        Last modified <span itemprop="dateModified" content="2016-07-18T10:16:09&#43;0900">2016-07-18</span>
+    </div>
+    
+    </article>
+
+    </main>
+    <footer class="footer container h-10 text-center">
+  <ul class="pl-0">
+    
+    <li class="ml-2 first:before:content-none before:content-['•'] inline-block list-none"><a class="ml-2 text-neutral-800 dark:text-neutral-400 border-none"
+          href="https://github.com/hugcis/hugo-astatine-theme">Code</a>
+    </li>
+    <li class="ml-2 first:before:content-none before:content-['•']
+                text-neutral-800 dark:text-neutral-400 inline-block list-none"><span class="ml-2">© Jaehoon Khim 2022</span>
+    </li>
+  </ul>
+</footer>
 
 
-        		<footer>
-			
-			<span>
-			&copy; <time datetime="2021-11-03 10:25:31.9046691 &#43;0900 KST m=&#43;0.531429501">2021</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
-			</span>
-		</footer>
-
-    </body>
+  </body>
 </html>

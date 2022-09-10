@@ -1,63 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-		
-		
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1"><title>9.Helm Package Management - ShrinkLabs</title>
+<meta property="og:title" content="9.Helm Package Management - ShrinkLabs">
+<meta property="og:type" content="article">
 
-		<title>9.Helm Package Management &middot; ShrinkLabs</title>
 
-		
-  		<link rel="stylesheet" href="/css/style.css">
-		<link rel="stylesheet" href="/css/fonts.css">
-		
-		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico">
-		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico">
-		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<meta property="og:image" content="images/logo.png">
 
-		
-		<link href="" rel="alternate" type="application/rss+xml" title="ShrinkLabs" />
-	</head>
+<meta property="og:url" content="https://shrinklabs.com/post/container_helm-package-management/">
 
-    <body>
-        		<nav class="nav">
-			<div class="nav-container">
-				<a href="/">
-					<h2 class="nav-title">ShrinkLabs</h2>
-				</a>
-				<ul>
+
+<meta property="keywords" content ="kubernetes, studyjam">
+
+<link rel="stylesheet" href="https://shrinklabs.com/css/style.min.css">
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#ffffff">
+<link rel="webmention" href="https://webmention.io/hugocisneros.com/webmention">
+<link rel="pingback" href="https://webmention.io/hugocisneros.com/xmlrpc">
+<script>
+ function updateMode() {
     
-    
-        <li>
-            <a href="/about/">
-                
-                <span>about</span>
-                
-            </a>
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+    }
+ }
+ function toggleMode() {
+     if (localStorage.theme === 'dark') {
+        
+        localStorage.theme = 'light';
+     }
+     else {
+        
+        localStorage.theme = 'dark';
+     }
+     updateMode()
+ }
+ window.onload = updateMode();
+ function toggleMenu() {
+     let navbar = document.getElementById("navbar-default");
+     if (navbar.classList.contains("hidden")) {
+        navbar.classList.remove("hidden");
+     }
+     else {
+        navbar.classList.add("hidden");
+     }
+ }
+</script>
+
+  </head>
+  <body>
+    <header class="md:px-0 px-2">
+        <nav >
+  <div class="container flex flex-wrap justify-between items-center mx-auto">
+    <div class="nav-main my-2.5">
+      <a href="https://shrinklabs.com/" class="nav-title py-2.5 text-2xl text-zinc-600 dark:text-zinc-300 hover:border-b-0">ShrinkLabs</a>
+    </div>
+    <button type="button"
+            onclick="toggleMenu()"
+            class="inline-flex items-center p-2 ml-3
+                  text-sm text-gray-500
+                  rounded-lg md:hidden hover:bg-gray-100
+                  focus:outline-none focus:ring-2
+                  focus:ring-gray-200 dark:text-gray-400
+                  dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            aria-controls="navbar-default"
+            aria-expanded="false">
+        <span class="sr-only">Open main menu</span>
+        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor"
+             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1
+                           0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0
+                           01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0
+                           01-1-1z" clip-rule="evenodd"></path>
+        </svg>
+    </button>
+    <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+      <ul class="grid md:grid-flow-col items-center justify-between text-lg my-2.5">
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/post/">posts</a>
         </li>
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/categories/">categories</a>
+        </li>
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/tags/">tags</a>
+        </li>
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/about/">about</a>
+        </li>
+        
+        <li class="h-7 pl-2.5 pr-0 list-none">
+          <button type="button" onclick="toggleMode()" class="h-full">
+            <img class="h-7 w-7 max-h-full mb-1.5 p-1.5 hidden dark:inline" id="dark-mode-button-img"
+                 src="https://shrinklabs.com/img/light_mode.svg">
+            <img class="h-7 w-7 max-h-full mb-1.5 p-1.5 inline dark:hidden" id="dark-mode-button-img"
+                 src="https://shrinklabs.com/img/dark_mode.svg">
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    </header>
+    <main class="content h-card container mt-2 m-auto
+                 leading-loose md:px-0 px-2 z-0 Page(/post/container_helm-package-management.md)"
+          role="main">
     
-</ul>
-			</div>
-		</nav>
+    <article class="article" itemprop="mainEntity" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="title-container">
+    <h1 class="article-title" itemprop="name">9.Helm Package Management</h1>
+    
+    <div class="article-subtitle">
+    
+    <span class="article-date" itemprop="datePublished" content="2019-01-17T15:04:00&#43;0900">2019-01-17</span>
+    
+    
+    
+    <span class="article-author" itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Jaehoon Khim</span></span>
+    
+    
+    </div>
+    
+    </div>
 
-        
-
-<main>
-	<div class="post">
-		<div class="post-info">
-    <span>Written by</span>
-        
-        <br>
-        <span>on&nbsp;</span><time datetime="2019-01-17 15:04:00 &#43;0900 KST">January 17, 2019</time>
-</div>
-
-		<h1 class="post-title">9.Helm Package Management</h1>
-<div class="post-line"></div>
-
-		
-
-		<p>이번 과정은 kubernetes에서 사용할 수 있는 패키지 관리자에 대해서 알아 볼 수 있었습니다.</p>
+    <div class="article-content" itemprop="articleBody">
+      <p>이번 과정은 kubernetes에서 사용할 수 있는 패키지 관리자에 대해서 알아 볼 수 있었습니다.</p>
 <p>Helm은 클라이언트 역할을 하는 helm, 서버 역할을 하는 tiller 그리고 설정 정보들의 관리를 위한 chart로 이루어져 있습니다.</p>
 <p>여기에서 클라이언트(helm)라고 하는건 클러스터의 외부에서 작업을 지시하기 위한 도구이고, 실제로 클러스터 안쪽에서 동작 하는건 서버(tiller)라고 보면 됩니다.</p>
 <p>helm의 설치는 간단합니다.</p>
@@ -98,24 +184,74 @@ $ kubectl -n kube-system delete serviceaccount tiller
 </script>
 
 
-		
-	</div>
+    </div>
 
-	<div class="pagination">
-		<a href="/post/container_setting-up-private-kubernetes-cluster/" class="left arrow">&#8592;</a>
-		<a href="/post/container_nginx-ingress-controller-on-google-kubernetes-engine/" class="right arrow">&#8594;</a>
+    
+<ul class="list-none pl-0 font-sm align-left">
 
-		<a href="#" class="top">Top</a>
-	</div>
-</main>
+<hr>
+<li>
+    Categories:
+
+<a href="/categories/cloud">
+    <span class="tag-item">
+    cloud
+    </span>
+</a>
+</li >
 
 
-        		<footer>
-			
-			<span>
-			&copy; <time datetime="2021-11-03 10:25:31.8850592 &#43;0900 KST m=&#43;0.511819601">2021</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
-			</span>
-		</footer>
+<li class="list-none">
+    Tags:
+    
+    <a class="inline-block mt-2 mr-2 border-none text-neutral-800 dark:text-neutral-200" href="/tags/kubernetes">
+        <span class="flex flex-row justify-start items-center dark:bg-zinc-900 dark:hover:bg-zinc-800
+                     hover:bg-zinc-200 bg-zinc-100 p-1
+                     rounded-t border-b-2 border-zinc-300 hover:border-zinc-500">
+            
+            <img class="h-5 mr-1 inline" src="https://shrinklabs.com/images/tag_logo.svg"
+                 alt="Logo of a tag: indicates that a tag item follows.">
+        kubernetes
+        </span>
+    </a>
+    
+    <a class="inline-block mt-2 mr-2 border-none text-neutral-800 dark:text-neutral-200" href="/tags/studyjam">
+        <span class="flex flex-row justify-start items-center dark:bg-zinc-900 dark:hover:bg-zinc-800
+                     hover:bg-zinc-200 bg-zinc-100 p-1
+                     rounded-t border-b-2 border-zinc-300 hover:border-zinc-500">
+            
+            <img class="h-5 mr-1 inline" src="https://shrinklabs.com/images/tag_logo.svg"
+                 alt="Logo of a tag: indicates that a tag item follows.">
+        studyjam
+        </span>
+    </a>
+    
+</li>
 
-    </body>
+</ul>
+
+
+    
+    
+    <div class="article-date-modified">
+        Last modified <span itemprop="dateModified" content="2019-01-17T15:04:00&#43;0900">2019-01-17</span>
+    </div>
+    
+    </article>
+
+    </main>
+    <footer class="footer container h-10 text-center">
+  <ul class="pl-0">
+    
+    <li class="ml-2 first:before:content-none before:content-['•'] inline-block list-none"><a class="ml-2 text-neutral-800 dark:text-neutral-400 border-none"
+          href="https://github.com/hugcis/hugo-astatine-theme">Code</a>
+    </li>
+    <li class="ml-2 first:before:content-none before:content-['•']
+                text-neutral-800 dark:text-neutral-400 inline-block list-none"><span class="ml-2">© Jaehoon Khim 2022</span>
+    </li>
+  </ul>
+</footer>
+
+
+  </body>
 </html>

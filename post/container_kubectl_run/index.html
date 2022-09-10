@@ -1,114 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-		
-		
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1"><title>Windows기반의 minikube로 로컬 환경의 image 사용해서 배포하기 - ShrinkLabs</title>
+<meta property="og:title" content="Windows기반의 minikube로 로컬 환경의 image 사용해서 배포하기 - ShrinkLabs">
+<meta property="og:type" content="article">
 
-		<title>Windows기반의 minikube로 로컬 환경의 image 사용해서 배포하기 &middot; ShrinkLabs</title>
 
-		
-  		<link rel="stylesheet" href="/css/style.css">
-		<link rel="stylesheet" href="/css/fonts.css">
-		
-		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico">
-		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico">
-		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<meta property="og:image" content="images/logo.png">
 
-		
-		<link href="" rel="alternate" type="application/rss+xml" title="ShrinkLabs" />
-	</head>
+<meta property="og:url" content="https://shrinklabs.com/post/container_kubectl_run/">
 
-    <body>
-        		<nav class="nav">
-			<div class="nav-container">
-				<a href="/">
-					<h2 class="nav-title">ShrinkLabs</h2>
-				</a>
-				<ul>
+
+<meta property="keywords" content ="kuberntes, windows">
+
+<link rel="stylesheet" href="https://shrinklabs.com/css/style.min.css">
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#ffffff">
+<link rel="webmention" href="https://webmention.io/hugocisneros.com/webmention">
+<link rel="pingback" href="https://webmention.io/hugocisneros.com/xmlrpc">
+<script>
+ function updateMode() {
     
-    
-        <li>
-            <a href="/about/">
-                
-                <span>about</span>
-                
-            </a>
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+    }
+ }
+ function toggleMode() {
+     if (localStorage.theme === 'dark') {
+        
+        localStorage.theme = 'light';
+     }
+     else {
+        
+        localStorage.theme = 'dark';
+     }
+     updateMode()
+ }
+ window.onload = updateMode();
+ function toggleMenu() {
+     let navbar = document.getElementById("navbar-default");
+     if (navbar.classList.contains("hidden")) {
+        navbar.classList.remove("hidden");
+     }
+     else {
+        navbar.classList.add("hidden");
+     }
+ }
+</script>
+
+  </head>
+  <body>
+    <header class="md:px-0 px-2">
+        <nav >
+  <div class="container flex flex-wrap justify-between items-center mx-auto">
+    <div class="nav-main my-2.5">
+      <a href="https://shrinklabs.com/" class="nav-title py-2.5 text-2xl text-zinc-600 dark:text-zinc-300 hover:border-b-0">ShrinkLabs</a>
+    </div>
+    <button type="button"
+            onclick="toggleMenu()"
+            class="inline-flex items-center p-2 ml-3
+                  text-sm text-gray-500
+                  rounded-lg md:hidden hover:bg-gray-100
+                  focus:outline-none focus:ring-2
+                  focus:ring-gray-200 dark:text-gray-400
+                  dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            aria-controls="navbar-default"
+            aria-expanded="false">
+        <span class="sr-only">Open main menu</span>
+        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor"
+             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1
+                           0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0
+                           01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0
+                           01-1-1z" clip-rule="evenodd"></path>
+        </svg>
+    </button>
+    <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+      <ul class="grid md:grid-flow-col items-center justify-between text-lg my-2.5">
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/post/">posts</a>
         </li>
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/categories/">categories</a>
+        </li>
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/tags/">tags</a>
+        </li>
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/about/">about</a>
+        </li>
+        
+        <li class="h-7 pl-2.5 pr-0 list-none">
+          <button type="button" onclick="toggleMode()" class="h-full">
+            <img class="h-7 w-7 max-h-full mb-1.5 p-1.5 hidden dark:inline" id="dark-mode-button-img"
+                 src="https://shrinklabs.com/img/light_mode.svg">
+            <img class="h-7 w-7 max-h-full mb-1.5 p-1.5 inline dark:hidden" id="dark-mode-button-img"
+                 src="https://shrinklabs.com/img/dark_mode.svg">
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    </header>
+    <main class="content h-card container mt-2 m-auto
+                 leading-loose md:px-0 px-2 z-0 Page(/post/container_kubectl_run.md)"
+          role="main">
     
-</ul>
-			</div>
-		</nav>
+    <article class="article" itemprop="mainEntity" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="title-container">
+    <h1 class="article-title" itemprop="name">Windows기반의 minikube로 로컬 환경의 image 사용해서 배포하기</h1>
+    
+    <div class="article-subtitle">
+    
+    <span class="article-date" itemprop="datePublished" content="2020-05-19T01:05:57&#43;0900">2020-05-19</span>
+    
+    
+    
+    <span class="article-author" itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Jaehoon Khim</span></span>
+    
+    
+    </div>
+    
+    </div>
 
-        
-
-<main>
-	<div class="post">
-		<div class="post-info">
-    <span>Written by</span>
-        
-        <br>
-        <span>on&nbsp;</span><time datetime="2020-05-19 01:05:57 &#43;0900 KST">May 19, 2020</time>
-</div>
-
-		<h1 class="post-title">Windows기반의 minikube로 로컬 환경의 image 사용해서 배포하기</h1>
-<div class="post-line"></div>
-
-		
-
-		<p>실제 클러스터에 배포하기 전에 로컬 환경의 minikube를 이용해서 배포하고 테스트를 하기 위한 방법이 필요하면 다음과 같이 합니다.</p>
+    <div class="article-content" itemprop="articleBody">
+      <p>실제 클러스터에 배포하기 전에 로컬 환경의 minikube를 이용해서 배포하고 테스트를 하기 위한 방법이 필요하면 다음과 같이 합니다.</p>
 <p>minikube를 시작하고, minikube에 내장되어 있는 docker 데몬을 사용하도록 합니다. 이렇게 하면 호스트 머신의 Docker Registry를 사용하고 image도 호스트 머신에 생성해 놓은 것을 사용할 수 있습니다.<br>
 (<a href="https://kubernetes.io/docs/setup/learning-environment/minikube/#use-local-images-by-re-using-the-docker-daemon">https://kubernetes.io/docs/setup/learning-environment/minikube/#use-local-images-by-re-using-the-docker-daemon</a>)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">PS&gt; minikube docker-env
-$Env:DOCKER_TLS_VERIFY <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;1&#34;</span>
-$Env:DOCKER_HOST <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;tcp://192.168.182.22:2376&#34;</span>
-$Env:DOCKER_CERT_PATH <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;C:\Users\jaehoonn\.minikube\certs&#34;</span>
-<span style="color:#75715e"># Run this command to configure your shell:</span>
-<span style="color:#75715e"># &amp; minikube docker-env | Invoke-Expression</span>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">PS&gt; minikube docker-env
+<span style="color:#40ffff">$Env</span>:DOCKER_TLS_VERIFY = <span style="color:#ed9d13">&#34;1&#34;</span>
+<span style="color:#40ffff">$Env</span>:DOCKER_HOST = <span style="color:#ed9d13">&#34;tcp://192.168.182.22:2376&#34;</span>
+<span style="color:#40ffff">$Env</span>:DOCKER_CERT_PATH = <span style="color:#ed9d13">&#34;C:\Users\jaehoonn\.minikube\certs&#34;</span>
+<span style="color:#999;font-style:italic"># Run this command to configure your shell:</span>
+<span style="color:#999;font-style:italic"># &amp; minikube docker-env | Invoke-Expression</span>
 
 PS&gt; minikube docker-env | Invoke-Expression
 </code></pre></div><p>이렇게 하면, minikube vm 안에 존재하는 docker 데몬과 통신을 하게 됩니다.</p>
 <p>이제 만들어 놓은 이미지를 실행합니다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">PS&gt; kubectl -n jaehoonn run sample-app --image<span style="color:#f92672">=</span>sample-app:latest --port<span style="color:#f92672">=</span><span style="color:#ae81ff">9000</span> --serviceaccount<span style="color:#f92672">=</span>jaehoonn-controller 
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">PS&gt; kubectl -n jaehoonn run sample-app --image=sample-app:latest --port=<span style="color:#3677a9">9000</span> --serviceaccount=jaehoonn-controller 
 </code></pre></div><p>다음과 같이 배포가 된 것을 확인 할 수 있습니다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">PS&gt; kubectl -n jaehoonn get pods
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">PS&gt; kubectl -n jaehoonn get pods
 NAME                             READY   STATUS              RESTARTS   AGE
-sample-app-685bbd44c6-kgc4z      1/1     Running   <span style="color:#ae81ff">0</span>          5h24m
+sample-app-685bbd44c6-kgc4z      1/1     Running   <span style="color:#3677a9">0</span>          5h24m
 </code></pre></div><p>웹브라우저를 통해서 연결 상태를 확인하기 위해서 Service를 생성합니다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">PS&gt; kubectl -n jaehoonn expose deployment sample-app --type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;LoadBalancer&#34;</span>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">PS&gt; kubectl -n jaehoonn expose deployment sample-app --type=<span style="color:#ed9d13">&#34;LoadBalancer&#34;</span>
 </code></pre></div><p>생성된 Service를 확인하면, 다음과 같이 pending 상태이다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">PS&gt; kubectl -n jaehoonn get services
-NAME             TYPE           CLUSTER-IP     EXTERNAL-IP   PORT<span style="color:#f92672">(</span>S<span style="color:#f92672">)</span>          AGE
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">PS&gt; kubectl -n jaehoonn get services
+NAME             TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
 sample-app       LoadBalancer   10.102.191.6   &lt;pending&gt;     8500:32416/TCP   11s
 </code></pre></div><p>이제 minikube를 통해서 url을 생성합니다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">PS&gt; minikube -n jaehoonn service sample-app --url
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">PS&gt; minikube -n jaehoonn service sample-app --url
 * http://192.168.182.22:32416
 </code></pre></div><p>필요한 테스트 작업을 완료하고 난 다음 해당 이미지를 중지하고자 할 때,</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">PS&gt; kubectl -n jaehoonn delete pods/sample-app-685bbd44c6-kgc4z
-pod <span style="color:#e6db74">&#34;sample-app-685bbd44c6-kgc4z&#34;</span> deleted
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">PS&gt; kubectl -n jaehoonn delete pods/sample-app-685bbd44c6-kgc4z
+pod <span style="color:#ed9d13">&#34;sample-app-685bbd44c6-kgc4z&#34;</span> deleted
 </code></pre></div><p>삭제 되었다는 메세지가 나오지만 실제로는 삭제 되지 않습니다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">PS&gt; kubectl -n jaehoonn get pod
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">PS&gt; kubectl -n jaehoonn get pod
 NAME                             READY   STATUS              RESTARTS   AGE
-sample-app-685bbd44c6-kgc4z      1/1     Running             <span style="color:#ae81ff">0</span>          5h24m
+sample-app-685bbd44c6-kgc4z      1/1     Running             <span style="color:#3677a9">0</span>          5h24m
 </code></pre></div><p>모든 리소스를 조회해보면 다음과 같습니다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">PS&gt; kubectl -n jaehoonn get all
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">PS&gt; kubectl -n jaehoonn get all
 NAME                                 READY   STATUS              RESTARTS   AGE
-pod/sample-app-685bbd44c6-fxl8f      1/1     Running             <span style="color:#ae81ff">0</span>          7m3s
+pod/sample-app-685bbd44c6-fxl8f      1/1     Running             <span style="color:#3677a9">0</span>          7m3s
 
 
 
 
 NAME                            READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/sample-app      1/1     <span style="color:#ae81ff">1</span>            <span style="color:#ae81ff">0</span>           5h36m
+deployment.apps/sample-app      1/1     <span style="color:#3677a9">1</span>            <span style="color:#3677a9">0</span>           5h36m
 
 NAME                                       DESIRED   CURRENT   READY   AGE
-replicaset.apps/sample-app-685bbd44c6      <span style="color:#ae81ff">1</span>         <span style="color:#ae81ff">1</span>         <span style="color:#ae81ff">0</span>       5h36m
+replicaset.apps/sample-app-685bbd44c6      <span style="color:#3677a9">1</span>         <span style="color:#3677a9">1</span>         <span style="color:#3677a9">0</span>       5h36m
 </code></pre></div><p>여기에서 deployment를 삭제하면 관련된 모든 리소스가 삭제됩니다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">PS&gt; kubectl -n jaehoonn delete deployment/sample-app
-deployment.extensions <span style="color:#e6db74">&#34;discovery&#34;</span> deleted
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">PS&gt; kubectl -n jaehoonn delete deployment/sample-app
+deployment.extensions <span style="color:#ed9d13">&#34;discovery&#34;</span> deleted
 </code></pre></div><p>다시 모든 리소스를 조회해보면 다음과 같이 모두 삭제된 걸 확인할 수 있습니다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">PS&gt; kubectl -n jaehoonn get all
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">PS&gt; kubectl -n jaehoonn get all
 
 No resources found.
 </code></pre></div><p>이 작업으로 Service까지 삭제 되지는 않습니다.</p>
@@ -124,24 +210,74 @@ No resources found.
 </script>
 
 
-		
-	</div>
+    </div>
 
-	<div class="pagination">
-		<a href="/post/go_crosscompile_on_windows/" class="left arrow">&#8592;</a>
-		<a href="/post/git_upstream/" class="right arrow">&#8594;</a>
+    
+<ul class="list-none pl-0 font-sm align-left">
 
-		<a href="#" class="top">Top</a>
-	</div>
-</main>
+<hr>
+<li>
+    Categories:
+
+<a href="/categories/cloud">
+    <span class="tag-item">
+    cloud
+    </span>
+</a>
+</li >
 
 
-        		<footer>
-			
-			<span>
-			&copy; <time datetime="2021-11-03 10:25:31.9014748 &#43;0900 KST m=&#43;0.528235201">2021</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
-			</span>
-		</footer>
+<li class="list-none">
+    Tags:
+    
+    <a class="inline-block mt-2 mr-2 border-none text-neutral-800 dark:text-neutral-200" href="/tags/kuberntes">
+        <span class="flex flex-row justify-start items-center dark:bg-zinc-900 dark:hover:bg-zinc-800
+                     hover:bg-zinc-200 bg-zinc-100 p-1
+                     rounded-t border-b-2 border-zinc-300 hover:border-zinc-500">
+            
+            <img class="h-5 mr-1 inline" src="https://shrinklabs.com/images/tag_logo.svg"
+                 alt="Logo of a tag: indicates that a tag item follows.">
+        kuberntes
+        </span>
+    </a>
+    
+    <a class="inline-block mt-2 mr-2 border-none text-neutral-800 dark:text-neutral-200" href="/tags/windows">
+        <span class="flex flex-row justify-start items-center dark:bg-zinc-900 dark:hover:bg-zinc-800
+                     hover:bg-zinc-200 bg-zinc-100 p-1
+                     rounded-t border-b-2 border-zinc-300 hover:border-zinc-500">
+            
+            <img class="h-5 mr-1 inline" src="https://shrinklabs.com/images/tag_logo.svg"
+                 alt="Logo of a tag: indicates that a tag item follows.">
+        windows
+        </span>
+    </a>
+    
+</li>
 
-    </body>
+</ul>
+
+
+    
+    
+    <div class="article-date-modified">
+        Last modified <span itemprop="dateModified" content="2020-05-19T01:05:57&#43;0900">2020-05-19</span>
+    </div>
+    
+    </article>
+
+    </main>
+    <footer class="footer container h-10 text-center">
+  <ul class="pl-0">
+    
+    <li class="ml-2 first:before:content-none before:content-['•'] inline-block list-none"><a class="ml-2 text-neutral-800 dark:text-neutral-400 border-none"
+          href="https://github.com/hugcis/hugo-astatine-theme">Code</a>
+    </li>
+    <li class="ml-2 first:before:content-none before:content-['•']
+                text-neutral-800 dark:text-neutral-400 inline-block list-none"><span class="ml-2">© Jaehoon Khim 2022</span>
+    </li>
+  </ul>
+</footer>
+
+
+  </body>
 </html>

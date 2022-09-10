@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>go on ShrinkLabs</title>
+    <link>https://shrinklabs.com/categories/go/</link>
+    <description>Recent content in go on ShrinkLabs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 25 May 2017 15:43:40 +0900</lastBuildDate><atom:link href="https://shrinklabs.com/categories/go/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>build</title>
+      <link>https://shrinklabs.com/post/go_build/</link>
+      <pubDate>Thu, 25 May 2017 15:43:40 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/post/go_build/</guid>
+      <description>소개 Go언어로 개발을 하다보면 debug모드 release모드 같이 별도의 빌드 환경을 구성하고 싶을때가 있습니다.
+그래서 build 옵션으로 특정한 환경별로 결과를 달리 할 수 있는 방법에 대해서 테스트한 내용을 정리해봅니다.
+빌드 go 파일들을 빌드하기 위해서는 일반적으로 다음과 같이 합니다.
+$ go build Go언어 문서중에 보면 https://golang.org/pkg/go/build/#hdr-Build_Constraints[Build Constraints] 에 관한 내용이 있습니다.
+이 내용은 build 할 때 조건을 줄 수 있다는 내용이고 방법은 다음과 같이 하면 된다고 합니다.
+코드의 상단에 &amp;ldquo;// +build linux&amp;rdquo; 하고 한 칸을 띄우고 &amp;ldquo;package blah&amp;rdquo; 를 시작합니다.</description>
+    </item>
+    
+    <item>
+      <title>type으로 이름 붙여진 구조체의 필드를 사용하기위한 방법</title>
+      <link>https://shrinklabs.com/post/go_cgo-type/</link>
+      <pubDate>Tue, 03 Sep 2013 17:10:53 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/post/go_cgo-type/</guid>
+      <description>c로 만들어져 있던 라이브러리를 cgo를 이용해서 포팅(?)을 하는 작업을 하다보면 난감한 부분들이 종종 나타납니다.
+그중에 한가지가 c에서 사용하던 구조체의 파라미터명이 go 에서 미리정의된 명칭일 경우가 있습니다.
+대표적인 예로 &amp;ldquo;type&amp;quot;이라는 파라미터명 입니다.
+c에서는 T_CCI_COL_INFO(cubrid의 cci에서 사용되는 구조체중에 하나) 의 필드중에 하나가 type이라는 필드가 하나 있습니다.
+이걸 go에서 사용을 하려고 하니,,,
+&amp;ldquo;&amp;hellip;expected selector or type assertion, found &amp;lsquo;type&amp;rsquo; &amp;quot; 이라는 결과를 만나게 됩니다.
+이걸 도대체 어떻게 사용해야 하나 고민을 하던중, golang.org 에 있는 문서 http://golang.</description>
+    </item>
+    
+  </channel>
+</rss>

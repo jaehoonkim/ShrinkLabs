@@ -1,63 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-		
-		
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1"><title>개발환경 설정 - ShrinkLabs</title>
+<meta property="og:title" content="개발환경 설정 - ShrinkLabs">
+<meta property="og:type" content="article">
 
-		<title>개발환경 설정 &middot; ShrinkLabs</title>
 
-		
-  		<link rel="stylesheet" href="/css/style.css">
-		<link rel="stylesheet" href="/css/fonts.css">
-		
-		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico">
-		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico">
-		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<meta property="og:image" content="images/logo.png">
 
-		
-		<link href="" rel="alternate" type="application/rss+xml" title="ShrinkLabs" />
-	</head>
+<meta property="og:url" content="https://shrinklabs.com/post/tool_setting/">
 
-    <body>
-        		<nav class="nav">
-			<div class="nav-container">
-				<a href="/">
-					<h2 class="nav-title">ShrinkLabs</h2>
-				</a>
-				<ul>
+
+
+
+<link rel="stylesheet" href="https://shrinklabs.com/css/style.min.css">
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#ffffff">
+<link rel="webmention" href="https://webmention.io/hugocisneros.com/webmention">
+<link rel="pingback" href="https://webmention.io/hugocisneros.com/xmlrpc">
+<script>
+ function updateMode() {
     
-    
-        <li>
-            <a href="/about/">
-                
-                <span>about</span>
-                
-            </a>
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+    }
+ }
+ function toggleMode() {
+     if (localStorage.theme === 'dark') {
+        
+        localStorage.theme = 'light';
+     }
+     else {
+        
+        localStorage.theme = 'dark';
+     }
+     updateMode()
+ }
+ window.onload = updateMode();
+ function toggleMenu() {
+     let navbar = document.getElementById("navbar-default");
+     if (navbar.classList.contains("hidden")) {
+        navbar.classList.remove("hidden");
+     }
+     else {
+        navbar.classList.add("hidden");
+     }
+ }
+</script>
+
+  </head>
+  <body>
+    <header class="md:px-0 px-2">
+        <nav >
+  <div class="container flex flex-wrap justify-between items-center mx-auto">
+    <div class="nav-main my-2.5">
+      <a href="https://shrinklabs.com/" class="nav-title py-2.5 text-2xl text-zinc-600 dark:text-zinc-300 hover:border-b-0">ShrinkLabs</a>
+    </div>
+    <button type="button"
+            onclick="toggleMenu()"
+            class="inline-flex items-center p-2 ml-3
+                  text-sm text-gray-500
+                  rounded-lg md:hidden hover:bg-gray-100
+                  focus:outline-none focus:ring-2
+                  focus:ring-gray-200 dark:text-gray-400
+                  dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            aria-controls="navbar-default"
+            aria-expanded="false">
+        <span class="sr-only">Open main menu</span>
+        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor"
+             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1
+                           0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0
+                           01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0
+                           01-1-1z" clip-rule="evenodd"></path>
+        </svg>
+    </button>
+    <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+      <ul class="grid md:grid-flow-col items-center justify-between text-lg my-2.5">
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/post/">posts</a>
         </li>
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/categories/">categories</a>
+        </li>
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/tags/">tags</a>
+        </li>
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/about/">about</a>
+        </li>
+        
+        <li class="h-7 pl-2.5 pr-0 list-none">
+          <button type="button" onclick="toggleMode()" class="h-full">
+            <img class="h-7 w-7 max-h-full mb-1.5 p-1.5 hidden dark:inline" id="dark-mode-button-img"
+                 src="https://shrinklabs.com/img/light_mode.svg">
+            <img class="h-7 w-7 max-h-full mb-1.5 p-1.5 inline dark:hidden" id="dark-mode-button-img"
+                 src="https://shrinklabs.com/img/dark_mode.svg">
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    </header>
+    <main class="content h-card container mt-2 m-auto
+                 leading-loose md:px-0 px-2 z-0 Page(/post/tool_setting.md)"
+          role="main">
     
-</ul>
-			</div>
-		</nav>
+    <article class="article" itemprop="mainEntity" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="title-container">
+    <h1 class="article-title" itemprop="name">개발환경 설정</h1>
+    
+    <div class="article-subtitle">
+    
+    <span class="article-date" itemprop="datePublished" content="2015-05-23T01:28:09&#43;0900">2015-05-23</span>
+    
+    
+    
+    <span class="article-author" itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Jaehoon Khim</span></span>
+    
+    
+    </div>
+    
+    </div>
 
-        
-
-<main>
-	<div class="post">
-		<div class="post-info">
-    <span>Written by</span>
-        
-        <br>
-        <span>on&nbsp;</span><time datetime="2015-05-23 01:28:09 &#43;0900 KST">May 23, 2015</time>
-</div>
-
-		<h1 class="post-title">개발환경 설정</h1>
-<div class="post-line"></div>
-
-		
-
-		<h2 id="업데이트">업데이트</h2>
+    <div class="article-content" itemprop="articleBody">
+      <h2 id="업데이트">업데이트</h2>
 <pre><code>$ sudo apt-get update  
 $ sudo apt-get install build-essential
 </code></pre><h2 id="vim-설치">vim 설치</h2>
@@ -136,62 +222,62 @@ $ sudo apt-get install cmake
 </code></pre></li>
 <li>/etc/vim/vimrc.local 을 생성해서 아래의 내용을 붙여 넣습니다.</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Shell" data-lang="Shell">set nocompatible <span style="color:#e6db74">&#34; be iMproved, required
-</span><span style="color:#e6db74">filetype off &#34;</span> required
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Shell" data-lang="Shell"><span style="color:#24909d">set</span> nocompatible <span style="color:#ed9d13">&#34; be iMproved, required
+</span><span style="color:#ed9d13">filetype off &#34;</span> required
 
-set autoindent
-set smartindent
-set shiftwidth<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>
-set number
-set expandtab
-set tabstop<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>
+<span style="color:#24909d">set</span> autoindent
+<span style="color:#24909d">set</span> smartindent
+<span style="color:#24909d">set</span> <span style="color:#40ffff">shiftwidth</span>=<span style="color:#3677a9">4</span>
+<span style="color:#24909d">set</span> number
+<span style="color:#24909d">set</span> expandtab
+<span style="color:#24909d">set</span> <span style="color:#40ffff">tabstop</span>=<span style="color:#3677a9">4</span>
 
-<span style="color:#e6db74">&#34; set the runtime path to include Vundle and initialize
-</span><span style="color:#e6db74">set rtp+=~/.vim/bundle/Vundle.vim
-</span><span style="color:#e6db74">call vundle#begin()
-</span><span style="color:#e6db74">&#34;</span> alternatively, pass a path where Vundle should install plugins
-<span style="color:#e6db74">&#34;call vundle#begin(&#39;~/some/path/here&#39;)
-</span><span style="color:#e6db74">
-</span><span style="color:#e6db74">&#34;</span> let Vundle manage Vundle, required
-Plugin <span style="color:#e6db74">&#39;gmarik/Vundle.vim&#39;</span>
+<span style="color:#ed9d13">&#34; set the runtime path to include Vundle and initialize
+</span><span style="color:#ed9d13">set rtp+=~/.vim/bundle/Vundle.vim
+</span><span style="color:#ed9d13">call vundle#begin()
+</span><span style="color:#ed9d13">&#34;</span> alternatively, pass a path where Vundle should install plugins
+<span style="color:#ed9d13">&#34;call vundle#begin(&#39;~/some/path/here&#39;)
+</span><span style="color:#ed9d13">
+</span><span style="color:#ed9d13">&#34;</span> <span style="color:#24909d">let</span> Vundle manage Vundle, required
+Plugin <span style="color:#ed9d13">&#39;gmarik/Vundle.vim&#39;</span>
 
-<span style="color:#e6db74">&#34; The following are examples of different formats supported.
-</span><span style="color:#e6db74">&#34;</span> Keep Plugin commands between vundle#begin/end.
-<span style="color:#e6db74">&#34; plugin on GitHub repo
-</span><span style="color:#e6db74">Plugin &#39;tpope/vim-fugitive&#39;
-</span><span style="color:#e6db74">&#34;</span> plugin from http://vim-scripts.org/vim/scripts.html
-Plugin <span style="color:#e6db74">&#39;L9&#39;</span>
-<span style="color:#e6db74">&#34; Git plugin not hosted on GitHub
-</span><span style="color:#e6db74">Plugin &#39;git://git.wincent.com/command-t.git&#39;
-</span><span style="color:#e6db74">&#34;</span> git repos on your local machine <span style="color:#f92672">(</span>i.e. when working on your own plugin<span style="color:#f92672">)</span>
-<span style="color:#e6db74">&#34;Plugin &#39;file:///home/gmarik/path/to/plugin&#39;
-</span><span style="color:#e6db74">&#34;</span> The sparkup vim script is in a subdirectory of this repo called vim.
-<span style="color:#e6db74">&#34; Pass the path to set the runtimepath properly.
-</span><span style="color:#e6db74">Plugin &#39;rstacruz/sparkup&#39;, {&#39;rtp&#39;: &#39;vim/&#39;}
-</span><span style="color:#e6db74">&#34;</span> Avoid a name conflict with L9
-<span style="color:#e6db74">&#34;Plugin &#39;user/L9&#39;, {&#39;name&#39;: &#39;newL9&#39;}
-</span><span style="color:#e6db74">
-</span><span style="color:#e6db74">Plugin &#39;The-NERD-tree&#39;
-</span><span style="color:#e6db74">Plugin &#39;bling/vim-airline&#39;
-</span><span style="color:#e6db74">Plugin &#39;fatih/vim-go&#39;
-</span><span style="color:#e6db74">Plugin &#39;nsf/gocode&#39;
-</span><span style="color:#e6db74">Plugin &#39;Tagbar&#39;
-</span><span style="color:#e6db74">Plugin &#39;Valloric/YouCompleteMe&#39;
-</span><span style="color:#e6db74">
-</span><span style="color:#e6db74">&#34;</span> All of your Plugins must be added before the following line
-call vundle#end<span style="color:#f92672">()</span> <span style="color:#e6db74">&#34; required
-</span><span style="color:#e6db74">filetype plugin indent on &#34;</span> required
-<span style="color:#e6db74">&#34; To ignore plugin indent changes, instead use:
-</span><span style="color:#e6db74">&#34;</span>filetype plugin on
-<span style="color:#e6db74">&#34;
-</span><span style="color:#e6db74">&#34;</span> Brief help
-<span style="color:#e6db74">&#34; :PluginList - lists configured plugins
-</span><span style="color:#e6db74">&#34;</span> :PluginInstall - installs plugins; append <span style="color:#e6db74">`</span>!<span style="color:#e6db74">`</span> to update or just :PluginUpdate
-<span style="color:#e6db74">&#34; :PluginSearch foo - searches for foo; append `!` to refresh local cache
-</span><span style="color:#e6db74">&#34;</span> :PluginClean - confirms removal of unused plugins; append <span style="color:#e6db74">`</span>!<span style="color:#e6db74">`</span> to auto-approve removal
-<span style="color:#e6db74">&#34;
-</span><span style="color:#e6db74">&#34;</span> see :h vundle <span style="color:#66d9ef">for</span> more details or wiki <span style="color:#66d9ef">for</span> FAQ
-<span style="color:#e6db74">&#34; Put your non-Plugin stuff after this line
+<span style="color:#ed9d13">&#34; The following are examples of different formats supported.
+</span><span style="color:#ed9d13">&#34;</span> Keep Plugin commands between vundle#begin/end.
+<span style="color:#ed9d13">&#34; plugin on GitHub repo
+</span><span style="color:#ed9d13">Plugin &#39;tpope/vim-fugitive&#39;
+</span><span style="color:#ed9d13">&#34;</span> plugin from http://vim-scripts.org/vim/scripts.html
+Plugin <span style="color:#ed9d13">&#39;L9&#39;</span>
+<span style="color:#ed9d13">&#34; Git plugin not hosted on GitHub
+</span><span style="color:#ed9d13">Plugin &#39;git://git.wincent.com/command-t.git&#39;
+</span><span style="color:#ed9d13">&#34;</span> git repos on your <span style="color:#24909d">local</span> machine (i.e. when working on your own plugin)
+<span style="color:#ed9d13">&#34;Plugin &#39;file:///home/gmarik/path/to/plugin&#39;
+</span><span style="color:#ed9d13">&#34;</span> The sparkup vim script is in a subdirectory of this repo called vim.
+<span style="color:#ed9d13">&#34; Pass the path to set the runtimepath properly.
+</span><span style="color:#ed9d13">Plugin &#39;rstacruz/sparkup&#39;, {&#39;rtp&#39;: &#39;vim/&#39;}
+</span><span style="color:#ed9d13">&#34;</span> Avoid a name conflict with L9
+<span style="color:#ed9d13">&#34;Plugin &#39;user/L9&#39;, {&#39;name&#39;: &#39;newL9&#39;}
+</span><span style="color:#ed9d13">
+</span><span style="color:#ed9d13">Plugin &#39;The-NERD-tree&#39;
+</span><span style="color:#ed9d13">Plugin &#39;bling/vim-airline&#39;
+</span><span style="color:#ed9d13">Plugin &#39;fatih/vim-go&#39;
+</span><span style="color:#ed9d13">Plugin &#39;nsf/gocode&#39;
+</span><span style="color:#ed9d13">Plugin &#39;Tagbar&#39;
+</span><span style="color:#ed9d13">Plugin &#39;Valloric/YouCompleteMe&#39;
+</span><span style="color:#ed9d13">
+</span><span style="color:#ed9d13">&#34;</span> All of your Plugins must be added before the following line
+call vundle#end() <span style="color:#ed9d13">&#34; required
+</span><span style="color:#ed9d13">filetype plugin indent on &#34;</span> required
+<span style="color:#ed9d13">&#34; To ignore plugin indent changes, instead use:
+</span><span style="color:#ed9d13">&#34;</span>filetype plugin on
+<span style="color:#ed9d13">&#34;
+</span><span style="color:#ed9d13">&#34;</span> Brief <span style="color:#24909d">help</span>
+<span style="color:#ed9d13">&#34; :PluginList - lists configured plugins
+</span><span style="color:#ed9d13">&#34;</span> :PluginInstall - installs plugins; append <span style="color:#ed9d13">`</span>!<span style="color:#ed9d13">`</span> to update or just :PluginUpdate
+<span style="color:#ed9d13">&#34; :PluginSearch foo - searches for foo; append `!` to refresh local cache
+</span><span style="color:#ed9d13">&#34;</span> :PluginClean - confirms removal of unused plugins; append <span style="color:#ed9d13">`</span>!<span style="color:#ed9d13">`</span> to auto-approve removal
+<span style="color:#ed9d13">&#34;
+</span><span style="color:#ed9d13">&#34;</span> see :h vundle <span style="color:#6ab825;font-weight:bold">for</span> more details or wiki <span style="color:#6ab825;font-weight:bold">for</span> FAQ
+<span style="color:#ed9d13">&#34; Put your non-Plugin stuff after this line
 </span></code></pre></div><ul>
 <li>
 <p>vim 실행해서 “ :PluginInstall “ 을 해서 지정된 플러그인들을 설치합니다.</p>
@@ -245,7 +331,7 @@ $GOPATH/bin 에 생성되어 있는, errcheck, gocode, gofmt, golint, gotags, go
 <li>YouCompleteMe 설치<br>
 YouCompleteMe의 설치를 완료하기 위해서 Bundle 디렉토리로 이동해서 Go언어 자동완성이 가능하도록 옵션을 지정해서 install을 합니다.</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ cd ~/.vim/bundle/YouCompleteMe
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ <span style="color:#24909d">cd</span> ~/.vim/bundle/YouCompleteMe
 $ ./install.py --gocode-completer
 </code></pre></div><ul>
 <li>cscope를 사용하기 위한 설정<br>
@@ -264,24 +350,31 @@ $ ./install.py --gocode-completer
 </script>
 
 
-		
-	</div>
+    </div>
 
-	<div class="pagination">
-		<a href="/post/go_pkg-config/" class="left arrow">&#8592;</a>
-		<a href="/post/go_meta-tag-pkg-repository/" class="right arrow">&#8594;</a>
+    
 
-		<a href="#" class="top">Top</a>
-	</div>
-</main>
+    
+    
+    <div class="article-date-modified">
+        Last modified <span itemprop="dateModified" content="2015-05-23T01:28:09&#43;0900">2015-05-23</span>
+    </div>
+    
+    </article>
+
+    </main>
+    <footer class="footer container h-10 text-center">
+  <ul class="pl-0">
+    
+    <li class="ml-2 first:before:content-none before:content-['•'] inline-block list-none"><a class="ml-2 text-neutral-800 dark:text-neutral-400 border-none"
+          href="https://github.com/hugcis/hugo-astatine-theme">Code</a>
+    </li>
+    <li class="ml-2 first:before:content-none before:content-['•']
+                text-neutral-800 dark:text-neutral-400 inline-block list-none"><span class="ml-2">© Jaehoon Khim 2022</span>
+    </li>
+  </ul>
+</footer>
 
 
-        		<footer>
-			
-			<span>
-			&copy; <time datetime="2021-11-03 10:25:31.9389981 &#43;0900 KST m=&#43;0.565758501">2021</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
-			</span>
-		</footer>
-
-    </body>
+  </body>
 </html>

@@ -1,63 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-		
-		
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1"><title>Go언어 프로젝트에서 테스트 코드 작성 경험 - ShrinkLabs</title>
+<meta property="og:title" content="Go언어 프로젝트에서 테스트 코드 작성 경험 - ShrinkLabs">
+<meta property="og:type" content="article">
 
-		<title>Go언어 프로젝트에서 테스트 코드 작성 경험 &middot; ShrinkLabs</title>
 
-		
-  		<link rel="stylesheet" href="/css/style.css">
-		<link rel="stylesheet" href="/css/fonts.css">
-		
-		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico">
-		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico">
-		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<meta property="og:image" content="images/logo.png">
 
-		
-		<link href="" rel="alternate" type="application/rss+xml" title="ShrinkLabs" />
-	</head>
+<meta property="og:url" content="https://shrinklabs.com/post/go_writing-a-unit-test/">
 
-    <body>
-        		<nav class="nav">
-			<div class="nav-container">
-				<a href="/">
-					<h2 class="nav-title">ShrinkLabs</h2>
-				</a>
-				<ul>
+
+
+
+<link rel="stylesheet" href="https://shrinklabs.com/css/style.min.css">
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#ffffff">
+<link rel="webmention" href="https://webmention.io/hugocisneros.com/webmention">
+<link rel="pingback" href="https://webmention.io/hugocisneros.com/xmlrpc">
+<script>
+ function updateMode() {
     
-    
-        <li>
-            <a href="/about/">
-                
-                <span>about</span>
-                
-            </a>
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+    }
+ }
+ function toggleMode() {
+     if (localStorage.theme === 'dark') {
+        
+        localStorage.theme = 'light';
+     }
+     else {
+        
+        localStorage.theme = 'dark';
+     }
+     updateMode()
+ }
+ window.onload = updateMode();
+ function toggleMenu() {
+     let navbar = document.getElementById("navbar-default");
+     if (navbar.classList.contains("hidden")) {
+        navbar.classList.remove("hidden");
+     }
+     else {
+        navbar.classList.add("hidden");
+     }
+ }
+</script>
+
+  </head>
+  <body>
+    <header class="md:px-0 px-2">
+        <nav >
+  <div class="container flex flex-wrap justify-between items-center mx-auto">
+    <div class="nav-main my-2.5">
+      <a href="https://shrinklabs.com/" class="nav-title py-2.5 text-2xl text-zinc-600 dark:text-zinc-300 hover:border-b-0">ShrinkLabs</a>
+    </div>
+    <button type="button"
+            onclick="toggleMenu()"
+            class="inline-flex items-center p-2 ml-3
+                  text-sm text-gray-500
+                  rounded-lg md:hidden hover:bg-gray-100
+                  focus:outline-none focus:ring-2
+                  focus:ring-gray-200 dark:text-gray-400
+                  dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            aria-controls="navbar-default"
+            aria-expanded="false">
+        <span class="sr-only">Open main menu</span>
+        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor"
+             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1
+                           0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0
+                           01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0
+                           01-1-1z" clip-rule="evenodd"></path>
+        </svg>
+    </button>
+    <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+      <ul class="grid md:grid-flow-col items-center justify-between text-lg my-2.5">
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/post/">posts</a>
         </li>
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/categories/">categories</a>
+        </li>
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/tags/">tags</a>
+        </li>
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/about/">about</a>
+        </li>
+        
+        <li class="h-7 pl-2.5 pr-0 list-none">
+          <button type="button" onclick="toggleMode()" class="h-full">
+            <img class="h-7 w-7 max-h-full mb-1.5 p-1.5 hidden dark:inline" id="dark-mode-button-img"
+                 src="https://shrinklabs.com/img/light_mode.svg">
+            <img class="h-7 w-7 max-h-full mb-1.5 p-1.5 inline dark:hidden" id="dark-mode-button-img"
+                 src="https://shrinklabs.com/img/dark_mode.svg">
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    </header>
+    <main class="content h-card container mt-2 m-auto
+                 leading-loose md:px-0 px-2 z-0 Page(/post/go_writing-a-unit-test.md)"
+          role="main">
     
-</ul>
-			</div>
-		</nav>
+    <article class="article" itemprop="mainEntity" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="title-container">
+    <h1 class="article-title" itemprop="name">Go언어 프로젝트에서 테스트 코드 작성 경험</h1>
+    
+    <div class="article-subtitle">
+    
+    <span class="article-date" itemprop="datePublished" content="2018-02-21T23:02:29&#43;0900">2018-02-21</span>
+    
+    
+    
+    <span class="article-author" itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Jaehoon Khim</span></span>
+    
+    
+    </div>
+    
+    </div>
 
-        
-
-<main>
-	<div class="post">
-		<div class="post-info">
-    <span>Written by</span>
-        
-        <br>
-        <span>on&nbsp;</span><time datetime="2018-02-21 23:02:29 &#43;0900 KST">February 21, 2018</time>
-</div>
-
-		<h1 class="post-title">Go언어 프로젝트에서 테스트 코드 작성 경험</h1>
-<div class="post-line"></div>
-
-		
-
-		<h2 id="테스트-코드는-왜">테스트 코드는 왜?</h2>
+    <div class="article-content" itemprop="articleBody">
+      <h2 id="테스트-코드는-왜">테스트 코드는 왜?</h2>
 <p>현재 프로젝트를 진행 중 코딩을 할 때면 계속해서 의심과 두려움이 들었다.</p>
 <p>&ldquo;내가 제대로 작성하고 있는 게 맞나?&rdquo;<br>
 &ldquo;이렇게 작성하면 다른 데에서 문제가 생기는 건 아닌가?&rdquo;</p>
@@ -122,33 +208,33 @@
 <h2 id="테스트-코드-작성-예1">테스트 코드 작성 예(1)</h2>
 <p>간단한 더하기 계산을 하는 패키지를 만들면서 필요한  테스트 코드를 작성하는 예를 한번 보겠습니다.<br>
 테스트 코드는 다음과 같습니다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// add_test.go
-</span><span style="color:#75715e"></span><span style="color:#f92672">package</span> <span style="color:#a6e22e">add</span>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#999;font-style:italic">// add_test.go
+</span><span style="color:#999;font-style:italic"></span><span style="color:#6ab825;font-weight:bold">package</span> add
 
-<span style="color:#f92672">import</span> (
-	<span style="color:#e6db74">&#34;testing&#34;</span>
+<span style="color:#6ab825;font-weight:bold">import</span> (
+	<span style="color:#ed9d13">&#34;testing&#34;</span>
 )
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">TestAdd</span>(<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">testing</span>.<span style="color:#a6e22e">T</span>) {
-	<span style="color:#75715e">//arrange
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">y</span>, <span style="color:#a6e22e">res</span> <span style="color:#66d9ef">int</span>
-	<span style="color:#a6e22e">x</span> = <span style="color:#ae81ff">2</span>
-	<span style="color:#a6e22e">y</span> = <span style="color:#ae81ff">3</span>
+<span style="color:#6ab825;font-weight:bold">func</span> <span style="color:#447fcf">TestAdd</span>(t *testing.T) {
+	<span style="color:#999;font-style:italic">//arrange
+</span><span style="color:#999;font-style:italic"></span>	<span style="color:#6ab825;font-weight:bold">var</span> x, y, res <span style="color:#6ab825;font-weight:bold">int</span>
+	x = <span style="color:#3677a9">2</span>
+	y = <span style="color:#3677a9">3</span>
 
-	<span style="color:#75715e">//act
-</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">res</span> = <span style="color:#a6e22e">Add</span>(<span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">y</span>)
+	<span style="color:#999;font-style:italic">//act
+</span><span style="color:#999;font-style:italic"></span>	res = <span style="color:#447fcf">Add</span>(x, y)
 
-	<span style="color:#75715e">//assert
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">res</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">5</span> {
-		<span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#e6db74">&#34;Add의 결과가 옳바르지 않습니다&#34;</span>)
+	<span style="color:#999;font-style:italic">//assert
+</span><span style="color:#999;font-style:italic"></span>	<span style="color:#6ab825;font-weight:bold">if</span> res != <span style="color:#3677a9">5</span> {
+		t.<span style="color:#447fcf">Fatal</span>(<span style="color:#ed9d13">&#34;Add의 결과가 옳바르지 않습니다&#34;</span>)
 	}
 }
 </code></pre></div><p>add 패키지의 구현은 다음과 같습니다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// add.go
-</span><span style="color:#75715e"></span><span style="color:#f92672">package</span> <span style="color:#a6e22e">add</span>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#999;font-style:italic">// add.go
+</span><span style="color:#999;font-style:italic"></span><span style="color:#6ab825;font-weight:bold">package</span> add
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Add</span>(<span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">y</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> {
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">y</span>
+<span style="color:#6ab825;font-weight:bold">func</span> <span style="color:#447fcf">Add</span>(x, y <span style="color:#6ab825;font-weight:bold">int</span>) <span style="color:#6ab825;font-weight:bold">int</span> {
+	<span style="color:#6ab825;font-weight:bold">return</span> x + y
 }
 </code></pre></div><p>이제 테스트를 진행해서 결과를 보기 위해서 다음과 같이 실행합니다.</p>
 <pre><code>$ go test -v
@@ -168,91 +254,91 @@
 2018/02/20 17:02:42 goconvey.go:105: Launching browser on 127.0.0.1:8080
 2018/02/20 17:02:46 goconvey.go:113: ATTENTION: default value of option force_s3tc_enable overridden by environment.
 기존 브라우저 세션에 새 창을 생성했습니다.
-</code></pre><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// oprcfg.go
-</span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CfgItem</span> <span style="color:#66d9ef">struct</span> {
-  <span style="color:#a6e22e">Name</span>        <span style="color:#66d9ef">string</span>
-  <span style="color:#a6e22e">Value</span>       <span style="color:#66d9ef">string</span>
-  <span style="color:#a6e22e">Owner</span>       <span style="color:#66d9ef">string</span>
+</code></pre><div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#999;font-style:italic">// oprcfg.go
+</span><span style="color:#999;font-style:italic"></span>
+<span style="color:#6ab825;font-weight:bold">type</span> CfgItem <span style="color:#6ab825;font-weight:bold">struct</span> {
+  Name        <span style="color:#6ab825;font-weight:bold">string</span>
+  Value       <span style="color:#6ab825;font-weight:bold">string</span>
+  Owner       <span style="color:#6ab825;font-weight:bold">string</span>
 }
 
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Config</span> <span style="color:#66d9ef">struct</span> {
-  <span style="color:#a6e22e">Cfg</span> <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>][]<span style="color:#a6e22e">CfgItem</span>
+<span style="color:#6ab825;font-weight:bold">type</span> Config <span style="color:#6ab825;font-weight:bold">struct</span> {
+  Cfg <span style="color:#6ab825;font-weight:bold">map</span>[<span style="color:#6ab825;font-weight:bold">string</span>][]CfgItem
 }
  
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewConfig</span>() (<span style="color:#f92672">*</span><span style="color:#a6e22e">Config</span>, <span style="color:#66d9ef">error</span>) {
-  <span style="color:#a6e22e">oc</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">Config</span>{}
-  <span style="color:#a6e22e">oc</span>.<span style="color:#a6e22e">Cfg</span> = make(<span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>][]<span style="color:#a6e22e">CfgItem</span>)
-  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">oc</span>, <span style="color:#66d9ef">nil</span>
+<span style="color:#6ab825;font-weight:bold">func</span> <span style="color:#447fcf">NewConfig</span>() (*Config, <span style="color:#6ab825;font-weight:bold">error</span>) {
+  oc := &amp;Config{}
+  oc.Cfg = <span style="color:#24909d">make</span>(<span style="color:#6ab825;font-weight:bold">map</span>[<span style="color:#6ab825;font-weight:bold">string</span>][]CfgItem)
+  <span style="color:#6ab825;font-weight:bold">return</span> oc, <span style="color:#6ab825;font-weight:bold">nil</span>
 }
  
-<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">oc</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Config</span>) <span style="color:#a6e22e">GetOprCfg</span>(<span style="color:#a6e22e">owner</span> <span style="color:#66d9ef">string</span>) []<span style="color:#a6e22e">OprCfg</span> {
-  <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">owner</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;&#34;</span> {
-    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>
+<span style="color:#6ab825;font-weight:bold">func</span> (oc *Config) <span style="color:#447fcf">GetOprCfg</span>(owner <span style="color:#6ab825;font-weight:bold">string</span>) []OprCfg {
+  <span style="color:#6ab825;font-weight:bold">if</span> owner == <span style="color:#ed9d13">&#34;&#34;</span> {
+    <span style="color:#6ab825;font-weight:bold">return</span> <span style="color:#6ab825;font-weight:bold">nil</span>
   }
   
-  <span style="color:#a6e22e">globalCategory</span> <span style="color:#f92672">:=</span> <span style="color:#e6db74">&#34;global&#34;</span>
-  <span style="color:#a6e22e">srchCategory</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">owner</span>
+  globalCategory := <span style="color:#ed9d13">&#34;global&#34;</span>
+  srchCategory := owner
  
-  <span style="color:#a6e22e">globalConfigItem</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">oc</span>.<span style="color:#a6e22e">Cfg</span>[<span style="color:#a6e22e">globalCategory</span>]
-  <span style="color:#a6e22e">srchConfigItem</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">oc</span>.<span style="color:#a6e22e">Cfg</span>[<span style="color:#a6e22e">srchCategory</span>]
+  globalConfigItem := oc.Cfg[globalCategory]
+  srchConfigItem := oc.Cfg[srchCategory]
  
-  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">resOpcf</span> []<span style="color:#a6e22e">OprCfg</span>
+  <span style="color:#6ab825;font-weight:bold">var</span> resOpcf []OprCfg
  
-  <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">cf</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">globalConfigItem</span> {
-    <span style="color:#a6e22e">opcf</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">OprCfg</span>{<span style="color:#a6e22e">Name</span>: <span style="color:#a6e22e">cf</span>.<span style="color:#a6e22e">Name</span>, <span style="color:#a6e22e">Value</span>: <span style="color:#a6e22e">cf</span>.<span style="color:#a6e22e">Value</span>, <span style="color:#a6e22e">Owner</span>: <span style="color:#a6e22e">cf</span>.<span style="color:#a6e22e">Owner</span>}
-    <span style="color:#a6e22e">resOpcf</span> = append(<span style="color:#a6e22e">resOpcf</span>, <span style="color:#a6e22e">opcf</span>)
+  <span style="color:#6ab825;font-weight:bold">for</span> _, cf := <span style="color:#6ab825;font-weight:bold">range</span> globalConfigItem {
+    opcf := OprCfg{Name: cf.Name, Value: cf.Value, Owner: cf.Owner}
+    resOpcf = <span style="color:#24909d">append</span>(resOpcf, opcf)
   }
  
-  <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">cf</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">srchConfigItem</span> {
-    <span style="color:#a6e22e">opcf</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">OprCfg</span>{<span style="color:#a6e22e">Name</span>: <span style="color:#a6e22e">cf</span>.<span style="color:#a6e22e">Name</span>, <span style="color:#a6e22e">Value</span>: <span style="color:#a6e22e">cf</span>.<span style="color:#a6e22e">Value</span>, <span style="color:#a6e22e">Owner</span>: <span style="color:#a6e22e">cf</span>.<span style="color:#a6e22e">Owner</span>}
-    <span style="color:#a6e22e">resOpcf</span> = append(<span style="color:#a6e22e">resOpcf</span>, <span style="color:#a6e22e">opcf</span>)
+  <span style="color:#6ab825;font-weight:bold">for</span> _, cf := <span style="color:#6ab825;font-weight:bold">range</span> srchConfigItem {
+    opcf := OprCfg{Name: cf.Name, Value: cf.Value, Owner: cf.Owner}
+    resOpcf = <span style="color:#24909d">append</span>(resOpcf, opcf)
   }
  
-  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">resOpcf</span>
+  <span style="color:#6ab825;font-weight:bold">return</span> resOpcf
 }
 </code></pre></div><p>Config 객체를 생성하는 NewConfig() 함수가 있고, Config에서 owner에 해당하는 OprCfg를 반환하는 GetOprCfg() 함수가 있습니다.<br>
 이 두 함수에 대한 테스트 코드를 다음과 같이 작성했습니다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// oprcfg_test.go
-</span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Test_Config_New</span>(<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">testing</span>.<span style="color:#a6e22e">T</span>) {
-  <span style="color:#75715e">// arrange
-</span><span style="color:#75715e"></span> 
-  <span style="color:#75715e">// act
-</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">oc</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">NewConfig</span>()
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#999;font-style:italic">// oprcfg_test.go
+</span><span style="color:#999;font-style:italic"></span>
+<span style="color:#6ab825;font-weight:bold">func</span> <span style="color:#447fcf">Test_Config_New</span>(t *testing.T) {
+  <span style="color:#999;font-style:italic">// arrange
+</span><span style="color:#999;font-style:italic"></span> 
+  <span style="color:#999;font-style:italic">// act
+</span><span style="color:#999;font-style:italic"></span>  oc, _ := <span style="color:#447fcf">NewConfig</span>()
  
-  <span style="color:#75715e">// assert
-</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">assert</span>.<span style="color:#a6e22e">NotNil</span>(<span style="color:#a6e22e">t</span>, <span style="color:#a6e22e">oc</span>)
+  <span style="color:#999;font-style:italic">// assert
+</span><span style="color:#999;font-style:italic"></span>  assert.<span style="color:#447fcf">NotNil</span>(t, oc)
 }
  
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Test_GetOprCfg</span>(<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">testing</span>.<span style="color:#a6e22e">T</span>) {
-  <span style="color:#75715e">// arrange
-</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">oc</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">NewConfig</span>()
+<span style="color:#6ab825;font-weight:bold">func</span> <span style="color:#447fcf">Test_GetOprCfg</span>(t *testing.T) {
+  <span style="color:#999;font-style:italic">// arrange
+</span><span style="color:#999;font-style:italic"></span>  oc, _ := <span style="color:#447fcf">NewConfig</span>()
  
-  <span style="color:#a6e22e">oc</span>.<span style="color:#a6e22e">SetCfgItem</span>(<span style="color:#e6db74">&#34;key1&#34;</span>, <span style="color:#e6db74">&#34;value1&#34;</span>, <span style="color:#e6db74">&#34;key1-value1&#34;</span>, <span style="color:#e6db74">&#34;owner1&#34;</span>)
-  <span style="color:#a6e22e">oc</span>.<span style="color:#a6e22e">SetCfgItem</span>(<span style="color:#e6db74">&#34;key2&#34;</span>, <span style="color:#e6db74">&#34;value2&#34;</span>, <span style="color:#e6db74">&#34;key2-value2&#34;</span>, <span style="color:#e6db74">&#34;owner2&#34;</span>)
-  <span style="color:#a6e22e">oc</span>.<span style="color:#a6e22e">SetCfgItem</span>(<span style="color:#e6db74">&#34;key3&#34;</span>, <span style="color:#e6db74">&#34;value3&#34;</span>, <span style="color:#e6db74">&#34;key3-value3&#34;</span>, <span style="color:#e6db74">&#34;owner1&#34;</span>)
-  <span style="color:#a6e22e">oc</span>.<span style="color:#a6e22e">SetCfgItem</span>(<span style="color:#e6db74">&#34;key4&#34;</span>, <span style="color:#e6db74">&#34;value4&#34;</span>, <span style="color:#e6db74">&#34;key4-value4&#34;</span>, <span style="color:#e6db74">&#34;owner1&#34;</span>)
-  <span style="color:#a6e22e">oc</span>.<span style="color:#a6e22e">SetCfgItem</span>(<span style="color:#e6db74">&#34;key5&#34;</span>, <span style="color:#e6db74">&#34;value5&#34;</span>, <span style="color:#e6db74">&#34;key5-value5&#34;</span>, <span style="color:#e6db74">&#34;owner2&#34;</span>)
-  <span style="color:#a6e22e">oc</span>.<span style="color:#a6e22e">SetCfgItem</span>(<span style="color:#e6db74">&#34;key6&#34;</span>, <span style="color:#e6db74">&#34;value6&#34;</span>, <span style="color:#e6db74">&#34;key6-value6&#34;</span>, <span style="color:#e6db74">&#34;owner3&#34;</span>)
-  <span style="color:#a6e22e">oc</span>.<span style="color:#a6e22e">SetCfgItem</span>(<span style="color:#e6db74">&#34;key7&#34;</span>, <span style="color:#e6db74">&#34;value7&#34;</span>, <span style="color:#e6db74">&#34;key7-value7&#34;</span>, <span style="color:#e6db74">&#34;owner1&#34;</span>)
-  <span style="color:#a6e22e">oc</span>.<span style="color:#a6e22e">SetCfgItem</span>(<span style="color:#e6db74">&#34;key8&#34;</span>, <span style="color:#e6db74">&#34;value8&#34;</span>, <span style="color:#e6db74">&#34;key8-value8&#34;</span>, <span style="color:#e6db74">&#34;global&#34;</span>)
+  oc.<span style="color:#447fcf">SetCfgItem</span>(<span style="color:#ed9d13">&#34;key1&#34;</span>, <span style="color:#ed9d13">&#34;value1&#34;</span>, <span style="color:#ed9d13">&#34;key1-value1&#34;</span>, <span style="color:#ed9d13">&#34;owner1&#34;</span>)
+  oc.<span style="color:#447fcf">SetCfgItem</span>(<span style="color:#ed9d13">&#34;key2&#34;</span>, <span style="color:#ed9d13">&#34;value2&#34;</span>, <span style="color:#ed9d13">&#34;key2-value2&#34;</span>, <span style="color:#ed9d13">&#34;owner2&#34;</span>)
+  oc.<span style="color:#447fcf">SetCfgItem</span>(<span style="color:#ed9d13">&#34;key3&#34;</span>, <span style="color:#ed9d13">&#34;value3&#34;</span>, <span style="color:#ed9d13">&#34;key3-value3&#34;</span>, <span style="color:#ed9d13">&#34;owner1&#34;</span>)
+  oc.<span style="color:#447fcf">SetCfgItem</span>(<span style="color:#ed9d13">&#34;key4&#34;</span>, <span style="color:#ed9d13">&#34;value4&#34;</span>, <span style="color:#ed9d13">&#34;key4-value4&#34;</span>, <span style="color:#ed9d13">&#34;owner1&#34;</span>)
+  oc.<span style="color:#447fcf">SetCfgItem</span>(<span style="color:#ed9d13">&#34;key5&#34;</span>, <span style="color:#ed9d13">&#34;value5&#34;</span>, <span style="color:#ed9d13">&#34;key5-value5&#34;</span>, <span style="color:#ed9d13">&#34;owner2&#34;</span>)
+  oc.<span style="color:#447fcf">SetCfgItem</span>(<span style="color:#ed9d13">&#34;key6&#34;</span>, <span style="color:#ed9d13">&#34;value6&#34;</span>, <span style="color:#ed9d13">&#34;key6-value6&#34;</span>, <span style="color:#ed9d13">&#34;owner3&#34;</span>)
+  oc.<span style="color:#447fcf">SetCfgItem</span>(<span style="color:#ed9d13">&#34;key7&#34;</span>, <span style="color:#ed9d13">&#34;value7&#34;</span>, <span style="color:#ed9d13">&#34;key7-value7&#34;</span>, <span style="color:#ed9d13">&#34;owner1&#34;</span>)
+  oc.<span style="color:#447fcf">SetCfgItem</span>(<span style="color:#ed9d13">&#34;key8&#34;</span>, <span style="color:#ed9d13">&#34;value8&#34;</span>, <span style="color:#ed9d13">&#34;key8-value8&#34;</span>, <span style="color:#ed9d13">&#34;global&#34;</span>)
  
-  <span style="color:#75715e">// act
-</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">opcfs</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">oc</span>.<span style="color:#a6e22e">GetOprCfg</span>(<span style="color:#e6db74">&#34;owner1&#34;</span>)
-  <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Log</span>(<span style="color:#a6e22e">opcfs</span>)
+  <span style="color:#999;font-style:italic">// act
+</span><span style="color:#999;font-style:italic"></span>  opcfs := oc.<span style="color:#447fcf">GetOprCfg</span>(<span style="color:#ed9d13">&#34;owner1&#34;</span>)
+  t.<span style="color:#447fcf">Log</span>(opcfs)
  
-  <span style="color:#75715e">// assert
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">res</span> []<span style="color:#a6e22e">OprCfg</span>
-  <span style="color:#a6e22e">res</span> = make([]<span style="color:#a6e22e">OprCfg</span>, <span style="color:#ae81ff">5</span>)
+  <span style="color:#999;font-style:italic">// assert
+</span><span style="color:#999;font-style:italic"></span>  <span style="color:#6ab825;font-weight:bold">var</span> res []OprCfg
+  res = <span style="color:#24909d">make</span>([]OprCfg, <span style="color:#3677a9">5</span>)
  
-  <span style="color:#75715e">// res에는 global이 먼저 쌓이고, 타겟 owner가 쌓인다
-</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">res</span>[<span style="color:#ae81ff">0</span>] = <span style="color:#a6e22e">OprCfg</span>{<span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;key8&#34;</span>, <span style="color:#a6e22e">Value</span>: <span style="color:#e6db74">&#34;value8&#34;</span>, <span style="color:#a6e22e">Owner</span>: <span style="color:#e6db74">&#34;global&#34;</span>}
-  <span style="color:#a6e22e">res</span>[<span style="color:#ae81ff">1</span>] = <span style="color:#a6e22e">OprCfg</span>{<span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;key1&#34;</span>, <span style="color:#a6e22e">Value</span>: <span style="color:#e6db74">&#34;value1&#34;</span>, <span style="color:#a6e22e">Owner</span>: <span style="color:#e6db74">&#34;owner1&#34;</span>}
-  <span style="color:#a6e22e">res</span>[<span style="color:#ae81ff">2</span>] = <span style="color:#a6e22e">OprCfg</span>{<span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;key3&#34;</span>, <span style="color:#a6e22e">Value</span>: <span style="color:#e6db74">&#34;value3&#34;</span>, <span style="color:#a6e22e">Owner</span>: <span style="color:#e6db74">&#34;owener1&#34;</span>}
-  <span style="color:#a6e22e">res</span>[<span style="color:#ae81ff">3</span>] = <span style="color:#a6e22e">OprCfg</span>{<span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;key4&#34;</span>, <span style="color:#a6e22e">Value</span>: <span style="color:#e6db74">&#34;value4&#34;</span>, <span style="color:#a6e22e">Owner</span>: <span style="color:#e6db74">&#34;owner1&#34;</span>}
-  <span style="color:#a6e22e">res</span>[<span style="color:#ae81ff">4</span>] = <span style="color:#a6e22e">OprCfg</span>{<span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;key7&#34;</span>, <span style="color:#a6e22e">Value</span>: <span style="color:#e6db74">&#34;value7&#34;</span>, <span style="color:#a6e22e">Owner</span>: <span style="color:#e6db74">&#34;owner1&#34;</span>}
-  <span style="color:#a6e22e">assert</span>.<span style="color:#a6e22e">True</span>(<span style="color:#a6e22e">t</span>, <span style="color:#a6e22e">assert</span>.<span style="color:#a6e22e">ObjectsAreEqual</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">res</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">opcfs</span>))
+  <span style="color:#999;font-style:italic">// res에는 global이 먼저 쌓이고, 타겟 owner가 쌓인다
+</span><span style="color:#999;font-style:italic"></span>  res[<span style="color:#3677a9">0</span>] = OprCfg{Name: <span style="color:#ed9d13">&#34;key8&#34;</span>, Value: <span style="color:#ed9d13">&#34;value8&#34;</span>, Owner: <span style="color:#ed9d13">&#34;global&#34;</span>}
+  res[<span style="color:#3677a9">1</span>] = OprCfg{Name: <span style="color:#ed9d13">&#34;key1&#34;</span>, Value: <span style="color:#ed9d13">&#34;value1&#34;</span>, Owner: <span style="color:#ed9d13">&#34;owner1&#34;</span>}
+  res[<span style="color:#3677a9">2</span>] = OprCfg{Name: <span style="color:#ed9d13">&#34;key3&#34;</span>, Value: <span style="color:#ed9d13">&#34;value3&#34;</span>, Owner: <span style="color:#ed9d13">&#34;owener1&#34;</span>}
+  res[<span style="color:#3677a9">3</span>] = OprCfg{Name: <span style="color:#ed9d13">&#34;key4&#34;</span>, Value: <span style="color:#ed9d13">&#34;value4&#34;</span>, Owner: <span style="color:#ed9d13">&#34;owner1&#34;</span>}
+  res[<span style="color:#3677a9">4</span>] = OprCfg{Name: <span style="color:#ed9d13">&#34;key7&#34;</span>, Value: <span style="color:#ed9d13">&#34;value7&#34;</span>, Owner: <span style="color:#ed9d13">&#34;owner1&#34;</span>}
+  assert.<span style="color:#447fcf">True</span>(t, assert.<span style="color:#447fcf">ObjectsAreEqual</span>(&amp;res, &amp;opcfs))
 }
 </code></pre></div><p>테스트 코드를 작성하기 위해서 “Test” 로 시작하는 함수명을 갖도록 했습니다.<br>
 func Test_Config_New(t *testing.T) 함수에서 보면, 다음과 같은 주석을 볼 수 있습니다.</p>
@@ -263,12 +349,12 @@ func Test_Config_New(t *testing.T) 함수에서 보면, 다음과 같은 주석�
 // assert
 ...
 </code></pre><p>이는 테스트 코드를 작성하기 위한 일종의 템플릿 같은것 입니다.<br>
-arrange: 테스트를 진행하기 전에 필요한 준비 작업 정도의 코드들이 위치할 수 있습니다. 
+arrange: 테스트를 진행하기 전에 필요한 준비 작업 정도의 코드들이 위치할 수 있습니다.
 act: 실제로 테스트 되어서 결과를 확인하고자 하는 동작을 구현합니다.<br>
 assert: act에서 진행한 동작에 대한 결과를 확인하는 용도입니다.</p>
 <p>첫 번째 테스트 코드인 Test_Config_New는 Config 객체의 생성이 잘 되는지 확인하기 위한 테스트입니다.</p>
 <p>arrange 절은 준비할 작업이 별도로 없기 때문에 생략 되었습니다.<br>
-act 절에서 확인하고자 하는 NewConfig() 함수를 사용해서 Config 객체를 생성합니다. 
+act 절에서 확인하고자 하는 NewConfig() 함수를 사용해서 Config 객체를 생성합니다.
 assert 절에서 생성된 객체가 생성이 잘 되었는지 확인하는 과정으로 객체가 nil인지를 확인 합니다. 여기에서 testify/assert 패키지를 사용합니다.</p>
 <p>assert 패키지에는 다양한 검증을 위한 기능을 제공하고 있습니다. 간단하게 assert.NotNil은 주어진 객체가 nil이 아닌지 확인하는 함수입니다. assert의 다양한 기능에 대해서는 godoc( <a href="https://godoc.org/github.com/stretchr/testify/assert">https://godoc.org/github.com/stretchr/testify/assert</a> ) 에서 확인해볼 수 있습니다.</p>
 <p>두 번째 테스트 코드인 Test_GetOprCfg는 Config에  다양한 owner의 CfgItem들이 섞여 있는 중에서, 특정 owner와 onwer가 global로 지정된 CfgItem을 찾아서 OprCfg 만들어서 반환해주는걸 확인하기 위한 용도의 테스트입니다.</p>
@@ -313,158 +399,158 @@ assert 패키지의 True는 전달받은 값이 true인지를 확인합니다.</
 <li>결과로 받은 값을 확인 합니다.</li>
 </ol>
 <p>테스트 코드를 작성하기 이전의 코드 상태는 다음과 같았습니다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">d</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Agent</span>) <span style="color:#a6e22e">GetChangeEventInfo</span>(<span style="color:#a6e22e">eventID</span> <span style="color:#66d9ef">string</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">EventInfo</span>, <span style="color:#66d9ef">error</span>) {
-  <span style="color:#f92672">*</span><span style="color:#a6e22e">msg</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">MakeChangeMsg</span>(<span style="color:#960050;background-color:#1e0010">“</span><span style="color:#a6e22e">blah</span><span style="color:#f92672">-</span><span style="color:#a6e22e">blah</span><span style="color:#f92672">-</span><span style="color:#a6e22e">chg</span><span style="color:#f92672">-</span><span style="color:#a6e22e">key</span><span style="color:#960050;background-color:#1e0010">”</span>, <span style="color:#960050;background-color:#1e0010">“</span><span style="color:#a6e22e">agent</span><span style="color:#960050;background-color:#1e0010">”</span>)<span style="color:#f92672">*</span>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#6ab825;font-weight:bold">func</span> (d *Agent) <span style="color:#447fcf">GetChangeEventInfo</span>(eventID <span style="color:#6ab825;font-weight:bold">string</span>) (*EventInfo, <span style="color:#6ab825;font-weight:bold">error</span>) {
+  *msg := <span style="color:#447fcf">MakeChangeMsg</span>(<span style="color:#a61717;background-color:#e3d2d2">“</span>blah-blah-chg-key<span style="color:#a61717;background-color:#e3d2d2">”</span>, <span style="color:#a61717;background-color:#e3d2d2">“</span>agent<span style="color:#a61717;background-color:#e3d2d2">”</span>)*
  
-  <span style="color:#a6e22e">eventUUID</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">UUID_Data</span> { <span style="color:#a6e22e">UUID</span>: <span style="color:#a6e22e">eventID</span> }
-  <span style="color:#a6e22e">any</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">Any</span>.<span style="color:#a6e22e">Encoding</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">eventUUID</span>)
-  <span style="color:#f92672">*</span><span style="color:#a6e22e">msg</span>.<span style="color:#a6e22e">Payload</span>(<span style="color:#a6e22e">any</span>)
+  eventUUID := UUID_Data { UUID: eventID }
+  any, _ := Any.<span style="color:#447fcf">Encoding</span>(&amp;eventUUID)
+  *msg.<span style="color:#447fcf">Payload</span>(any)
  
-  <span style="color:#75715e">/* message queue 관련 기타 등등의 구현 들
-</span><span style="color:#75715e">      ...
-</span><span style="color:#75715e">  */</span>
+  <span style="color:#999;font-style:italic">/* message queue 관련 기타 등등의 구현 들
+</span><span style="color:#999;font-style:italic">      ...
+</span><span style="color:#999;font-style:italic">  */</span>
  
-  <span style="color:#a6e22e">SendMessage</span>(<span style="color:#a6e22e">msg</span>)
-  <span style="color:#a6e22e">val</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">RecvMessage</span>()
+  <span style="color:#447fcf">SendMessage</span>(msg)
+  val := <span style="color:#447fcf">RecvMessage</span>()
 
-  <span style="color:#a6e22e">data</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">val</span>.<span style="color:#a6e22e">GetPayload</span>()
-  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">ei</span> <span style="color:#a6e22e">EventInfo</span>
-  <span style="color:#a6e22e">Any</span>.<span style="color:#a6e22e">Decoding</span>(<span style="color:#a6e22e">data</span>[<span style="color:#ae81ff">0</span>], <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">ei</span>)
+  data := val.<span style="color:#447fcf">GetPayload</span>()
+  <span style="color:#6ab825;font-weight:bold">var</span> ei EventInfo
+  Any.<span style="color:#447fcf">Decoding</span>(data[<span style="color:#3677a9">0</span>], &amp;ei)
  
-  <span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">ei</span>, <span style="color:#66d9ef">nil</span>
+  <span style="color:#6ab825;font-weight:bold">return</span> &amp;ei, <span style="color:#6ab825;font-weight:bold">nil</span>
 }
 </code></pre></div><p>위의 코드 중에서 굵게 표시된 부분은 sample_1 이 아닌 외부 요소(MessageQueue)들에 대한 동작을 구현한 부분입니다.<br>
 그리고 이 부분은 MessageQueue에 무언가를 요청하는 과정에서 매번 반복되기도 합니다. 그래서 이 부분을 별도의 함수로 구현하기로 했습니다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">d</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Agent</span>) <span style="color:#a6e22e">GetChangeEventInfo</span>(<span style="color:#a6e22e">eventID</span> <span style="color:#66d9ef">string</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">EventInfo</span>, <span style="color:#66d9ef">error</span>) { 
-  <span style="color:#a6e22e">sendInfo</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">MqSendInfo</span>{
-    <span style="color:#a6e22e">key</span>:     <span style="color:#960050;background-color:#1e0010">“</span><span style="color:#a6e22e">blah</span><span style="color:#f92672">-</span><span style="color:#a6e22e">blah</span><span style="color:#f92672">-</span><span style="color:#a6e22e">chg</span><span style="color:#f92672">-</span><span style="color:#a6e22e">key</span><span style="color:#960050;background-color:#1e0010">”</span>,
-    <span style="color:#a6e22e">recv</span>: <span style="color:#960050;background-color:#1e0010">“</span><span style="color:#a6e22e">agent</span><span style="color:#960050;background-color:#1e0010">”</span>,
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#6ab825;font-weight:bold">func</span> (d *Agent) <span style="color:#447fcf">GetChangeEventInfo</span>(eventID <span style="color:#6ab825;font-weight:bold">string</span>) (*EventInfo, <span style="color:#6ab825;font-weight:bold">error</span>) { 
+  sendInfo := &amp;MqSendInfo{
+    key:     <span style="color:#a61717;background-color:#e3d2d2">“</span>blah-blah-chg-key<span style="color:#a61717;background-color:#e3d2d2">”</span>,
+    recv: <span style="color:#a61717;background-color:#e3d2d2">“</span>agent<span style="color:#a61717;background-color:#e3d2d2">”</span>,
   }
  
-  <span style="color:#a6e22e">eventUUID</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">UUID_Data</span>{ <span style="color:#a6e22e">UUID</span>: <span style="color:#a6e22e">eventID</span> }
-  <span style="color:#a6e22e">any</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">Any</span>.<span style="color:#a6e22e">Encoding</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">eventUUID</span>)
+  eventUUID := UUID_Data{ UUID: eventID }
+  any, _ := Any.<span style="color:#447fcf">Encoding</span>(&amp;eventUUID)
  
-  <span style="color:#a6e22e">anyData</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">MqSend</span>(<span style="color:#a6e22e">sendInfo</span>, <span style="color:#a6e22e">any</span>)
-  <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> { <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">err</span> }
+  anyData, err := <span style="color:#447fcf">MqSend</span>(sendInfo, any)
+  <span style="color:#6ab825;font-weight:bold">if</span> err != <span style="color:#6ab825;font-weight:bold">nil</span> { <span style="color:#6ab825;font-weight:bold">return</span> <span style="color:#6ab825;font-weight:bold">nil</span>, err }
  
-  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">ei</span> <span style="color:#a6e22e">EventInfo</span>
-  <span style="color:#a6e22e">Any</span>.<span style="color:#a6e22e">Decoding</span>(<span style="color:#a6e22e">anyData</span>[<span style="color:#ae81ff">0</span>], <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">ei</span>)
+  <span style="color:#6ab825;font-weight:bold">var</span> ei EventInfo
+  Any.<span style="color:#447fcf">Decoding</span>(anyData[<span style="color:#3677a9">0</span>], &amp;ei)
 
-  <span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">ei</span>, <span style="color:#66d9ef">nil</span>
+  <span style="color:#6ab825;font-weight:bold">return</span> &amp;ei, <span style="color:#6ab825;font-weight:bold">nil</span>
 }
 </code></pre></div><p>위와 같이 코드를 별도의 함수(MqSend)로 빼놓고, MqSendInfo라는 struct를 인자로 받도록 변경을 했습니다. 함수와 구조체는 다음과 같이 작성 되었습니다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">MqSendInfo</span> <span style="color:#66d9ef">struct</span> {
-  <span style="color:#a6e22e">key</span>     <span style="color:#66d9ef">string</span>
-  <span style="color:#a6e22e">recv</span> <span style="color:#66d9ef">string</span>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#6ab825;font-weight:bold">type</span> MqSendInfo <span style="color:#6ab825;font-weight:bold">struct</span> {
+  key     <span style="color:#6ab825;font-weight:bold">string</span>
+  recv <span style="color:#6ab825;font-weight:bold">string</span>
 }
  
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">MqSend</span>(<span style="color:#a6e22e">info</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">MqSendInfo</span>, <span style="color:#a6e22e">any</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Any</span>) ([]<span style="color:#f92672">*</span><span style="color:#a6e22e">Any</span>, <span style="color:#66d9ef">error</span>) {
-  <span style="color:#a6e22e">msg</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">MakeChangeMsg</span>(<span style="color:#a6e22e">info</span>.<span style="color:#a6e22e">key</span>, <span style="color:#a6e22e">info</span>.<span style="color:#a6e22e">recv</span>)
+<span style="color:#6ab825;font-weight:bold">func</span> <span style="color:#447fcf">MqSend</span>(info *MqSendInfo, any *Any) ([]*Any, <span style="color:#6ab825;font-weight:bold">error</span>) {
+  msg := <span style="color:#447fcf">MakeChangeMsg</span>(info.key, info.recv)
   
-  <span style="color:#a6e22e">msg</span>.<span style="color:#a6e22e">Payload</span>(<span style="color:#a6e22e">any</span>)
+  msg.<span style="color:#447fcf">Payload</span>(any)
  
-  <span style="color:#75715e">/* message queue 관련 기타 등등의 구현 들 
-</span><span style="color:#75715e">     ...
-</span><span style="color:#75715e">  */</span>
+  <span style="color:#999;font-style:italic">/* message queue 관련 기타 등등의 구현 들 
+</span><span style="color:#999;font-style:italic">     ...
+</span><span style="color:#999;font-style:italic">  */</span>
  
-  <span style="color:#a6e22e">SendMessage</span>(<span style="color:#a6e22e">msg</span>) 
-  <span style="color:#a6e22e">val</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">RecvMessage</span>()
+  <span style="color:#447fcf">SendMessage</span>(msg) 
+  val := <span style="color:#447fcf">RecvMessage</span>()
  
-  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">val</span>.<span style="color:#a6e22e">Msgs</span>, <span style="color:#66d9ef">nil</span>
+  <span style="color:#6ab825;font-weight:bold">return</span> val.Msgs, <span style="color:#6ab825;font-weight:bold">nil</span>
 }
 </code></pre></div><p>이렇게 해서 중복된 코드를 많이 줄일 수는 있었습니다. 그렇지만 MessageQueue의 의존성은 여전히 남아 있습니다.</p>
 <p>테스트 코드를 작성하는 입장에서는 우리가 전달한 eventID의 값을 이용해서 MqSend 함수가 EventInfo 값을 돌려주면됩니다. MqSend가 호출되었는지와 그 함수의 결과 값을 이용해서 GetChangeEventInfo가 우리가 원하는 결과 값을 만들어서 돌려주면 성공적으로 동작한 걸로 간주할 수가 있게 됩니다.</p>
 <p>그래서 MqSend 함수를 가짜로 구현하고 있는 테스트더블 객체를 만들려고 합니다. +
 우선 위의 MqSendInfo 구조체와 MqSend 함수의 이름을 MqMsg 구조체와 구조체의 메소드 Send로 변경하였습니다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Messenger</span> <span style="color:#66d9ef">interface</span> {
-  <span style="color:#a6e22e">Send</span>(<span style="color:#a6e22e">any</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Any</span>) ([]<span style="color:#f92672">*</span><span style="color:#a6e22e">Any</span>, <span style="color:#66d9ef">error</span>)
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#6ab825;font-weight:bold">type</span> Messenger <span style="color:#6ab825;font-weight:bold">interface</span> {
+  <span style="color:#447fcf">Send</span>(any *Any) ([]*Any, <span style="color:#6ab825;font-weight:bold">error</span>)
 }
  
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">MqMsg</span> <span style="color:#66d9ef">struct</span> {
-  <span style="color:#a6e22e">key</span>     <span style="color:#66d9ef">string</span>
-  <span style="color:#a6e22e">recv</span> <span style="color:#66d9ef">string</span>
+<span style="color:#6ab825;font-weight:bold">type</span> MqMsg <span style="color:#6ab825;font-weight:bold">struct</span> {
+  key     <span style="color:#6ab825;font-weight:bold">string</span>
+  recv <span style="color:#6ab825;font-weight:bold">string</span>
 }
 
-<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">m</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">MqMsg</span>) <span style="color:#a6e22e">Send</span>(<span style="color:#a6e22e">any</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Any</span>) ([]<span style="color:#f92672">*</span><span style="color:#a6e22e">Any</span>, <span style="color:#66d9ef">error</span>) {
-  <span style="color:#a6e22e">msg</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">MakeChangeMsg</span>(<span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">key</span>, <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">recv</span>)
+<span style="color:#6ab825;font-weight:bold">func</span> (m *MqMsg) <span style="color:#447fcf">Send</span>(any *Any) ([]*Any, <span style="color:#6ab825;font-weight:bold">error</span>) {
+  msg := <span style="color:#447fcf">MakeChangeMsg</span>(m.key, m.recv)
  
-  <span style="color:#a6e22e">msg</span>.<span style="color:#a6e22e">Payload</span>(<span style="color:#a6e22e">any</span>)
+  msg.<span style="color:#447fcf">Payload</span>(any)
  
-  <span style="color:#75715e">/* message queue 관련 기타 등등의 구현 들 
-</span><span style="color:#75715e">     ...
-</span><span style="color:#75715e">  */</span>
+  <span style="color:#999;font-style:italic">/* message queue 관련 기타 등등의 구현 들 
+</span><span style="color:#999;font-style:italic">     ...
+</span><span style="color:#999;font-style:italic">  */</span>
  
-  <span style="color:#a6e22e">SendMessage</span>(<span style="color:#a6e22e">msg</span>)
-  <span style="color:#a6e22e">val</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">RecvMessage</span>()
+  <span style="color:#447fcf">SendMessage</span>(msg)
+  val := <span style="color:#447fcf">RecvMessage</span>()
 
-  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">val</span>.<span style="color:#a6e22e">Msgs</span>, <span style="color:#66d9ef">nil</span>
+  <span style="color:#6ab825;font-weight:bold">return</span> val.Msgs, <span style="color:#6ab825;font-weight:bold">nil</span>
 }
 </code></pre></div><p>이제 테스트 코드를 다음과 같이 작성해 볼 수 있습니다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">MockAgentMsgr</span> <span style="color:#66d9ef">struct</span> {
-  <span style="color:#a6e22e">mock</span>.<span style="color:#a6e22e">Mock</span>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#6ab825;font-weight:bold">type</span> MockAgentMsgr <span style="color:#6ab825;font-weight:bold">struct</span> {
+  mock.Mock
 }
 
-<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">m</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">MockAgentMsgr</span>) <span style="color:#a6e22e">Send</span>(<span style="color:#a6e22e">any</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Any</span>) ([]<span style="color:#f92672">*</span><span style="color:#a6e22e">Any</span>, <span style="color:#66d9ef">error</span>) {
-  <span style="color:#a6e22e">args</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">Called</span>(<span style="color:#a6e22e">any</span>, <span style="color:#a6e22e">wait</span>)
-  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">args</span>.<span style="color:#a6e22e">Get</span>(<span style="color:#ae81ff">0</span>).([]<span style="color:#f92672">*</span><span style="color:#a6e22e">Any</span>), <span style="color:#a6e22e">args</span>.<span style="color:#a6e22e">Error</span>(<span style="color:#ae81ff">1</span>)
+<span style="color:#6ab825;font-weight:bold">func</span> (m *MockAgentMsgr) <span style="color:#447fcf">Send</span>(any *Any) ([]*Any, <span style="color:#6ab825;font-weight:bold">error</span>) {
+  args := m.<span style="color:#447fcf">Called</span>(any, wait)
+  <span style="color:#6ab825;font-weight:bold">return</span> args.<span style="color:#447fcf">Get</span>(<span style="color:#3677a9">0</span>).([]*Any), args.<span style="color:#447fcf">Error</span>(<span style="color:#3677a9">1</span>)
 }
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Test_GetChangeEventInfo</span>(<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">testing</span>.<span style="color:#a6e22e">T</span>) {
-  <span style="color:#75715e">// arrange
-</span><span style="color:#75715e"></span> 
-  <span style="color:#75715e">// 입력 값
-</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">eventID</span> <span style="color:#f92672">:=</span> <span style="color:#e6db74">&#34;event--uuid-1&#34;</span>
+<span style="color:#6ab825;font-weight:bold">func</span> <span style="color:#447fcf">Test_GetChangeEventInfo</span>(t *testing.T) {
+  <span style="color:#999;font-style:italic">// arrange
+</span><span style="color:#999;font-style:italic"></span> 
+  <span style="color:#999;font-style:italic">// 입력 값
+</span><span style="color:#999;font-style:italic"></span>  eventID := <span style="color:#ed9d13">&#34;event--uuid-1&#34;</span>
  
-  <span style="color:#a6e22e">UUID</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">UUID_Data</span> { <span style="color:#a6e22e">UUID</span>: <span style="color:#a6e22e">eventID</span> }
-  <span style="color:#a6e22e">par1</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">Any</span>.<span style="color:#a6e22e">Encoding</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">UUID</span>)
+  UUID := UUID_Data { UUID: eventID }
+  par1, _ := Any.<span style="color:#447fcf">Encoding</span>(&amp;UUID)
  
-  <span style="color:#75715e">// 출력 값
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">resAnytypes</span> []<span style="color:#f92672">*</span><span style="color:#a6e22e">Any</span>
-  <span style="color:#a6e22e">res1</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">EventInfo</span> { <span style="color:#a6e22e">UUID</span>: <span style="color:#a6e22e">eventID</span>, <span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;event1&#34;</span>, <span style="color:#a6e22e">Type</span>: <span style="color:#a6e22e">ET_START</span> }
+  <span style="color:#999;font-style:italic">// 출력 값
+</span><span style="color:#999;font-style:italic"></span>  <span style="color:#6ab825;font-weight:bold">var</span> resAnytypes []*Any
+  res1 := EventInfo { UUID: eventID, Name: <span style="color:#ed9d13">&#34;event1&#34;</span>, Type: ET_START }
  
-  <span style="color:#a6e22e">resAnytype1</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">Any</span>.<span style="color:#a6e22e">Encoding</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">res1</span>)
-  <span style="color:#a6e22e">resAnytypes</span> = append(<span style="color:#a6e22e">resAnytypes</span>, <span style="color:#a6e22e">resAnytype1</span>)
+  resAnytype1, _ := Any.<span style="color:#447fcf">Encoding</span>(&amp;res1)
+  resAnytypes = <span style="color:#24909d">append</span>(resAnytypes, resAnytype1)
  
-  <span style="color:#a6e22e">m</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">MockAgentMsgr</span>{}
-  <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">On</span>(<span style="color:#e6db74">&#34;Send&#34;</span>, <span style="color:#a6e22e">par1</span>).<span style="color:#a6e22e">Return</span>(<span style="color:#a6e22e">resAnytypes</span>, <span style="color:#66d9ef">nil</span>)
+  m := &amp;MockAgentMsgr{}
+  m.<span style="color:#447fcf">On</span>(<span style="color:#ed9d13">&#34;Send&#34;</span>, par1).<span style="color:#447fcf">Return</span>(resAnytypes, <span style="color:#6ab825;font-weight:bold">nil</span>)
  
-  <span style="color:#a6e22e">agentMg</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">NewAgent</span>(<span style="color:#a6e22e">m</span>)
+  agentMg := <span style="color:#447fcf">NewAgent</span>(m)
  
-  <span style="color:#75715e">// act
-</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">event</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">agentMg</span>.<span style="color:#a6e22e">GetChangeEventInfo</span>(<span style="color:#a6e22e">eventID</span>)
+  <span style="color:#999;font-style:italic">// act
+</span><span style="color:#999;font-style:italic"></span>  event, err := agentMg.<span style="color:#447fcf">GetChangeEventInfo</span>(eventID)
  
-  <span style="color:#75715e">// assert
-</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">assert</span>.<span style="color:#a6e22e">Equal</span>(<span style="color:#a6e22e">t</span>, <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">err</span>)
-  <span style="color:#a6e22e">assert</span>.<span style="color:#a6e22e">True</span>(<span style="color:#a6e22e">t</span>, <span style="color:#a6e22e">assert</span>.<span style="color:#a6e22e">ObjectsAreEqual</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">res1</span>, <span style="color:#a6e22e">event</span>))
-  <span style="color:#a6e22e">assert</span>.<span style="color:#a6e22e">True</span>(<span style="color:#a6e22e">t</span>, <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">AssertCalled</span>(<span style="color:#a6e22e">t</span>, <span style="color:#e6db74">&#34;Send&#34;</span>, <span style="color:#a6e22e">par1</span>, <span style="color:#66d9ef">true</span>))
+  <span style="color:#999;font-style:italic">// assert
+</span><span style="color:#999;font-style:italic"></span>  assert.<span style="color:#447fcf">Equal</span>(t, <span style="color:#6ab825;font-weight:bold">nil</span>, err)
+  assert.<span style="color:#447fcf">True</span>(t, assert.<span style="color:#447fcf">ObjectsAreEqual</span>(&amp;res1, event))
+  assert.<span style="color:#447fcf">True</span>(t, m.<span style="color:#447fcf">AssertCalled</span>(t, <span style="color:#ed9d13">&#34;Send&#34;</span>, par1, <span style="color:#6ab825;font-weight:bold">true</span>))
 }
 </code></pre></div><p>MqMsg의 테스트더블을 구현하기 위해서 Messenger 인터페이스에 Send 메소드를 정의했습니다.<br>
 MockAgentMsgr 구조체는 Messenger 인터페이스를 구현한 테스트더블 입니다.<br>
 MockAgentMsgr의 Send 메소드의 구현에서는 입력된 값과 반환되어야 할 값에 대해서 지정을 하고 있습니다.<br>
 이제 Test_GetChangeEventInfo 함수에서 입력값을 만들고 Send 메소드가 호출되었을 때 반환해야 할 출력값도 지정 합니다. MessageQueue에서 어떤 동작을 하든지 상관없이 입력된 값에 의해서 정해진 결과 값을 받는다는 가정 입니다. 그래서 작성된 코드 중에 다음과 같은 내용이 있습니다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">m</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">MockAgentMsgr</span>{}
-<span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">On</span>(<span style="color:#e6db74">&#34;Send&#34;</span>, <span style="color:#a6e22e">par1</span>).<span style="color:#a6e22e">Return</span>(<span style="color:#a6e22e">resAnytypes</span>, <span style="color:#66d9ef">nil</span>)
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">m := &amp;MockAgentMsgr{}
+m.<span style="color:#447fcf">On</span>(<span style="color:#ed9d13">&#34;Send&#34;</span>, par1).<span style="color:#447fcf">Return</span>(resAnytypes, <span style="color:#6ab825;font-weight:bold">nil</span>)
 </code></pre></div><p>Send 메소드가 호출될 때 입력값에 대해서 출력값을 정의해 놓은것 입니다.</p>
 <p>그런데 현재의 실행 코드상에서는 정해진 형태(MqMsg의 Send 메소드)만을 호출하는 구조입니다. 이를 변경해야 할 필요가 있습니다. 그래서 우리는 Agent 객체를 생성하는 시점에 MessageQueue에 대한 정보를 지정해서 받는 형식으로 변경 했습니다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Agent</span> <span style="color:#66d9ef">struct</span> {
-  <span style="color:#a6e22e">Msgr</span> <span style="color:#a6e22e">Messenger</span>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#6ab825;font-weight:bold">type</span> Agent <span style="color:#6ab825;font-weight:bold">struct</span> {
+  Msgr Messenger
 }
  
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewAgent</span>(<span style="color:#a6e22e">msgr</span> <span style="color:#a6e22e">Messenger</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">Agent</span> {
-  <span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">Agent</span>{<span style="color:#a6e22e">Msgr</span>: <span style="color:#a6e22e">msgr</span>}
+<span style="color:#6ab825;font-weight:bold">func</span> <span style="color:#447fcf">NewAgent</span>(msgr Messenger) *Agent {
+  <span style="color:#6ab825;font-weight:bold">return</span> &amp;Agent{Msgr: msgr}
 }
 
-<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">d</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Agent</span>) <span style="color:#a6e22e">GetChangeEventInfo</span>(<span style="color:#a6e22e">eventID</span> <span style="color:#66d9ef">string</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">EventInfo</span>, <span style="color:#66d9ef">error</span>) {
-  <span style="color:#a6e22e">eventUUID</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">UUID_Data</span>{ <span style="color:#a6e22e">UUID</span>: <span style="color:#a6e22e">evnetID</span> }
-  <span style="color:#a6e22e">any</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">Any</span>.<span style="color:#a6e22e">Encoding</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">eventUUID</span>)
+<span style="color:#6ab825;font-weight:bold">func</span> (d *Agent) <span style="color:#447fcf">GetChangeEventInfo</span>(eventID <span style="color:#6ab825;font-weight:bold">string</span>) (*EventInfo, <span style="color:#6ab825;font-weight:bold">error</span>) {
+  eventUUID := UUID_Data{ UUID: evnetID }
+  any, _ := Any.<span style="color:#447fcf">Encoding</span>(&amp;eventUUID)
  
-  <span style="color:#a6e22e">anyData</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">Msgr</span>.<span style="color:#a6e22e">Send</span>(<span style="color:#a6e22e">any</span>)
-  <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> { <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">err</span> }
+  anyData, err := d.Msgr.<span style="color:#447fcf">Send</span>(any)
+  <span style="color:#6ab825;font-weight:bold">if</span> err != <span style="color:#6ab825;font-weight:bold">nil</span> { <span style="color:#6ab825;font-weight:bold">return</span> <span style="color:#6ab825;font-weight:bold">nil</span>, err }
  
-  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">ei</span> <span style="color:#a6e22e">EventInfo</span>
-  <span style="color:#a6e22e">Any</span>.<span style="color:#a6e22e">Decoding</span>(<span style="color:#a6e22e">anyData</span>[<span style="color:#ae81ff">0</span>], <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">ei</span>)
+  <span style="color:#6ab825;font-weight:bold">var</span> ei EventInfo
+  Any.<span style="color:#447fcf">Decoding</span>(anyData[<span style="color:#3677a9">0</span>], &amp;ei)
  
-  <span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">ei</span>, <span style="color:#66d9ef">nil</span>
+  <span style="color:#6ab825;font-weight:bold">return</span> &amp;ei, <span style="color:#6ab825;font-weight:bold">nil</span>
 }
 </code></pre></div><p>이제 테스트 코드에서처럼 NewAgent로 Agent 객체를 생성하기 전에 Messenger를 생성해서 전달받을 수 있게 되었습니다. (단, 실제로 Agent를 사용하는 시점에서는 매번 중복 코드가 발생하게 되었습니다. 이 부분은 다음에 다시 개선하기로 합니다.)</p>
 <p>이제 GetChangeEventInfo 함수를 구현하기 위해서 MessageQueue에 연결해서 디버깅하기 위한 과정 대신에 테스트 코드가 sample_1 에서 구현되어야 할 내용에 대해서 보장을 해줄 수 있게 되었습니다.</p>
@@ -483,24 +569,31 @@ MockAgentMsgr의 Send 메소드의 구현에서는 입력된 값과 반환되어
 </script>
 
 
-		
-	</div>
+    </div>
 
-	<div class="pagination">
-		<a href="/post/go_kvm-with-go/" class="left arrow">&#8592;</a>
-		<a href="/post/go_key_exists_in_map/" class="right arrow">&#8594;</a>
+    
 
-		<a href="#" class="top">Top</a>
-	</div>
-</main>
+    
+    
+    <div class="article-date-modified">
+        Last modified <span itemprop="dateModified" content="2018-02-21T23:02:29&#43;0900">2018-02-21</span>
+    </div>
+    
+    </article>
+
+    </main>
+    <footer class="footer container h-10 text-center">
+  <ul class="pl-0">
+    
+    <li class="ml-2 first:before:content-none before:content-['•'] inline-block list-none"><a class="ml-2 text-neutral-800 dark:text-neutral-400 border-none"
+          href="https://github.com/hugcis/hugo-astatine-theme">Code</a>
+    </li>
+    <li class="ml-2 first:before:content-none before:content-['•']
+                text-neutral-800 dark:text-neutral-400 inline-block list-none"><span class="ml-2">© Jaehoon Khim 2022</span>
+    </li>
+  </ul>
+</footer>
 
 
-        		<footer>
-			
-			<span>
-			&copy; <time datetime="2021-11-03 10:25:31.954333 &#43;0900 KST m=&#43;0.581093401">2021</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
-			</span>
-		</footer>
-
-    </body>
+  </body>
 </html>

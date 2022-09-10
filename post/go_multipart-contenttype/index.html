@@ -1,66 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-		
-		
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1"><title>CreateFormFile()을 사용하면 Content-Type이 고정되는 현상 - ShrinkLabs</title>
+<meta property="og:title" content="CreateFormFile()을 사용하면 Content-Type이 고정되는 현상 - ShrinkLabs">
+<meta property="og:type" content="article">
 
-		<title>CreateFormFile()을 사용하면 Content-Type이 고정되는 현상 &middot; ShrinkLabs</title>
 
-		
-  		<link rel="stylesheet" href="/css/style.css">
-		<link rel="stylesheet" href="/css/fonts.css">
-		
-		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico">
-		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico">
-		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<meta property="og:image" content="images/logo.png">
 
-		
-		<link href="" rel="alternate" type="application/rss+xml" title="ShrinkLabs" />
-	</head>
+<meta property="og:url" content="https://shrinklabs.com/post/go_multipart-contenttype/">
 
-    <body>
-        		<nav class="nav">
-			<div class="nav-container">
-				<a href="/">
-					<h2 class="nav-title">ShrinkLabs</h2>
-				</a>
-				<ul>
+
+
+
+<link rel="stylesheet" href="https://shrinklabs.com/css/style.min.css">
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#ffffff">
+<link rel="webmention" href="https://webmention.io/hugocisneros.com/webmention">
+<link rel="pingback" href="https://webmention.io/hugocisneros.com/xmlrpc">
+<script>
+ function updateMode() {
     
-    
-        <li>
-            <a href="/about/">
-                
-                <span>about</span>
-                
-            </a>
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+    }
+ }
+ function toggleMode() {
+     if (localStorage.theme === 'dark') {
+        
+        localStorage.theme = 'light';
+     }
+     else {
+        
+        localStorage.theme = 'dark';
+     }
+     updateMode()
+ }
+ window.onload = updateMode();
+ function toggleMenu() {
+     let navbar = document.getElementById("navbar-default");
+     if (navbar.classList.contains("hidden")) {
+        navbar.classList.remove("hidden");
+     }
+     else {
+        navbar.classList.add("hidden");
+     }
+ }
+</script>
+
+  </head>
+  <body>
+    <header class="md:px-0 px-2">
+        <nav >
+  <div class="container flex flex-wrap justify-between items-center mx-auto">
+    <div class="nav-main my-2.5">
+      <a href="https://shrinklabs.com/" class="nav-title py-2.5 text-2xl text-zinc-600 dark:text-zinc-300 hover:border-b-0">ShrinkLabs</a>
+    </div>
+    <button type="button"
+            onclick="toggleMenu()"
+            class="inline-flex items-center p-2 ml-3
+                  text-sm text-gray-500
+                  rounded-lg md:hidden hover:bg-gray-100
+                  focus:outline-none focus:ring-2
+                  focus:ring-gray-200 dark:text-gray-400
+                  dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            aria-controls="navbar-default"
+            aria-expanded="false">
+        <span class="sr-only">Open main menu</span>
+        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor"
+             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1
+                           0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0
+                           01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0
+                           01-1-1z" clip-rule="evenodd"></path>
+        </svg>
+    </button>
+    <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+      <ul class="grid md:grid-flow-col items-center justify-between text-lg my-2.5">
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/post/">posts</a>
         </li>
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/categories/">categories</a>
+        </li>
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/tags/">tags</a>
+        </li>
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/about/">about</a>
+        </li>
+        
+        <li class="h-7 pl-2.5 pr-0 list-none">
+          <button type="button" onclick="toggleMode()" class="h-full">
+            <img class="h-7 w-7 max-h-full mb-1.5 p-1.5 hidden dark:inline" id="dark-mode-button-img"
+                 src="https://shrinklabs.com/img/light_mode.svg">
+            <img class="h-7 w-7 max-h-full mb-1.5 p-1.5 inline dark:hidden" id="dark-mode-button-img"
+                 src="https://shrinklabs.com/img/dark_mode.svg">
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    </header>
+    <main class="content h-card container mt-2 m-auto
+                 leading-loose md:px-0 px-2 z-0 Page(/post/go_multipart-contenttype.md)"
+          role="main">
     
-</ul>
-			</div>
-		</nav>
+    <article class="article" itemprop="mainEntity" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="title-container">
+    <h1 class="article-title" itemprop="name">CreateFormFile()을 사용하면 Content-Type이 고정되는 현상</h1>
+    
+    <div class="article-subtitle">
+    
+    <span class="article-date" itemprop="datePublished" content="2016-12-10T18:22:48&#43;0900">2016-12-10</span>
+    
+    
+    
+    <span class="article-author" itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Jaehoon Khim</span></span>
+    
+    
+    </div>
+    
+    </div>
 
-        
-
-<main>
-	<div class="post">
-		<div class="post-info">
-    <span>Written by</span>
-        
-        <br>
-        <span>on&nbsp;</span><time datetime="2016-12-10 18:22:48 &#43;0900 KST">December 10, 2016</time>
-</div>
-
-		<h1 class="post-title">CreateFormFile()을 사용하면 Content-Type이 고정되는 현상</h1>
-<div class="post-line"></div>
-
-		
-
-		<p>mime/multipart를 사용해서 파일을 업로드 하려 할때 파일을 업로드할 필드를 생성하기 위해서 CreateFormFile()을 사용합니다.<br>
+    <div class="article-content" itemprop="articleBody">
+      <p>mime/multipart를 사용해서 파일을 업로드 하려 할때 파일을 업로드할 필드를 생성하기 위해서 CreateFormFile()을 사용합니다.<br>
 이를 이용해서 파일을 업로드하면 &ldquo;Content-Type&quot;이 &ldquo;application/octet-stream&rdquo; 으로 고정 되어집니다.</p>
 <p>src/mime/multipart/writer.go의 CreateFormFile을 확인해 보면 다음과 같이 고정되어 있는걸 확인 할 수 있습니다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">h</span>.<span style="color:#a6e22e">Set</span>(<span style="color:#e6db74">&#34;Content-Type&#34;</span>, <span style="color:#e6db74">&#34;application/octet-stream&#34;</span>)
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">h.<span style="color:#447fcf">Set</span>(<span style="color:#ed9d13">&#34;Content-Type&#34;</span>, <span style="color:#ed9d13">&#34;application/octet-stream&#34;</span>)
 </code></pre></div><p>관련한 이슈가 올라온게 혹시 있지 않을까 해서 찾아보니 이런 이슈가 있었습니다.<br>
 <a href="https://github.com/golang/go/issues/16425">https://github.com/golang/go/issues/16425</a></p>
 <p>bradfitz는 다음과 같이 답변을 하고 있습니다.</p>
@@ -69,15 +155,15 @@
 CreateFormFile is a very thin wrapper around CreatePart. Click <a href="https://golang.org/pkg/mime/multipart/#Writer.CreateFormField%5B%5D">https://golang.org/pkg/mime/multipart/#Writer.CreateFormField[]</a> and then click the CreateFormFile heading to see its source code.</p>
 </blockquote>
 <p>그래서 난 CreateFormFile() 함수의 구현을 수정해서 CreateFormImage()함수를 만들어서 사용하기로 했습니다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">file</span>, <span style="color:#a6e22e">fileHeader</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">FormFile</span>(<span style="color:#e6db74">&#34;image&#34;</span>)
-<span style="color:#f92672">...</span>
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">b</span> <span style="color:#a6e22e">bytes</span>.<span style="color:#a6e22e">Buffer</span>
-<span style="color:#a6e22e">wr</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">multipart</span>.<span style="color:#a6e22e">NewWriter</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">b</span>)
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">file, fileHeader, _ := r.<span style="color:#447fcf">FormFile</span>(<span style="color:#ed9d13">&#34;image&#34;</span>)
+...
+<span style="color:#6ab825;font-weight:bold">var</span> b bytes.Buffer
+wr := multipart.<span style="color:#447fcf">NewWriter</span>(&amp;b)
 
-<span style="color:#a6e22e">h</span> <span style="color:#f92672">:=</span> make(<span style="color:#a6e22e">textproto</span>.<span style="color:#a6e22e">MIMEHeader</span>)
-<span style="color:#a6e22e">h</span>.<span style="color:#a6e22e">Set</span>(<span style="color:#e6db74">&#34;Content-Disposition&#34;</span>,  <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">`form-data; name=&#34;%s&#34;; filename=&#34;%s&#34;`</span>, <span style="color:#a6e22e">escapeQuotes</span>(<span style="color:#e6db74">&#34;image&#34;</span>), <span style="color:#a6e22e">escapeQuotes</span>(<span style="color:#a6e22e">fileHeader</span>.<span style="color:#a6e22e">Filename</span>)))
-<span style="color:#a6e22e">h</span>.<span style="color:#a6e22e">Set</span>(<span style="color:#e6db74">&#34;Content-Type&#34;</span>, <span style="color:#e6db74">&#34;image/jpeg&#34;</span>)
-<span style="color:#a6e22e">fw</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">wr</span>.<span style="color:#a6e22e">CreatePart</span>(<span style="color:#a6e22e">h</span>)
+h := <span style="color:#24909d">make</span>(textproto.MIMEHeader)
+h.<span style="color:#447fcf">Set</span>(<span style="color:#ed9d13">&#34;Content-Disposition&#34;</span>,  fmt.<span style="color:#447fcf">Sprintf</span>(<span style="color:#ed9d13">`form-data; name=&#34;%s&#34;; filename=&#34;%s&#34;`</span>, <span style="color:#447fcf">escapeQuotes</span>(<span style="color:#ed9d13">&#34;image&#34;</span>), <span style="color:#447fcf">escapeQuotes</span>(fileHeader.Filename)))
+h.<span style="color:#447fcf">Set</span>(<span style="color:#ed9d13">&#34;Content-Type&#34;</span>, <span style="color:#ed9d13">&#34;image/jpeg&#34;</span>)
+fw, err := wr.<span style="color:#447fcf">CreatePart</span>(h)
 </code></pre></div><p>CreateFormFile()을 사용하던 부분을 위의 코드로 교체해서 전송 하면 Content Type이 원하는 형태(image/jpeg&rdquo;)로 전달이 되어진것을 확인 할 수 있습니다.<br>
 escapeQuotes() 함수는 &hellip;/multipart/writer.go의 구현을 참고하면 됩니다.</p>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -92,24 +178,31 @@ escapeQuotes() 함수는 &hellip;/multipart/writer.go의 구현을 참고하면 
 </script>
 
 
-		
-	</div>
+    </div>
 
-	<div class="pagination">
-		<a href="/post/go_html-form/" class="left arrow">&#8592;</a>
-		<a href="/post/go_rabbitmqwithgo/" class="right arrow">&#8594;</a>
+    
 
-		<a href="#" class="top">Top</a>
-	</div>
-</main>
+    
+    
+    <div class="article-date-modified">
+        Last modified <span itemprop="dateModified" content="2016-12-10T18:22:48&#43;0900">2016-12-10</span>
+    </div>
+    
+    </article>
+
+    </main>
+    <footer class="footer container h-10 text-center">
+  <ul class="pl-0">
+    
+    <li class="ml-2 first:before:content-none before:content-['•'] inline-block list-none"><a class="ml-2 text-neutral-800 dark:text-neutral-400 border-none"
+          href="https://github.com/hugcis/hugo-astatine-theme">Code</a>
+    </li>
+    <li class="ml-2 first:before:content-none before:content-['•']
+                text-neutral-800 dark:text-neutral-400 inline-block list-none"><span class="ml-2">© Jaehoon Khim 2022</span>
+    </li>
+  </ul>
+</footer>
 
 
-        		<footer>
-			
-			<span>
-			&copy; <time datetime="2021-11-03 10:25:31.919481 &#43;0900 KST m=&#43;0.546241401">2021</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
-			</span>
-		</footer>
-
-    </body>
+  </body>
 </html>
