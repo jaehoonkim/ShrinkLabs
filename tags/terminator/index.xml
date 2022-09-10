@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>terminator on ShrinkLabs</title>
+    <link>https://shrinklabs.com/tags/terminator/</link>
+    <description>Recent content in terminator on ShrinkLabs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 21 Apr 2016 13:35:10 +0900</lastBuildDate><atom:link href="https://shrinklabs.com/tags/terminator/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>terminator 사용</title>
+      <link>https://shrinklabs.com/post/tool_terminator/</link>
+      <pubDate>Thu, 21 Apr 2016 13:35:10 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/post/tool_terminator/</guid>
+      <description>설치 $sudo apt-get install terminator 단축키 분할(수직): ctrl + shift + e 분할(수평): ctrl + shift + o 닫기(현재 창): ctrl + shift + w 닫기(전체): ctrl + shift + q 새 탭: ctrl + shift + t 분할된 화면간 이동: alt + 방향키    (adsbygoogle = window.adsbygoogle || []).push({});  </description>
+    </item>
+    
+  </channel>
+</rss>

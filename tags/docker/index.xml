@@ -6,7 +6,16 @@
     <description>Recent content in docker on ShrinkLabs</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 08 Apr 2020 21:27:50 +0900</lastBuildDate><atom:link href="https://shrinklabs.com/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 24 Feb 2021 03:08:00 +0900</lastBuildDate><atom:link href="https://shrinklabs.com/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>klevr_agent 빌드 후 Docker Image 만들기</title>
+      <link>https://shrinklabs.com/post/tool_klevr-agent/</link>
+      <pubDate>Wed, 24 Feb 2021 03:08:00 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/post/tool_klevr-agent/</guid>
+      <description>$ git clone git@github.com:jaehoonn/klevr.git $ cd klevr $ chmod +x ./build.sh $ ./build.sh $ cd cmd/klebr-agent/Dockerfile $ docker build -t jaehoon/klevr-agent:0.2.6 . $ docker login -u jaehoon -p {password} $ docker push jaehoon/klevr-agent:0.2.6    (adsbygoogle = window.adsbygoogle || []).push({});  </description>
+    </item>
+    
     <item>
       <title>docker 설치 후 에러</title>
       <link>https://shrinklabs.com/post/container_docker-error/</link>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>static on ShrinkLabs</title>
+    <link>https://shrinklabs.com/tags/static/</link>
+    <description>Recent content in static on ShrinkLabs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 18 Jul 2016 10:16:09 +0900</lastBuildDate><atom:link href="https://shrinklabs.com/tags/static/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>css와 같은 정적 컨텐츠를 html에서 사용하기 위한 팁</title>
+      <link>https://shrinklabs.com/post/go_css-html/</link>
+      <pubDate>Mon, 18 Jul 2016 10:16:09 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/post/go_css-html/</guid>
+      <description>Go의 &amp;ldquo;net/http&amp;quot;와 &amp;ldquo;html/template&amp;quot;를 이용해서 html과 css로 만들어진 웹페이지를 만들려고 할때, html 파일이 보여질때 css가 적용되지 않은 상태로 보여집니다.
+이 때 어떻게 해야 하는지 방법을 찾아가던 과정을 기록으로 남겨 놓습니다.
+프로젝트의 디렉토리 구조는 다음과 같습니다.
+src\ + prj + main.go + static style.css + template index.html 그래서 이렇게&amp;hellip;
+func main() { http.HandleFunc(&amp;#34;/&amp;#34;, indexHandler) http.ListenAndServe(&amp;#34;:8080&amp;#34;, nil) } func indexHandler(...) { // index.html } 와 같이 하면 될 줄 알았습니다.
+그런데 안됩니다.
+그래서 어떻게 해야 하는지 찾아보니, FileServer로 css파일을 제공해 주면 된다고 합니다.</description>
+    </item>
+    
+  </channel>
+</rss>

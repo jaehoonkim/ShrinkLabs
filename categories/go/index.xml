@@ -6,9 +6,107 @@
     <description>Recent content in go on ShrinkLabs</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 25 May 2017 15:43:40 +0900</lastBuildDate><atom:link href="https://shrinklabs.com/categories/go/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 18 May 2020 10:52:23 +0900</lastBuildDate><atom:link href="https://shrinklabs.com/categories/go/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>build</title>
+      <title>Powershell에서 할 수 있는 Linux를 위한 빌드</title>
+      <link>https://shrinklabs.com/post/go_crosscompile_on_windows/</link>
+      <pubDate>Mon, 18 May 2020 10:52:23 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/post/go_crosscompile_on_windows/</guid>
+      <description>Windows 환경에서 개발 후 Linux 환경으로 배포하기 위해서 Linux용 바이너리로 빌드가 필요할 때가 있습니다.
+다음의 방법으로 빌드 할 수 있습니다.
+Powershell에서 빌드하기 위한 방법은 아래와 같습니다.
+PS D:\ws\src\sample&amp;gt; $env:GOOS=&amp;#34;linux&amp;#34;; go build 빌드 이후에는 필요에 따라서 &amp;ldquo;GOOS&amp;quot;를 다시 &amp;ldquo;windows&amp;quot;로 돌려 놓습니다.
+   (adsbygoogle = window.adsbygoogle || []).push({});  </description>
+    </item>
+    
+    <item>
+      <title>cscope 사용(Go)</title>
+      <link>https://shrinklabs.com/post/go_cscope/</link>
+      <pubDate>Tue, 21 Aug 2018 16:34:04 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/post/go_cscope/</guid>
+      <description>Go언어 개발 환경(추가) Go언어로 작성한 코드를 분석하기 위해서 cscope가 필요할 때가 있습니다.
+vim에서 cscope를 사용하기 위한 과정을 정리해 보려고 합니다.
+cscope를 설치합니다. $ sudo apt-get install cscope mkscope.sh 파일을 만듭니다. mkscope.sh의 내용은 다음과 같습니다.
+이 스크립트는 https://www.cnblogs.com/shaohef/p/7358111.html 의 내용을 수정해서 사용했습니다.
+#!/bin/bash # 기존에 존재하던 files와 out 파일을 제거합니다 rm cscope.files cscope.out # $GOROOT가 존재하지 않으면 설정합니다. if [&amp;quot;$GOROOT&amp;quot; = &amp;quot;&amp;quot;]; then echo &amp;quot;GOROOT is not set&amp;quot; GOROOT=`go env | grep &amp;quot;GOROOT&amp;quot; | cut -d &amp;quot;=&amp;quot; -f2` GOROOT=${GOROOT#\&amp;quot;} GOROOT=${GOROOT%\&amp;quot;} fi echo $GOROOT # Go 표준 패키지 go_src=$GOROOT/src # Go언어 표준 패키지로 제공되는 go 파일의 경로를 cscope.</description>
+    </item>
+    
+    <item>
+      <title>map에 key가 존재하는지 확인</title>
+      <link>https://shrinklabs.com/post/go_key_exists_in_map/</link>
+      <pubDate>Thu, 12 Jul 2018 16:52:08 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/post/go_key_exists_in_map/</guid>
+      <description>map을 사용할때 해당하는 키가 map에 존재하는지 확인이 필요할 때가 있습니다.
+var target[string]*item ... target[&amp;#34;apple&amp;#34;] = itm1 target[&amp;#34;orange&amp;#34;] = itm2 ... value, ok := target[&amp;#34;kiwi&amp;#34;]    (adsbygoogle = window.adsbygoogle || []).push({});  </description>
+    </item>
+    
+    <item>
+      <title>Go언어 프로젝트에서 테스트 코드 작성 경험</title>
+      <link>https://shrinklabs.com/post/go_writing-a-unit-test/</link>
+      <pubDate>Wed, 21 Feb 2018 23:02:29 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/post/go_writing-a-unit-test/</guid>
+      <description>테스트 코드는 왜? 현재 프로젝트를 진행 중 코딩을 할 때면 계속해서 의심과 두려움이 들었다.
+&amp;ldquo;내가 제대로 작성하고 있는 게 맞나?&amp;rdquo;
+&amp;ldquo;이렇게 작성하면 다른 데에서 문제가 생기는 건 아닌가?&amp;rdquo;
+그리고 이런 걱정들은 다음의 2가지 원인 때문이지 않을까 라고 생각하게 되었다.
+첫 번째, 코드 작성 후 실행해서 결과를 확인하기 위해서 개인 개발 환경을 MessageQueue와 내가 보낸 요청에 대해 기대하는 응답을 전달해줄 MessageQueue 반대편의 모듈을 구성하기가 쉽지 않다는 것이었다.
+두 번째, 기존에 코딩하면서 세워 놓았던 원칙을 기억하지 못하고 그 원칙에 어긋나는 코드를 작성하게 되었을 때, 전체 시스템에서 동작 중 알 수 없는 순간에 오동작하는 경우 때문이었다.</description>
+    </item>
+    
+    <item>
+      <title>KVM 스터디(with go)</title>
+      <link>https://shrinklabs.com/post/go_kvm-with-go/</link>
+      <pubDate>Sat, 02 Dec 2017 23:55:52 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/post/go_kvm-with-go/</guid>
+      <description>준비물 노트북(우분투 16.04)
+KVM이 뭔가요? 하이퍼바이저? 위키백과에 나와 있는 정의( https://ko.wikipedia.org/wiki/%ED%95%98%EC%9D%B4%ED%8D%BC%EB%B0%94%EC%9D%B4%EC%A0%80 ) 를 보면 이렇게 나와 있습니다.
+&amp;ldquo;다수의 운영 체제를 동시에 실행하기 위한 논리적 플랫폼&amp;rdquo;
+여기에 우리가 잘 알고 있는 VmWare, VirtualBox와 같은것도 있고, Xen, KVM 같이 좀 낯선 것들도 있습니다.
+내용을 읽다보면, 왠지 중요해 보이는 단어 Type1, Type2, 전가상화, 반가상화 뭐 이런 단어들이 나옵니다.
+Type1은 호스트에 하이퍼바이저가 존재하고, Type2는 호스트 OS에 설치된 응용 프로그램 형태로 하이퍼바이저가 존재하는거라고 보면 될 것 같습니다.</description>
+    </item>
+    
+    <item>
+      <title>core파일 만들기</title>
+      <link>https://shrinklabs.com/post/go_core/</link>
+      <pubDate>Tue, 01 Aug 2017 13:59:57 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/post/go_core/</guid>
+      <description>Go언어에서도 core dump를 만드는 방법이 있었습니다.
+데이브체니님이 정리해 놓은 무려 2015년도의 글 입니다.
+https://dave.cheney.net/2015/11/29/a-whirlwind-tour-of-gos-runtime-environment-variables
+환경변수로 GOTRACEBACK 을 crash로 설정만 해주면 됩니다.
+근데 위에 처럼 환경변수 설정하고도 core 파일이 안생긴다면, 다음 블로그의 글을 참고해 보면 좋을것 같습니다.
+http://lapan.tistory.com/68
+블로그의 내용처럼 ulimit -a 로 확인 해보니 core file size가 0으로 되어 있습니다.
+ulimit -c unlimited 로 해주었습니다.
+이제 panic을 발생시켜 보면 core 파일이 잘 만들어져 있는걸 확인 할 수 있습니다.
+   (adsbygoogle = window.</description>
+    </item>
+    
+    <item>
+      <title>delve를 사용한 Go언어 디버깅</title>
+      <link>https://shrinklabs.com/post/go_delve/</link>
+      <pubDate>Sun, 18 Jun 2017 23:13:14 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/post/go_delve/</guid>
+      <description>소개 delve는 Go언어를 위한 debugger 입니다.
+delve설치 설치를 하기 위해서는 Go 1.5 이상의 버전이 필요합니다.
+지금 시점에 Go 1.5를 사용하지 않을테니&amp;hellip;
+다음의 명령으로 설치합니다.
+$ go get github.com/derekparker/delve/cmd/dlv 이제 설치 끝! (Windows랑 MAC은 모르겠습니다.)
+delve사용 프로세스 실행 제어, 변수, 스레드/goroutine 상태, CPU 레지스터 상태 등을 확인 할 수 있습니다.
+  Commands
+ attach: 실행중인 프로세스에 연결해서 디버깅을 합니다. $ dlv attach pid [executable] 실행중인 프로세스에 디버그 세션을 연결해서 프로세스를 제어합니다.</description>
+    </item>
+    
+    <item>
+      <title>build 옵션</title>
       <link>https://shrinklabs.com/post/go_build/</link>
       <pubDate>Thu, 25 May 2017 15:43:40 +0900</pubDate>
       
@@ -19,6 +117,194 @@
 $ go build Go언어 문서중에 보면 https://golang.org/pkg/go/build/#hdr-Build_Constraints[Build Constraints] 에 관한 내용이 있습니다.
 이 내용은 build 할 때 조건을 줄 수 있다는 내용이고 방법은 다음과 같이 하면 된다고 합니다.
 코드의 상단에 &amp;ldquo;// +build linux&amp;rdquo; 하고 한 칸을 띄우고 &amp;ldquo;package blah&amp;rdquo; 를 시작합니다.</description>
+    </item>
+    
+    <item>
+      <title>RabbitMQ 스터디(with go)</title>
+      <link>https://shrinklabs.com/post/go_rabbitmqwithgo/</link>
+      <pubDate>Wed, 19 Apr 2017 23:43:52 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/post/go_rabbitmqwithgo/</guid>
+      <description>Go언어로 RabbitMQ를 어떻게 이용할 수 있는지 스터디하는 내용들을 대충 대충 정리하는 중&amp;hellip;
+RabbitMQ라는게 뭐지? AMQP를 구현한 메세지 브로커
+여기 저기에 있는 클라이언트들(Producer/Consumer)이 메세지를 서로 주고 받을 수 있도록 해주는 그런거?
+설치  RabbitMQ 설치  sudo apt-get install rabbitmq-server  관리 플러그인 설치  sudo rabbitmq-plugins enable rabbitmq_management sudo service rabbitmq-server restart  실행  service rabbitmq-server start  계정 등록(id:jaehoonn, pw:1234)  rabbimqctl add_user jaehoonn 1234  등록한 계정을 관리자 계정으로 변경  rabbitmqctl set_user_tags jaehoonn administrator  웹브라우저로 관리 플러그인에 접속  localhost:15672 용어 대충 요런것들에 대해서 찾아 보면 될 것 같은데&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>CreateFormFile()을 사용하면 Content-Type이 고정되는 현상</title>
+      <link>https://shrinklabs.com/post/go_multipart-contenttype/</link>
+      <pubDate>Sat, 10 Dec 2016 18:22:48 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/post/go_multipart-contenttype/</guid>
+      <description>mime/multipart를 사용해서 파일을 업로드 하려 할때 파일을 업로드할 필드를 생성하기 위해서 CreateFormFile()을 사용합니다.
+이를 이용해서 파일을 업로드하면 &amp;ldquo;Content-Type&amp;quot;이 &amp;ldquo;application/octet-stream&amp;rdquo; 으로 고정 되어집니다.
+src/mime/multipart/writer.go의 CreateFormFile을 확인해 보면 다음과 같이 고정되어 있는걸 확인 할 수 있습니다.
+h.Set(&amp;#34;Content-Type&amp;#34;, &amp;#34;application/octet-stream&amp;#34;) 관련한 이슈가 올라온게 혹시 있지 않을까 해서 찾아보니 이런 이슈가 있었습니다.
+https://github.com/golang/go/issues/16425
+bradfitz는 다음과 같이 답변을 하고 있습니다.
+ Use CreatePart. CreateFormFile is a very thin wrapper around CreatePart. Click https://golang.org/pkg/mime/multipart/#Writer.CreateFormField[] and then click the CreateFormFile heading to see its source code.</description>
+    </item>
+    
+    <item>
+      <title>Go코드로 HTML Form 전송</title>
+      <link>https://shrinklabs.com/post/go_html-form/</link>
+      <pubDate>Tue, 06 Dec 2016 01:13:41 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/post/go_html-form/</guid>
+      <description>HTML, Javascript를 사용해서 Post방식으로 Form을 전송하는 동작을 Go 코드를 작성해 보려고 합니다.
+우선 POST로 전송된 Form을 받아서 처리를 하는 서버쪽을 다음과 같은 구성을 갖는 코드로 만듭니다.
+package main import { &amp;#34;net/http&amp;#34; &amp;#34;github.com/gorilla/mux&amp;#34; } func main() { r := mux.Newrouter().StrictSlash(false) r.HandleFunc(&amp;#34;/upload&amp;#34;, upload).Methods(&amp;#34;POST&amp;#34;) http.ListenAndServe(&amp;#34;:8080&amp;#34;, r) } func upload(w http.ResponseWriter, r *http.Request) { if r.Method == &amp;#34;POST&amp;#34; { } } 이렇게 &amp;ldquo;http://localhost:8080/upload&amp;rdquo; 를 통해서 POST 방식으로 전달되는 요청을 받아서 처리하기 위한 큰틀을 만들었습니다.</description>
+    </item>
+    
+    <item>
+      <title>인코딩된 텍스트 디코딩하기</title>
+      <link>https://shrinklabs.com/post/go_encode/</link>
+      <pubDate>Fri, 25 Nov 2016 00:52:47 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/post/go_encode/</guid>
+      <description>Javascript에서 encodeURIComponent() 함수를 사용해서 전달받은 문자열을 디코딩해서 보기 위해서는 &amp;ldquo;net/url&amp;rdquo; 패키지의 QueryUnescape() 함수를 사용할 수 있습니다.
+email, err := url.QueryUnescape(user.Email)    (adsbygoogle = window.adsbygoogle || []).push({});  </description>
+    </item>
+    
+    <item>
+      <title>vendor 관리</title>
+      <link>https://shrinklabs.com/post/go_govendor/</link>
+      <pubDate>Fri, 14 Oct 2016 18:16:35 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/post/go_govendor/</guid>
+      <description>vendoring되어 있는 패키지를 관리해야 할 이유가 무엇인지에 대해서 찾아보다가 좋은 글을 발견했습니다.
+https://gocodecloud.com/blog/2016/03/29/go-vendoring-beginner-tutorial/
+이 글을 읽고 이해한 정도만을 요약해 봅니다
+ vendoring을 왜 하나? Project A에서 사용하는 Pkg X의 리비전 1을 사용하고 있습니다. 그런데 Project B에서는 Pkg X의 리비전 2를 사용하려 합니다.
+그런데 $GOPATH 안에는 같은 패키지를 하나만 갖고 있을 수 있습니다.
+Pkg X의 리비전을 Project A에 맞추면 Project B가 빌드를 실패하고, Project B에 맞추면 Project A가 빌드에 실패하게 됩니다.</description>
+    </item>
+    
+    <item>
+      <title>template을 생성할때 왜 이름을 지정할까?</title>
+      <link>https://shrinklabs.com/post/go_template/</link>
+      <pubDate>Sat, 03 Sep 2016 17:10:53 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/post/go_template/</guid>
+      <description>Go언어의 Template 엔진을 사용할때, 왜 New()의 파라미터로 이름을 만들어서 넘겨야 하는지가 궁금 했었습니다.
+Template and Associated templates라는 글을 읽고 어느 정도 이해를 하게 되었습니다.
+다음은 위 글의 내용을 요약한 것 입니다.
+template.New() 로 template을 만들때, 이름을 정해서 만듭니다.
+이 때 FuncMap과 템플릿 리스트를 갖는 그룹(그룹의 이 글에서 사용하는 용어로 Associated Templates를 가르킨다)이 생성 됩니다.
+FuncMap에 대해서는,
+https://golang.org/pkg/html/template/#FuncMap
+http://goinbigdata.com/example-of-using-templates-in-golang/
+http://technosophos.com/2013/11/23/using-custom-template-functions-in-go.html
+를 확인해 봅니다.
+New()를 했어도 아직 템플릿 리스트에서 관리되는 대상은 아닙니다.</description>
+    </item>
+    
+    <item>
+      <title>css와 같은 정적 컨텐츠를 html에서 사용하기 위한 팁</title>
+      <link>https://shrinklabs.com/post/go_css-html/</link>
+      <pubDate>Mon, 18 Jul 2016 10:16:09 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/post/go_css-html/</guid>
+      <description>Go의 &amp;ldquo;net/http&amp;quot;와 &amp;ldquo;html/template&amp;quot;를 이용해서 html과 css로 만들어진 웹페이지를 만들려고 할때, html 파일이 보여질때 css가 적용되지 않은 상태로 보여집니다.
+이 때 어떻게 해야 하는지 방법을 찾아가던 과정을 기록으로 남겨 놓습니다.
+프로젝트의 디렉토리 구조는 다음과 같습니다.
+src\ + prj + main.go + static style.css + template index.html 그래서 이렇게&amp;hellip;
+func main() { http.HandleFunc(&amp;#34;/&amp;#34;, indexHandler) http.ListenAndServe(&amp;#34;:8080&amp;#34;, nil) } func indexHandler(...) { // index.html } 와 같이 하면 될 줄 알았습니다.
+그런데 안됩니다.
+그래서 어떻게 해야 하는지 찾아보니, FileServer로 css파일을 제공해 주면 된다고 합니다.</description>
+    </item>
+    
+    <item>
+      <title>http 패키지의 HandleFunc과 Handle</title>
+      <link>https://shrinklabs.com/post/go_http-handlefunc-handle/</link>
+      <pubDate>Sun, 17 Jul 2016 17:10:53 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/post/go_http-handlefunc-handle/</guid>
+      <description>HandleFunc  http.ResponseWriter 와 *http.Request를 인자로 받는 함수를 전달받습니다. 내부적으로 ServeHTTP가 구현된 ServeMux를 사용합니다.  package main import ( &amp;#34;net/http&amp;#34; ) func indexHandler(w http.ResponseWriter, r *http.Request) { .... } func main() { http.HandleFunc(&amp;#34;/&amp;#34;, indexHandler) http.ListenAndServe(&amp;#34;:8080&amp;#34;, nil) } Handle  http.Handler 인터페이스를 구현한 객체를 전달받습니다. 인자로 전달받은 객체는 http.Handler의 ServeHTTP(http.ResponseWriter, *http.Request)가 구현되어 있어야 합니다.  package main import ( &amp;#34;net/http&amp;#34; ) type indexHandler struct { } func (index *AppHandler) ServeHTTP(w http.ResponseWriter, r *http.</description>
+    </item>
+    
+    <item>
+      <title>vendor 사용 팁(내부 패키지)</title>
+      <link>https://shrinklabs.com/post/go_vendor/</link>
+      <pubDate>Wed, 09 Mar 2016 14:12:58 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/post/go_vendor/</guid>
+      <description>프로젝트 내부에서 별도의 패키지를 만들어서 사용을 하려고 할때면,
+import 경로를 &amp;ldquo;github.com/blah/project/internalpkg&amp;rdquo; 처럼 다 써야 했었습니다.
+이제 vendor를 사용하면 pkg 이름만 import 해서 사용할 수 있게 되었습니다.
+샘플 프로젝트는 다음과 같습니다.
+https://github.com/jaehoonn/lotto
+샘플 프로젝트에 대해서 약간의 설명을 더하면,
+기존에는 command 패키지를 commands.go 에서 import 하기 위해서,
+import &amp;ldquo;github.com/jaehoonn/lotto/command&amp;rdquo; 와 같이 사용해야 했었습니다.
+이렇게 되면 lotto 프로젝트를 다른 사람이 fork 해서 사용하려고 하면 일일이 import 경로를 변경해줘야 하는 문제가 생기게 됩니다.
+그래서 go1.</description>
+    </item>
+    
+    <item>
+      <title>pkg 원격저장소 연결하기</title>
+      <link>https://shrinklabs.com/post/go_meta-tag-pkg-repository/</link>
+      <pubDate>Thu, 11 Jun 2015 13:43:41 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/post/go_meta-tag-pkg-repository/</guid>
+      <description>최근에 go소스들을 분석하면서 특이한 pkg import 경로들을 보게 되었습니다.
+import &amp;#34;rsc.io/pdf&amp;#34; 와 같은 &amp;ldquo;github.com/rsc/pdf&amp;rdquo; 와 동일한 내용인데 그리고 rsc는 russ cox가 사용하는 닉네임인데 그럼 같은 pkg 인가 싶었습니다?
+그래서 웹브라우저에서 rsc.io/pdf 를 입력하면 godoc로 이동을 합니다.
+어떻게 한걸까!? 궁금했습니다. 그리고 왠지 멋있어 보였습니다&amp;hellip;;
+그러다가 우연히 rob pike의 github page(https://github.com/robpike/robpike.github.io)를 보게 되었습니다.
+index.html 에 이렇게만 코드가 되어 있었습니다.
+&amp;lt;meta name=&amp;quot;go-import&amp;quot; content=&amp;quot;robpike.io/cmd hg https://code.google.com/p/rspace.cmd&amp;quot;&amp;gt; This is a git repository holding a redirect for the Go repositories referenced by robpike.</description>
+    </item>
+    
+    <item>
+      <title>pkg-config 사용</title>
+      <link>https://shrinklabs.com/post/go_pkg-config/</link>
+      <pubDate>Fri, 06 Mar 2015 01:28:09 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/post/go_pkg-config/</guid>
+      <description>Go언어를 사용하다보면 C로 만들어진 라이브러리를 사용하기 위해서 cgo가 필요할 때 가 있습니다. 라이브러리를 링크하고 하는 몇 가지 절차를 거치게 되는데, 이때 pkg-config라는걸 사용하면 편리합니다.
+pkg-config를 사용하면 컴파일하는데 필요한 라이브러리와 헤더정보를 Go코드상에서 동일한 경로로 제공해줄 수 있게 됩니다.
+pkg-config가 설치되어 있지 않을 경우에는 다음과 같이 설치를 해줄 수 있습니다.
+$ sudo apt-get install pkg-config 이제 설치되어 있는 라이브러리 목록을 한번 보겠습니다.
+$ pkg-config --list-all 현재 설치된 라이브러리들의 정보가 나오게 됩니다.
+그런데 내가 원하는 라이브러리의 정보가 나타나지 않습니다.</description>
+    </item>
+    
+    <item>
+      <title>Golang channels tutorial</title>
+      <link>https://shrinklabs.com/post/go_golang-channels-tutorial/</link>
+      <pubDate>Wed, 10 Dec 2014 13:12:58 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/post/go_golang-channels-tutorial/</guid>
+      <description>최근에 goroutine과 channel에 대해서 학습하다가 설명이 잘 되어 있는 글을 찾아서 번역(이라고 하기에는 뭐하고 정리?) 를 해봤습니다. 제대로 이해를 못하고 잘 못 번역을 한 부분이 있을 수 도 있으니&amp;hellip;꼭 원본을 보길 권장합니다.
+원본 : http://guzalexander.com/2013/12/06/golang-channels-tutorial.html
+ Go언어는 병렬 프로그램 작성을 위해서 내장 도구를 갖고 있습니다. go를 함수 호출 앞에 놓으면 동일한 주소에 위치하는 코드를 독립적인 병렬 스레드로 실행을 시작합니다. 이런 쓰레드를 Go언어에서는 goroutine이라고 부릅니다. 여기에서 말하는 concurrently는 parallel을 의미하지는 않습니다. (역주: 그렇지만 번역은 “병렬” 이라고 칭하겠습니다.</description>
+    </item>
+    
+    <item>
+      <title>md5 패키지 사용예</title>
+      <link>https://shrinklabs.com/post/go_md5/</link>
+      <pubDate>Tue, 08 Oct 2013 17:10:53 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/post/go_md5/</guid>
+      <description>Qt로 만드는 클라이언트에서 이미지 파일에 대해서 만들어진 md5 hash를 검증 해보기 위해서, 같은 이미지 파일에 대해서 Go언어로 md5 hash를 만들었을때 동일한 값이 생성되면 제대로 만들어진거 아닐까 해서, 만들어 봤습니다.
+package main import ( &amp;#34;io/ioutil&amp;#34; &amp;#34;crypto/md5&amp;#34; &amp;#34;fmt&amp;#34; ) func main() { data, err := ioutil.ReadFile(&amp;#34;1.jpg&amp;#34;) if err != nil { return; } hash := md5.New() hash.Write(data) hashData := hash.Sum(nil) fmt.Printf(&amp;#34;%x&amp;#34;, hashData) }    (adsbygoogle = window.adsbygoogle || []).push({});  </description>
+    </item>
+    
+    <item>
+      <title>C언어의 배열을 Go언어의 slices로 변환</title>
+      <link>https://shrinklabs.com/post/go_go-slice-from-c-array/</link>
+      <pubDate>Tue, 17 Sep 2013 17:10:53 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/post/go_go-slice-from-c-array/</guid>
+      <description>cgo를 이용하다보면, C언어로 작성된 라이브러리의 리턴값으로 포인터에 구조체가 할당되어서 넘어올때가 있습니다.
+C언어에서 넘어오는 구조체 배열이 포인터 형태로 넘어오니, Go의 포인터에 할당을 해서 사용 해봤습니다.
+당연히 제대로 동작하지 않습니다. C언어로 작성된 라이브러리에서 넘어오는 값은 배열이니, Go언어에서는 slices에 할당을 하는게 맞는것 같습니다.
+다음의 내용을 보면, array를 어떻게 slices에 할당을 해야 할지에 대해서 잘 설명이 되어 있습니다.
+&amp;ldquo;Turning C arrays into Go slcies&amp;rdquo; ( https://code.google.com/p/go-wiki/wiki/cgo )
+아래는 cubrid driver를 만들면서 사용한 코드입니다.
+slcieHeader := (*reflect.</description>
     </item>
     
     <item>
@@ -34,6 +320,21 @@ c에서는 T_CCI_COL_INFO(cubrid의 cci에서 사용되는 구조체중에 하�
 이걸 go에서 사용을 하려고 하니,,,
 &amp;ldquo;&amp;hellip;expected selector or type assertion, found &amp;lsquo;type&amp;rsquo; &amp;quot; 이라는 결과를 만나게 됩니다.
 이걸 도대체 어떻게 사용해야 하나 고민을 하던중, golang.org 에 있는 문서 http://golang.</description>
+    </item>
+    
+    <item>
+      <title>패키지 만들때 testing 패키지 사용하기</title>
+      <link>https://shrinklabs.com/post/go_testing/</link>
+      <pubDate>Fri, 23 Aug 2013 14:12:58 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/post/go_testing/</guid>
+      <description>개요 Go 언어용 패키지를 만들려면, 테스트코드를 작성해야 진행이 좀 더 원활하게 되는것 같습니다.
+그래서 간단하게 테스트 코드 작성하는 방법을 정리해봤습니다.
+abc 패키지를 만들어서 테스트하기 src\abc\abc.go
+src\abc\abc_test.go 와 같이 파일을 만들어 놓습니다.
+abc.go를 다음과 같이 작성합니다.
+// abc.go  package abc import ( &amp;#34;fmt&amp;#34; ) func A_Method() { fmt.Println(&amp;#34;test A Method&amp;#34;) } 그리고 abc_test.go를 다음과 같이 작성합니다.
+// abc_test.go  package abc import ( &amp;#34;testing&amp;#34; ) func TestA_Method(t *testing.T) { A_Method() } 그리고 $GOPATH/src/abc/ 에서</description>
     </item>
     
   </channel>

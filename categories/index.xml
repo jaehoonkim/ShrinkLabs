@@ -17,11 +17,11 @@
     </item>
     
     <item>
-      <title>tools</title>
-      <link>https://shrinklabs.com/categories/tools/</link>
-      <pubDate>Fri, 19 Feb 2021 07:17:00 +0900</pubDate>
+      <title>environment</title>
+      <link>https://shrinklabs.com/categories/environment/</link>
+      <pubDate>Wed, 24 Feb 2021 03:08:00 +0900</pubDate>
       
-      <guid>https://shrinklabs.com/categories/tools/</guid>
+      <guid>https://shrinklabs.com/categories/environment/</guid>
       <description></description>
     </item>
     
@@ -35,20 +35,20 @@
     </item>
     
     <item>
+      <title>go</title>
+      <link>https://shrinklabs.com/categories/go/</link>
+      <pubDate>Mon, 18 May 2020 10:52:23 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/categories/go/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>container</title>
       <link>https://shrinklabs.com/categories/container/</link>
       <pubDate>Wed, 08 Apr 2020 21:27:50 +0900</pubDate>
       
       <guid>https://shrinklabs.com/categories/container/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>go</title>
-      <link>https://shrinklabs.com/categories/go/</link>
-      <pubDate>Thu, 25 May 2017 15:43:40 +0900</pubDate>
-      
-      <guid>https://shrinklabs.com/categories/go/</guid>
       <description></description>
     </item>
     

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>cgo on ShrinkLabs</title>
+    <link>https://shrinklabs.com/tags/cgo/</link>
+    <description>Recent content in cgo on ShrinkLabs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 17 Sep 2013 17:10:53 +0900</lastBuildDate><atom:link href="https://shrinklabs.com/tags/cgo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C언어의 배열을 Go언어의 slices로 변환</title>
+      <link>https://shrinklabs.com/post/go_go-slice-from-c-array/</link>
+      <pubDate>Tue, 17 Sep 2013 17:10:53 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/post/go_go-slice-from-c-array/</guid>
+      <description>cgo를 이용하다보면, C언어로 작성된 라이브러리의 리턴값으로 포인터에 구조체가 할당되어서 넘어올때가 있습니다.
+C언어에서 넘어오는 구조체 배열이 포인터 형태로 넘어오니, Go의 포인터에 할당을 해서 사용 해봤습니다.
+당연히 제대로 동작하지 않습니다. C언어로 작성된 라이브러리에서 넘어오는 값은 배열이니, Go언어에서는 slices에 할당을 하는게 맞는것 같습니다.
+다음의 내용을 보면, array를 어떻게 slices에 할당을 해야 할지에 대해서 잘 설명이 되어 있습니다.
+&amp;ldquo;Turning C arrays into Go slcies&amp;rdquo; ( https://code.google.com/p/go-wiki/wiki/cgo )
+아래는 cubrid driver를 만들면서 사용한 코드입니다.
+slcieHeader := (*reflect.</description>
+    </item>
+    
+    <item>
+      <title>type으로 이름 붙여진 구조체의 필드를 사용하기위한 방법</title>
+      <link>https://shrinklabs.com/post/go_cgo-type/</link>
+      <pubDate>Tue, 03 Sep 2013 17:10:53 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/post/go_cgo-type/</guid>
+      <description>c로 만들어져 있던 라이브러리를 cgo를 이용해서 포팅(?)을 하는 작업을 하다보면 난감한 부분들이 종종 나타납니다.
+그중에 한가지가 c에서 사용하던 구조체의 파라미터명이 go 에서 미리정의된 명칭일 경우가 있습니다.
+대표적인 예로 &amp;ldquo;type&amp;quot;이라는 파라미터명 입니다.
+c에서는 T_CCI_COL_INFO(cubrid의 cci에서 사용되는 구조체중에 하나) 의 필드중에 하나가 type이라는 필드가 하나 있습니다.
+이걸 go에서 사용을 하려고 하니,,,
+&amp;ldquo;&amp;hellip;expected selector or type assertion, found &amp;lsquo;type&amp;rsquo; &amp;quot; 이라는 결과를 만나게 됩니다.
+이걸 도대체 어떻게 사용해야 하나 고민을 하던중, golang.org 에 있는 문서 http://golang.</description>
+    </item>
+    
+  </channel>
+</rss>
