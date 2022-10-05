@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>prometheus on ShrinkLabs</title>
+    <link>https://shrinklabs.com/tags/prometheus/</link>
+    <description>Recent content in prometheus on ShrinkLabs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 06 Oct 2022 00:24:53 +0900</lastBuildDate><atom:link href="https://shrinklabs.com/tags/prometheus/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Prometheus 직접 설치</title>
+      <link>https://shrinklabs.com/post/prometheus_manual_install/</link>
+      <pubDate>Thu, 06 Oct 2022 00:24:53 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/post/prometheus_manual_install/</guid>
+      <description>사용자 계정 추가 및 확인  $ useradd -M -s /sbin/nologin prometheus $ cat /etc/passwd | awk -F: &amp;#39;{print $1}&amp;#39; 프로메테우스 바이너리와 설정 파일이 위치할 디렉토리 생성  $ mkdir /etc/prometheus $ mkdir /var/lib/prometheus prometheus 계정의 소유로 변경  $ chown prometheus:prometheus /etc/prometheus $ chown prometheus:prometheus /var/lib/prometheus 프로메테우스 다운로드(https://prometheus.io/download): 현재 최신버전(2.39.0 / 2022-10-05)  $ cd /tmp $ curl -LO https://github.com/prometheus/prometheus/releases/download/v2.39.0/prometheus-2.39.0.linux-amd64.tar.gz 프로메테우스 설치 및 소유권 변경  $ tar -xvf prometheus-2.</description>
+    </item>
+    
+  </channel>
+</rss>
