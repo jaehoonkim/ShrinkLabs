@@ -13,7 +13,7 @@
       <pubDate>Thu, 06 Oct 2022 00:24:53 +0900</pubDate>
       
       <guid>https://shrinklabs.com/post/prometheus_manual_install/</guid>
-      <description>사용자 계정 추가 및 확인  $ useradd -M -s /sbin/nologin prometheus $ cat /etc/passwd | awk -F: &amp;#39;{print $1}&amp;#39; 프로메테우스 바이너리와 설정 파일이 위치할 디렉토리 생성  $ mkdir /etc/prometheus $ mkdir /var/lib/prometheus prometheus 계정의 소유로 변경  $ chown prometheus:prometheus /etc/prometheus $ chown prometheus:prometheus /var/lib/prometheus 프로메테우스 다운로드(https://prometheus.io/download): 현재 최신버전(2.39.0 / 2022-10-05)  $ cd /tmp $ curl -LO https://github.com/prometheus/prometheus/releases/download/v2.39.0/prometheus-2.39.0.linux-amd64.tar.gz 프로메테우스 설치 및 소유권 변경  $ tar -xvf prometheus-2.</description>
+      <description>사용자 계정 추가 및 확인  $ useradd -M -s /sbin/nologin prometheus $ cat /etc/passwd | awk -F: &amp;#39;{print $1}&amp;#39; root bin daemon adm lp sync shutdown halt mail operator games ftp nobody dbus systemd-coredump systemd-resolve tss polkitd clevis unbound libstoragemgmt setroubleshoot cockpit-ws cockpit-wsinstance sssd chrony tcpdump sshd prometheus 프로메테우스 바이너리와 설정 파일이 위치할 디렉토리 생성  $ mkdir /etc/prometheus $ mkdir /var/lib/prometheus prometheus 계정의 소유로 변경  $ chown prometheus:prometheus /etc/prometheus $ chown prometheus:prometheus /var/lib/prometheus 프로메테우스 다운로드(https://prometheus.</description>
     </item>
     
     <item>
