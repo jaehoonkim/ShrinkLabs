@@ -200,42 +200,43 @@ jenkins  | *************************************************************
 jenkins  | *************************************************************
 jenkins  | *************************************************************
 ...
-```# Docker 설치
-
-1. dnf update -y
-2. dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-3. dnf install docker-ce --allowerasing
-4. systemctl start docker
-5. systemctl enable docker
-6. systemctl status docker
-7. usermod -aG docker $USER
-
-
-# Docker Compose 설치
-1. dnf install -y curl
-2. curl -L &quot;https://github.com/docker/compose/releases/download/v2.11.2/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose
-3. chmod +x /usr/local/bin/docker-compose
-4. docker-compose --version
-
-# Jenkins 설치
-1. mkdir ws
-2. cd ws
-3. vim docker-compose.yml
-```yaml
-version: '3' 
-
-services:
-	jenkins:
-	image: jenkins/jenkins:lts 
-	container_name: jenkins 
-	volumes: 
-		- /var/run/docker.sock:/var/run/docker.sock 
-		- /jenkins:/var/jenkins_home 
-	ports: 
-		- &quot;8080:8080&quot; 
-	privileged: true 
-	user: root
-</code></pre><ol start="4">
+</code></pre><h1 id="docker-설치-1">Docker 설치</h1>
+<ol>
+<li>dnf update -y</li>
+<li>dnf config-manager &ndash;add-repo <a href="https://download.docker.com/linux/centos/docker-ce.repo">https://download.docker.com/linux/centos/docker-ce.repo</a></li>
+<li>dnf install docker-ce &ndash;allowerasing</li>
+<li>systemctl start docker</li>
+<li>systemctl enable docker</li>
+<li>systemctl status docker</li>
+<li>usermod -aG docker $USER</li>
+</ol>
+<h1 id="docker-compose-설치-1">Docker Compose 설치</h1>
+<ol>
+<li>dnf install -y curl</li>
+<li>curl -L &ldquo;<a href="https://github.com/docker/compose/releases/download/v2.11.2/docker-compose-$(uname">https://github.com/docker/compose/releases/download/v2.11.2/docker-compose-$(uname</a> -s)-$(uname -m)&rdquo; -o /usr/local/bin/docker-compose</li>
+<li>chmod +x /usr/local/bin/docker-compose</li>
+<li>docker-compose &ndash;version</li>
+</ol>
+<h1 id="jenkins-설치-1">Jenkins 설치</h1>
+<ol>
+<li>mkdir ws</li>
+<li>cd ws</li>
+<li>vim docker-compose.yml</li>
+</ol>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#6ab825;font-weight:bold">version</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#39;3&#39;</span><span style="color:#666"> 
+</span><span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">services</span>:<span style="color:#666">
+</span><span style="color:#666">	</span><span style="color:#6ab825;font-weight:bold">jenkins</span>:<span style="color:#666">
+</span><span style="color:#666">	</span><span style="color:#6ab825;font-weight:bold">image</span>:<span style="color:#666"> </span>jenkins/jenkins:lts <span style="color:#666">
+</span><span style="color:#666">	</span><span style="color:#6ab825;font-weight:bold">container_name</span>:<span style="color:#666"> </span>jenkins <span style="color:#666">
+</span><span style="color:#666">	</span><span style="color:#6ab825;font-weight:bold">volumes</span>:<span style="color:#666"> 
+</span><span style="color:#666">		</span>- /var/run/docker.sock:/var/run/docker.sock <span style="color:#666">
+</span><span style="color:#666">		</span>- /jenkins:/var/jenkins_home <span style="color:#666">
+</span><span style="color:#666">	</span><span style="color:#6ab825;font-weight:bold">ports</span>:<span style="color:#666"> 
+</span><span style="color:#666">		</span>- <span style="color:#ed9d13">&#34;8080:8080&#34;</span><span style="color:#666"> 
+</span><span style="color:#666">	</span><span style="color:#6ab825;font-weight:bold">privileged</span>:<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">true</span><span style="color:#666"> 
+</span><span style="color:#666">	</span><span style="color:#6ab825;font-weight:bold">user</span>:<span style="color:#666"> </span>root<span style="color:#666">
+</span></code></pre></div><ol start="4">
 <li>docker-compose up -d</li>
 <li>docker ps -a</li>
 <li>docker-compose logs</li>
