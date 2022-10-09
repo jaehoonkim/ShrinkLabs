@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1"><title>pkg-config 사용 - ShrinkLabs</title>
+<meta property="og:title" content="pkg-config 사용 - ShrinkLabs">
+<meta property="og:type" content="article">
+
+
+<meta property="og:image" content="images/logo.png">
+
+<meta property="og:url" content="https://shrinklabs.com/post/go_pkg-config/">
+
+
+<meta property="keywords" content ="pkg-config">
+
+<link rel="stylesheet" href="https://shrinklabs.com/css/style.min.css">
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#ffffff">
+<link rel="webmention" href="https://webmention.io/hugocisneros.com/webmention">
+<link rel="pingback" href="https://webmention.io/hugocisneros.com/xmlrpc">
+<script>
+ function updateMode() {
+    
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+    }
+ }
+ function toggleMode() {
+     if (localStorage.theme === 'dark') {
+        
+        localStorage.theme = 'light';
+     }
+     else {
+        
+        localStorage.theme = 'dark';
+     }
+     updateMode()
+ }
+ window.onload = updateMode();
+ function toggleMenu() {
+     let navbar = document.getElementById("navbar-default");
+     if (navbar.classList.contains("hidden")) {
+        navbar.classList.remove("hidden");
+     }
+     else {
+        navbar.classList.add("hidden");
+     }
+ }
+</script>
+
+  </head>
+  <body>
+    <header class="md:px-0 px-2">
+        <nav >
+  <div class="container flex flex-wrap justify-between items-center mx-auto">
+    <div class="nav-main my-2.5">
+      <a href="https://shrinklabs.com/" class="nav-title py-2.5 text-2xl text-zinc-600 dark:text-zinc-300 hover:border-b-0">ShrinkLabs</a>
+    </div>
+    <button type="button"
+            onclick="toggleMenu()"
+            class="inline-flex items-center p-2 ml-3
+                  text-sm text-gray-500
+                  rounded-lg md:hidden hover:bg-gray-100
+                  focus:outline-none focus:ring-2
+                  focus:ring-gray-200 dark:text-gray-400
+                  dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            aria-controls="navbar-default"
+            aria-expanded="false">
+        <span class="sr-only">Open main menu</span>
+        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor"
+             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1
+                           0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0
+                           01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0
+                           01-1-1z" clip-rule="evenodd"></path>
+        </svg>
+    </button>
+    <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+      <ul class="grid md:grid-flow-col items-center justify-between text-lg my-2.5">
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/post/">posts</a>
+        </li>
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/categories/">categories</a>
+        </li>
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/tags/">tags</a>
+        </li>
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/contact/">contact</a>
+        </li>
+        
+        <li class="h-7 pl-2.5 pr-0 list-none">
+          <button type="button" onclick="toggleMode()" class="h-full">
+            <img class="h-7 w-7 max-h-full mb-1.5 p-1.5 hidden dark:inline" id="dark-mode-button-img"
+                 src="https://shrinklabs.com/img/light_mode.svg">
+            <img class="h-7 w-7 max-h-full mb-1.5 p-1.5 inline dark:hidden" id="dark-mode-button-img"
+                 src="https://shrinklabs.com/img/dark_mode.svg">
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    </header>
+    <main class="content h-card container mt-2 m-auto
+                 leading-loose md:px-0 px-2 z-0 Page(/post/go_pkg-config.md)"
+          role="main">
+    
+    <article class="article" itemprop="mainEntity" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="title-container">
+    <h1 class="article-title" itemprop="name">pkg-config 사용</h1>
+    
+    <div class="article-subtitle">
+    
+    <span class="article-date" itemprop="datePublished" content="2015-03-06T01:28:09&#43;0900">2015-03-06</span>
+    
+    
+    
+    <span class="article-author" itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Jaehoon Khim</span></span>
+    
+    
+    </div>
+    
+    </div>
+
+    <div class="article-content" itemprop="articleBody">
+      <p>Go언어를 사용하다보면 C로 만들어진 라이브러리를 사용하기 위해서 cgo가 필요할 때 가 있습니다.
+라이브러리를 링크하고 하는 몇 가지 절차를 거치게 되는데, 이때 pkg-config라는걸 사용하면 편리합니다.</p>
+<p>pkg-config를 사용하면 컴파일하는데 필요한 라이브러리와 헤더정보를 Go코드상에서 동일한 경로로 제공해줄 수 있게 됩니다.</p>
+<p>pkg-config가 설치되어 있지 않을 경우에는 다음과 같이 설치를 해줄 수 있습니다.</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Shell" data-lang="Shell">$ sudo apt-get install pkg-config
+</code></pre></div><p>이제 설치되어 있는 라이브러리 목록을 한번 보겠습니다.</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Shell" data-lang="Shell">$ pkg-config --list-all
+</code></pre></div><p>현재 설치된 라이브러리들의 정보가 나오게 됩니다.</p>
+<p>그런데 내가 원하는 라이브러리의 정보가 나타나지 않습니다.</p>
+<p>라이브러리 정보의 관리는 /usr/lib/pkgconfig 경로에 있는 .pc 파일들을 통해서 됩니다.
+직접 소스를 컴파일해서 사용하는 라이이브러리의 경우 /usr/local/lib/pkgconfig 에 있는 경우도 있습니다. 또는 Qt와 같은 경우에는 /home/{user}/Qt5.4.1/5.4/gcc_64/lib/pkgconfig 의 경로에 pc파일이 존재합니다.</p>
+<p>이렇게 기본경로가 아닌곳에 존재하는 pc파일들을 관리하기 위해서 PKG_CONFIG_PATH라는 환경변수를 사용할 수 있습니다.</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Shell" data-lang="Shell">$ <span style="color:#24909d">export</span> <span style="color:#40ffff">PKG_CONFIG_PATH</span>=”<span style="color:#40ffff">$PKG_CONFIG_PATH</span>:/home/{user}/Qt5.4.1/5.4/gcc_64/lib/pkgconfig”
+</code></pre></div><p>와 같이 해줍니다. 구분은 &ldquo;:&rdquo; 로 합니다.</p>
+<p>[참고] <a href="http://ko.wikipedia.org/wiki/Pkg-config">http://ko.wikipedia.org/wiki/Pkg-config</a><br>
+[참고] <a href="http://tjcplpllog.blogspot.kr/2014/08/pkg-config.html">http://tjcplpllog.blogspot.kr/2014/08/pkg-config.html</a><br>
+[참고] <a href="http://blog.daum.net/heyjun/15705389">http://blog.daum.net/heyjun/15705389</a><br>
+[참고] <a href="http://mwmw7.tistory.com/160">http://mwmw7.tistory.com/160</a><br>
+[참고] <a href="http://ubuntuforums.org/showthread.php?t=751456">http://ubuntuforums.org/showthread.php?t=751456</a><br>
+[참고] <a href="http://manual-archive.blogspot.kr/2011/08/pkg-config-pc-pkgconfigpath.html">http://manual-archive.blogspot.kr/2011/08/pkg-config-pc-pkgconfigpath.html</a><br>
+[참고] <a href="http://ubuntuforums.org/showthread.php?t=1091717">http://ubuntuforums.org/showthread.php?t=1091717</a><br>
+[참고] <a href="http://blog.naver.com/supsup5642/60161284657">http://blog.naver.com/supsup5642/60161284657</a></p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8444244371421612"
+     data-ad-slot="6693872766"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+    </div>
+
+    
+<ul class="list-none pl-0 font-sm align-left">
+
+<hr>
+<li>
+    Categories:
+
+<a href="/categories/go">
+    <span class="tag-item">
+    go
+    </span>
+</a>
+</li >
+
+
+<li class="list-none">
+    Tags:
+    
+    <a class="inline-block mt-2 mr-2 border-none text-neutral-800 dark:text-neutral-200" href="/tags/pkg-config">
+        <span class="flex flex-row justify-start items-center dark:bg-zinc-900 dark:hover:bg-zinc-800
+                     hover:bg-zinc-200 bg-zinc-100 p-1
+                     rounded-t border-b-2 border-zinc-300 hover:border-zinc-500">
+            
+            <img class="h-5 mr-1 inline" src="https://shrinklabs.com/images/tag_logo.svg"
+                 alt="Logo of a tag: indicates that a tag item follows.">
+        pkg-config
+        </span>
+    </a>
+    
+</li>
+
+</ul>
+
+
+    
+    
+    <div class="article-date-modified">
+        Last modified <span itemprop="dateModified" content="2015-03-06T01:28:09&#43;0900">2015-03-06</span>
+    </div>
+    
+    </article>
+
+    </main>
+    <footer class="footer container h-10 text-center">
+  <ul class="pl-0">
+    
+    <li class="ml-2 first:before:content-none before:content-['•'] inline-block list-none"><a class="ml-2 text-neutral-800 dark:text-neutral-400 border-none"
+          href="https://github.com/hugcis/hugo-astatine-theme">Code</a>
+    </li>
+    <li class="ml-2 first:before:content-none before:content-['•']
+                text-neutral-800 dark:text-neutral-400 inline-block list-none"><span class="ml-2">© Jaehoon Khim 2022</span>
+    </li>
+  </ul>
+</footer>
+
+
+  </body>
+</html>

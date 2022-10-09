@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1"><title>Go코드로 HTML Form 전송 - ShrinkLabs</title>
+<meta property="og:title" content="Go코드로 HTML Form 전송 - ShrinkLabs">
+<meta property="og:type" content="article">
+
+
+<meta property="og:image" content="images/logo.png">
+
+<meta property="og:url" content="https://shrinklabs.com/post/go_html-form/">
+
+
+<meta property="keywords" content ="net">
+
+<link rel="stylesheet" href="https://shrinklabs.com/css/style.min.css">
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#ffffff">
+<link rel="webmention" href="https://webmention.io/hugocisneros.com/webmention">
+<link rel="pingback" href="https://webmention.io/hugocisneros.com/xmlrpc">
+<script>
+ function updateMode() {
+    
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+    }
+ }
+ function toggleMode() {
+     if (localStorage.theme === 'dark') {
+        
+        localStorage.theme = 'light';
+     }
+     else {
+        
+        localStorage.theme = 'dark';
+     }
+     updateMode()
+ }
+ window.onload = updateMode();
+ function toggleMenu() {
+     let navbar = document.getElementById("navbar-default");
+     if (navbar.classList.contains("hidden")) {
+        navbar.classList.remove("hidden");
+     }
+     else {
+        navbar.classList.add("hidden");
+     }
+ }
+</script>
+
+  </head>
+  <body>
+    <header class="md:px-0 px-2">
+        <nav >
+  <div class="container flex flex-wrap justify-between items-center mx-auto">
+    <div class="nav-main my-2.5">
+      <a href="https://shrinklabs.com/" class="nav-title py-2.5 text-2xl text-zinc-600 dark:text-zinc-300 hover:border-b-0">ShrinkLabs</a>
+    </div>
+    <button type="button"
+            onclick="toggleMenu()"
+            class="inline-flex items-center p-2 ml-3
+                  text-sm text-gray-500
+                  rounded-lg md:hidden hover:bg-gray-100
+                  focus:outline-none focus:ring-2
+                  focus:ring-gray-200 dark:text-gray-400
+                  dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            aria-controls="navbar-default"
+            aria-expanded="false">
+        <span class="sr-only">Open main menu</span>
+        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor"
+             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1
+                           0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0
+                           01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0
+                           01-1-1z" clip-rule="evenodd"></path>
+        </svg>
+    </button>
+    <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+      <ul class="grid md:grid-flow-col items-center justify-between text-lg my-2.5">
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/post/">posts</a>
+        </li>
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/categories/">categories</a>
+        </li>
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/tags/">tags</a>
+        </li>
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/contact/">contact</a>
+        </li>
+        
+        <li class="h-7 pl-2.5 pr-0 list-none">
+          <button type="button" onclick="toggleMode()" class="h-full">
+            <img class="h-7 w-7 max-h-full mb-1.5 p-1.5 hidden dark:inline" id="dark-mode-button-img"
+                 src="https://shrinklabs.com/img/light_mode.svg">
+            <img class="h-7 w-7 max-h-full mb-1.5 p-1.5 inline dark:hidden" id="dark-mode-button-img"
+                 src="https://shrinklabs.com/img/dark_mode.svg">
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    </header>
+    <main class="content h-card container mt-2 m-auto
+                 leading-loose md:px-0 px-2 z-0 Page(/post/go_html-form.md)"
+          role="main">
+    
+    <article class="article" itemprop="mainEntity" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="title-container">
+    <h1 class="article-title" itemprop="name">Go코드로 HTML Form 전송</h1>
+    
+    <div class="article-subtitle">
+    
+    <span class="article-date" itemprop="datePublished" content="2016-12-06T01:13:41&#43;0900">2016-12-06</span>
+    
+    
+    
+    <span class="article-author" itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Jaehoon Khim</span></span>
+    
+    
+    </div>
+    
+    </div>
+
+    <div class="article-content" itemprop="articleBody">
+      <p>HTML, Javascript를 사용해서 Post방식으로 Form을 전송하는 동작을 Go 코드를 작성해 보려고 합니다.<br>
+우선 POST로 전송된 Form을 받아서 처리를 하는 서버쪽을 다음과 같은 구성을 갖는 코드로 만듭니다.</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#6ab825;font-weight:bold">package</span> main
+
+<span style="color:#6ab825;font-weight:bold">import</span> {
+    <span style="color:#ed9d13">&#34;net/http&#34;</span>
+
+    <span style="color:#ed9d13">&#34;github.com/gorilla/mux&#34;</span>
+}
+
+<span style="color:#6ab825;font-weight:bold">func</span> <span style="color:#447fcf">main</span>() {
+   r := mux.<span style="color:#447fcf">Newrouter</span>().<span style="color:#447fcf">StrictSlash</span>(<span style="color:#6ab825;font-weight:bold">false</span>)
+   r.<span style="color:#447fcf">HandleFunc</span>(<span style="color:#ed9d13">&#34;/upload&#34;</span>, upload).<span style="color:#447fcf">Methods</span>(<span style="color:#ed9d13">&#34;POST&#34;</span>)
+
+   http.<span style="color:#447fcf">ListenAndServe</span>(<span style="color:#ed9d13">&#34;:8080&#34;</span>, r)
+}
+
+<span style="color:#6ab825;font-weight:bold">func</span> <span style="color:#447fcf">upload</span>(w http.ResponseWriter, r *http.Request) {
+    <span style="color:#6ab825;font-weight:bold">if</span> r.Method == <span style="color:#ed9d13">&#34;POST&#34;</span> {
+
+    }
+}
+</code></pre></div><p>이렇게 &ldquo;http://localhost:8080/upload&rdquo; 를 통해서 POST 방식으로 전달되는 요청을 받아서 처리하기 위한 큰틀을 만들었습니다.</p>
+<p>이제 upload() 를 구현해 보겠습니다.<br>
+우선 Form의 필드로 &ldquo;user&quot;를 받아오는 부분을 구현해 보면 다음과 같습니다.</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#6ab825;font-weight:bold">func</span> <span style="color:#447fcf">upload</span>(w http.ResponseWriter, r *http.Request) {
+    <span style="color:#6ab825;font-weight:bold">if</span> r.Method == <span style="color:#ed9d13">&#34;POST&#34;</span> {
+        user := r.<span style="color:#447fcf">FormValue</span>(<span style="color:#ed9d13">&#34;user&#34;</span>)
+    }
+}
+</code></pre></div><p>위의 코드는 다음과 같은 HTML의 Form을 받아서 처리 하기 위한 구현입니다.</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#6ab825;font-weight:bold">html</span>&gt;
+    &lt;<span style="color:#6ab825;font-weight:bold">body</span>&gt;
+        &lt;<span style="color:#6ab825;font-weight:bold">form</span> <span style="color:#bbb">action</span>=<span style="color:#ed9d13">&#34;/upload&#34;</span> <span style="color:#bbb">method</span>=<span style="color:#ed9d13">&#34;POST&#34;</span>&gt;
+            user: &lt;<span style="color:#6ab825;font-weight:bold">input</span> <span style="color:#bbb">type</span>=<span style="color:#ed9d13">&#34;text&#34;</span> <span style="color:#bbb">name</span>=<span style="color:#ed9d13">&#34;user&#34;</span>&gt;
+            &lt;<span style="color:#6ab825;font-weight:bold">input</span> <span style="color:#bbb">type</span>=<span style="color:#ed9d13">&#34;submit&#34;</span>  <span style="color:#bbb">name</span>=<span style="color:#ed9d13">&#34;submit&#34;</span> <span style="color:#bbb">value</span>=<span style="color:#ed9d13">&#34;submit&#34;</span>&gt;
+        &lt;/<span style="color:#6ab825;font-weight:bold">form</span>&gt;
+    &lt;/<span style="color:#6ab825;font-weight:bold">body</span>&gt;
+&lt;/<span style="color:#6ab825;font-weight:bold">html</span>&gt;
+</code></pre></div><p>이 HTML을 Go 코드로 구현을 하기 위해서는 http 패키지의 PostForm() 함수를 사용할 수 있습니다.</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">resp, err := http.<span style="color:#447fcf">PostForm</span>(<span style="color:#ed9d13">&#34;localhost:8080/upload&#34;</span>, url.Values{<span style="color:#ed9d13">&#34;user&#34;</span>, {<span style="color:#ed9d13">&#34;jaehoonn&#34;</span>}})
+</code></pre></div><p>그럼 HTML의 Form을 통해서 파일을 업로드를 할 경우에는 어떻게 해야 할까요?<br>
+그냥 url.Values를 사용해서 파일을 업로드 할 수 있을까요? 안되는것 같습니다.</p>
+<p>http 통신에서 파일을 전송하기 위해서는 mime/multipart 패키지를 사용할 수 있습니다.</p>
+<p>우선 Form을 받아서 각 필드를 처리하기 위한 부분을 구현해 보면 다음과 같습니다.</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#6ab825;font-weight:bold">func</span> <span style="color:#447fcf">upload</span>(w http.ResponseWriter, r *http.Request) {
+    <span style="color:#6ab825;font-weight:bold">if</span> r.Method == <span style="color:#ed9d13">&#34;POST&#34;</span> {
+        user := r.<span style="color:#447fcf">FormValue</span>(<span style="color:#ed9d13">&#34;user&#34;</span>)
+        file, handler, _ := r.<span style="color:#447fcf">FormFile</span>(<span style="color:#ed9d13">&#34;image&#34;</span>)
+        <span style="color:#6ab825;font-weight:bold">defer</span> file.<span style="color:#447fcf">Close</span>()
+
+        f, err := os.<span style="color:#447fcf">OpenFile</span>(<span style="color:#ed9d13">&#34;./&#34;</span> + handler.Filename, os.O_WRONLY | os.O_CREATE, <span style="color:#3677a9">0666</span>)
+        <span style="color:#6ab825;font-weight:bold">if</span> err != <span style="color:#6ab825;font-weight:bold">nil</span> {
+            <span style="color:#6ab825;font-weight:bold">return</span>
+        }
+        <span style="color:#6ab825;font-weight:bold">defer</span> f.<span style="color:#447fcf">Close</span>()
+        io.<span style="color:#447fcf">Copy</span>(f, file)
+    }
+}
+</code></pre></div><p>위의 코드는 http.Request를 통해 전달된 Form의 필드 중 &ldquo;image&rdquo; 필드의 파일을 FormFile() 함수를 사용해서 구한 다음 전달된 파일이름으로 서버에서 파일을 생성하도록 하고 있습니다.</p>
+<p>이제 File을 전달하는 HTML 코드를 살펴보겠습니다.</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#6ab825;font-weight:bold">html</span>&gt;
+    &lt;<span style="color:#6ab825;font-weight:bold">body</span>&gt;
+        &lt;<span style="color:#6ab825;font-weight:bold">form</span> <span style="color:#bbb">action</span>=<span style="color:#ed9d13">&#34;/upload&#34;</span> <span style="color:#bbb">method</span>=<span style="color:#ed9d13">&#34;POST&#34;</span> <span style="color:#bbb">enctype</span>=<span style="color:#ed9d13">&#34;multipart/form-data&#34;</span>&gt;
+            user: &lt;<span style="color:#6ab825;font-weight:bold">input</span> <span style="color:#bbb">type</span>=<span style="color:#ed9d13">&#34;text&#34;</span> <span style="color:#bbb">name</span>=<span style="color:#ed9d13">&#34;user&#34;</span>&gt;&lt;<span style="color:#6ab825;font-weight:bold">br</span>&gt;
+            file: &lt;<span style="color:#6ab825;font-weight:bold">input</span> <span style="color:#bbb">type</span>=<span style="color:#ed9d13">&#34;file&#34;</span> <span style="color:#bbb">name</span>=<span style="color:#ed9d13">&#34;image&#34;</span>&gt;
+            &lt;<span style="color:#6ab825;font-weight:bold">input</span> <span style="color:#bbb">type</span>=<span style="color:#ed9d13">&#34;submit&#34;</span>  <span style="color:#bbb">name</span>=<span style="color:#ed9d13">&#34;submit&#34;</span> <span style="color:#bbb">value</span>=<span style="color:#ed9d13">&#34;submit&#34;</span>&gt;
+        &lt;/<span style="color:#6ab825;font-weight:bold">form</span>&gt;
+    &lt;/<span style="color:#6ab825;font-weight:bold">body</span>&gt;
+&lt;/<span style="color:#6ab825;font-weight:bold">html</span>&gt;
+</code></pre></div><p>이렇게 하면 user라는 문자열 필드와 image라는 파일 필드를 갖는 Form이 전송됩니다.</p>
+<p>이제 이 HTML의 내용을 Go코드로 구현을 하면 다음과 같습니다.</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#6ab825;font-weight:bold">func</span> <span style="color:#447fcf">main</span>() {
+    url := <span style="color:#ed9d13">&#34;http://localhost:8080/upload&#34;</span>
+
+    <span style="color:#6ab825;font-weight:bold">var</span> b bytes.Buffer
+    w := multipart.<span style="color:#447fcf">NewWriter</span>(&amp;b)
+    f, err := os.<span style="color:#447fcf">Open</span>(<span style="color:#ed9d13">&#34;./sample.jpg&#34;</span>)
+    <span style="color:#6ab825;font-weight:bold">if</span> err != <span style="color:#6ab825;font-weight:bold">nil</span> {
+        <span style="color:#6ab825;font-weight:bold">return</span> err
+    }
+    <span style="color:#6ab825;font-weight:bold">defer</span> f.<span style="color:#447fcf">Close</span>()
+    
+    fw, err := w.<span style="color:#447fcf">CreateFormFile</span>(<span style="color:#ed9d13">&#34;image&#34;</span>, <span style="color:#ed9d13">&#34;./sample.jpg&#34;</span>)
+    <span style="color:#6ab825;font-weight:bold">if</span> err != <span style="color:#6ab825;font-weight:bold">nil</span> {
+        <span style="color:#6ab825;font-weight:bold">return</span>
+    }
+    <span style="color:#6ab825;font-weight:bold">if</span> _, err = io.<span style="color:#447fcf">Copy</span>(fw, f); err != <span style="color:#6ab825;font-weight:bold">nil</span> {
+        <span style="color:#6ab825;font-weight:bold">return</span>
+    }
+    <span style="color:#6ab825;font-weight:bold">if</span> fw, err = w.<span style="color:#447fcf">CreateFormField</span>(<span style="color:#ed9d13">&#34;user&#34;</span>); err != <span style="color:#6ab825;font-weight:bold">nil</span> {
+        <span style="color:#6ab825;font-weight:bold">return</span>
+    }
+    <span style="color:#6ab825;font-weight:bold">if</span> _, err = fw.<span style="color:#447fcf">Write</span>([]<span style="color:#24909d">byte</span>(<span style="color:#ed9d13">&#34;jaehoonn&#34;</span>)); err != <span style="color:#6ab825;font-weight:bold">nil</span> {
+        <span style="color:#6ab825;font-weight:bold">return</span>
+    }
+
+    w.<span style="color:#447fcf">Close</span>()
+
+    req, err := http.<span style="color:#447fcf">NewRequest</span>(<span style="color:#ed9d13">&#34;POST&#34;</span>, url, &amp;b)
+    <span style="color:#6ab825;font-weight:bold">if</span> err != <span style="color:#6ab825;font-weight:bold">nil</span> {
+        <span style="color:#6ab825;font-weight:bold">return</span>
+    }
+
+    req.Header.<span style="color:#447fcf">Set</span>(<span style="color:#ed9d13">&#34;Content-Type&#34;</span>, w.<span style="color:#447fcf">FormDataContentType</span>())
+
+    client := &amp;http.Client{}
+    res, err := client.<span style="color:#447fcf">Do</span>(req)
+    <span style="color:#6ab825;font-weight:bold">if</span> err != <span style="color:#6ab825;font-weight:bold">nil</span> {
+        <span style="color:#6ab825;font-weight:bold">return</span>
+    }
+}
+</code></pre></div><p>위의 코드는 로컬의 현재 위치에 있는 &ldquo;sample.jpg&rdquo; 파일과 &ldquo;jaehoonn&quot;이라는 이름을 전송하려고 합니다.</p>
+<p>mime/multipart의 Writer를 생성해서 File 필드를 하나 만들고(CreateFormFile), 일반 필드를 하나 만듭니다.(CreateFormField)<br>
+HTML의 Form에서 action에 해당하는 url과 파일 버퍼를 사용해서 request를 만듭니다. (NewRequest)<br>
+만들어진 request와 http.Client를 이용해서 POST방식의 Form을 전달합니다.</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8444244371421612"
+     data-ad-slot="6693872766"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+    </div>
+
+    
+<ul class="list-none pl-0 font-sm align-left">
+
+<hr>
+<li>
+    Categories:
+
+<a href="/categories/go">
+    <span class="tag-item">
+    go
+    </span>
+</a>
+</li >
+
+
+<li class="list-none">
+    Tags:
+    
+    <a class="inline-block mt-2 mr-2 border-none text-neutral-800 dark:text-neutral-200" href="/tags/net">
+        <span class="flex flex-row justify-start items-center dark:bg-zinc-900 dark:hover:bg-zinc-800
+                     hover:bg-zinc-200 bg-zinc-100 p-1
+                     rounded-t border-b-2 border-zinc-300 hover:border-zinc-500">
+            
+            <img class="h-5 mr-1 inline" src="https://shrinklabs.com/images/tag_logo.svg"
+                 alt="Logo of a tag: indicates that a tag item follows.">
+        net
+        </span>
+    </a>
+    
+</li>
+
+</ul>
+
+
+    
+    
+    <div class="article-date-modified">
+        Last modified <span itemprop="dateModified" content="2016-12-06T01:13:41&#43;0900">2016-12-06</span>
+    </div>
+    
+    </article>
+
+    </main>
+    <footer class="footer container h-10 text-center">
+  <ul class="pl-0">
+    
+    <li class="ml-2 first:before:content-none before:content-['•'] inline-block list-none"><a class="ml-2 text-neutral-800 dark:text-neutral-400 border-none"
+          href="https://github.com/hugcis/hugo-astatine-theme">Code</a>
+    </li>
+    <li class="ml-2 first:before:content-none before:content-['•']
+                text-neutral-800 dark:text-neutral-400 inline-block list-none"><span class="ml-2">© Jaehoon Khim 2022</span>
+    </li>
+  </ul>
+</footer>
+
+
+  </body>
+</html>

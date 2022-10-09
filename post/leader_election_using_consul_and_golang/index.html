@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1"><title>Consul과 Golang을 사용한 리더 선출 - ShrinkLabs</title>
+<meta property="og:title" content="Consul과 Golang을 사용한 리더 선출 - ShrinkLabs">
+<meta property="og:type" content="article">
+
+
+<meta property="og:image" content="images/logo.png">
+
+<meta property="og:url" content="https://shrinklabs.com/post/leader_election_using_consul_and_golang/">
+
+
+<meta property="keywords" content ="cluster">
+
+<link rel="stylesheet" href="https://shrinklabs.com/css/style.min.css">
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#ffffff">
+<link rel="webmention" href="https://webmention.io/hugocisneros.com/webmention">
+<link rel="pingback" href="https://webmention.io/hugocisneros.com/xmlrpc">
+<script>
+ function updateMode() {
+    
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+    }
+ }
+ function toggleMode() {
+     if (localStorage.theme === 'dark') {
+        
+        localStorage.theme = 'light';
+     }
+     else {
+        
+        localStorage.theme = 'dark';
+     }
+     updateMode()
+ }
+ window.onload = updateMode();
+ function toggleMenu() {
+     let navbar = document.getElementById("navbar-default");
+     if (navbar.classList.contains("hidden")) {
+        navbar.classList.remove("hidden");
+     }
+     else {
+        navbar.classList.add("hidden");
+     }
+ }
+</script>
+
+  </head>
+  <body>
+    <header class="md:px-0 px-2">
+        <nav >
+  <div class="container flex flex-wrap justify-between items-center mx-auto">
+    <div class="nav-main my-2.5">
+      <a href="https://shrinklabs.com/" class="nav-title py-2.5 text-2xl text-zinc-600 dark:text-zinc-300 hover:border-b-0">ShrinkLabs</a>
+    </div>
+    <button type="button"
+            onclick="toggleMenu()"
+            class="inline-flex items-center p-2 ml-3
+                  text-sm text-gray-500
+                  rounded-lg md:hidden hover:bg-gray-100
+                  focus:outline-none focus:ring-2
+                  focus:ring-gray-200 dark:text-gray-400
+                  dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            aria-controls="navbar-default"
+            aria-expanded="false">
+        <span class="sr-only">Open main menu</span>
+        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor"
+             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1
+                           0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0
+                           01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0
+                           01-1-1z" clip-rule="evenodd"></path>
+        </svg>
+    </button>
+    <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+      <ul class="grid md:grid-flow-col items-center justify-between text-lg my-2.5">
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/post/">posts</a>
+        </li>
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/categories/">categories</a>
+        </li>
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/tags/">tags</a>
+        </li>
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/contact/">contact</a>
+        </li>
+        
+        <li class="h-7 pl-2.5 pr-0 list-none">
+          <button type="button" onclick="toggleMode()" class="h-full">
+            <img class="h-7 w-7 max-h-full mb-1.5 p-1.5 hidden dark:inline" id="dark-mode-button-img"
+                 src="https://shrinklabs.com/img/light_mode.svg">
+            <img class="h-7 w-7 max-h-full mb-1.5 p-1.5 inline dark:hidden" id="dark-mode-button-img"
+                 src="https://shrinklabs.com/img/dark_mode.svg">
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    </header>
+    <main class="content h-card container mt-2 m-auto
+                 leading-loose md:px-0 px-2 z-0 Page(/post/leader_election_using_consul_and_golang.md)"
+          role="main">
+    
+    <article class="article" itemprop="mainEntity" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="title-container">
+    <h1 class="article-title" itemprop="name">Consul과 Golang을 사용한 리더 선출</h1>
+    
+    <div class="article-subtitle">
+    
+    <span class="article-date" itemprop="datePublished" content="2021-06-27T21:33:58&#43;0900">2021-06-27</span>
+    
+    
+    
+    <span class="article-author" itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Jaehoon Khim</span></span>
+    
+    
+    </div>
+    
+    </div>
+
+    <div class="article-content" itemprop="articleBody">
+      <p>이 글은 원글(<a href="https://engineering.razorpay.com/leader-election-using-consul-and-golang-73580fb14463">Leader Election using Consul and Golang</a>)의 저작자 Sunny Aggrawal씨의 허락을 받고 번역한 글 입니다.</p>
+<hr>
+<p>분산 컴퓨팅에서 리더 선택은 단일 노드를 여러 노드에 분산되는 일부 작업의 주관자로 지정하는 프로세스입니다. 처음에는 모든 네트워크 노드가 작업의 &ldquo;리더&rdquo; 역할을 할 노드를 알지 못합니다. 리더 선택 알고리즘이 실행된 후, 네트워크의 각 노드는 특정 고유 노드를 작업 리더로 인식하고 다른 노드는 팔로워 노드 역할을 합니다.</p>
+<p><strong>리더</strong> - 클러스터의 노드가 특수 작업을 수행하도록 지정되었습니다. 이러한 특수 작업에는 작업 할당 기능, 데이터 수정 기능 또는 시스템의 모든 요청을 처리하는 책임도 포함될 수 있습니다.</p>
+<p><strong>팔로워</strong> - 할당된 작업을 수행하는 클러스터의 노드입니다.</p>
+<p>예: 쿠버네티스 클러스터에서</p>
+<ul>
+<li>여러 Kube-scheduler 인스턴스가 컨트롤 플레인(control plane)에서 실행됩니다.</li>
+<li>선출된 리더만이 노드(nodes)간 포드(pod) 스케줄링을 담당합니다.</li>
+</ul>
+<p>Razorpay에서도 Metro(오픈 소스 PubSub 기반 비동기 메시징 서비스)에서 유사한 사용 사례가 있었습니다. Metro는 Metro worker를 배치하여 푸시 기반 메시지 전달을 지원합니다. 이러한 Metro worker는 항목의 메시지를 읽고 구독자 엔드포인트로 푸시합니다. Metro worker들 사이의 구독 할당은 리더 선거 과정을 통해 선출된 리더에 의해 처리됩니다.</p>
+<p><img src="/images/leader_election_using_consul_and_golang/1_0cYFM3r_nAVf2L43pDeLhg.png" alt="리더 선출을 위해서 경쟁하는 노드"></p>
+<p>일반적으로, 리더 선택은 분산 잠금을 사용하여 구현됩니다. 여기서 모든 노드가 동일한 리소스에 대한 잠금을 획득하기 위해 경쟁하고, 잠금을 획득하는 노드가 리더가 됩니다. 분산 잠금을 구현하기 위해서는 어떤 노드가 잠금을 유지하는지 결정하는 강력한 일관성이 있는 시스템이 필요합니다. 왜냐하면 이것은 원자 작용이어야 하기 때문입니다. 일반적으로 Paxos, Raft 프로토콜과 같은 합의 프로토콜이 이러한 목적으로 사용됩니다. 그러나 이러한 알고리즘을 올바르게 구현하는 것은 매우 어렵습니다. 구현은 광범위하게 테스트되고 공식적으로 입증되어야 하기 때문입니다. 리더 선출은 사육사, 영사 등과 같은 제3자 툴을 사용하여 구현할 수도 있지만, 이러한 툴에 대한 HA 시스템 유지에 대한 운영 오버헤드가 추가됩니다.</p>
+<p>Metro에서 데이터베이스 레지스트리로 Consul을 사용하고 있었기 때문에, 우리는 리더 선출을 위해 같은 것을 사용하기로 결정했습니다. Consul을 사용하여 분산 잠금을 구현한 방법을 살펴보겠습니다.</p>
+<h1 id="분산-잠금-구현">분산 잠금 구현</h1>
+<p>분산 잠금을 제공하는 시스템에서 요구되는 최소 보장은 다음과 같습니다.</p>
+<ol>
+<li><strong>상호 배제(Mutual exclusion)</strong> - 언제든지 한 클라이언트만 잠금을 유지할 수 있습니다.</li>
+<li><strong>교착 상태 없음(Deadlock free)</strong> - 결국 리소스를 잠근 클라이언트가 충돌하더라도 항상 잠금을 획득할 수 있습니다.</li>
+<li><strong>내결함성(Fault tolerance)</strong> - 분산 시스템의 노드 대부분이 작동 중인 경우 클라이언트는 잠금을 획득하고 해제할 수 있습니다.</li>
+</ol>
+<h1 id="consul">Consul</h1>
+<p><a href="https://www.consul.io/">Consul</a>은 가용성이 높은 분산형 키 값 저장소입니다(etcd, zookeeper 와 유사). consul의 데이터는 KV 리소스의 형태로 저장됩니다.</p>
+<p>분산 잠금 요구 사항이 Consul에 의해 어떻게 충족되는지 살펴보겠습니다.</p>
+<h2 id="상호-배제mutual-exclusion">상호 배제(Mutual exclusion)</h2>
+<ul>
+<li>Consul은 클라이언트가 세션 API를 사용하여 세션을 생성하도록 요구합니다.</li>
+<li>이 세션 ID는 KV 생성 API를 사용하여 KV 리소스를 가져오는 데 사용됩니다.</li>
+<li>하나의 클라이언트만 성공을 보장합니다.</li>
+</ul>
+<h2 id="교착상태-없음deadlock-free">교착상태 없음(Deadlock free)</h2>
+<ul>
+<li>세션에는 TTL이 있습니다. 세션이 만료되고 수집된 키가 모두 해제/삭제되면 클라이언트는 주기적으로 세션을 갱신하여 만료되지 않도록 해야 합니다.</li>
+</ul>
+<h2 id="내결함성fault-tolerance">내결함성(Fault tolerance)</h2>
+<ul>
+<li>Consul이 HA 모드에서 실행 중이어야 합니다.</li>
+</ul>
+<h1 id="go에서-consul을-사용하여-리더-선출">Go에서 Consul을 사용하여 리더 선출</h1>
+<p>리더 선출은 아래의 4단계로 실시할 수 있습니다.</p>
+<p><img src="/images/leader_election_using_consul_and_golang/1_TyncBh-p31wMUowpaCC4mw.png" alt="Consul을 사용하는 리더 선거 구현 단계입니다"></p>
+<ol>
+<li>
+<p>TTL을 사용하여 consul 세션을 생성합니다.</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">sessionID, _, err := client.<span style="color:#447fcf">Session</span>().<span style="color:#447fcf">Create</span>(&amp;api.SessionEntry{
+    Name: <span style="color:#ed9d13">&#34;my-service-lock&#34;</span>,
+    Behavior: <span style="color:#ed9d13">&#34;delete&#34;</span>,
+    TTL: <span style="color:#ed9d13">&#34;30s&#34;</span>,
+    LockDelay : <span style="color:#3677a9">2</span> * time.Second
+}, <span style="color:#6ab825;font-weight:bold">nil</span>)
+
+<span style="color:#6ab825;font-weight:bold">if</span> err != <span style="color:#6ab825;font-weight:bold">nil</span> {
+    <span style="color:#24909d">panic</span>(err)
+}
+</code></pre></div><h6 id="팁">팁</h6>
+<blockquote>
+<ul>
+<li>응용 프로그램에 따라 TTL 값을 선택합니다. TTL이 크면 리더가 충돌할 경우 문제가 발생할 수 있으며 세션이 만료될 때까지 새 리더가 선출되지 않습니다. 값이 작을수록 세션을 더 자주 갱신해야 하며 시스템에 부하가 추가됩니다.</li>
+<li>LockDelay는 KV가 해제된 후 즉시 획득되는 것을 방지합니다. 리더가 이 지연 간격을 사용하여 리더 하차 관련 작업을 수행할 수 있습니다.</li>
+</ul>
+</blockquote>
+</li>
+<li>
+<p>세션 갱신(Renew Session)<br>
+renew/renewPeriodic API를 사용하여 세션을 정기적으로 갱신합니다. 세션은 TTL이 만료되기 전에 TTL 기간으로 갱신됩니다.</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">client.<span style="color:#447fcf">Session</span>().<span style="color:#447fcf">RenewPeriodic</span>(
+     <span style="color:#ed9d13">&#34;30s&#34;</span>,
+     sessionID,
+     <span style="color:#6ab825;font-weight:bold">nil</span>,
+     doneChan,
+ )
+
+</code></pre></div><p>이는 동기(blocking) 호출이므로 별도의 고루틴에서 실행해야 합니다. 일반적으로 doneCh는 현재 컨텍스트의 완료 채널이 됩니다.</p>
+</li>
+<li>
+<p>합의된 키에 대한 잠금 설정 시도(Try to accquire a lock on an agreed key)</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">isAcquired, _, err := client.<span style="color:#447fcf">KV</span>().<span style="color:#447fcf">Acquire</span>(&amp;api.KVPair{
+  Key:    <span style="color:#ed9d13">&#34;path/to/leader/key&#34;</span>,
+  Value:   []<span style="color:#24909d">byte</span>(<span style="color:#ed9d13">&#34;any value&#34;</span>),
+  Session: sessionID,
+}, <span style="color:#6ab825;font-weight:bold">nil</span>)
+
+<span style="color:#6ab825;font-weight:bold">if</span> err != <span style="color:#6ab825;font-weight:bold">nil</span> {
+  <span style="color:#999;font-style:italic">// handle error
+</span><span style="color:#999;font-style:italic"></span>}
+
+<span style="color:#999;font-style:italic">// if no error and isAcquired is true node is leader node 
+</span></code></pre></div><p>잠금을 획득할 수 있는 노드는 리더로 간주할 수 있으며 다른 노드는 팔로워가 됩니다.</p>
+<h6 id="팁-1">팁</h6>
+<blockquote>
+<ul>
+<li>Value 매개 변수를 사용하여 클러스터 상태를 리더에서 팔로워로 전달할 수 있습니다. 예를 들어 팔로워가 리더에 연결하려는 경우 리더는 식별자를 Value에 포함할 수 있습니다.</li>
+</ul>
+</blockquote>
+</li>
+<li>
+<p>리더 키 보기(Watch Leader key)</p>
+<h5 id="watch-설정">watch 설정</h5>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">params := <span style="color:#6ab825;font-weight:bold">map</span>[<span style="color:#6ab825;font-weight:bold">string</span>]<span style="color:#6ab825;font-weight:bold">interface</span>{}{}
+params[<span style="color:#ed9d13">&#34;type&#34;</span>] = <span style="color:#ed9d13">&#34;key&#34;</span>
+params[<span style="color:#ed9d13">&#34;key&#34;</span>] = <span style="color:#ed9d13">&#34;path/to/leader/key&#34;</span>
+
+plan, err := watch.<span style="color:#447fcf">Parse</span>(params)
+<span style="color:#6ab825;font-weight:bold">if</span> err != <span style="color:#6ab825;font-weight:bold">nil</span> {
+  <span style="color:#999;font-style:italic">// handle error
+</span><span style="color:#999;font-style:italic"></span>}
+
+<span style="color:#999;font-style:italic">// handler function which is invoked for any changes in the watched key
+</span><span style="color:#999;font-style:italic"></span>plan.Handler = handler
+
+<span style="color:#999;font-style:italic">// blocking call, so this code should run in a go routine
+</span><span style="color:#999;font-style:italic"></span>plan.<span style="color:#447fcf">RunWithClientAndHclog</span>(client, <span style="color:#6ab825;font-weight:bold">nil</span>)
+</code></pre></div><h5 id="watch-업데이트-처리handle-watch-updates">watch 업데이트 처리(Handle watch updates)</h5>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#6ab825;font-weight:bold">func</span> <span style="color:#447fcf">handler</span>(index <span style="color:#6ab825;font-weight:bold">uint64</span>, result <span style="color:#6ab825;font-weight:bold">interface</span>{}) {
+  log.<span style="color:#447fcf">Printf</span>(<span style="color:#ed9d13">&#34;watch data: %s&#34;</span>, result)
+  <span style="color:#999;font-style:italic">// check if the returned key has a sessionID
+</span><span style="color:#999;font-style:italic"></span>  <span style="color:#999;font-style:italic">// if session ID is present, key is acquired by some node
+</span><span style="color:#999;font-style:italic"></span>  <span style="color:#999;font-style:italic">// if not, currently there is no leader, attempt to acquire the key
+</span><span style="color:#999;font-style:italic"></span>}
+</code></pre></div><p>watches를 사용하여 키의 변경 내용을 확인할 수 있습니다. Consul은 변경 사항이 발생하면 이를 통지하므로 세션이 삭제/만료되면 리더 키에 대한 잠금이 해제되고 KV 쌍이 업데이트됩니다. 이 키를 감시하는 모든 노드에 알림이 표시됩니다. 알림을 받으면 모든 노드가 키 상태를 확인하고 새로운 선택을 실행할 수 있으며 프로세스가 계속됩니다.</p>
+<p>개념적으로는 간단하지만 프로덕션 시스템을 작성할 때는 많은 사례를 고려해야 합니다.</p>
+<ul>
+<li><strong>배포시 발생하는 작업</strong> - 배포 시 리더 노드가 다운됩니다. 문제를 훌륭하게 처리하려면 리더가 물러나야 합니다. 다른 노드가 즉시 리더가 될 수 있습니다. 리더는 세션 잠금을 해제하거나 세션 자체를 제거하여 물러날 수 있습니다.</li>
+<li><strong>리더/작업자 노드가 예기치 않게 중단되는 경우</strong> - 리더가 물러나지 않고 노드가 예기치 않게 종료되는 경우에도 다른 노드는 세션이 만료될 때까지 리더가 존재한다고 생각하기 때문에 애플리케이션 요구 사항에 따라 적절한 TTL을 선택하는 것이 중요합니다.</li>
+</ul>
+</li>
+</ol>
+<h1 id="코드code">코드(Code)</h1>
+<p>Metro의 리더 선출 <a href="https://github.com/razorpay/metro/blob/5eb8881adbf5da6d387d1f4659916c83028dfb06/pkg/leaderelection/candidate.go#L56">구현</a>에서도 동일한 내용을 참조할 수 있습니다.</p>
+<h1 id="우리-함께-일해요">우리 함께 일해요!</h1>
+<p>저희가 하는 일이 여러분을 흥분시키시면 저희 엔지니어링 팀을 적극적으로 채용하고 있습니다. 우리는 비즈니스용 금융 인프라를 단순화하는 데 많은 관심을 기울이고 있습니다. 우리는 항상 훌륭한 사람들을 찾고 있습니다. 저희 구인 페이지를 통해 지원하시거나 <a href="mailto:sunny.aggrawal@razorpay.com">sunny.aggrawal@razorpay.com</a>으로 연락 주십시오.</p>
+<h1 id="참고">참고</h1>
+<ol>
+<li><a href="https://learn.hashicorp.com/tutorials/consul/application-leader-elections">https://learn.hashicorp.com/tutorials/consul/application-leader-elections</a></li>
+<li><a href="https://clivern.com/leader-election-with-consul-and-golang/">https://clivern.com/leader-election-with-consul-and-golang/</a></li>
+</ol>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8444244371421612"
+     data-ad-slot="6693872766"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+    </div>
+
+    
+<ul class="list-none pl-0 font-sm align-left">
+
+<hr>
+<li>
+    Categories:
+
+<a href="/categories/distributedsystems">
+    <span class="tag-item">
+    distributedsystems
+    </span>
+</a>
+</li >
+
+
+<li class="list-none">
+    Tags:
+    
+    <a class="inline-block mt-2 mr-2 border-none text-neutral-800 dark:text-neutral-200" href="/tags/cluster">
+        <span class="flex flex-row justify-start items-center dark:bg-zinc-900 dark:hover:bg-zinc-800
+                     hover:bg-zinc-200 bg-zinc-100 p-1
+                     rounded-t border-b-2 border-zinc-300 hover:border-zinc-500">
+            
+            <img class="h-5 mr-1 inline" src="https://shrinklabs.com/images/tag_logo.svg"
+                 alt="Logo of a tag: indicates that a tag item follows.">
+        cluster
+        </span>
+    </a>
+    
+</li>
+
+</ul>
+
+
+    
+    
+    <div class="article-date-modified">
+        Last modified <span itemprop="dateModified" content="2021-06-27T21:33:58&#43;0900">2021-06-27</span>
+    </div>
+    
+    </article>
+
+    </main>
+    <footer class="footer container h-10 text-center">
+  <ul class="pl-0">
+    
+    <li class="ml-2 first:before:content-none before:content-['•'] inline-block list-none"><a class="ml-2 text-neutral-800 dark:text-neutral-400 border-none"
+          href="https://github.com/hugcis/hugo-astatine-theme">Code</a>
+    </li>
+    <li class="ml-2 first:before:content-none before:content-['•']
+                text-neutral-800 dark:text-neutral-400 inline-block list-none"><span class="ml-2">© Jaehoon Khim 2022</span>
+    </li>
+  </ul>
+</footer>
+
+
+  </body>
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1"><title>vi 팁 - ShrinkLabs</title>
+<meta property="og:title" content="vi 팁 - ShrinkLabs">
+<meta property="og:type" content="article">
+
+
+<meta property="og:image" content="images/logo.png">
+
+<meta property="og:url" content="https://shrinklabs.com/post/tool_vi/">
+
+
+<meta property="keywords" content ="vim">
+
+<link rel="stylesheet" href="https://shrinklabs.com/css/style.min.css">
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#ffffff">
+<link rel="webmention" href="https://webmention.io/hugocisneros.com/webmention">
+<link rel="pingback" href="https://webmention.io/hugocisneros.com/xmlrpc">
+<script>
+ function updateMode() {
+    
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+    }
+ }
+ function toggleMode() {
+     if (localStorage.theme === 'dark') {
+        
+        localStorage.theme = 'light';
+     }
+     else {
+        
+        localStorage.theme = 'dark';
+     }
+     updateMode()
+ }
+ window.onload = updateMode();
+ function toggleMenu() {
+     let navbar = document.getElementById("navbar-default");
+     if (navbar.classList.contains("hidden")) {
+        navbar.classList.remove("hidden");
+     }
+     else {
+        navbar.classList.add("hidden");
+     }
+ }
+</script>
+
+  </head>
+  <body>
+    <header class="md:px-0 px-2">
+        <nav >
+  <div class="container flex flex-wrap justify-between items-center mx-auto">
+    <div class="nav-main my-2.5">
+      <a href="https://shrinklabs.com/" class="nav-title py-2.5 text-2xl text-zinc-600 dark:text-zinc-300 hover:border-b-0">ShrinkLabs</a>
+    </div>
+    <button type="button"
+            onclick="toggleMenu()"
+            class="inline-flex items-center p-2 ml-3
+                  text-sm text-gray-500
+                  rounded-lg md:hidden hover:bg-gray-100
+                  focus:outline-none focus:ring-2
+                  focus:ring-gray-200 dark:text-gray-400
+                  dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            aria-controls="navbar-default"
+            aria-expanded="false">
+        <span class="sr-only">Open main menu</span>
+        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor"
+             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1
+                           0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0
+                           01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0
+                           01-1-1z" clip-rule="evenodd"></path>
+        </svg>
+    </button>
+    <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+      <ul class="grid md:grid-flow-col items-center justify-between text-lg my-2.5">
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/post/">posts</a>
+        </li>
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/categories/">categories</a>
+        </li>
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/tags/">tags</a>
+        </li>
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/contact/">contact</a>
+        </li>
+        
+        <li class="h-7 pl-2.5 pr-0 list-none">
+          <button type="button" onclick="toggleMode()" class="h-full">
+            <img class="h-7 w-7 max-h-full mb-1.5 p-1.5 hidden dark:inline" id="dark-mode-button-img"
+                 src="https://shrinklabs.com/img/light_mode.svg">
+            <img class="h-7 w-7 max-h-full mb-1.5 p-1.5 inline dark:hidden" id="dark-mode-button-img"
+                 src="https://shrinklabs.com/img/dark_mode.svg">
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    </header>
+    <main class="content h-card container mt-2 m-auto
+                 leading-loose md:px-0 px-2 z-0 Page(/post/tool_vi.md)"
+          role="main">
+    
+    <article class="article" itemprop="mainEntity" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="title-container">
+    <h1 class="article-title" itemprop="name">vi 팁</h1>
+    
+    <div class="article-subtitle">
+    
+    <span class="article-date" itemprop="datePublished" content="2016-09-05T01:28:09&#43;0900">2016-09-05</span>
+    
+    
+    
+    <span class="article-author" itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Jaehoon Khim</span></span>
+    
+    
+    </div>
+    
+    </div>
+
+    <div class="article-content" itemprop="articleBody">
+      <h2 id="현재-작업중인-파일의-경로와-이름-확인">현재 작업중인 파일의 경로와 이름 확인</h2>
+<p>현재 작업중인 파일의 경로 또는 이름이 궁금할 경우가 있습니다.</p>
+<pre><code>ctrl + g  
+</code></pre><p>또는</p>
+<pre><code>: f
+</code></pre><h2 id="80컬럼에-버티컬-라인">80컬럼에 버티컬 라인</h2>
+<p>vi에서 80컬럼의 버티컬 라인을 생성하려면 다음과 같이 합니다.</p>
+<pre><code>set colorcolumn=80
+</code></pre><p>을 적용하면, 빨간색 라인이 생깁니다.</p>
+<h2 id="파일-관리">파일 관리</h2>
+<p>NerdTree를 사용하지 않고 vi에서 파일과 디렉토리를 관리하는 방법</p>
+<p>파일 네비게이션</p>
+<ol>
+<li>표준모드(ex: i, o, a 같은걸 입력해서 입력모드로 전환되기 전 상태)</li>
+<li>&ldquo;e.&rdquo; (설명: &ldquo;.&rdquo; 는 현재의 디렉토리)</li>
+</ol>
+<p>디렉토리 만들기</p>
+<ol>
+<li>명령라인 모드 (ex: &ldquo;:wq&rdquo; 해서 현재 작업중인 내용을 저장하고 종료 하기 위한 명령을 입력하기 위한 모드)</li>
+<li>&ldquo;:!mkidir foo&rdquo; (ex: &ldquo;foo&rdquo; 라는 디렉토리 생성)</li>
+</ol>
+<p>또는 &ldquo;:!mkdir -p foo/bar&rdquo; (ex: foo의 하위 디렉토리인 bar까지 생성)</p>
+<h2 id="buffer이동">buffer이동</h2>
+<p>vi를 사용중에 열려있는 buffer를 이동해야 할때가 있습니다.</p>
+<p>다음과 같이 하면 열려있는 1번 bufffer로 이동합니다.</p>
+<pre><code>:buffer 1  
+</code></pre><p>열려 있는 buffer전체를 보려면,</p>
+<pre><code>:buffers  
+</code></pre><p>와 같이 합니다.</p>
+<h2 id="화면-분리">화면 분리</h2>
+<p>분리는 가로(vsplit), 세로(split)으로 나눌 수 있습니다.</p>
+<pre><code>:[vsp]lit [파일명]  
+:[sp]lit [파일명]  
+</code></pre><p>화면간의 이동은</p>
+<blockquote>
+<p>ctrl + w [h j k l]</p>
+</blockquote>
+<p>현재 화면 닫기는</p>
+<blockquote>
+<p>:q</p>
+</blockquote>
+<p>화면을 모두 닫기 위해서는</p>
+<blockquote>
+<p>:qa</p>
+</blockquote>
+<p>현재 커서가 있는 화면을 제외하고 모두 닫기</p>
+<blockquote>
+<p>ctrl + w, o</p>
+</blockquote>
+<h2 id="vimgrep">vimgrep</h2>
+<p>현재 디렉토리내에서 &ldquo;.go&rdquo; 파일들중에서 문자(&ldquo;TEXT&rdquo;)에 대한  검색이 필요할 경우</p>
+<pre><code>:vimgrep /TEXT/ ./*.go
+</code></pre><p>여러개의 결과들을 이동</p>
+<pre><code>:cfirst
+:cnext
+:cprev
+:clast
+</code></pre><p>검색된 결과를 리스트로 보기</p>
+<pre><code>:cw
+</code></pre><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8444244371421612"
+     data-ad-slot="6693872766"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+    </div>
+
+    
+<ul class="list-none pl-0 font-sm align-left">
+
+<hr>
+<li>
+    Categories:
+
+<a href="/categories/environment">
+    <span class="tag-item">
+    environment
+    </span>
+</a>
+</li >
+
+
+<li class="list-none">
+    Tags:
+    
+    <a class="inline-block mt-2 mr-2 border-none text-neutral-800 dark:text-neutral-200" href="/tags/vim">
+        <span class="flex flex-row justify-start items-center dark:bg-zinc-900 dark:hover:bg-zinc-800
+                     hover:bg-zinc-200 bg-zinc-100 p-1
+                     rounded-t border-b-2 border-zinc-300 hover:border-zinc-500">
+            
+            <img class="h-5 mr-1 inline" src="https://shrinklabs.com/images/tag_logo.svg"
+                 alt="Logo of a tag: indicates that a tag item follows.">
+        vim
+        </span>
+    </a>
+    
+</li>
+
+</ul>
+
+
+    
+    
+    <div class="article-date-modified">
+        Last modified <span itemprop="dateModified" content="2016-09-05T01:28:09&#43;0900">2016-09-05</span>
+    </div>
+    
+    </article>
+
+    </main>
+    <footer class="footer container h-10 text-center">
+  <ul class="pl-0">
+    
+    <li class="ml-2 first:before:content-none before:content-['•'] inline-block list-none"><a class="ml-2 text-neutral-800 dark:text-neutral-400 border-none"
+          href="https://github.com/hugcis/hugo-astatine-theme">Code</a>
+    </li>
+    <li class="ml-2 first:before:content-none before:content-['•']
+                text-neutral-800 dark:text-neutral-400 inline-block list-none"><span class="ml-2">© Jaehoon Khim 2022</span>
+    </li>
+  </ul>
+</footer>
+
+
+  </body>
+</html>

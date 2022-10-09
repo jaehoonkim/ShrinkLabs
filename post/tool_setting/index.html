@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1"><title>개발환경 설정 - ShrinkLabs</title>
+<meta property="og:title" content="개발환경 설정 - ShrinkLabs">
+<meta property="og:type" content="article">
+
+
+<meta property="og:image" content="images/logo.png">
+
+<meta property="og:url" content="https://shrinklabs.com/post/tool_setting/">
+
+
+<meta property="keywords" content ="development">
+
+<link rel="stylesheet" href="https://shrinklabs.com/css/style.min.css">
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#ffffff">
+<link rel="webmention" href="https://webmention.io/hugocisneros.com/webmention">
+<link rel="pingback" href="https://webmention.io/hugocisneros.com/xmlrpc">
+<script>
+ function updateMode() {
+    
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+    }
+ }
+ function toggleMode() {
+     if (localStorage.theme === 'dark') {
+        
+        localStorage.theme = 'light';
+     }
+     else {
+        
+        localStorage.theme = 'dark';
+     }
+     updateMode()
+ }
+ window.onload = updateMode();
+ function toggleMenu() {
+     let navbar = document.getElementById("navbar-default");
+     if (navbar.classList.contains("hidden")) {
+        navbar.classList.remove("hidden");
+     }
+     else {
+        navbar.classList.add("hidden");
+     }
+ }
+</script>
+
+  </head>
+  <body>
+    <header class="md:px-0 px-2">
+        <nav >
+  <div class="container flex flex-wrap justify-between items-center mx-auto">
+    <div class="nav-main my-2.5">
+      <a href="https://shrinklabs.com/" class="nav-title py-2.5 text-2xl text-zinc-600 dark:text-zinc-300 hover:border-b-0">ShrinkLabs</a>
+    </div>
+    <button type="button"
+            onclick="toggleMenu()"
+            class="inline-flex items-center p-2 ml-3
+                  text-sm text-gray-500
+                  rounded-lg md:hidden hover:bg-gray-100
+                  focus:outline-none focus:ring-2
+                  focus:ring-gray-200 dark:text-gray-400
+                  dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            aria-controls="navbar-default"
+            aria-expanded="false">
+        <span class="sr-only">Open main menu</span>
+        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor"
+             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1
+                           0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0
+                           01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0
+                           01-1-1z" clip-rule="evenodd"></path>
+        </svg>
+    </button>
+    <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+      <ul class="grid md:grid-flow-col items-center justify-between text-lg my-2.5">
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/post/">posts</a>
+        </li>
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/categories/">categories</a>
+        </li>
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/tags/">tags</a>
+        </li>
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/contact/">contact</a>
+        </li>
+        
+        <li class="h-7 pl-2.5 pr-0 list-none">
+          <button type="button" onclick="toggleMode()" class="h-full">
+            <img class="h-7 w-7 max-h-full mb-1.5 p-1.5 hidden dark:inline" id="dark-mode-button-img"
+                 src="https://shrinklabs.com/img/light_mode.svg">
+            <img class="h-7 w-7 max-h-full mb-1.5 p-1.5 inline dark:hidden" id="dark-mode-button-img"
+                 src="https://shrinklabs.com/img/dark_mode.svg">
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    </header>
+    <main class="content h-card container mt-2 m-auto
+                 leading-loose md:px-0 px-2 z-0 Page(/post/tool_setting.md)"
+          role="main">
+    
+    <article class="article" itemprop="mainEntity" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="title-container">
+    <h1 class="article-title" itemprop="name">개발환경 설정</h1>
+    
+    <div class="article-subtitle">
+    
+    <span class="article-date" itemprop="datePublished" content="2015-05-23T01:28:09&#43;0900">2015-05-23</span>
+    
+    
+    
+    <span class="article-author" itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Jaehoon Khim</span></span>
+    
+    
+    </div>
+    
+    </div>
+
+    <div class="article-content" itemprop="articleBody">
+      <h2 id="업데이트">업데이트</h2>
+<pre><code>$ sudo apt-get update  
+$ sudo apt-get install build-essential
+</code></pre><h2 id="vim-설치">vim 설치</h2>
+<pre><code>$ sudo apt-get install vim
+</code></pre><h2 id="vim-80">vim 8.0</h2>
+<pre><code>$ sudo add-apt-repository ppa:jonathonf/vim  
+$ sudo apt-get update
+</code></pre><h2 id="xclip-설치">xclip 설치</h2>
+<pre><code>$ sudo apt-get install xclip
+</code></pre><h2 id="wget-설치사용이-필요한-경우에만-설치">wget 설치(사용이 필요한 경우에만 설치)</h2>
+<pre><code>$ sudo apt-get install wget
+</code></pre><h2 id="git-설치">git 설치</h2>
+<ol>
+<li>git 설치와 설정</li>
+</ol>
+<pre><code>$ sudo apt-get install git  
+$ git config –-global user.name “blah”  
+$ git config –-global user.email “blah@blah.com”  
+$ git config --global core.editor vim  
+$ git config --global core.commentchar &quot;*&quot;  
+$ ssh-keygen -t rsa -C “blah@blah.com”  
+$ xclip -sel clip &lt; ~/.ssh/id_rsa.pub
+</code></pre><ol start="2">
+<li>github/bitbucket에 ssh key 값을 등록</li>
+</ol>
+<h2 id="gopath로-사용할-위치-생성">GOPATH로 사용할 위치 생성</h2>
+<pre><code>$HOME/work  
+bin  
+pkg  
+src
+</code></pre><h2 id="go-설치">Go 설치</h2>
+<ol>
+<li>기존에 설치된 버전이 있다면 삭제합니다.</li>
+</ol>
+<pre><code>$ rm -r /usr/local/go
+</code></pre><ol start="2">
+<li><a href="http://golang.org/doc/install">http://golang.org/doc/install</a> 에서 다운로드<br>
+(또는$ wget &ndash;no-check-certificate <a href="https://storage.googleapis.com/golang/go1.7.1.linux-amd64.tar.gz">https://storage.googleapis.com/golang/go1.7.1.linux-amd64.tar.gz</a> 와 같이 원하는 OS 및 버전에 맞는 Go 바이너리를 wget으로 받을 수도 있습니다.)</li>
+<li>/usr/loca/go에 압축을 풉니다.</li>
+</ol>
+<pre><code>$ sudo tar -C /usr/local -xzf gox.x.x.linux-xxx.tar.gz
+</code></pre><ol start="4">
+<li>$HOME/.profile 에 다음을 추가합니다.</li>
+</ol>
+<pre><code>export PATH=$PATH:/usr/local/go/bin  
+export GOPATH=$HOME/work
+</code></pre><p>추가) app engine도 사용 할 경우에는 PATH에 app engine의 위치도 추가</p>
+<ol start="5">
+<li>적용</li>
+</ol>
+<pre><code>$ source ~/.profile
+</code></pre><h2 id="ctags-설치">ctags 설치</h2>
+<ol>
+<li>설치</li>
+</ol>
+<pre><code>$ sudo apt-get install ctags
+</code></pre><ol start="2">
+<li>go가 설치된 위치로 이동(/usr/local/go)해서 tag 생성</li>
+</ol>
+<pre><code>$ sudo ctags -R
+</code></pre><ol start="3">
+<li>vimrc 파일에 다음을 추가합니다.</li>
+</ol>
+<pre><code>set tags +=/usr/local/go/tags
+</code></pre><h2 id="python과-cmake-설치">python과 cmake 설치</h2>
+<ul>
+<li>YouCompleteMe라는 vim 플러그인의 정상적인 설치를 위해서 python과 cmake를 설치합니다.
+<pre><code>$ sudo apt-get install python-dev python3-dev  
+$ sudo apt-get install cmake
+</code></pre></li>
+</ul>
+<h2 id="vundlevim을-이용한-nerdtree와-fatihvim-go-설치">Vundle.vim을 이용한 NERDTree와 fatih/vim-go 설치</h2>
+<ul>
+<li>Vundle.vim 설치
+<pre><code>$ git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+</code></pre></li>
+<li>/etc/vim/vimrc.local 을 생성해서 아래의 내용을 붙여 넣습니다.</li>
+</ul>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Shell" data-lang="Shell"><span style="color:#24909d">set</span> nocompatible <span style="color:#ed9d13">&#34; be iMproved, required
+</span><span style="color:#ed9d13">filetype off &#34;</span> required
+
+<span style="color:#24909d">set</span> autoindent
+<span style="color:#24909d">set</span> smartindent
+<span style="color:#24909d">set</span> <span style="color:#40ffff">shiftwidth</span>=<span style="color:#3677a9">4</span>
+<span style="color:#24909d">set</span> number
+<span style="color:#24909d">set</span> expandtab
+<span style="color:#24909d">set</span> <span style="color:#40ffff">tabstop</span>=<span style="color:#3677a9">4</span>
+
+<span style="color:#ed9d13">&#34; set the runtime path to include Vundle and initialize
+</span><span style="color:#ed9d13">set rtp+=~/.vim/bundle/Vundle.vim
+</span><span style="color:#ed9d13">call vundle#begin()
+</span><span style="color:#ed9d13">&#34;</span> alternatively, pass a path where Vundle should install plugins
+<span style="color:#ed9d13">&#34;call vundle#begin(&#39;~/some/path/here&#39;)
+</span><span style="color:#ed9d13">
+</span><span style="color:#ed9d13">&#34;</span> <span style="color:#24909d">let</span> Vundle manage Vundle, required
+Plugin <span style="color:#ed9d13">&#39;gmarik/Vundle.vim&#39;</span>
+
+<span style="color:#ed9d13">&#34; The following are examples of different formats supported.
+</span><span style="color:#ed9d13">&#34;</span> Keep Plugin commands between vundle#begin/end.
+<span style="color:#ed9d13">&#34; plugin on GitHub repo
+</span><span style="color:#ed9d13">Plugin &#39;tpope/vim-fugitive&#39;
+</span><span style="color:#ed9d13">&#34;</span> plugin from http://vim-scripts.org/vim/scripts.html
+Plugin <span style="color:#ed9d13">&#39;L9&#39;</span>
+<span style="color:#ed9d13">&#34; Git plugin not hosted on GitHub
+</span><span style="color:#ed9d13">Plugin &#39;git://git.wincent.com/command-t.git&#39;
+</span><span style="color:#ed9d13">&#34;</span> git repos on your <span style="color:#24909d">local</span> machine (i.e. when working on your own plugin)
+<span style="color:#ed9d13">&#34;Plugin &#39;file:///home/gmarik/path/to/plugin&#39;
+</span><span style="color:#ed9d13">&#34;</span> The sparkup vim script is in a subdirectory of this repo called vim.
+<span style="color:#ed9d13">&#34; Pass the path to set the runtimepath properly.
+</span><span style="color:#ed9d13">Plugin &#39;rstacruz/sparkup&#39;, {&#39;rtp&#39;: &#39;vim/&#39;}
+</span><span style="color:#ed9d13">&#34;</span> Avoid a name conflict with L9
+<span style="color:#ed9d13">&#34;Plugin &#39;user/L9&#39;, {&#39;name&#39;: &#39;newL9&#39;}
+</span><span style="color:#ed9d13">
+</span><span style="color:#ed9d13">Plugin &#39;The-NERD-tree&#39;
+</span><span style="color:#ed9d13">Plugin &#39;bling/vim-airline&#39;
+</span><span style="color:#ed9d13">Plugin &#39;fatih/vim-go&#39;
+</span><span style="color:#ed9d13">Plugin &#39;nsf/gocode&#39;
+</span><span style="color:#ed9d13">Plugin &#39;Tagbar&#39;
+</span><span style="color:#ed9d13">Plugin &#39;Valloric/YouCompleteMe&#39;
+</span><span style="color:#ed9d13">
+</span><span style="color:#ed9d13">&#34;</span> All of your Plugins must be added before the following line
+call vundle#end() <span style="color:#ed9d13">&#34; required
+</span><span style="color:#ed9d13">filetype plugin indent on &#34;</span> required
+<span style="color:#ed9d13">&#34; To ignore plugin indent changes, instead use:
+</span><span style="color:#ed9d13">&#34;</span>filetype plugin on
+<span style="color:#ed9d13">&#34;
+</span><span style="color:#ed9d13">&#34;</span> Brief <span style="color:#24909d">help</span>
+<span style="color:#ed9d13">&#34; :PluginList - lists configured plugins
+</span><span style="color:#ed9d13">&#34;</span> :PluginInstall - installs plugins; append <span style="color:#ed9d13">`</span>!<span style="color:#ed9d13">`</span> to update or just :PluginUpdate
+<span style="color:#ed9d13">&#34; :PluginSearch foo - searches for foo; append `!` to refresh local cache
+</span><span style="color:#ed9d13">&#34;</span> :PluginClean - confirms removal of unused plugins; append <span style="color:#ed9d13">`</span>!<span style="color:#ed9d13">`</span> to auto-approve removal
+<span style="color:#ed9d13">&#34;
+</span><span style="color:#ed9d13">&#34;</span> see :h vundle <span style="color:#6ab825;font-weight:bold">for</span> more details or wiki <span style="color:#6ab825;font-weight:bold">for</span> FAQ
+<span style="color:#ed9d13">&#34; Put your non-Plugin stuff after this line
+</span></code></pre></div><ul>
+<li>
+<p>vim 실행해서 “ :PluginInstall “ 을 해서 지정된 플러그인들을 설치합니다.</p>
+</li>
+<li>
+<p>NERDTree의 설정을 합니다.</p>
+</li>
+</ul>
+<pre><code>$ sudo vim /etc/vim/vimrc.local
+</code></pre><p>을 열어서 적당한 곳에 아래의 내용을 붙여넣습니다.</p>
+<pre><code>nmap &lt;F2&gt; :NERDTreeToggle&lt;CR&gt;
+let NERDTreeWinPos=&quot;left&quot;
+</code></pre><ul>
+<li>Tagbar 설정<br>
+위의 NERDTree 설정 부분 아래에 추가합니다.</li>
+</ul>
+<pre><code>nmap &lt;F3&gt; :Tagbar&lt;CR&gt;
+let Tagbar=&quot;right&quot;
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+    \ }
+</code></pre><p>추가) vim-go 설치가 완료되고 난 다음에,<br>
+$GOPATH/bin 에 생성되어 있는, errcheck, gocode, gofmt, golint, gotags, goimports, gorename, oracle
+를 /usr/local/go/bin 에 복사/붙여넣기 합니다.</p>
+<p>[참고] <a href="https://gist.github.com/jaehoonn/47d81a29b620a0d64f80">https://gist.github.com/jaehoonn/47d81a29b620a0d64f80</a></p>
+<ul>
+<li>YouCompleteMe 설치<br>
+YouCompleteMe의 설치를 완료하기 위해서 Bundle 디렉토리로 이동해서 Go언어 자동완성이 가능하도록 옵션을 지정해서 install을 합니다.</li>
+</ul>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ <span style="color:#24909d">cd</span> ~/.vim/bundle/YouCompleteMe
+$ ./install.py --gocode-completer
+</code></pre></div><ul>
+<li>cscope를 사용하기 위한 설정<br>
+[참고] <a href="https://github.com/jaehoonn/log/blob/master/cscope.md">https://github.com/jaehoonn/log/blob/master/cscope.md</a><br>
+[script] <a href="https://gist.github.com/jaehoonn/bc257991fe8932944d8fa9a9556eb223">https://gist.github.com/jaehoonn/bc257991fe8932944d8fa9a9556eb223</a></li>
+</ul>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8444244371421612"
+     data-ad-slot="6693872766"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+    </div>
+
+    
+<ul class="list-none pl-0 font-sm align-left">
+
+<hr>
+<li>
+    Categories:
+
+<a href="/categories/environment">
+    <span class="tag-item">
+    environment
+    </span>
+</a>
+</li >
+
+
+<li class="list-none">
+    Tags:
+    
+    <a class="inline-block mt-2 mr-2 border-none text-neutral-800 dark:text-neutral-200" href="/tags/development">
+        <span class="flex flex-row justify-start items-center dark:bg-zinc-900 dark:hover:bg-zinc-800
+                     hover:bg-zinc-200 bg-zinc-100 p-1
+                     rounded-t border-b-2 border-zinc-300 hover:border-zinc-500">
+            
+            <img class="h-5 mr-1 inline" src="https://shrinklabs.com/images/tag_logo.svg"
+                 alt="Logo of a tag: indicates that a tag item follows.">
+        development
+        </span>
+    </a>
+    
+</li>
+
+</ul>
+
+
+    
+    
+    <div class="article-date-modified">
+        Last modified <span itemprop="dateModified" content="2015-05-23T01:28:09&#43;0900">2015-05-23</span>
+    </div>
+    
+    </article>
+
+    </main>
+    <footer class="footer container h-10 text-center">
+  <ul class="pl-0">
+    
+    <li class="ml-2 first:before:content-none before:content-['•'] inline-block list-none"><a class="ml-2 text-neutral-800 dark:text-neutral-400 border-none"
+          href="https://github.com/hugcis/hugo-astatine-theme">Code</a>
+    </li>
+    <li class="ml-2 first:before:content-none before:content-['•']
+                text-neutral-800 dark:text-neutral-400 inline-block list-none"><span class="ml-2">© Jaehoon Khim 2022</span>
+    </li>
+  </ul>
+</footer>
+
+
+  </body>
+</html>

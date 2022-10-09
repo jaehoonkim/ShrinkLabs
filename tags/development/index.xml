@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>development on ShrinkLabs</title>
+    <link>https://shrinklabs.com/tags/development/</link>
+    <description>Recent content in development on ShrinkLabs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 23 May 2015 01:28:09 +0900</lastBuildDate><atom:link href="https://shrinklabs.com/tags/development/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>개발환경 설정</title>
+      <link>https://shrinklabs.com/post/tool_setting/</link>
+      <pubDate>Sat, 23 May 2015 01:28:09 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/post/tool_setting/</guid>
+      <description>업데이트 $ sudo apt-get update $ sudo apt-get install build-essential vim 설치 $ sudo apt-get install vim vim 8.0 $ sudo add-apt-repository ppa:jonathonf/vim $ sudo apt-get update xclip 설치 $ sudo apt-get install xclip wget 설치(사용이 필요한 경우에만 설치) $ sudo apt-get install wget git 설치  git 설치와 설정  $ sudo apt-get install git $ git config –-global user.name “blah” $ git config –-global user.email “blah@blah.com” $ git config --global core.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1"><title>cloud - ShrinkLabs</title>
+<meta property="og:title" content="cloud - ShrinkLabs">
+<meta property="og:type" content="website">
+
+
+<meta property="og:image" content="images/logo.png">
+
+<meta property="og:url" content="https://shrinklabs.com/categories/cloud/">
+
+
+
+
+<link rel="stylesheet" href="https://shrinklabs.com/css/style.min.css">
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#ffffff">
+<link rel="webmention" href="https://webmention.io/hugocisneros.com/webmention">
+<link rel="pingback" href="https://webmention.io/hugocisneros.com/xmlrpc">
+<script>
+ function updateMode() {
+    
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+    }
+ }
+ function toggleMode() {
+     if (localStorage.theme === 'dark') {
+        
+        localStorage.theme = 'light';
+     }
+     else {
+        
+        localStorage.theme = 'dark';
+     }
+     updateMode()
+ }
+ window.onload = updateMode();
+ function toggleMenu() {
+     let navbar = document.getElementById("navbar-default");
+     if (navbar.classList.contains("hidden")) {
+        navbar.classList.remove("hidden");
+     }
+     else {
+        navbar.classList.add("hidden");
+     }
+ }
+</script>
+
+  </head>
+  <body>
+    <header class="md:px-0 px-2">
+        <nav >
+  <div class="container flex flex-wrap justify-between items-center mx-auto">
+    <div class="nav-main my-2.5">
+      <a href="https://shrinklabs.com/" class="nav-title py-2.5 text-2xl text-zinc-600 dark:text-zinc-300 hover:border-b-0">ShrinkLabs</a>
+    </div>
+    <button type="button"
+            onclick="toggleMenu()"
+            class="inline-flex items-center p-2 ml-3
+                  text-sm text-gray-500
+                  rounded-lg md:hidden hover:bg-gray-100
+                  focus:outline-none focus:ring-2
+                  focus:ring-gray-200 dark:text-gray-400
+                  dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            aria-controls="navbar-default"
+            aria-expanded="false">
+        <span class="sr-only">Open main menu</span>
+        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor"
+             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1
+                           0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0
+                           01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0
+                           01-1-1z" clip-rule="evenodd"></path>
+        </svg>
+    </button>
+    <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+      <ul class="grid md:grid-flow-col items-center justify-between text-lg my-2.5">
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/post/">posts</a>
+        </li>
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/categories/">categories</a>
+        </li>
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/tags/">tags</a>
+        </li>
+        
+        <li class="p-2.5 md:first:pl-0 md:border-none border-b list-none">
+          <a class="text-zinc-600 dark:text-zinc-300
+                    hover:border-b-0" href="/contact/">contact</a>
+        </li>
+        
+        <li class="h-7 pl-2.5 pr-0 list-none">
+          <button type="button" onclick="toggleMode()" class="h-full">
+            <img class="h-7 w-7 max-h-full mb-1.5 p-1.5 hidden dark:inline" id="dark-mode-button-img"
+                 src="https://shrinklabs.com/img/light_mode.svg">
+            <img class="h-7 w-7 max-h-full mb-1.5 p-1.5 inline dark:hidden" id="dark-mode-button-img"
+                 src="https://shrinklabs.com/img/dark_mode.svg">
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    </header>
+    <main class="content h-card container mt-2 m-auto
+                 leading-loose md:px-0 px-2 z-0 Page(/categories/cloud)"
+          role="main">
+    
+  <div class="list">
+    <h2 class="list-title">cloud</h2>
+    
+    <div class="my-4" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="grid grid-cols-list-item items-center gap-2">
+        
+        <a href="https://shrinklabs.com/post/container_kubectl_run/" itemprop="url" class="my-4 text-black border-none"
+           style="grid-column: 1 / span 2;"><h3 itemprop="name">Windows기반의 minikube로 로컬 환경의 image 사용해서 배포하기</h3>
+        </a>
+        
+        <span class="text-right text-zinc-800 dark:text-zinc-400 col-start-4"
+              itemprop="datePublished"
+              content="2020-05-19T01:05:57&#43;0900">
+        19/05/2020
+        </span>
+        <meta itemprop="author" content="Jaehoon Khim">
+    </div>
+</div>
+
+    
+    <div class="my-4" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="grid grid-cols-list-item items-center gap-2">
+        
+        <a href="https://shrinklabs.com/post/container_private-container-registry/" itemprop="url" class="my-4 text-black border-none"
+           style="grid-column: 1 / span 2;"><h3 itemprop="name">Kubernetes에서 Private Container Registry 사용</h3>
+        </a>
+        
+        <span class="text-right text-zinc-800 dark:text-zinc-400 col-start-4"
+              itemprop="datePublished"
+              content="2020-04-10T16:31:48&#43;0900">
+        10/04/2020
+        </span>
+        <meta itemprop="author" content="Jaehoon Khim">
+    </div>
+</div>
+
+    
+    <div class="my-4" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="grid grid-cols-list-item items-center gap-2">
+        
+        <a href="https://shrinklabs.com/post/container_k8s-with-kops-on-gce/" itemprop="url" class="my-4 text-black border-none"
+           style="grid-column: 1 / span 2;"><h3 itemprop="name">GCE에서 kops를 이용한 K8s 구성</h3>
+        </a>
+        
+        <span class="text-right text-zinc-800 dark:text-zinc-400 col-start-4"
+              itemprop="datePublished"
+              content="2020-03-05T21:36:13&#43;0900">
+        05/03/2020
+        </span>
+        <meta itemprop="author" content="Jaehoon Khim">
+    </div>
+</div>
+
+    
+    <div class="my-4" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="grid grid-cols-list-item items-center gap-2">
+        
+        <a href="https://shrinklabs.com/post/container_nginx-ingress-controller-on-google-kubernetes-engine/" itemprop="url" class="my-4 text-black border-none"
+           style="grid-column: 1 / span 2;"><h3 itemprop="name">10.Nginx Ingress Controller on Google Kubernetes Engine</h3>
+        </a>
+        
+        <span class="text-right text-zinc-800 dark:text-zinc-400 col-start-4"
+              itemprop="datePublished"
+              content="2019-01-21T17:05:30&#43;0900">
+        21/01/2019
+        </span>
+        <meta itemprop="author" content="Jaehoon Khim">
+    </div>
+</div>
+
+    
+    <div class="my-4" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="grid grid-cols-list-item items-center gap-2">
+        
+        <a href="https://shrinklabs.com/post/container_helm-package-management/" itemprop="url" class="my-4 text-black border-none"
+           style="grid-column: 1 / span 2;"><h3 itemprop="name">9.Helm Package Management</h3>
+        </a>
+        
+        <span class="text-right text-zinc-800 dark:text-zinc-400 col-start-4"
+              itemprop="datePublished"
+              content="2019-01-17T15:04:00&#43;0900">
+        17/01/2019
+        </span>
+        <meta itemprop="author" content="Jaehoon Khim">
+    </div>
+</div>
+
+    
+    <div class="my-4" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="grid grid-cols-list-item items-center gap-2">
+        
+        <a href="https://shrinklabs.com/post/container_setting-up-private-kubernetes-cluster/" itemprop="url" class="my-4 text-black border-none"
+           style="grid-column: 1 / span 2;"><h3 itemprop="name">8.Setting Up a Private Kubernetes Cluster</h3>
+        </a>
+        
+        <span class="text-right text-zinc-800 dark:text-zinc-400 col-start-4"
+              itemprop="datePublished"
+              content="2019-01-16T01:46:28&#43;0900">
+        16/01/2019
+        </span>
+        <meta itemprop="author" content="Jaehoon Khim">
+    </div>
+</div>
+
+    
+    <div class="my-4" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="grid grid-cols-list-item items-center gap-2">
+        
+        <a href="https://shrinklabs.com/post/container_build-slack-bot-with-nodejs-on-kubernetes/" itemprop="url" class="my-4 text-black border-none"
+           style="grid-column: 1 / span 2;"><h3 itemprop="name">7.Build Slack Bot With Node.js on Kubernetes</h3>
+        </a>
+        
+        <span class="text-right text-zinc-800 dark:text-zinc-400 col-start-4"
+              itemprop="datePublished"
+              content="2019-01-14T13:17:21&#43;0900">
+        14/01/2019
+        </span>
+        <meta itemprop="author" content="Jaehoon Khim">
+    </div>
+</div>
+
+    
+    <div class="my-4" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="grid grid-cols-list-item items-center gap-2">
+        
+        <a href="https://shrinklabs.com/post/container_running-mongodb-database-in-kubernetes-with-statefulsets/" itemprop="url" class="my-4 text-black border-none"
+           style="grid-column: 1 / span 2;"><h3 itemprop="name">6.Running Mongodb Database in Kubernetes With Statefulsets</h3>
+        </a>
+        
+        <span class="text-right text-zinc-800 dark:text-zinc-400 col-start-4"
+              itemprop="datePublished"
+              content="2019-01-11T17:52:48&#43;0900">
+        11/01/2019
+        </span>
+        <meta itemprop="author" content="Jaehoon Khim">
+    </div>
+</div>
+
+    
+    <div class="my-4" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="grid grid-cols-list-item items-center gap-2">
+        
+        <a href="https://shrinklabs.com/post/container_continuous-delivery-with-jenkins-in-kubernetes-engine/" itemprop="url" class="my-4 text-black border-none"
+           style="grid-column: 1 / span 2;"><h3 itemprop="name">5.Continuous Delivery With Jenkins in Kubernetes Engine</h3>
+        </a>
+        
+        <span class="text-right text-zinc-800 dark:text-zinc-400 col-start-4"
+              itemprop="datePublished"
+              content="2019-01-10T11:40:50&#43;0900">
+        10/01/2019
+        </span>
+        <meta itemprop="author" content="Jaehoon Khim">
+    </div>
+</div>
+
+    
+    <div class="my-4" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="grid grid-cols-list-item items-center gap-2">
+        
+        <a href="https://shrinklabs.com/post/container_managing-deployments-using-kubernetes/" itemprop="url" class="my-4 text-black border-none"
+           style="grid-column: 1 / span 2;"><h3 itemprop="name">4.Managing Deployments Using Kubernetes</h3>
+        </a>
+        
+        <span class="text-right text-zinc-800 dark:text-zinc-400 col-start-4"
+              itemprop="datePublished"
+              content="2019-01-09T11:15:55&#43;0900">
+        09/01/2019
+        </span>
+        <meta itemprop="author" content="Jaehoon Khim">
+    </div>
+</div>
+
+    
+    <div class="my-4" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="grid grid-cols-list-item items-center gap-2">
+        
+        <a href="https://shrinklabs.com/post/container_orchestrating-cloud-with-kubernetes/" itemprop="url" class="my-4 text-black border-none"
+           style="grid-column: 1 / span 2;"><h3 itemprop="name">3.Orchestrating the Cloud With Kubernetes</h3>
+        </a>
+        
+        <span class="text-right text-zinc-800 dark:text-zinc-400 col-start-4"
+              itemprop="datePublished"
+              content="2019-01-09T01:26:47&#43;0900">
+        09/01/2019
+        </span>
+        <meta itemprop="author" content="Jaehoon Khim">
+    </div>
+</div>
+
+    
+    <div class="my-4" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="grid grid-cols-list-item items-center gap-2">
+        
+        <a href="https://shrinklabs.com/post/container_hello-node-kubernetes/" itemprop="url" class="my-4 text-black border-none"
+           style="grid-column: 1 / span 2;"><h3 itemprop="name">2.Hello Node Kubernetes</h3>
+        </a>
+        
+        <span class="text-right text-zinc-800 dark:text-zinc-400 col-start-4"
+              itemprop="datePublished"
+              content="2019-01-08T13:13:09&#43;0900">
+        08/01/2019
+        </span>
+        <meta itemprop="author" content="Jaehoon Khim">
+    </div>
+</div>
+
+    
+    <div class="my-4" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="grid grid-cols-list-item items-center gap-2">
+        
+        <a href="https://shrinklabs.com/post/container_introduction-to-docker/" itemprop="url" class="my-4 text-black border-none"
+           style="grid-column: 1 / span 2;"><h3 itemprop="name">1.Introduction to Docker</h3>
+        </a>
+        
+        <span class="text-right text-zinc-800 dark:text-zinc-400 col-start-4"
+              itemprop="datePublished"
+              content="2019-01-08T10:48:08&#43;0900">
+        08/01/2019
+        </span>
+        <meta itemprop="author" content="Jaehoon Khim">
+    </div>
+</div>
+
+    
+  </div>
+
+    </main>
+    <footer class="footer container h-10 text-center">
+  <ul class="pl-0">
+    
+    <li class="ml-2 first:before:content-none before:content-['•'] inline-block list-none"><a class="ml-2 text-neutral-800 dark:text-neutral-400 border-none"
+          href="https://github.com/hugcis/hugo-astatine-theme">Code</a>
+    </li>
+    <li class="ml-2 first:before:content-none before:content-['•']
+                text-neutral-800 dark:text-neutral-400 inline-block list-none"><span class="ml-2">© Jaehoon Khim 2022</span>
+    </li>
+  </ul>
+</footer>
+
+
+  </body>
+</html>

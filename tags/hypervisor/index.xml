@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>hypervisor on ShrinkLabs</title>
+    <link>https://shrinklabs.com/tags/hypervisor/</link>
+    <description>Recent content in hypervisor on ShrinkLabs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 02 Dec 2017 23:55:52 +0900</lastBuildDate><atom:link href="https://shrinklabs.com/tags/hypervisor/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>KVM 스터디(with go)</title>
+      <link>https://shrinklabs.com/post/go_kvm-with-go/</link>
+      <pubDate>Sat, 02 Dec 2017 23:55:52 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/post/go_kvm-with-go/</guid>
+      <description>준비물 노트북(우분투 16.04)
+KVM이 뭔가요? 하이퍼바이저? 위키백과에 나와 있는 정의( https://ko.wikipedia.org/wiki/%ED%95%98%EC%9D%B4%ED%8D%BC%EB%B0%94%EC%9D%B4%EC%A0%80 ) 를 보면 이렇게 나와 있습니다.
+&amp;ldquo;다수의 운영 체제를 동시에 실행하기 위한 논리적 플랫폼&amp;rdquo;
+여기에 우리가 잘 알고 있는 VmWare, VirtualBox와 같은것도 있고, Xen, KVM 같이 좀 낯선 것들도 있습니다.
+내용을 읽다보면, 왠지 중요해 보이는 단어 Type1, Type2, 전가상화, 반가상화 뭐 이런 단어들이 나옵니다.
+Type1은 호스트에 하이퍼바이저가 존재하고, Type2는 호스트 OS에 설치된 응용 프로그램 형태로 하이퍼바이저가 존재하는거라고 보면 될 것 같습니다.</description>
+    </item>
+    
+  </channel>
+</rss>

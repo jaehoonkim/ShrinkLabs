@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>goroutine on ShrinkLabs</title>
+    <link>https://shrinklabs.com/tags/goroutine/</link>
+    <description>Recent content in goroutine on ShrinkLabs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 10 Dec 2014 13:12:58 +0900</lastBuildDate><atom:link href="https://shrinklabs.com/tags/goroutine/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Golang channels tutorial</title>
+      <link>https://shrinklabs.com/post/go_golang-channels-tutorial/</link>
+      <pubDate>Wed, 10 Dec 2014 13:12:58 +0900</pubDate>
+      
+      <guid>https://shrinklabs.com/post/go_golang-channels-tutorial/</guid>
+      <description>최근에 goroutine과 channel에 대해서 학습하다가 설명이 잘 되어 있는 글을 찾아서 번역(이라고 하기에는 뭐하고 정리?) 를 해봤습니다. 제대로 이해를 못하고 잘 못 번역을 한 부분이 있을 수 도 있으니&amp;hellip;꼭 원본을 보길 권장합니다.
+원본 : http://guzalexander.com/2013/12/06/golang-channels-tutorial.html
+ Go언어는 병렬 프로그램 작성을 위해서 내장 도구를 갖고 있습니다. go를 함수 호출 앞에 놓으면 동일한 주소에 위치하는 코드를 독립적인 병렬 스레드로 실행을 시작합니다. 이런 쓰레드를 Go언어에서는 goroutine이라고 부릅니다. 여기에서 말하는 concurrently는 parallel을 의미하지는 않습니다. (역주: 그렇지만 번역은 “병렬” 이라고 칭하겠습니다.</description>
+    </item>
+    
+  </channel>
+</rss>
