@@ -1,14 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>ShrinkLabs</title>
+    <title>Shrink Labs</title>
     <link>https://shrinklabs.com/</link>
-    <description>Recent content on ShrinkLabs</description>
-    
-    <language>en</language>
-    <lastBuildDate>Sun, 09 Oct 2022 13:13:36 +0900</lastBuildDate>
-    
-    <atom:link href="https://shrinklabs.com/index.xml" rel="self" type="application/rss+xml" />
-    
+    <description>Recent content on Shrink Labs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language><atom:link href="https://shrinklabs.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>contact</title>
+      <link>https://shrinklabs.com/contact/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://shrinklabs.com/contact/</guid>
+      <description>Contact
+github: https://github.com/jaehoonkhim linkedin: https://linkedin.com/in/jaehoonkhim </description>
+    </item>
     
   </channel>
 </rss>
