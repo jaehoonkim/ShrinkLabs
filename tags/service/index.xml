@@ -6,23 +6,23 @@
     <description>Recent content in service on Shrink Labs</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 05 Mar 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://shrinklabs.com/tags/service/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 06 Mar 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://shrinklabs.com/tags/service/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Project</title>
+      <link>https://shrinklabs.com/services/project/</link>
+      <pubDate>Wed, 06 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://shrinklabs.com/services/project/</guid>
+      <description>sudoRy sudoRy 프로젝트는 멀티 쿠버네티스 클러스터 관리를 자동화하기 위한 목적의 오픈소스 프로젝트입니다. 이 프로젝트의 최초 설계부터 개발 및 릴리즈까지 책임지는 프로젝</description>
+    </item>
+    
     <item>
       <title>Research &amp; Services</title>
       <link>https://shrinklabs.com/services/service/</link>
       <pubDate>Tue, 05 Mar 2019 00:00:00 +0000</pubDate>
       
       <guid>https://shrinklabs.com/services/service/</guid>
-      <description>시계열 데이터의 분석 및 연구 Open Source 기반의 모니터링 시스템 구축 Go, Python등을 이용한 외주 개발</description>
-    </item>
-    
-    <item>
-      <title>Product</title>
-      <link>https://shrinklabs.com/services/product/</link>
-      <pubDate>Mon, 04 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://shrinklabs.com/services/product/</guid>
-      <description> Remofunc </description>
+      <description>오픈소스 기반의 모니터링 시스템 구축 시계열 데이터의 분석 및 연구 Go, Python등을 이용한 외주 개발</description>
     </item>
     
   </channel>
