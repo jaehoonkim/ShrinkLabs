@@ -2,23 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
 	xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://shrinklabs.com/</loc>
+    <loc>/</loc>
     <lastmod>2024-12-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://shrinklabs.com/research/</loc>
+    <loc>/research/</loc>
     <lastmod>2024-12-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://shrinklabs.com/about/</loc>
+    <loc>/blog/</loc>
     <lastmod>2024-12-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://shrinklabs.com/blog/</loc>
+    <loc>/contact/</loc>
     <lastmod>2024-12-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://shrinklabs.com/blog/hello/</loc>
+    <loc>/blog/hello/</loc>
     <lastmod>2024-12-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://shrinklabs.com/categories/</loc>
+    <loc>/categories/</loc>
   </url><url>
-    <loc>https://shrinklabs.com/tags/</loc>
+    <loc>/tags/</loc>
   </url>
 </urlset>

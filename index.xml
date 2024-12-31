@@ -3,24 +3,27 @@
 
   <channel>
     <title>ShrinkLabs</title>
-    <link>https://shrinklabs.com/</link>
+    <link>/</link>
     <description>Recent content on ShrinkLabs</description>
     
     <language>en-us</language>
-    <lastBuildDate>Sat, 28 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://shrinklabs.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 28 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>About Me</title>
-      <link>https://shrinklabs.com/about/</link><pubDate>Fri, 27 Dec 2024 00:00:00 +0000</pubDate>
+      <title>Contact Me</title>
+      <link>/contact/</link><pubDate>Fri, 27 Dec 2024 00:00:00 +0000</pubDate>
       
-      <guid>https://shrinklabs.com/about/</guid>
-      <description>Bio 저는 현재 작은 스타트업에서 NLP/LLM 기반의 소프트웨어 개발팀의 팀장으로 재직 중에 있으며, Kubernetes 기반의 MLOps의 활용에도 관심을 갖고 있습니다. Contact me Email: jaehoon{at}gmail{dot}com GitHub: github.com/jaehoonkim Linkedin: linkedin.com/in/jaehoon-kim-919959294</description>
+      <guid>/contact/</guid>
+      <description>Email: jaehoon{at}gmail.com
+GitHub: github.com/jaehoonkim
+Linkedin: linkedin.com/in/jaehoon-kim-919959294
+Facebook: facebook.com/jaehoon./</description>
     </item>
     
     <item>
       <title>안녕하세요</title>
-      <link>https://shrinklabs.com/blog/hello/</link><pubDate>Fri, 27 Dec 2024 00:00:00 +0000</pubDate>
+      <link>/blog/hello/</link><pubDate>Fri, 27 Dec 2024 00:00:00 +0000</pubDate>
       
-      <guid>https://shrinklabs.com/blog/hello/</guid>
+      <guid>/blog/hello/</guid>
       <description>Hello, World!</description>
     </item>
     
